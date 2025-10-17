@@ -14,7 +14,6 @@ func _init_struct() -> void:
 	max_rotate_velocity = 0.0
 	is_type = "STRUCT"
 	_do_range()
-	_do_shader(0)
 
 	if special != "ROCK":
 		UNIT_STATE.do_unit_build(self, build_speed)
@@ -35,9 +34,8 @@ func _get_ship() -> int:
 	var m
 	for i in modules.size():
 		m = modules[i]
-		if(m.is_type == "HANGAR"):
-			if("ship_id" in m):
-				s = m.ship_id[0]
+		if m.is_type == "HANGAR" && "ship_id" in m:
+			s = m.ship_id[0]
 	return s
 
 func _do_tick() -> void:

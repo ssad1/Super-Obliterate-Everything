@@ -665,7 +665,7 @@ func _select_grid_size(map_size):
 			size = Vector2(96,96)
 	return size
 
-#TODO: fazer com que as cores sejam respectivas as cores das estrelas
+#TODO: make ambience color be the same color as the star/make it blend with the star color
 
 func _set_lights():
 	var light = Color(1,1,1,1)

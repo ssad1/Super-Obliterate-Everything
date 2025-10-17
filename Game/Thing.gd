@@ -286,7 +286,9 @@ func _process(delta:float) -> void:
 	#	hide()
 	#else:
 	#	show()
-	#_do_shader(delta)
+
+	#temporary fix till we dont make shaders run every single frame to compute damage
+	if is_type == "STRUCT": _do_shader(delta)
 
 func _remove_ref(s) -> void:
 	if tcpu != null:

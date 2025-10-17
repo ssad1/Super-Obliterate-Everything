@@ -8,7 +8,6 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_galyx"]
 font_size = 10
-font_color = Color(1, 1, 0.639216, 0.843137)
 outline_size = 1
 
 [node name="Item_Button" type="TextureButton"]
@@ -29,6 +28,7 @@ layout_mode = 0
 texture = ExtResource("6")
 
 [node name="Hotkey" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 47.0
 offset_top = 46.0
