@@ -1,0 +1,88 @@
+[gd_scene load_steps=15 format=3 uid="uid://c1smnu0urftuu"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://ctwswfdycrdav" path="res://Ships/Graphics/Builder_C.PNG" id="3_1fd6f"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Delivery.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://blghdkofadc5u" path="res://Ships/Graphics/Builder_L.PNG" id="4_5nphd"]
+[ext_resource type="Texture2D" uid="uid://5p7v6ulx270r" path="res://Ships/Graphics/Builder_D.PNG" id="5"]
+[ext_resource type="Texture2D" uid="uid://b8r0ub26ckw4g" path="res://Ships/Graphics/Builder_N.PNG" id="6_k1hdg"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://ct61wyprp0kit" path="res://Ships/Graphics/Builder_B.PNG" id="10"]
+[ext_resource type="PackedScene" path="res://Modules/Spawn_Effect.tscn" id="11"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_1fd6f")
+shader_parameter/lighting = ExtResource("4_5nphd")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1gvqg"]
+diffuse_texture = ExtResource("5")
+normal_texture = ExtResource("6_k1hdg")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[node name="Ship_Builder" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.5
+aihigh = "BUILDER"
+aistandoff = 150
+name_text = "BUILDER"
+inertia = 0.8
+max_velocity = 9.0
+max_rotate_velocity = 0.3
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_1gvqg")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("10")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -9.0
+offset_top = -17.0
+offset_right = 9.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Delivery" parent="." instance=ExtResource("4")]
+
+[node name="Spawn_Effect" parent="Module_Delivery" instance=ExtResource("11")]
+spawn_id = 10100
+scale_effect = true
+scale_effect_size = 0.5
+
+[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("9")]

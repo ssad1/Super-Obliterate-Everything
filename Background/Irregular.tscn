@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmcufan2l38ds"]
+
+[ext_resource type="Texture2D" uid="uid://b0gslptemhge4" path="res://Background/Irregular.PNG" id="1"]
+[ext_resource type="Script" path="res://Background/Galaxy.gd" id="2"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+blend_mode = 1
+
+[node name="Irregular" type="Sprite2D"]
+light_mask = 0
+material = SubResource("1")
+texture = ExtResource("1")
+hframes = 11
+vframes = 2
+script = ExtResource("2")

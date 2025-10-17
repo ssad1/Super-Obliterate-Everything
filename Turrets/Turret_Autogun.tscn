@@ -1,0 +1,85 @@
+[gd_scene load_steps=15 format=3 uid="uid://dsmpb7fkxj0b4"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Texture2D" uid="uid://cyh2v40euvxhq" path="res://Turrets/Graphics/Backup/Turret_Autogun_D.PNG" id="3_6pbph"]
+[ext_resource type="Texture2D" uid="uid://crsbpfc8rfaph" path="res://Turrets/Graphics/Backup/Turret_Autogun_C.PNG" id="3_lxkq6"]
+[ext_resource type="Texture2D" uid="uid://kv3pqv16mwvj" path="res://Turrets/Graphics/Backup/Turret_Autogun_L.PNG" id="4_snrop"]
+[ext_resource type="Script" path="res://Turrets/Turret_General.gd" id="5"]
+[ext_resource type="PackedScene" path="res://Shots/Shot_Blaster.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://cfedhhpkuavqb" path="res://Turrets/Graphics/Backup/Turret_Autogun_N.PNG" id="6_5xihl"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="7"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="8"]
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="9"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="11"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_lxkq6")
+shader_parameter/lighting = ExtResource("4_snrop")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rygo0"]
+diffuse_texture = ExtResource("3_6pbph")
+normal_texture = ExtResource("6_5xihl")
+
+[sub_resource type="ShaderMaterial" id="2"]
+resource_local_to_scene = true
+shader = ExtResource("9")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("8")
+
+[node name="Turret_Autogun" type="Node2D"]
+script = ExtResource("5")
+max_rotate_velocity = 0.3
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_rygo0")
+hframes = 8
+vframes = 8
+
+[node name="Gun_General" parent="." instance=ExtResource("7")]
+position = Vector2(0, -14)
+fire_sound = 3002
+gun_heat = 20
+gun_burst_max = 4
+gun_burst_heat = 2
+gun_range = 300
+gun_v = 25
+gun_v_noise = 0.2
+gun_r_noise = 0.2
+gun_arc = 0.25
+gun_arc_rounds = 3
+gun_scale = 0.25
+
+[node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("6")]
+visible = false
+material = SubResource("2")
+
+[node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("11")]
+visible = false
+scale = Vector2(0.5, 0.5)

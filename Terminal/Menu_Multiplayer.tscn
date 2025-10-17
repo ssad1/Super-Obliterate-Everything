@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Terminal/Terminal_Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Terminal/Menu_Multiplayer.gd" type="Script" id=2]
+[ext_resource path="res://Terminal/Menu_Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Terminal/Menu_Duel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Terminal/Menu_Custom.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Terminal/Menu_Ladder.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Terminal/Menu_Replays.tscn" type="PackedScene" id=7]
+
+[sub_resource type="ButtonGroup" id=1]
+
+[node name="Menu_Multiplayer" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1220.0
+margin_bottom = -480.0
+min_size = Vector2( 700, 600 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+menu_duel_path = NodePath("VBoxContainer/Control/Menu_Duel")
+menu_custom_path = NodePath("VBoxContainer/Control/Menu_Custom")
+menu_ladder_path = NodePath("VBoxContainer/Control/Menu_Ladder")
+menu_replays_path = NodePath("VBoxContainer/Control/Menu_Replays")
+menu_button_duel_path = NodePath("VBoxContainer/HBoxContainer/Button_Duel")
+menu_button_custom_path = NodePath("VBoxContainer/HBoxContainer/Button_Custom")
+menu_button_ladder_path = NodePath("VBoxContainer/HBoxContainer/Button_Ladder")
+menu_button_replays_path = NodePath("VBoxContainer/HBoxContainer/Button_Replays")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 700.0
+margin_bottom = 600.0
+min_size = Vector2( 700, 600 )
+color = Color( 0, 0, 0, 0.784314 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 732.0
+margin_bottom = 30.0
+
+[node name="Button_Duel" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_bottom = 30.0
+pressed = true
+group = SubResource( 1 )
+text = "DUEL"
+
+[node name="Button_Custom" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 184.0
+margin_right = 364.0
+margin_bottom = 30.0
+group = SubResource( 1 )
+text = "CUSTOM"
+
+[node name="Button_Ladder" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 368.0
+margin_right = 548.0
+margin_bottom = 30.0
+group = SubResource( 1 )
+text = "LADDER"
+
+[node name="Button_Replays" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 552.0
+margin_right = 732.0
+margin_bottom = 30.0
+group = SubResource( 1 )
+text = "REPLAYS"
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+margin_top = 34.0
+margin_right = 732.0
+margin_bottom = 34.0
+
+[node name="Menu_Duel" parent="VBoxContainer/Control" instance=ExtResource( 4 )]
+visible = false
+
+[node name="Menu_Custom" parent="VBoxContainer/Control" instance=ExtResource( 5 )]
+visible = false
+
+[node name="Menu_Ladder" parent="VBoxContainer/Control" instance=ExtResource( 6 )]
+visible = false
+
+[node name="Menu_Replays" parent="VBoxContainer/Control" instance=ExtResource( 7 )]
+visible = false

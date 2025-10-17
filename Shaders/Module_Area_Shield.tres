@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dogx6bcc1hm2n"]
+
+[ext_resource type="Shader" path="res://Shaders/ShieldGlow.gdshader" id="1"]
+
+[resource]
+shader = ExtResource("1")
+shader_parameter/shield_radius = 128.0
+shader_parameter/shield_width = 32.0
+shader_parameter/hit_angle = 0.0
+shader_parameter/hit_fade = 1.0
+shader_parameter/shock_strength = 1.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/offset = null

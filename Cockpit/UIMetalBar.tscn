@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Cockpit/UIBar.gdshader" type="Shader" id=1]
+[ext_resource path="res://Cockpit/UIEnergyBar.png" type="Texture" id=2]
+[ext_resource path="res://Cockpit/UIEnergyBar.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_parameter/offset = Vector2( 100, 200 )
+shader_parameter/simplex_scale = 0.258
+shader_parameter/fire_strength = 0.7
+shader_parameter/fire_height = 1.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shock_height = 0.0
+
+[node name="UIMetalBar" type="TextureRect"]
+light_mask = 0
+material = SubResource( 2 )
+margin_left = 104.0
+margin_right = 204.0
+margin_bottom = 8.0
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

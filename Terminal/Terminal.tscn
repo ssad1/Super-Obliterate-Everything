@@ -1,0 +1,308 @@
+[gd_scene load_steps=29 format=3 uid="uid://cctvpmji1qnwv"]
+
+[ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="1"]
+[ext_resource type="Script" path="res://Terminal/Terminal.gd" id="2"]
+[ext_resource type="PackedScene" path="res://Terminal/Menu_Exit_Menu.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://b7gx81jebjtya" path="res://Terminal/Menu_Equip.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://deerkygggjnh2" path="res://Background/MenuBackN.png" id="4_ko62t"]
+[ext_resource type="PackedScene" uid="uid://bxmv0pe168se1" path="res://Terminal/Menus/Menu_Settings.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://ded47pr84ke5b" path="res://Cockpit/MainMenuScreenN.png" id="6_qmt0c"]
+[ext_resource type="Texture2D" uid="uid://c1hbe8nkdlxj7" path="res://Cockpit/MainMenuScreenD.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://dus3edtfgub6b" path="res://Background/MenuBack.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://cepqvmtm6aies" path="res://TitleScreen/Backdrop3.png" id="9"]
+[ext_resource type="PackedScene" uid="uid://sq82wqcpvbce" path="res://Terminal/Menus/Main_Menu_Options.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://nmbqa1dtprsx" path="res://Terminal/Map/Mission Block/Mission_Block.tscn" id="11"]
+[ext_resource type="Texture2D" uid="uid://b40ehicl5okoo" path="res://Effects/Lights/L_BigGlow.png" id="13"]
+[ext_resource type="Script" path="res://Terminal/Menu_Low_Light.gd" id="14"]
+[ext_resource type="Texture2D" uid="uid://cxllpqt68cwi5" path="res://Effects/Particles/Static/Glows/Flare2.png" id="15"]
+[ext_resource type="PackedScene" uid="uid://cicakp0jtxngu" path="res://Terminal/Menus/Menu_EquipSelect.tscn" id="16"]
+[ext_resource type="PackedScene" uid="uid://ckhvntt8kuoof" path="res://Terminal/Menus/Menu_View.tscn" id="17"]
+[ext_resource type="PackedScene" uid="uid://cf5cx8yq0pkxp" path="res://Terminal/Menus/Menu_Item_Data.tscn" id="18"]
+[ext_resource type="PackedScene" uid="uid://dubyj186xplhx" path="res://Terminal/Menus/Credits_Text.tscn" id="19"]
+[ext_resource type="PackedScene" uid="uid://bkevxvqstumtf" path="res://Terminal/Menus/Menu_Prizes.tscn" id="20"]
+[ext_resource type="PackedScene" uid="uid://527u6s4ni5k1" path="res://Terminal/Menus/Menu_Sell.tscn" id="21"]
+[ext_resource type="PackedScene" uid="uid://vpsh1gddr74" path="res://Terminal/Menus/Menu_Draft.tscn" id="22"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="2"]
+offsets = PackedFloat32Array(0, 0.363636, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.886275, 0.498039, 1, 1, 0.257813, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="3"]
+gradient = SubResource("2")
+
+[sub_resource type="ParticleProcessMaterial" id="4"]
+direction = Vector3(-1, 0, 0)
+gravity = Vector3(0, 700, 0)
+scale_min = 0.0
+scale_max = 0.0
+color_ramp = SubResource("3")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_c7fk8"]
+diffuse_texture = ExtResource("8")
+normal_texture = ExtResource("4_ko62t")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_do1w7"]
+diffuse_texture = ExtResource("7")
+normal_texture = ExtResource("6_qmt0c")
+
+[node name="Terminal" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -800.0
+offset_top = -450.0
+offset_right = -800.0
+offset_bottom = -450.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.834, 0.834)
+theme = ExtResource("1")
+script = ExtResource("2")
+
+[node name="Particles2D" type="GPUParticles2D" parent="."]
+light_mask = 0
+material = SubResource("1")
+position = Vector2(450, 800)
+emitting = false
+amount = 30
+process_material = SubResource("4")
+texture = ExtResource("15")
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.82
+randomness = 0.28
+
+[node name="MenuBack" type="Sprite2D" parent="."]
+light_mask = 4
+position = Vector2(960, 540)
+texture = SubResource("CanvasTexture_c7fk8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 4
+position = Vector2(976.152, 540)
+texture = SubResource("CanvasTexture_do1w7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(938, 990)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 507.152
+offset_top = 45.0
+offset_right = 1445.15
+offset_bottom = 1035.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+light_mask = 0
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(0.834, 0.834)
+texture = ExtResource("9")
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(700, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 626.152
+offset_top = 240.0
+offset_right = 1326.15
+offset_bottom = 840.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu_Exit_Menu" parent="Control" instance=ExtResource("3")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_right = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu_Settings" parent="Control" instance=ExtResource("5")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = 75.0
+offset_right = -17.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu_Equip" parent="Control" instance=ExtResource("4")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -186.619
+offset_top = -63.9808
+offset_right = -186.619
+offset_bottom = -63.9808
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu_EquipSelect" parent="Control" instance=ExtResource("16")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.892
+offset_top = -320.576
+offset_right = -344.892
+offset_bottom = -320.576
+
+[node name="ItemGrid" parent="Control/Menu_EquipSelect/Menu_Items" index="1"]
+offset_left = 12.0
+offset_top = 64.0
+offset_right = 688.0
+offset_bottom = 740.0
+
+[node name="Menu_View" parent="Control" instance=ExtResource("17")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.892
+offset_top = -320.576
+offset_right = -344.892
+offset_bottom = -320.576
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu_Prizes" parent="Control" instance=ExtResource("20")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -300.0
+offset_right = -130.0
+offset_bottom = -300.0
+
+[node name="Menu_Sell" parent="Control" instance=ExtResource("21")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.892
+offset_top = -320.576
+offset_right = -344.892
+offset_bottom = -320.576
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu_Draft" parent="Control" instance=ExtResource("22")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.528
+offset_top = -159.5
+offset_right = -300.528
+offset_bottom = -159.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu_Item_Data" parent="Control" instance=ExtResource("18")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -105.0
+offset_right = 110.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Mission_Block" parent="." instance=ExtResource("11")]
+visible = false
+
+[node name="Main_Menu_Options" parent="." instance=ExtResource("10")]
+light_mask = 0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 516.152
+offset_top = 54.0
+offset_right = 516.152
+offset_bottom = 54.0
+grow_horizontal = 2
+
+[node name="Light2D" type="PointLight2D" parent="."]
+light_mask = 0
+position = Vector2(992.221, 1181.04)
+energy = 16.0
+range_item_cull_mask = 4
+texture = ExtResource("13")
+texture_scale = 3.48
+script = ExtResource("14")
+
+[node name="Credits_Text" parent="." instance=ExtResource("19")]
+offset_left = 510.152
+offset_top = 123.0
+offset_right = 510.152
+offset_bottom = 123.0
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.470588)
+layout_mode = 0
+offset_left = 1244.15
+offset_top = 127.0
+offset_right = 1432.15
+offset_bottom = 170.0
+theme = ExtResource("1")
+text = "DEMO by cwwallis
+Version 0.02"
+
+[editable path="Control/Menu_EquipSelect"]
+[editable path="Control/Menu_EquipSelect/Menu_Items"]

@@ -1,0 +1,96 @@
+[gd_scene load_steps=3 format=3 uid="uid://otl3jyv0h23v"]
+
+[ext_resource type="PackedScene" uid="uid://n13ub57ujx6o" path="res://Terminal/Menus/Draft_Set.tscn" id="1"]
+[ext_resource type="Script" path="res://Terminal/Menus/Draft_Grid.gd" id="2"]
+
+[node name="Menu_DraftItems" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Draft_Grid" type="GridContainer" parent="."]
+layout_mode = 0
+columns = 9
+script = ExtResource("2")
+
+[node name="Draft_Set" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set2" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set3" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set4" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set5" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set6" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set7" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set8" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set9" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set10" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set11" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set12" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set13" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set14" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set15" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set16" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set17" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set18" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set19" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set20" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set21" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set22" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set23" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set24" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set25" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set26" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Draft_Set27" parent="Draft_Grid" instance=ExtResource("1")]
+layout_mode = 2

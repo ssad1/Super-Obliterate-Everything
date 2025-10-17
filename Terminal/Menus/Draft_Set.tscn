@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://n13ub57ujx6o"]
+
+[ext_resource type="PackedScene" uid="uid://dkaicgotf278s" path="res://Terminal/Item_Button.tscn" id="1"]
+[ext_resource type="Theme" uid="uid://cn87onodi101q" path="res://Terminal/Terminal_Theme_Tiny.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://bqjgdgj18ydvn" path="res://Icons/Credit_Single.png" id="3"]
+[ext_resource type="Script" path="res://Terminal/Menus/Draft_Set.gd" id="4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u2ick"]
+font_size = 12
+
+[node name="Draft_Set" type="VBoxContainer"]
+script = ExtResource("4")
+
+[node name="Item_Button" parent="." instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Control" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 2
+texture = ExtResource("3")
+expand_mode = 3
+
+[node name="Price" type="Label" parent="Control"]
+layout_mode = 2
+theme = ExtResource("2")
+text = "0"
+label_settings = SubResource("LabelSettings_u2ick")
+horizontal_alignment = 1

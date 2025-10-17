@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://cv1b7eyrbgcj0"]
+
+[ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://dkaicgotf278s" path="res://Terminal/Item_Button.tscn" id="2"]
+[ext_resource type="Script" path="res://Terminal/Menus/Prize_Slot.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://b181gcqcova7j" path="res://Icons/Credit.PNG" id="4"]
+
+[node name="Prize_Slot" type="Control"]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1300.0
+offset_bottom = -800.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3")
+
+[node name="Item_Button" parent="." instance=ExtResource("2")]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 69.0
+offset_bottom = 69.0
+
+[node name="Credit" type="Sprite2D" parent="."]
+position = Vector2(245, 28)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4")
+hframes = 8
+vframes = 8
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+light_mask = 0
+layout_mode = 0
+offset_left = 262.0
+offset_top = 17.0
+offset_right = 277.0
+offset_bottom = 37.0
+theme = ExtResource("1")
+text = "0"
+horizontal_alignment = 2
+
+[node name="Sell_Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 213.0
+offset_top = 43.0
+offset_right = 277.0
+offset_bottom = 63.0
+theme = ExtResource("1")
+text = " SELL "
+
+[connection signal="pressed" from="Sell_Button" to="." method="_sell_pressed"]

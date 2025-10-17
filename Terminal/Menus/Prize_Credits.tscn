@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4hcsqet0u6gx"]
+
+[ext_resource type="Theme" uid="uid://18o43qaay3t1" path="res://Terminal/Terminal_Theme_Small.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://cbkmsvnoj2pt3" path="res://Terminal/Misc/ItemSquareNormal.png" id="2"]
+[ext_resource type="Theme" uid="uid://elferpjtn4s7" path="res://Terminal/Terminal_Theme_Big.tres" id="3"]
+[ext_resource type="Script" path="res://Terminal/Menus/Prize_Credits.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://b181gcqcova7j" path="res://Icons/Credit.PNG" id="5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ywakn"]
+font_size = 25
+
+[sub_resource type="Animation" id="1"]
+resource_name = "Credit Spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 63]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s04uv"]
+_data = {
+"Credit Spin": SubResource("1")
+}
+
+[node name="Prize_Credits" type="Control"]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1300.0
+offset_bottom = -825.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 69.0
+offset_bottom = 69.0
+texture = ExtResource("2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 28.0
+offset_right = 276.0
+offset_bottom = 68.0
+
+[node name="Credits" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3")
+text = "0"
+label_settings = SubResource("LabelSettings_ywakn")
+horizontal_alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("1")
+text = "CREDITS"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(37, 37)
+texture = ExtResource("5")
+hframes = 8
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_s04uv")
+}
+autoplay = "Credit Spin"

@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Terminal/Terminal_Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Terminal/Menu_Button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Terminal/Icons/icon_confirmed.png" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -324.0
+margin_bottom = -168.0
+min_size = Vector2( 700, 600 )
+theme = ExtResource( 1 )
+script = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -153.5
+margin_top = -39.0
+margin_right = 153.5
+margin_bottom = 39.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 307.0
+margin_bottom = 37.0
+text = "SURRENDER MATCH?"
+
+[node name="Button_Quit" parent="VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 41.0
+margin_right = 307.0
+margin_bottom = 78.0
+toggle_mode = false
+text = "CONFIRM"
+icon = ExtResource( 3 )

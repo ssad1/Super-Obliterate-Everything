@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://cinqhkwowinld"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://cno6g84u621u3" path="res://Structures/Graphics/Backup/Struct_Big_Rocky_Asteroid_2_D.PNG" id="3_xmmdl"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Asteroid_Boom_Large.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://8f7ccju8isgk" path="res://Structures/Graphics/Backup/Struct_Big_Rocky_Asteroid_2_N.PNG" id="4_5hjwu"]
+[ext_resource type="PackedScene" path="res://Structures/Asteroid_Animator.tscn" id="5"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = null
+shader_parameter/select_strength = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wurw2"]
+diffuse_texture = ExtResource("3_xmmdl")
+normal_texture = ExtResource("4_5hjwu")
+
+[sub_resource type="Animation" id="Animation_i26l4"]
+resource_name = "Roll"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 63]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3cxkg"]
+_data = {
+"Roll": SubResource("Animation_i26l4")
+}
+
+[node name="Struct_Big_Rocky_Asteroid_2" type="Node2D"]
+script = ExtResource("2")
+build_size = Vector2(2, 2)
+class_text = "ASTEROID"
+max_armor = 100
+special = "ROCK"
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_wurw2")
+hframes = 8
+vframes = 8
+
+[node name="Asteroid_Animator" parent="Hull" instance=ExtResource("5")]
+libraries = {
+"": SubResource("AnimationLibrary_3cxkg")
+}
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -19.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Asteroid_Boom_Large" parent="." instance=ExtResource("4")]
+visible = false

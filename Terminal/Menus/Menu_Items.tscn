@@ -1,0 +1,382 @@
+[gd_scene load_steps=5 format=3 uid="uid://d277mqsoyvw0x"]
+
+[ext_resource type="PackedScene" uid="uid://dkaicgotf278s" path="res://Terminal/Item_Button.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://Terminal/Buttons/Button_X.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://Terminal/Buttons/Button_Page.tscn" id="3"]
+[ext_resource type="Script" path="res://Terminal/Menus/ItemGrid.gd" id="4"]
+
+[node name="Menu_Items" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(700, 750)
+layout_mode = 0
+color = Color(0, 0, 0, 0.784314)
+
+[node name="ItemGrid" type="GridContainer" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -788.0
+offset_top = -836.0
+offset_right = -112.0
+offset_bottom = -160.0
+columns = 10
+script = ExtResource("4")
+
+[node name="TextureButton" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton2" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton3" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton4" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton5" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton6" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton7" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton8" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton9" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton10" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton11" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton12" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton13" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton14" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton15" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton16" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton17" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton18" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton19" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton20" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton21" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton22" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton23" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton24" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton25" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton26" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton27" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton28" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton29" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton30" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton31" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton32" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton33" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton34" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton35" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton36" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton37" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton38" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton39" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton40" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton41" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton42" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton43" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton44" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton45" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton46" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton47" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton48" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton49" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton50" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton51" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton52" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton53" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton54" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton55" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton56" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton57" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton58" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton59" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton60" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton61" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton62" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton63" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton64" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton65" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton66" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton67" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton68" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton69" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton70" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton71" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton72" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton73" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton74" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton75" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton76" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton77" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton78" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton79" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton80" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton81" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton82" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton83" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton84" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton85" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton86" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton87" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton88" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton89" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton90" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton91" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton92" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton93" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton94" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton95" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton96" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton97" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton98" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton99" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="TextureButton100" parent="ItemGrid" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Button_X" parent="." instance=ExtResource("2")]
+layout_mode = 0
+offset_left = 668.079
+offset_top = 28.0
+offset_right = 683.079
+offset_bottom = 48.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 504.271
+offset_top = 19.097
+offset_right = 645.271
+offset_bottom = 59.097
+alignment = 2
+
+[node name="Button_Page" parent="HBoxContainer" instance=ExtResource("3")]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+
+[node name="Button_Page2" parent="HBoxContainer" instance=ExtResource("3")]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "2"
+
+[node name="Button_Page3" parent="HBoxContainer" instance=ExtResource("3")]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "3"
+
+[node name="Button_Page4" parent="HBoxContainer" instance=ExtResource("3")]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "4"
+
+[node name="Button_Page5" parent="HBoxContainer" instance=ExtResource("3")]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "5"
+
+[connection signal="pressed" from="HBoxContainer/Button_Page" to="ItemGrid" method="_page_flip" binds= [0]]
+[connection signal="pressed" from="HBoxContainer/Button_Page2" to="ItemGrid" method="_page_flip" binds= [1]]
+[connection signal="pressed" from="HBoxContainer/Button_Page3" to="ItemGrid" method="_page_flip" binds= [2]]
+[connection signal="pressed" from="HBoxContainer/Button_Page4" to="ItemGrid" method="_page_flip" binds= [3]]
+[connection signal="pressed" from="HBoxContainer/Button_Page5" to="ItemGrid" method="_page_flip" binds= [4]]

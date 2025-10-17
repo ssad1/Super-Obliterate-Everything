@@ -1,0 +1,178 @@
+[gd_scene load_steps=22 format=3 uid="uid://bv7qimdtoimxx"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://dii4e4h8qwwca" path="res://Ships/Graphics/Trident_D.PNG" id="4"]
+[ext_resource type="Texture2D" uid="uid://coj75qg2iw5je" path="res://Ships/Graphics/Trident_B.PNG" id="6"]
+[ext_resource type="Texture2D" uid="uid://c5kfo0iwrcqvc" path="res://Ships/Graphics/Trident_N.PNG" id="6_xweos"]
+[ext_resource type="Texture2D" uid="uid://n030stav6qvn" path="res://Ships/Graphics/Trident_L.PNG" id="7"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="10"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="11"]
+[ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://b7uoppkeik13" path="res://Turrets/Turret_Laser.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="14"]
+[ext_resource type="Texture2D" uid="uid://cul0isylh8snj" path="res://Ships/Graphics/Trident_C.PNG" id="15"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(16, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("15")
+shader_parameter/lighting = ExtResource("7")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ia1a6"]
+diffuse_texture = ExtResource("4")
+normal_texture = ExtResource("6_xweos")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="3"]
+resource_local_to_scene = true
+shader = ExtResource("10")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("11")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_stdcd"]
+resource_local_to_scene = true
+shader = ExtResource("10")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("11")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mxp2u"]
+resource_local_to_scene = true
+shader = ExtResource("10")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("11")
+
+[node name="Ship_Trident" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.2
+factory = 279
+name_text = "TRIDENT"
+class_text = "CRUISER"
+energy_cost = 400
+metal_cost = 300
+supply_cost = 5
+credit_cost = 2000
+inertia = 0.2
+max_velocity = 5.0
+max_rotate_velocity = 0.05
+max_armor = 100
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_ia1a6")
+hframes = 16
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("6")
+hframes = 16
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -20.0
+offset_top = -26.0
+offset_right = 20.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Turret_Laser" parent="." instance=ExtResource("13")]
+position = Vector2(0, -9)
+
+[node name="Gun_LR_Cannon1" parent="." instance=ExtResource("8")]
+position = Vector2(-16, -24)
+fire_sound = 3007
+gun_kick = 1.0
+gun_heat = 5
+gun_angle = 0.1
+gun_v = 45
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.75
+
+[node name="Shot_Blaster" parent="Gun_LR_Cannon1" instance=ExtResource("12")]
+visible = false
+material = SubResource("3")
+
+[node name="E_MuzzleA" parent="Gun_LR_Cannon1" instance=ExtResource("14")]
+visible = false
+scale = Vector2(0.75, 0.75)
+
+[node name="Gun_LR_Cannon2" parent="." instance=ExtResource("8")]
+position = Vector2(16, -24)
+fire_sound = 3007
+gun_kick = 1.0
+gun_heat = 5
+gun_angle = 0.1
+gun_v = 45
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.75
+
+[node name="Shot_Blaster" parent="Gun_LR_Cannon2" instance=ExtResource("12")]
+visible = false
+material = SubResource("ShaderMaterial_stdcd")
+
+[node name="E_MuzzleA" parent="Gun_LR_Cannon2" instance=ExtResource("14")]
+visible = false
+scale = Vector2(0.75, 0.75)
+
+[node name="Gun_Burst_Cannon" parent="." instance=ExtResource("8")]
+position = Vector2(0, -32)
+fire_sound = 3002
+gun_heat = 10
+gun_burst_max = 5
+gun_burst_heat = 1
+gun_angle = 0.1
+gun_v = 30
+gun_v_noise = 0.2
+gun_r_noise = 0.2
+gun_scale = 0.5
+
+[node name="Shot_Blaster" parent="Gun_Burst_Cannon" instance=ExtResource("12")]
+visible = false
+material = SubResource("ShaderMaterial_mxp2u")
+
+[node name="E_MuzzleA" parent="Gun_Burst_Cannon" instance=ExtResource("14")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("9")]

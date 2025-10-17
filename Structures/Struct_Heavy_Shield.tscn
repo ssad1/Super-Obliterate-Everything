@@ -1,0 +1,122 @@
+[gd_scene load_steps=15 format=3 uid="uid://b27jpx18nuq18"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Structures/Struct_Shield.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://cyetwarnb2wve" path="res://Structures/Graphics/Struct_Heavy_Shield_D.PNG" id="3_rretx"]
+[ext_resource type="Texture2D" uid="uid://pov00ntnkncm" path="res://Structures/Graphics/Struct_Heavy_Shield_N.PNG" id="4_84hin"]
+[ext_resource type="Texture2D" uid="uid://d3fvog4dxbaeq" path="res://Structures/Graphics/newAssets/Struct_Heavy_Shield_Glow.PNG" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://ctp4jh83ii4c3" path="res://Modules/Module_Area_Heavy_Shield.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="11"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_pmjv2"]
+diffuse_texture = ExtResource("3_rretx")
+normal_texture = ExtResource("4_84hin")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="3"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 63]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Struct_Shield_Glow:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 63]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_21hqg"]
+_data = {
+"Spin": SubResource("3")
+}
+
+[node name="Struct_Heavy_Shield" type="Node2D"]
+script = ExtResource("2")
+build_size = Vector2(2, 2)
+name_text = "HEAVY SHIELD"
+class_text = "AUXILIARY"
+energy_cost = 200
+metal_cost = 100
+supply_cost = 2
+credit_cost = 1000
+max_armor = 100
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_pmjv2")
+hframes = 8
+vframes = 8
+
+[node name="Struct_Shield_Glow" type="Sprite2D" parent="Hull"]
+modulate = Color(0.772549, 0.894118, 1, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("8")
+hframes = 8
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
+libraries = {
+"": SubResource("AnimationLibrary_21hqg")
+}
+autoplay = "Spin"
+
+[node name="Module_Area_Shield" parent="." instance=ExtResource("10")]
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Medium_Struct_Boom_Large" parent="." instance=ExtResource("9")]
+visible = false
+
+[node name="Module_SFX" parent="." instance=ExtResource("11")]
+build_sfx = 1012

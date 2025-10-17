@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://blqjki57p55pu"]
+
+[ext_resource type="Shader" path="res://Background/Nebula.gdshader" id="1_4svmr"]
+[ext_resource type="Texture2D" uid="uid://dro1p0q1pv0gk" path="res://Effects/Gradients/Gradient_Spartan.tres" id="2_xri0o"]
+
+[resource]
+shader = ExtResource("1_4svmr")
+shader_parameter/mode = 5
+shader_parameter/corona_direction = 0
+shader_parameter/offset = Vector2(300, 2000)
+shader_parameter/scroll = Vector2(0, 0)
+shader_parameter/colors = ExtResource("2_xri0o")

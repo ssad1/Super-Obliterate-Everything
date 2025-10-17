@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://dg2fumnmi6k64"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1_qpog1"]
+[ext_resource type="Texture2D" uid="uid://benf2gd3aiu3j" path="res://Structures/Graphics/Struct_Turret_Base_Small_C.png" id="2_o5adr"]
+[ext_resource type="Texture2D" uid="uid://f1x41ecwblna" path="res://Structures/Graphics/Struct_Turret_Base_Small_L.png" id="3_7flfu"]
+[ext_resource type="Texture2D" uid="uid://dr8xukcc34xdp" path="res://Structures/Graphics/Struct_Turret_Base_Small_D.png" id="4_ao7pu"]
+[ext_resource type="Texture2D" uid="uid://duu23cpuaixh0" path="res://Structures/Graphics/Struct_Turret_Base_Small_N.png" id="5_1f7tj"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="6_m2ye3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8rcdj"]
+resource_local_to_scene = true
+shader = ExtResource("1_qpog1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("2_o5adr")
+shader_parameter/lighting = ExtResource("3_7flfu")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_h0fcw"]
+diffuse_texture = ExtResource("4_ao7pu")
+normal_texture = ExtResource("5_1f7tj")
+
+[node name="Hull" type="Sprite2D"]
+material = SubResource("ShaderMaterial_8rcdj")
+texture = SubResource("CanvasTexture_h0fcw")
+
+[node name="HitBox" parent="." instance=ExtResource("6_m2ye3")]
+offset_left = -25.0
+offset_top = -22.0
+offset_right = -7.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+parent_type = "SECONDARY"

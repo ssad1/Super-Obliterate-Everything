@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Shaders/ShieldGlow.gdshader" type="Shader" id=1]
+[ext_resource path="res://Background/Nebula.gd" type="Script" id=2]
+[ext_resource path="res://Effects/ShieldGlowBlankSmall.png" type="Texture" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_parameter/shield_radius = 128.0
+shader_parameter/shield_width = 32.0
+shader_parameter/hit_angle = 0.0
+shader_parameter/hit_fade = 1.0
+shader_parameter/shock_strength = 1.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/offset = null
+
+[node name="ShieldGlow" type="Sprite2D"]
+light_mask = 0
+material = SubResource( 1 )
+position = Vector2( 128, 128 )
+texture = ExtResource( 3 )
+script = ExtResource( 2 )

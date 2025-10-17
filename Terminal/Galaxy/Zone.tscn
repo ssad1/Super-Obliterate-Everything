@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Effects/Zone.png" type="Texture" id=1]
+[ext_resource path="res://Terminal/Map/UICircle.png" type="Texture" id=2]
+[ext_resource path="res://Terminal/Galaxy/Zone.gd" type="Script" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="Animation" id=2]
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 127 ]
+}
+
+[node name="Zone" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
+material = SubResource( 1 )
+position = Vector2( 16, 16 )
+texture = ExtResource( 1 )
+hframes = 16
+vframes = 8
+frame = 97
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 2 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+modulate = Color( 1, 1, 1, 0.784314 )
+light_mask = 0
+margin_right = 32.0
+margin_bottom = 32.0
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 2 )
+texture_disabled = ExtResource( 2 )
+texture_focused = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="mouse_entered" from="TextureButton" to="." method="_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_mouse_exited"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

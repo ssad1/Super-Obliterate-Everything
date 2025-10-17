@@ -1,0 +1,126 @@
+[gd_scene load_steps=20 format=3 uid="uid://d306cjie4sgkv"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="4"]
+[ext_resource type="Texture2D" uid="uid://c7i44bhkppbg5" path="res://Ships/Graphics/Gladiator_C.PNG" id="5"]
+[ext_resource type="Texture2D" uid="uid://dtooocmlbwh3s" path="res://Ships/Graphics/Gladiator_L.PNG" id="6"]
+[ext_resource type="Texture2D" uid="uid://df35n7hmaebrm" path="res://Ships/Graphics/Gladiator_N.PNG" id="6_hljt2"]
+[ext_resource type="Texture2D" uid="uid://vmcbd084kpme" path="res://Ships/Graphics/Gladiator_D.PNG" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://dp1ngnixbejvd" path="res://Ships/Graphics/Gladiator_B.PNG" id="10"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="14"]
+[ext_resource type="PackedScene" uid="uid://dn6ub42eu2b6i" path="res://Turrets/Turret_Phalanx.tscn" id="15"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("5")
+shader_parameter/lighting = ExtResource("6")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5i8pf"]
+diffuse_texture = ExtResource("8")
+normal_texture = ExtResource("6_hljt2")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="3"]
+resource_local_to_scene = true
+shader = ExtResource("4")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("14")
+
+[node name="Ship_Gladiator" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.2
+aistandoff = 200
+factory = 276
+name_text = "GLADIATOR"
+class_text = "CORVETTE"
+energy_cost = 125
+metal_cost = 35
+supply_cost = 2
+credit_cost = 400
+inertia = 0.8
+max_velocity = 6.0
+max_rotate_velocity = 0.1
+max_armor = 20
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_5i8pf")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("10")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+light_mask = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_General1" parent="." instance=ExtResource("11")]
+position = Vector2(0, -20)
+fire_sound = 3002
+gun_kick = 3.0
+gun_heat = 10
+gun_range = 250
+gun_angle = 0.1
+gun_v = 30
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.6
+velocity_align = false
+
+[node name="Shot_Blaster" parent="Gun_General1" instance=ExtResource("12")]
+visible = false
+material = SubResource("3")
+
+[node name="E_MuzzleA" parent="Gun_General1" instance=ExtResource("13")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Turret_Phalanx" parent="." instance=ExtResource("15")]
+position = Vector2(0, -4)
+
+[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("9")]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2iakrhbb3uws"]
+
+[ext_resource type="Script" path="res://Modules/HitBox.gd" id="1_asdmy"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/hitbox2.tscn" id="2_jjixl"]
+
+[node name="HitBox" type="ColorRect"]
+modulate = Color(1, 1, 1, 0.513726)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_asdmy")
+
+[node name="detection_hitbox" parent="." instance=ExtResource("2_jjixl")]

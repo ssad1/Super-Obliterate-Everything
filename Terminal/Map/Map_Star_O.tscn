@@ -1,0 +1,184 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Terminal/Map/Map_Star.gd" type="Script" id=1]
+[ext_resource path="res://Terminal/Map/MapStarA.png" type="Texture" id=2]
+[ext_resource path="res://Background/StarA.png" type="Texture" id=3]
+[ext_resource path="res://Terminal/Map/Star_Embers.gd" type="Script" id=4]
+[ext_resource path="res://Terminal/Map/Light_Spike.png" type="Texture" id=5]
+[ext_resource path="res://Terminal/Map/Star_Flares.gd" type="Script" id=6]
+[ext_resource path="res://Terminal/Map/Star_FireA.png" type="Texture" id=7]
+[ext_resource path="res://Terminal/Map/Star_Corona.gd" type="Script" id=8]
+[ext_resource path="res://Terminal/Map/StarGlow.png" type="Texture" id=9]
+[ext_resource path="res://Terminal/Map/StarOFlames.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Effects/Lights/L_BigGlow.png" type="Texture" id=11]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.172589, 0.406091, 0.715736, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.644531, 0.958344, 1, 1, 0.566406, 0.928864, 1, 0.309804, 0.746094, 0.857178, 1, 0.164706, 0.640625, 0.814697, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 35.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 80.0
+initial_velocity_random = 0.25
+angular_velocity = 9.55105e-39
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 100.0
+damping_random = 1.0
+scale_random = 1.0
+color_ramp = SubResource( 2 )
+
+[sub_resource type="CanvasItemMaterial" id=4]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.522843, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.117647, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 30.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 25.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 1.0
+scale = 5.0
+scale_random = 0.75
+color_ramp = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+emission_shape = 1
+emission_sphere_radius = 30.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 25.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 1.0
+scale = 3.0
+scale_random = 0.75
+color_ramp = SubResource( 6 )
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0, 0.147208, 0.492386, 0.690355, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 0.601563, 0.738525, 1, 1, 0.0898438, 0.488037, 1, 0.921569, 0, 0.367188, 1, 0.768627, 0, 0.15625, 1, 0 )
+
+[sub_resource type="GradientTexture" id=10]
+gradient = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+emission_shape = 1
+emission_sphere_radius = 40.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 30.0
+angular_velocity = 90.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -32.17
+angle = 720.0
+angle_random = 1.0
+scale = 2.0
+scale_random = 0.5
+color_ramp = SubResource( 10 )
+
+[sub_resource type="CanvasItemMaterial" id=12]
+blend_mode = 1
+
+[node name="Map_Star" type="Node2D"]
+light_mask = 0
+script = ExtResource( 1 )
+s = 6
+
+[node name="StarOFlames" parent="." instance=ExtResource( 10 )]
+scale = Vector2( 0.6, 0.6 )
+
+[node name="Star_Rear_Ball" type="Sprite2D" parent="."]
+modulate = Color( 0.380392, 0.533333, 1, 1 )
+light_mask = 0
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="Star_Embers" type="Particles2D" parent="."]
+light_mask = 0
+amount = 250
+randomness = 1.0
+process_material = SubResource( 3 )
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[node name="Star_Flares" type="Particles2D" parent="."]
+modulate = Color( 0.415686, 0.505882, 1, 1 )
+light_mask = 0
+material = SubResource( 4 )
+scale = Vector2( 0.5, 0.5 )
+amount = 60
+lifetime = 3.0
+process_material = SubResource( 7 )
+texture = ExtResource( 5 )
+script = ExtResource( 6 )
+
+[node name="Star_Flares2" type="Particles2D" parent="."]
+modulate = Color( 0.415686, 0.505882, 1, 1 )
+light_mask = 0
+material = SubResource( 4 )
+scale = Vector2( 0.5, 0.5 )
+amount = 60
+lifetime = 3.0
+process_material = SubResource( 8 )
+texture = ExtResource( 5 )
+script = ExtResource( 6 )
+
+[node name="Star_Corona" type="Particles2D" parent="."]
+light_mask = 0
+amount = 120
+lifetime = 2.0
+randomness = 1.0
+process_material = SubResource( 11 )
+texture = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="Star_Fore_Ball" type="Sprite2D" parent="."]
+light_mask = 0
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, -0.773773 )
+texture = ExtResource( 9 )
+texture_scale = 2.0
+energy = 8.0
+range_z_min = -4096
+range_z_max = 4096
+range_layer_min = -512
+range_layer_max = 512
+range_item_cull_mask = 2
+shadow_item_cull_mask = 0
+
+[node name="Star_Bloom" type="Sprite2D" parent="."]
+modulate = Color( 0.439216, 0.670588, 1, 0.470588 )
+light_mask = 0
+material = SubResource( 12 )
+scale = Vector2( 2, 2 )
+z_index = -2
+texture = ExtResource( 11 )

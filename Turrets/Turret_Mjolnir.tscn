@@ -1,0 +1,85 @@
+[gd_scene load_steps=15 format=3 uid="uid://bvll4vuhiotxn"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Texture2D" uid="uid://crqoi8kfvm6me" path="res://Turrets/Graphics/Backup/Turret_Mjolnir_C.PNG" id="3_83gd3"]
+[ext_resource type="Texture2D" uid="uid://cq4yprsvswfqr" path="res://Turrets/Graphics/Backup/Turret_Mjolnir_L.PNG" id="4_4pf6a"]
+[ext_resource type="Script" path="res://Turrets/Turret_General.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://cjh374045paka" path="res://Turrets/Graphics/Backup/Turret_Mjolnir_D.PNG" id="5_s8h56"]
+[ext_resource type="Texture2D" uid="uid://4oat6bgn65rv" path="res://Effects/Gradients/Gradient_Artillery.tres" id="6"]
+[ext_resource type="Texture2D" uid="uid://bsvd7te2tmcff" path="res://Turrets/Graphics/Backup/Turret_Mjolnir_N.PNG" id="6_osqsf"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://Shots/Shot_Artillery.tscn" id="8"]
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="9"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleB.tscn" id="11"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_83gd3")
+shader_parameter/lighting = ExtResource("4_4pf6a")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_sirqm"]
+diffuse_texture = ExtResource("5_s8h56")
+normal_texture = ExtResource("6_osqsf")
+
+[sub_resource type="ShaderMaterial" id="2"]
+resource_local_to_scene = true
+shader = ExtResource("9")
+shader_parameter/shimmer_strength = 0.0
+shader_parameter/pulse_strength = 0.0
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("6")
+
+[node name="Turret_Mjolnir" type="Node2D"]
+script = ExtResource("5")
+target_profile = "BOMBER"
+tier = 2
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_sirqm")
+hframes = 8
+vframes = 8
+
+[node name="Gun_General" parent="." instance=ExtResource("7")]
+position = Vector2(0, -32)
+fire_sound = 3005
+gun_heat = 100
+gun_burst_max = 3
+gun_burst_heat = 3
+gun_range = 1200
+gun_angle = 0.05
+gun_v = 35
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.4
+
+[node name="Shot_Artillery" parent="Gun_General" instance=ExtResource("8")]
+visible = false
+material = SubResource("2")
+
+[node name="E_MuzzleB" parent="Gun_General" instance=ExtResource("11")]
+visible = false
+scale = Vector2(2, 2)

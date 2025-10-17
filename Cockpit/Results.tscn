@@ -1,0 +1,110 @@
+[gd_scene load_steps=20 format=3 uid="uid://tcxufnvkn3hs"]
+
+[ext_resource type="Texture2D" uid="uid://cm0qnwdnnf8x1" path="res://Terminal/Map/StarGlow.png" id="1"]
+[ext_resource type="Script" path="res://TitleScreen/Title/TitleSpotlight.gd" id="2"]
+[ext_resource type="Shader" path="res://Shaders/Text_Dissolve.gdshader" id="2_mqq1w"]
+[ext_resource type="Script" path="res://TitleScreen/Title/TitleSpotlight2.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://drmremeq2rkja" path="res://Cockpit/VictoryD.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://37wum0w110f8" path="res://Cockpit/VictoryN.png" id="4_1q0nn"]
+[ext_resource type="Script" path="res://Cockpit/Results.gd" id="6"]
+[ext_resource type="Texture2D" uid="uid://boij3p8308amf" path="res://Cockpit/DefeatN.png" id="7_uq3la"]
+[ext_resource type="Texture2D" uid="uid://ckqj6e5y25b0i" path="res://Cockpit/DefeatD.png" id="8"]
+[ext_resource type="Script" path="res://Shaders/Text_Dissolve_In.gd" id="9"]
+[ext_resource type="Texture2D" uid="uid://dhrnrcrvmfxhn" path="res://Cockpit/DisconnectN.png" id="9_e7e1g"]
+[ext_resource type="Texture2D" uid="uid://sa2i7ou17skc" path="res://Cockpit/DisconnectD.png" id="11"]
+
+[sub_resource type="Gradient" id="1"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="2"]
+gradient = SubResource("1")
+width = 1
+
+[sub_resource type="ShaderMaterial" id="3"]
+resource_local_to_scene = true
+shader = ExtResource("2_mqq1w")
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/offset = null
+shader_parameter/simplex_scale = null
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_a8wml"]
+diffuse_texture = ExtResource("4")
+normal_texture = ExtResource("4_1q0nn")
+
+[sub_resource type="ShaderMaterial" id="4"]
+shader = ExtResource("2_mqq1w")
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/offset = null
+shader_parameter/simplex_scale = null
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7etgt"]
+diffuse_texture = ExtResource("8")
+normal_texture = ExtResource("7_uq3la")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q2irf"]
+diffuse_texture = ExtResource("11")
+normal_texture = ExtResource("9_e7e1g")
+
+[node name="Results" type="Node2D"]
+light_mask = 0
+script = ExtResource("6")
+
+[node name="Back" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.784314)
+light_mask = 0
+position = Vector2(800, 450)
+scale = Vector2(1600, 900)
+texture = SubResource("2")
+
+[node name="Victory" type="Sprite2D" parent="."]
+visible = false
+light_mask = 1024
+z_index = 5
+material = SubResource("3")
+position = Vector2(805, 451)
+scale = Vector2(0.9, 0.9)
+texture = SubResource("CanvasTexture_a8wml")
+script = ExtResource("9")
+
+[node name="Defeat" type="Sprite2D" parent="."]
+visible = false
+light_mask = 1024
+z_index = 5
+material = SubResource("4")
+position = Vector2(805, 451)
+scale = Vector2(0.9, 0.9)
+texture = SubResource("CanvasTexture_7etgt")
+script = ExtResource("9")
+
+[node name="Disconnect" type="Sprite2D" parent="."]
+visible = false
+light_mask = 1024
+z_index = 5
+material = SubResource("4")
+position = Vector2(805, 451)
+scale = Vector2(0.9, 0.9)
+texture = SubResource("CanvasTexture_q2irf")
+script = ExtResource("9")
+
+[node name="ResultLight1" type="PointLight2D" parent="."]
+light_mask = 1024
+position = Vector2(778, -57)
+energy = 30.0
+range_item_cull_mask = 1024
+shadow_item_cull_mask = 0
+texture = ExtResource("1")
+texture_scale = 3.0
+script = ExtResource("2")
+
+[node name="ResultLight2" type="PointLight2D" parent="."]
+light_mask = 1024
+position = Vector2(680, 473)
+energy = 30.0
+range_item_cull_mask = 1024
+shadow_item_cull_mask = 0
+texture = ExtResource("1")
+texture_scale = 3.0
+script = ExtResource("3")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

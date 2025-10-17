@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Background/Star_Heat_Layer.gd" type="Script" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[node name="Star_Heat_Layer" type="ColorRect"]
+modulate = Color( 1, 1, 1, 0 )
+light_mask = 0
+material = SubResource( 1 )
+margin_right = 1920.0
+margin_bottom = 1280.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

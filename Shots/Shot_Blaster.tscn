@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://chumbt55n10wq"]
+
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="1"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="4"]
+[ext_resource type="Texture2D" uid="uid://d23jwugnjtj67" path="res://Shots/Graphics/Blaster.png" id="5"]
+[ext_resource type="Script" path="res://Shots/Shot_General.gd" id="6"]
+[ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="7"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("4")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[node name="Shot_Blaster" type="Sprite2D"]
+light_mask = 0
+material = SubResource("1")
+texture = ExtResource("5")
+script = ExtResource("6")
+name_text = "Blaster shot"
+max_velocity = 100.0
+
+[node name="Hull" type="Sprite2D" parent="."]
+modulate = Color(1, 0.372549, 0.203922, 0.301961)
+light_mask = 0
+material = SubResource("2")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7")
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -44.0
+offset_top = -49.0
+offset_right = -20.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2

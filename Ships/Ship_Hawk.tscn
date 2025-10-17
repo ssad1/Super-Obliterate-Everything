@@ -1,0 +1,110 @@
+[gd_scene load_steps=16 format=3 uid="uid://cmq6mqxwybt3h"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://caubbm878f1sc" path="res://Ships/Graphics/Hawk_D.PNG" id="4"]
+[ext_resource type="Texture2D" uid="uid://cjeuw1hm54l7n" path="res://Ships/Graphics/Piranha_C.PNG" id="6"]
+[ext_resource type="Texture2D" uid="uid://b2ubd8xlx50kb" path="res://Ships/Graphics/Hawk_N.PNG" id="6_3xhkp"]
+[ext_resource type="Texture2D" uid="uid://cdp0eeabh1o7w" path="res://Ships/Graphics/Piranha_L.PNG" id="7"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Shots/Missile_R1.tscn" id="10"]
+[ext_resource type="Texture2D" uid="uid://cw8r3sye86d6d" path="res://Ships/Graphics/Hawk_B.PNG" id="11"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="14"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("6")
+shader_parameter/lighting = ExtResource("7")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_x7nyw"]
+diffuse_texture = ExtResource("4")
+normal_texture = ExtResource("6_3xhkp")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[node name="Ship_Hawk" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.5
+aistandoff = 300
+factory = 275
+name_text = "HAWK"
+class_text = "FIGHTER"
+energy_cost = 90
+supply_cost = 1
+credit_cost = 150
+inertia = 1.0
+max_velocity = 17.0
+max_rotate_velocity = 0.3
+max_armor = 4
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_x7nyw")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("11")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_General" parent="." instance=ExtResource("8")]
+position = Vector2(0, -16)
+fire_sound = 3004
+gun_kick = 1.0
+gun_heat = 30
+gun_range = 600
+gun_angle = 0.1
+gun_v = 5
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.35
+velocity_align = false
+
+[node name="Missile_R1" parent="Gun_General" instance=ExtResource("10")]
+visible = false
+
+[node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("14")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Module_Fighter_Boom" parent="." instance=ExtResource("9")]
+visible = false
+position = Vector2(0, -16)

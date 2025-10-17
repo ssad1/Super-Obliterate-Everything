@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Shots/Explode_Plasma.gd" type="Script" id=1]
+
+[node name="Explode_Rocket" type="Node2D"]
+script = ExtResource( 1 )
+damage = 2
+force = 2
+boom_radius = 48
+boom_flash = 10308
+boom_effect = 10307
+boom_smoke = 10304
+boom_sparks = 10309
+boom_scale = 3.0
+flash_scale = 0.75
+smoke_scale = 0.75
+lifespan = 5

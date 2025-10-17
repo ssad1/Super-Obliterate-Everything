@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://cppu8x4fuwaev"]
+
+[ext_resource type="PackedScene" path="res://Effects/FlipScreen.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cctvpmji1qnwv" path="res://Terminal/Terminal.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bmgxnoyw1wc3y" path="res://Cockpit/Cockpit.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://clmsesi21n00n" path="res://TitleScreen/TitleScreen.tscn" id="4"]
+[ext_resource type="Script" path="res://GUI.gd" id="5"]
+
+[node name="GUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("5")
+
+[node name="FlipScreen" parent="." instance=ExtResource("1")]
+visible = false
+z_index = 10
+
+[node name="Terminal" parent="." instance=ExtResource("2")]
+visible = false
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Cockpit" parent="." instance=ExtResource("3")]
+visible = false
+
+[node name="TitleScreen" parent="." instance=ExtResource("4")]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0

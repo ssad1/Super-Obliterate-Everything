@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Terminal/Buttons/Button_Exit.gd" type="Script" id=2]
+
+
+[node name="Button_Exit" type="Button"]
+margin_top = 72.0
+margin_right = 363.0
+margin_bottom = 104.0
+text = "EXIT GAME"
+align = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

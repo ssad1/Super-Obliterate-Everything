@@ -1,0 +1,83 @@
+[gd_scene load_steps=15 format=3 uid="uid://cfxhjbmt2lidm"]
+
+[ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" path="res://Shaders/Missile_Shader.gdshader" id="4"]
+[ext_resource type="Texture2D" uid="uid://ddwciijiknqu6" path="res://Shots/Graphics/Missile_B1_D.PNG" id="5"]
+[ext_resource type="Script" path="res://Ships/Ship_Missile.gd" id="6"]
+[ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://qowugioktkxu" path="res://Shots/Graphics/Missile_B1_L.PNG" id="8"]
+[ext_resource type="PackedScene" path="res://Shots/Explode_Basic.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Modules/Spawn_Explosion.tscn" id="10"]
+[ext_resource type="Texture2D" uid="uid://cyediksj3ln0f" path="res://Shots/Graphics/Missile_M1_B.PNG" id="11"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Death_SFX.tscn" id="12"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("4")
+shader_parameter/light_color = Color(1, 0.52549, 0.180392, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/lighting = ExtResource("8")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="3"]
+blend_mode = 1
+
+[node name="Missile_B1" type="Node2D"]
+script = ExtResource("6")
+lifespan = 30
+detonate_range = 24
+smoke_trail = 10311
+thrust = 3.0
+aihigh = "B1"
+aistandoff = 0
+inertia = 1.0
+max_velocity = 100.0
+max_rotate_velocity = 0.3
+drag = 0.1
+max_armor = 1
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = ExtResource("5")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0, 0, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("11")
+hframes = 8
+vframes = 8
+
+[node name="Glow" type="Sprite2D" parent="."]
+modulate = Color(1, 0.670588, 0.505882, 0.14902)
+light_mask = 0
+material = SubResource("3")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7")
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Trigger" parent="." instance=ExtResource("2")]
+death_activate = true
+
+[node name="Spawn_Explosion" parent="Module_Trigger" instance=ExtResource("10")]
+scale_effect = true
+
+[node name="Explode_Basic" parent="Module_Trigger/Spawn_Explosion" instance=ExtResource("9")]
+boom_scale = 1.2
+
+[node name="Module_Death_SFX" parent="Module_Trigger" instance=ExtResource("12")]
+fire_sound = 2000

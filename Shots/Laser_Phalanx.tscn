@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Shots/Laser_General.gd" type="Script" id=1]
+[ext_resource path="res://Shots/Graphics/Laser.png" type="Texture" id=2]
+[ext_resource path="res://Effects/Gradients/Gradient_Phalanx.tres" type="Texture" id=3]
+[ext_resource path="res://Shaders/Laser_Effects.gdshader" type="Shader" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
+shader_parameter/colors = ExtResource( 3 )
+
+[node name="Laser_Phalanx" type="Node2D"]
+light_mask = 0
+material = SubResource( 1 )
+script = ExtResource( 1 )
+damage_type = "PHALANX"
+lifespan = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
+material = SubResource( 2 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -64 )

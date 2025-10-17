@@ -1,0 +1,110 @@
+[gd_scene load_steps=16 format=3 uid="uid://bh5xp6mtn32sp"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://jvhg8ffay531" path="res://Ships/Graphics/Athena_C.PNG" id="3_nji2l"]
+[ext_resource type="PackedScene" path="res://Shots/Missile_B1.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://c2k84vrv5rhxd" path="res://Ships/Graphics/Athena_L.PNG" id="4_ddkfi"]
+[ext_resource type="Texture2D" uid="uid://brmjj4nh3kdre" path="res://Ships/Graphics/Athena_D.PNG" id="6"]
+[ext_resource type="Texture2D" uid="uid://crhhn8ku0e8so" path="res://Ships/Graphics/Athena_N.PNG" id="6_ou1qc"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://cfs4bqda500w6" path="res://Ships/Graphics/Athena_B.PNG" id="10"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_nji2l")
+shader_parameter/lighting = ExtResource("4_ddkfi")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7y66n"]
+diffuse_texture = ExtResource("6")
+normal_texture = ExtResource("6_ou1qc")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[node name="Ship_Athena" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.2
+aistandoff = 150
+factory = 277
+name_text = "ATHENA"
+class_text = "FRIGATE"
+energy_cost = 250
+metal_cost = 100
+supply_cost = 3
+credit_cost = 500
+inertia = 0.6
+max_velocity = 7.0
+max_rotate_velocity = 0.1
+max_armor = 15
+target_profile = "BOMBER"
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_7y66n")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("10")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+light_mask = 0
+offset_left = -13.0
+offset_top = -12.0
+offset_right = 13.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_General" parent="." instance=ExtResource("11")]
+position = Vector2(0, -20)
+fire_sound = 3004
+gun_heat = 25
+gun_range = 300
+gun_v = 20
+gun_arc = 1.6
+gun_arc_rounds = 5
+gun_arc_v = 5
+gun_scale = 0.5
+velocity_align = false
+
+[node name="Missile_B1" parent="Gun_General" instance=ExtResource("4")]
+visible = false
+
+[node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("13")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("9")]

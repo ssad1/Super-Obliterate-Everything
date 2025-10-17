@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://11en2e3cpqwr"]
+
+[ext_resource type="AudioStream" uid="uid://b7tnhhfdfjcy1" path="res://Sounds/Weapons/WeaponMissile4.wav" id="1"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1")

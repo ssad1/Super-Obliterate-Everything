@@ -1,0 +1,159 @@
+[gd_scene load_steps=23 format=3 uid="uid://dkm63sbkyx7d5"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://dgot83cgwkh7q" path="res://Ships/Graphics/Fury_D.PNG" id="4"]
+[ext_resource type="Texture2D" uid="uid://mblxuw7fxx5y" path="res://Ships/Graphics/Fury_B.PNG" id="6"]
+[ext_resource type="Texture2D" uid="uid://wurwxc5f80d" path="res://Ships/Graphics/Fury_N.PNG" id="6_456jo"]
+[ext_resource type="Texture2D" uid="uid://hyr4mjumrkps" path="res://Ships/Graphics/Fury_C.PNG" id="7"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Death_SFX.tscn" id="9"]
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="10"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="11"]
+[ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
+[ext_resource type="Texture2D" uid="uid://cbleooxn7mtkr" path="res://Ships/Graphics/Fury_L.PNG" id="13"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://Shots/Explode_Basic.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://Modules/Spawn_Explosion.tscn" id="17"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("7")
+shader_parameter/lighting = ExtResource("13")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_enfnm"]
+diffuse_texture = ExtResource("4")
+normal_texture = ExtResource("6_456jo")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="3"]
+resource_local_to_scene = true
+shader = ExtResource("10")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("11")
+
+[sub_resource type="ShaderMaterial" id="4"]
+resource_local_to_scene = true
+shader = ExtResource("10")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("11")
+
+[node name="Ship_Fury" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.4
+aistandoff = 32
+factory = 275
+name_text = "FURY"
+class_text = "FIGHTER"
+energy_cost = 80
+supply_cost = 1
+credit_cost = 100
+inertia = 1.0
+max_velocity = 13.0
+max_rotate_velocity = 0.1
+max_armor = 1
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_enfnm")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("6")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -5.0
+offset_top = -6.0
+offset_right = 5.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_General" parent="." instance=ExtResource("8")]
+position = Vector2(0, -16)
+fire_sound = 3002
+gun_kick = 1.0
+gun_heat = 10
+gun_range = 250
+gun_angle = 0.1
+gun_v = 30
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.25
+
+[node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("12")]
+visible = false
+material = SubResource("3")
+
+[node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("14")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Module_Trigger" parent="." instance=ExtResource("15")]
+death_activate = true
+
+[node name="Gun_General" parent="Module_Trigger" instance=ExtResource("8")]
+fire_sound = 3007
+gun_v = 35
+gun_v_noise = 0.5
+gun_r_noise = 0.2
+gun_life_noise = 0.5
+gun_arc = 1.0
+gun_arc_rounds = 3
+gun_scale = 0.7
+
+[node name="Shot_Blaster" parent="Module_Trigger/Gun_General" instance=ExtResource("12")]
+visible = false
+material = SubResource("4")
+
+[node name="E_MuzzleA" parent="Module_Trigger/Gun_General" instance=ExtResource("14")]
+visible = false
+scale = Vector2(0.7, 0.7)
+
+[node name="Spawn_Explosion" parent="Module_Trigger" instance=ExtResource("17")]
+scale_effect = true
+scale_effect_size = 0.5
+
+[node name="Explode_Basic" parent="Module_Trigger/Spawn_Explosion" instance=ExtResource("16")]
+
+[node name="Module_Death_SFX" parent="Module_Trigger" instance=ExtResource("9")]
+fire_sound = 2000

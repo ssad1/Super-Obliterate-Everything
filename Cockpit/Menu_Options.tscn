@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8wqc2un5b5xp"]
+
+[ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="1"]
+[ext_resource type="Script" path="res://Cockpit/Menu_Options.gd" id="2"]
+[ext_resource type="PackedScene" path="res://Terminal/Menu_Exit_Game.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://bim03saxdbk6y" path="res://Cockpit/UIIOptionsScreen.png" id="4"]
+[ext_resource type="PackedScene" path="res://Terminal/Menu_Controls.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://Terminal/Menus/Menu_Settings.tscn" id="7"]
+[ext_resource type="Script" path="res://Terminal/Menus/Menu_Container.gd" id="8"]
+[ext_resource type="PackedScene" path="res://Terminal/Menu_Button.tscn" id="9"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+pivot_offset = Vector2(295, 300)
+theme = ExtResource("1")
+script = ExtResource("2")
+menu_exit_path = NodePath("VBoxContainer/Control/Menu_Exit_Game")
+menu_settings_path = NodePath("VBoxContainer/Control/Menu_Settings")
+menu_controls_path = NodePath("VBoxContainer/Control/Menu_Controls")
+menu_button_exit_path = NodePath("VBoxContainer/HBoxContainer/Menu_Button_Exit")
+menu_button_settings_path = NodePath("VBoxContainer/HBoxContainer/Menu_Button_Settings")
+menu_button_controls_path = NodePath("VBoxContainer/HBoxContainer/Menu_Button_Controls")
+menu_button_x_path = NodePath("VBoxContainer/HBoxContainer/Menu_Button_X")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
+position = Vector2(296, 296)
+texture = ExtResource("4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(53, 53)
+layout_mode = 0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 597.0
+offset_bottom = 597.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(592, 0)
+layout_mode = 2
+
+[node name="Menu_Button_Exit" parent="VBoxContainer/HBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "EXIT"
+
+[node name="Menu_Button_Settings" parent="VBoxContainer/HBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SETTINGS"
+
+[node name="Menu_Button_Controls" parent="VBoxContainer/HBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CONTROLS"
+
+[node name="Menu_Button_X" parent="VBoxContainer/HBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
+toggle_mode = false
+text = "X"
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Menu_Settings" parent="VBoxContainer/Control" instance=ExtResource("7")]
+visible = false
+anchors_preset = 0
+
+[node name="Menu_Exit_Game" parent="VBoxContainer/Control" instance=ExtResource("3")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 234.0
+offset_top = 240.0
+offset_right = 234.0
+offset_bottom = 240.0
+script = ExtResource("8")
+
+[node name="Menu_Controls" parent="VBoxContainer/Control" instance=ExtResource("6")]
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+script = ExtResource("8")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5u5kfsla0e7b"]
+
+[ext_resource type="Texture2D" uid="uid://07t28rt3c5ei" path="res://Effects/Particles/Static/Nature/Snow2.png" id="1"]
+[ext_resource type="Script" path="res://Background/DustA.gd" id="2"]
+
+[node name="DustA" type="Sprite2D"]
+light_mask = 0
+texture = ExtResource("1")
+hframes = 2
+vframes = 2
+script = ExtResource("2")

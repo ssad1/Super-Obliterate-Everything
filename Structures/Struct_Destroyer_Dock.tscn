@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3 uid="uid://ngnwp3vcnat1"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://clqceerl26y0j" path="res://Structures/Graphics/newAssets/Struct_Destroyer_Dock_D.PNG" id="4"]
+[ext_resource type="Texture2D" uid="uid://cghuqkir5e7ch" path="res://Structures/Graphics/newAssets/Struct_Destroyer_Dock_C.PNG" id="6"]
+[ext_resource type="Texture2D" uid="uid://cnxmc7w4suerh" path="res://Structures/Graphics/newAssets/Struct_Destroyer_Dock_N.PNG" id="6_tn7k5"]
+[ext_resource type="Texture2D" uid="uid://c65velwxdmoiu" path="res://Structures/Graphics/newAssets/Struct_Destroyer_Dock_L.PNG" id="7"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Hangars/Hangar_Factory.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("6")
+shader_parameter/lighting = ExtResource("7")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q6n38"]
+diffuse_texture = ExtResource("4")
+normal_texture = ExtResource("6_tn7k5")
+
+[sub_resource type="Animation" id="2"]
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 63]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aj6tf"]
+_data = {
+"Spin": SubResource("2")
+}
+
+[node name="Struct_Stardock" type="Node2D"]
+script = ExtResource("2")
+build_size = Vector2(2, 3)
+name_text = "DESTROYER DOCK"
+supply_cost = 1
+max_armor = 150
+special = "OFFENSE"
+build_speed = 1.5
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_q6n38")
+hframes = 8
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
+libraries = {
+"": SubResource("AnimationLibrary_aj6tf")
+}
+autoplay = "Spin"
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -20.0
+offset_top = -34.0
+offset_right = 20.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hangar_Factory" parent="." instance=ExtResource("9")]
+build_max = 90
+ship_max = 2
+
+[node name="Module_Medium_Struct_Boom_Large" parent="." instance=ExtResource("8")]
+
+[node name="Module_SFX" parent="." instance=ExtResource("10")]
+build_sfx = 1005

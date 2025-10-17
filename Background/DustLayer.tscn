@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Background/DustLayer.gd" type="Script" id=1]
+
+[node name="DustLayer" type="Node2D"]
+light_mask = 0
+z_index = 10
+script = ExtResource( 1 )

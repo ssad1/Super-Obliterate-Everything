@@ -1,0 +1,121 @@
+[gd_scene load_steps=19 format=3 uid="uid://rubpq04iu5id"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://cjeuw1hm54l7n" path="res://Ships/Graphics/Piranha_C.PNG" id="3_ki1ee"]
+[ext_resource type="Texture2D" uid="uid://cnpg1gfc3wyvq" path="res://Ships/Graphics/Piranha_D.PNG" id="4"]
+[ext_resource type="Texture2D" uid="uid://3qjtww33ctyv" path="res://Ships/Graphics/Piranha_N.PNG" id="4_438e0"]
+[ext_resource type="Texture2D" uid="uid://cdp0eeabh1o7w" path="res://Ships/Graphics/Piranha_L.PNG" id="4_vhhlj"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="10"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="11"]
+[ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="14"]
+[ext_resource type="Texture2D" uid="uid://csn65w646t8de" path="res://Ships/Graphics/Piranha_B.PNG" id="16"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_ki1ee")
+shader_parameter/lighting = ExtResource("4_vhhlj")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_qj5g5"]
+diffuse_texture = ExtResource("4")
+normal_texture = ExtResource("4_438e0")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="3"]
+resource_local_to_scene = true
+shader = ExtResource("10")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("11")
+
+[node name="Ship_Piranha" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.6
+factory = 275
+name_text = "PIRANHA"
+class_text = "FIGHTER"
+energy_cost = 45
+supply_cost = 1
+credit_cost = 50
+inertia = 1.0
+max_velocity = 15.0
+max_rotate_velocity = 0.3
+max_armor = 2
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_qj5g5")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("16")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -5.0
+offset_top = -6.0
+offset_right = 5.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_General" parent="." instance=ExtResource("8")]
+position = Vector2(0, -16)
+fire_sound = 3002
+gun_kick = 1.0
+gun_heat = 15
+gun_burst_max = 3
+gun_burst_heat = 1
+gun_range = 250
+gun_angle = 0.1
+gun_v = 30
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.25
+
+[node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("12")]
+visible = false
+material = SubResource("3")
+
+[node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("14")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Module_Fighter_Boom" parent="." instance=ExtResource("9")]
+position = Vector2(0, -16)

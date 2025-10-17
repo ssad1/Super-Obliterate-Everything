@@ -1,0 +1,59 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Super Obliterate Everything"
+run/main_scene="res://SOE.tscn"
+config/features=PackedStringArray("4.3")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://TitleScreen/LoadingScreen.png"
+config/icon="res://icon.png"
+
+[autoload]
+
+GLOBAL="*res://Global.gd"
+EVENTS="*res://Events.gd"
+SPAWNER="*res://Game/Spawner.gd"
+LEVELS="*res://Game/Levels.gd"
+CALC="*res://Calc.gd"
+KEYMAPS="*res://Keymaps.gd"
+ACCOUNT="*res://Account.gd"
+DIPLOMACY="*res://Diplomacy.gd"
+ICONS="*res://Icon_Library.tscn"
+FACTIONS="*res://Factions.gd"
+DRAFT="*res://Draft.gd"
+SFX="*res://Sfx.gd"
+UNIT_STATE="*res://unit_state.gd"
+
+[debug]
+
+gdscript/warnings/enable=false
+
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=900
+window/size/borderless=true
+window/stretch/mode="2d"
+window/size/width=1920
+window/size/height=1080
+
+[dotnet]
+
+project/assembly_name="Super Obliterate Everything"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+environment/default_clear_color=Color(0, 0, 0, 1)
+environment/default_environment="res://default_env.tres"

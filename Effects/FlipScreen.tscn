@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Effects/FlipScreen.gd" type="Script" id=1]
+
+[node name="FlipScreen" type="Node2D"]
+script = ExtResource( 1 )

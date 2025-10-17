@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://5d6viw3kaygx"]
+
+[ext_resource type="AudioStream" uid="uid://ylw5n1dh0boh" path="res://Sounds/Weapons/WeaponBlaster1.wav" id="1"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1")
+pitch_scale = 1.2

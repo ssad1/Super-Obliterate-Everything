@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Shots/Explode_Basic.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Shots/Shot_Debris.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Modules/Spawn_Explosion.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Guns/Gun_General.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Modules/Module_Trigger.gd" type="Script" id=5]
+[ext_resource path="res://Modules/Module_Death_SFX.tscn" type="PackedScene" id=6]
+
+[node name="Module_Medium_Struct_Boom_Large" type="Node2D"]
+script = ExtResource( 5 )
+death_activate = true
+
+[node name="Gun_General" parent="." instance=ExtResource( 4 )]
+visible = false
+gun_range = 600
+gun_v = 20
+gun_v_noise = 1.0
+gun_r_noise = 1.0
+gun_life_noise = 0.9
+gun_scale_noise = 0.75
+gun_arc = 6.28
+gun_arc_rounds = 8
+gun_circle = true
+
+[node name="Shot_Debris" parent="Gun_General" instance=ExtResource( 2 )]
+
+[node name="Spawn_Explosion" parent="." instance=ExtResource( 3 )]
+
+[node name="Explode_Basic" parent="Spawn_Explosion" instance=ExtResource( 1 )]
+boom_scale = 0.6
+
+[node name="Module_Death_SFX" parent="." instance=ExtResource( 6 )]
+fire_sound = 2001

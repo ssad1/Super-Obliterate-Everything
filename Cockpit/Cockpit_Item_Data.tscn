@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://vj7cstlbketo"]
+
+[ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="1"]
+[ext_resource type="Script" path="res://Cockpit/Cockpit_Item_Data.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://6u4lfqdbu8u8" path="res://Cockpit/UIEnergySmall.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bfuw6w7c4jqne" path="res://Cockpit/UIMetalSmall.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dhs7ch6m6f5nd" path="res://Cockpit/UISupplySmall.png" id="5"]
+
+[node name="Cockpit_Item_Data" type="Node2D"]
+light_mask = 0
+z_index = 10
+script = ExtResource("2")
+
+[node name="Blackground" type="ColorRect" parent="."]
+light_mask = 0
+custom_minimum_size = Vector2(300, 64)
+color = Color(0, 0, 0, 0.941176)
+
+[node name="VBox" type="VBoxContainer" parent="."]
+
+[node name="UIName" type="Label" parent="VBox"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("1")
+horizontal_alignment = 1
+
+[node name="UIName2" type="Label" parent="VBox/UIName"]
+modulate = Color(1, 1, 1, 0.156863)
+light_mask = 0
+layout_mode = 0
+theme = ExtResource("1")
+horizontal_alignment = 1
+
+[node name="CostMenu" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="UIEnergyIcon" type="TextureRect" parent="VBox/CostMenu"]
+light_mask = 0
+layout_mode = 2
+texture = ExtResource("3")
+
+[node name="UIEnergy" type="Label" parent="VBox/CostMenu"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("1")
+text = "0"
+
+[node name="UIMetalIcon" type="TextureRect" parent="VBox/CostMenu"]
+light_mask = 0
+layout_mode = 2
+texture = ExtResource("4")
+
+[node name="UIMetal" type="Label" parent="VBox/CostMenu"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("1")
+text = "0"
+
+[node name="UISupplyIcon" type="TextureRect" parent="VBox/CostMenu"]
+light_mask = 0
+layout_mode = 2
+texture = ExtResource("5")
+
+[node name="UISupply" type="Label" parent="VBox/CostMenu"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("1")
+text = "0"

@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://m1sxxtptlki"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://d1wul40smfw6x" path="res://Structures/Graphics/newAssets/Struct_Barricade_D.PNG" id="4"]
+[ext_resource type="Texture2D" uid="uid://dbxi3xc2js4a" path="res://Structures/Graphics/newAssets/Struct_Barricade_N.PNG" id="4_ty4uq"]
+[ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Small_Struct_Boom.tscn" id="9"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_eiaed"]
+diffuse_texture = ExtResource("4")
+normal_texture = ExtResource("4_ty4uq")
+
+[node name="Struct_Barricade" type="Node2D"]
+script = ExtResource("2")
+name_text = "BARRICADE"
+class_text = "ARMOR"
+metal_cost = 5
+supply_cost = 1
+credit_cost = 200
+max_armor = 200
+special = "ARMOR"
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_eiaed")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -10.0
+offset_top = -11.0
+offset_right = 10.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Small_Struct_Boom_Large" parent="." instance=ExtResource("9")]
+
+[node name="Module_SFX" parent="." instance=ExtResource("6")]
+build_sfx = 1013

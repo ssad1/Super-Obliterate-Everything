@@ -1,0 +1,110 @@
+[gd_scene load_steps=16 format=3 uid="uid://bvr5uvp3er2o6"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://crlv8oww80mif" path="res://Ships/Graphics/Cataclysm_C.PNG" id="3_obmbs"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://diaktlslyieij" path="res://Ships/Graphics/Cataclysm_L.PNG" id="4_bl7v7"]
+[ext_resource type="PackedScene" path="res://Shots/Missile_M1.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleC.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://fb2u0uv28syv" path="res://Ships/Graphics/Cataclysm_N.PNG" id="6_0qevq"]
+[ext_resource type="Texture2D" uid="uid://co2lkwh6t74fc" path="res://Ships/Graphics/Cataclysm_D.PNG" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://21fssbturhmf" path="res://Ships/Graphics/Cataclysm_B.PNG" id="12"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(16, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_obmbs")
+shader_parameter/lighting = ExtResource("4_bl7v7")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_xjdky"]
+diffuse_texture = ExtResource("8")
+normal_texture = ExtResource("6_0qevq")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[node name="Ship_Cataclysm" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.2
+aistandoff = 300
+factory = 279
+name_text = "CATACLYSM"
+class_text = "CRUISER"
+energy_cost = 400
+metal_cost = 400
+supply_cost = 5
+credit_cost = 2300
+inertia = 0.2
+max_velocity = 4.0
+max_rotate_velocity = 0.05
+max_armor = 90
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_xjdky")
+hframes = 16
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("12")
+hframes = 16
+vframes = 8
+
+[node name="Gun_General" parent="." instance=ExtResource("4")]
+position = Vector2(0, -36)
+fire_sound = 3004
+gun_kick = 5.0
+gun_heat = 10
+gun_angle = 0.8
+gun_v = 15
+gun_v_noise = 0.3
+gun_r_noise = 0.3
+gun_arc = 1.0
+gun_arc_rounds = 3
+gun_scale = 0.7
+velocity_align = false
+
+[node name="Missile_M1" parent="Gun_General" instance=ExtResource("5")]
+visible = false
+
+[node name="E_MuzzleC" parent="Gun_General" instance=ExtResource("6")]
+visible = false
+scale = Vector2(0.7, 0.7)
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("9")]

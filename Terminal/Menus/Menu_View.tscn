@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckhvntt8kuoof"]
+
+[ext_resource type="PackedScene" uid="uid://d277mqsoyvw0x" path="res://Terminal/Menus/Menu_Items.tscn" id="1"]
+[ext_resource type="Theme" uid="uid://elferpjtn4s7" path="res://Terminal/Terminal_Theme_Big.tres" id="2"]
+[ext_resource type="Script" path="res://Terminal/Menus/Menu_Container.gd" id="3"]
+
+[node name="Menu_View" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("3")
+
+[node name="Menu_Items" parent="." instance=ExtResource("1")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+
+[node name="ItemGrid" parent="Menu_Items" index="1"]
+layout_mode = 1
+anchors_preset = 7
+offset_left = 12.0
+offset_top = 64.0
+offset_right = 688.0
+offset_bottom = 740.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = 12.0
+offset_top = 15.0
+offset_right = 225.0
+offset_bottom = 35.0
+scale = Vector2(1.5, 1.5)
+theme = ExtResource("2")
+text = "VIEW EQUIPMENT"
+
+[editable path="Menu_Items"]

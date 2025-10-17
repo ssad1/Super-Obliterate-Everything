@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://dn6ub42eu2b6i"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Texture2D" uid="uid://bg3lyoc8k8ecy" path="res://Turrets/Graphics/Backup/Turret_Phalanx_L.PNG" id="3_fsio2"]
+[ext_resource type="Texture2D" uid="uid://bf1h4etbp2gth" path="res://Turrets/Graphics/Backup/Turret_Phalanx_D.PNG" id="3_m0xx5"]
+[ext_resource type="Script" path="res://Turrets/Turret_General.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://ddr6xrax1hm0r" path="res://Turrets/Graphics/Backup/Turret_Phalanx_N.PNG" id="5_8o8gq"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_Laser.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://Shots/Laser_Phalanx.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://dtqg37q5n0m4u" path="res://Effects/E_MuzzleG.tscn" id="8"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/lighting = ExtResource("3_fsio2")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_lt7r1"]
+diffuse_texture = ExtResource("3_m0xx5")
+normal_texture = ExtResource("5_8o8gq")
+
+[node name="Turret_Phalanx" type="Node2D"]
+script = ExtResource("5")
+max_rotate_velocity = 0.5
+target_profile = "PHALANX"
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_lt7r1")
+hframes = 8
+vframes = 8
+
+[node name="Gun_Laser" parent="." instance=ExtResource("6")]
+position = Vector2(0, -14)
+fire_sound = 3009
+gun_heat = 5
+gun_range = 250
+gun_angle = 0.2
+gun_scale = 0.1
+
+[node name="Laser_Phalanx" parent="Gun_Laser" instance=ExtResource("7")]
+visible = false
+
+[node name="E_MuzzleG" parent="Gun_Laser" instance=ExtResource("8")]
+scale = Vector2(0.3, 0.3)

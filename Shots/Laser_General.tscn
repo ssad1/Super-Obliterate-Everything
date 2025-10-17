@@ -1,0 +1,25 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Shots/Laser_General.gd" type="Script" id=1]
+[ext_resource path="res://Shots/Graphics/Laser.png" type="Texture" id=2]
+[ext_resource path="res://Shaders/Laser_Effects.gdshader" type="Shader" id=3]
+[ext_resource path="res://Effects/Gradients/Gradient_Laser.tres" type="Texture" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_parameter/colors = ExtResource( 4 )
+
+[node name="Laser_General" type="Node2D"]
+light_mask = 0
+material = SubResource( 2 )
+script = ExtResource( 1 )
+base_damage = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
+material = SubResource( 1 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -64 )

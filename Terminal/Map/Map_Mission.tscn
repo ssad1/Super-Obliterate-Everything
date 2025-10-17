@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Terminal/Map/Map_Mission_Button.gd" type="Script" id=1]
+[ext_resource path="res://Terminal/Map/UICircle.png" type="Texture" id=2]
+
+[node name="Map_Mission_Button" type="TextureButton"]
+modulate = Color( 1, 1, 1, 0.784314 )
+light_mask = 0
+margin_right = 32.0
+margin_bottom = 32.0
+pivot_offset = Vector2( 16, 16 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 2 )
+texture_disabled = ExtResource( 2 )
+texture_focused = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="mouse_entered" from="." to="." method="_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_mouse_exited"]

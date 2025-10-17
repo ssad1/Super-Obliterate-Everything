@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d00lc5onv8rq2"]
+
+[ext_resource type="Script" path="res://Background/Heat_Layer.gd" id="1"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+blend_mode = 1
+
+[node name="Heat_Layer" type="ColorRect"]
+modulate = Color(1, 1, 1, 0)
+light_mask = 0
+material = SubResource("1")
+custom_minimum_size = Vector2(1600, 900)
+script = ExtResource("1")

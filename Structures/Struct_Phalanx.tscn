@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://bj60g7psg1ub0"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://dg2fumnmi6k64" path="res://Structures/struct_turret_base_small.tscn" id="2_d2x8h"]
+[ext_resource type="Texture2D" uid="uid://benf2gd3aiu3j" path="res://Structures/Graphics/Struct_Turret_Base_Small_C.png" id="4_5ubri"]
+[ext_resource type="Texture2D" uid="uid://f1x41ecwblna" path="res://Structures/Graphics/Struct_Turret_Base_Small_L.png" id="5_1uqbu"]
+[ext_resource type="PackedScene" uid="uid://dn6ub42eu2b6i" path="res://Turrets/Turret_Phalanx.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Small_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sojm8"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("4_5ubri")
+shader_parameter/lighting = ExtResource("5_1uqbu")
+
+[node name="Struct_Phalanx" type="Node2D"]
+script = ExtResource("2")
+name_text = "PHALANX"
+class_text = "TURRET"
+energy_cost = 100
+supply_cost = 1
+credit_cost = 250
+max_armor = 50
+
+[node name="Hull" parent="." instance=ExtResource("2_d2x8h")]
+material = SubResource("ShaderMaterial_sojm8")
+
+[node name="Turret_Phalanx" parent="." instance=ExtResource("8")]
+position = Vector2(0, -2)
+
+[node name="Module_Small_Struct_Boom_Large" parent="." instance=ExtResource("9")]
+
+[node name="Module_SFX" parent="." instance=ExtResource("10")]
+build_sfx = 1008

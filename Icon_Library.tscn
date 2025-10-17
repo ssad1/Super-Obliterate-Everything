@@ -1,0 +1,186 @@
+[gd_scene load_steps=47 format=3 uid="uid://sixtbslqbh8r"]
+
+[ext_resource type="Texture2D" uid="uid://bqviofh0l2qjf" path="res://Icons/Icon_Artillery.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dgvl73f5nxsjy" path="res://Icons/Icon_Autocannon.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://buly45k8xgnfu" path="res://Icons/Icon_Autogun.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://yhfwcldpqrjr" path="res://Icons/Icon_Blaster.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://c5kb8hd8jegoq" path="res://Icons/Icon_Artillery_Halo.png" id="4_vbkxo"]
+[ext_resource type="Texture2D" uid="uid://dloq67chh710v" path="res://Icons/Icon_DoubleBlaster.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bbqockw4pvr2n" path="res://Icons/Icon_Goliath.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://dg53n8an7evu6" path="res://Icons/Icon_Extractor.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://ck07gfy1ujunu" path="res://Icons/Icon_Beam_Halo.png" id="8_1uuq7"]
+[ext_resource type="Texture2D" uid="uid://c453ycte7m2hj" path="res://Icons/Icon_Laser.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://y4c1tkw7ltp" path="res://Icons/Icon_Lasercannon.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://cjr6jdqkaoe5c" path="res://Icons/Icon_Phalanx.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://bcdftkqu7pa5o" path="res://Icons/Icon_Mjolnir.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://b6djecrgmaavy" path="res://Icons/Icon_Piranha.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://bkrwmnwlrsl3y" path="res://Icons/Icon_Rapier.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://crrput54q4j4t" path="res://Icons/Icon_Saber.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://cng1he4oqpkep" path="res://Icons/Icon_Reactor.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://t1l5xoyjpdis" path="res://Icons/Icon_Spartan.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://du1yybgepaya4" path="res://Icons/Icon_Trident.png" id="18"]
+[ext_resource type="Script" path="res://Icon_Library.gd" id="19"]
+[ext_resource type="Texture2D" uid="uid://b8cgotyrkbv4v" path="res://Icons/Icon_Plasmacaster.png" id="20"]
+[ext_resource type="Texture2D" uid="uid://dwrwfrijrw24x" path="res://Icons/Icon_Grendal.png" id="21"]
+[ext_resource type="Texture2D" uid="uid://b0hoek7q5p5f" path="res://Icons/Icon_Myrmidon.png" id="22"]
+[ext_resource type="Texture2D" uid="uid://1d0tm0sad8ey" path="res://Icons/Icon_Cobra.png" id="23"]
+[ext_resource type="Texture2D" uid="uid://hgvoyrk52aou" path="res://Icons/Icon_Hammerhead.png" id="24"]
+[ext_resource type="Texture2D" uid="uid://kw2qaohunqg2" path="res://Icons/Icon_Missiles.png" id="25"]
+[ext_resource type="Texture2D" uid="uid://jmkbnl3jwc0b" path="res://Icons/Icon_QuadMissiles.png" id="26"]
+[ext_resource type="Texture2D" uid="uid://dvwwbpgh0jws5" path="res://Icons/Icon_Minotaur.png" id="27"]
+[ext_resource type="Texture2D" uid="uid://dq1h5w5tsao5p" path="res://Icons/Icon_Cataclysm.png" id="28"]
+[ext_resource type="Texture2D" uid="uid://bw7f6appc5ycr" path="res://Icons/Icon_Athena.png" id="29"]
+[ext_resource type="Texture2D" uid="uid://denaggf5o50rr" path="res://Icons/Icon_Mosquito.png" id="30"]
+[ext_resource type="Texture2D" uid="uid://6fh3uexloag4" path="res://Icons/Icon_Scorpion.png" id="31"]
+[ext_resource type="Texture2D" uid="uid://bgavdfmrna7sp" path="res://Icons/Icon_Plasma_Halo.png" id="31_aalbg"]
+[ext_resource type="Texture2D" uid="uid://cc324go02tpcp" path="res://Icons/Icon_Puma.png" id="32"]
+[ext_resource type="Texture2D" uid="uid://7lmag54xn05p" path="res://Icons/Icon_Hawk.png" id="33"]
+[ext_resource type="Texture2D" uid="uid://dgvcb6rsg3tau" path="res://Icons/Icon_Falcon.png" id="34"]
+[ext_resource type="Texture2D" uid="uid://bpw7xj6s3ckhl" path="res://Icons/Icon_Mantis.png" id="35"]
+[ext_resource type="Texture2D" uid="uid://fmg4tvinhitn" path="res://Icons/Icon_Knights.png" id="36"]
+[ext_resource type="Texture2D" uid="uid://cgnk8o0etvhh2" path="res://Icons/Icon_Tremor.png" id="37"]
+[ext_resource type="Texture2D" uid="uid://baiokj4bpowos" path="res://Icons/Icon_Fury.png" id="38"]
+[ext_resource type="Texture2D" uid="uid://bkutr0u54yta0" path="res://Icons/Icon_Gladiator.png" id="39"]
+[ext_resource type="Texture2D" uid="uid://cyrfks2gdwya7" path="res://Icons/Icon_Barricade.png" id="40"]
+[ext_resource type="Texture2D" uid="uid://d2p8v67ebxx0f" path="res://Icons/Icon_Repair.png" id="41"]
+[ext_resource type="Texture2D" uid="uid://bikoruuu4su8p" path="res://Icons/Icon_HyperRepair.png" id="42"]
+[ext_resource type="Texture2D" uid="uid://bgt17n74r2gj0" path="res://Icons/Icon_Shield.png" id="43"]
+[ext_resource type="Texture2D" uid="uid://dxnw0u2y3uaf2" path="res://Icons/Icon_Heavy_Shield.png" id="44"]
+
+[node name="Icon_Library" type="Node2D"]
+script = ExtResource("19")
+
+[node name="ATHENA" type="Sprite2D" parent="."]
+texture = ExtResource("29")
+
+[node name="ARTILLERY" type="Sprite2D" parent="."]
+texture = ExtResource("1")
+
+[node name="ARTILLERY HALO" type="Sprite2D" parent="."]
+texture = ExtResource("4_vbkxo")
+
+[node name="AUTOCANNON" type="Sprite2D" parent="."]
+texture = ExtResource("2")
+
+[node name="AUTOGUN" type="Sprite2D" parent="."]
+texture = ExtResource("3")
+
+[node name="BARRICADE" type="Sprite2D" parent="."]
+texture = ExtResource("40")
+
+[node name="BEAM HALO" type="Sprite2D" parent="."]
+texture = ExtResource("8_1uuq7")
+
+[node name="BLASTER" type="Sprite2D" parent="."]
+texture = ExtResource("4")
+
+[node name="CATACLYSM" type="Sprite2D" parent="."]
+texture = ExtResource("28")
+
+[node name="COBRA" type="Sprite2D" parent="."]
+texture = ExtResource("23")
+
+[node name="DOUBLE BLASTER" type="Sprite2D" parent="."]
+texture = ExtResource("5")
+
+[node name="EXTRACTOR" type="Sprite2D" parent="."]
+texture = ExtResource("8")
+
+[node name="FALCON" type="Sprite2D" parent="."]
+texture = ExtResource("34")
+
+[node name="FURY" type="Sprite2D" parent="."]
+texture = ExtResource("38")
+
+[node name="GOLIATH" type="Sprite2D" parent="."]
+texture = ExtResource("7")
+
+[node name="GLADIATOR" type="Sprite2D" parent="."]
+texture = ExtResource("39")
+
+[node name="GRENDAL" type="Sprite2D" parent="."]
+texture = ExtResource("21")
+
+[node name="HAMMERHEAD" type="Sprite2D" parent="."]
+texture = ExtResource("24")
+
+[node name="HAWK" type="Sprite2D" parent="."]
+texture = ExtResource("33")
+
+[node name="HEAVY SHIELD" type="Sprite2D" parent="."]
+texture = ExtResource("44")
+
+[node name="HYPER REPAIR" type="Sprite2D" parent="."]
+texture = ExtResource("42")
+
+[node name="KNIGHT" type="Sprite2D" parent="."]
+texture = ExtResource("36")
+
+[node name="LASER" type="Sprite2D" parent="."]
+texture = ExtResource("9")
+
+[node name="LASERCANNON" type="Sprite2D" parent="."]
+texture = ExtResource("10")
+
+[node name="MANTIS" type="Sprite2D" parent="."]
+texture = ExtResource("35")
+
+[node name="MINOTAUR" type="Sprite2D" parent="."]
+texture = ExtResource("27")
+
+[node name="MJOLNIR" type="Sprite2D" parent="."]
+texture = ExtResource("12")
+
+[node name="MOSQUITO" type="Sprite2D" parent="."]
+texture = ExtResource("30")
+
+[node name="MYRMIDON" type="Sprite2D" parent="."]
+texture = ExtResource("22")
+
+[node name="PLASMA HALO" type="Sprite2D" parent="."]
+texture = ExtResource("31_aalbg")
+
+[node name="PHALANX" type="Sprite2D" parent="."]
+texture = ExtResource("11")
+
+[node name="PLASMACASTER" type="Sprite2D" parent="."]
+texture = ExtResource("20")
+
+[node name="PIRANHA" type="Sprite2D" parent="."]
+texture = ExtResource("13")
+
+[node name="PUMA" type="Sprite2D" parent="."]
+texture = ExtResource("32")
+
+[node name="RAPIER" type="Sprite2D" parent="."]
+texture = ExtResource("14")
+
+[node name="REACTOR" type="Sprite2D" parent="."]
+texture = ExtResource("16")
+
+[node name="SABER" type="Sprite2D" parent="."]
+texture = ExtResource("15")
+
+[node name="SPARTAN" type="Sprite2D" parent="."]
+texture = ExtResource("17")
+
+[node name="TRIDENT" type="Sprite2D" parent="."]
+texture = ExtResource("18")
+
+[node name="MISSILES" type="Sprite2D" parent="."]
+texture = ExtResource("25")
+
+[node name="QUAD MISSILES" type="Sprite2D" parent="."]
+texture = ExtResource("26")
+
+[node name="REPAIR" type="Sprite2D" parent="."]
+texture = ExtResource("41")
+
+[node name="SCORPION" type="Sprite2D" parent="."]
+texture = ExtResource("31")
+
+[node name="SHIELD" type="Sprite2D" parent="."]
+texture = ExtResource("43")
+
+[node name="TREMOR" type="Sprite2D" parent="."]
+texture = ExtResource("37")

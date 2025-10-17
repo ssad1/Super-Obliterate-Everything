@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://nmbqa1dtprsx"]
+
+[ext_resource type="PackedScene" uid="uid://c8kp6h711q0kf" path="res://Terminal/Map/Mission Block/FactionList.tscn" id="1"]
+[ext_resource type="Script" path="res://Terminal/Map/Mission Block/Mission_Block.gd" id="2"]
+
+[node name="Mission_Block" type="Node2D"]
+z_index = 60
+script = ExtResource("2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(200, 250)
+color = Color(0, 0, 0, 0.941176)
+
+[node name="Box" type="VBoxContainer" parent="."]
+
+[node name="Mission_Type" type="Label" parent="Box"]
+layout_mode = 2
+text = "MISSION DATA"
+
+[node name="Mission_Factions" parent="Box" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="Mission_Map" type="Label" parent="Box"]
+layout_mode = 2
+text = "MAP"
+
+[node name="Mission_Size" type="Label" parent="Box"]
+layout_mode = 2
+text = "SIZE"
+
+[node name="Mission_Resources" type="Label" parent="Box"]
+layout_mode = 2
+text = "RESOURCES"
+
+[node name="Mission_Temperature" type="Label" parent="Box"]
+layout_mode = 2
+text = "TEMPERATURE"
+
+[node name="Mission_Difficulty" type="Label" parent="Box"]
+layout_mode = 2
+text = "DIFFICULTY"
+
+[node name="Mission_Planet" type="Label" parent="Box"]
+visible = false
+layout_mode = 2
+text = "PLANET"
+
+[node name="Mission_Asteroids" type="Label" parent="Box"]
+visible = false
+layout_mode = 2
+text = "ASTEROIDS"

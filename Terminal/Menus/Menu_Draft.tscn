@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://vpsh1gddr74"]
+
+[ext_resource type="Theme" uid="uid://elferpjtn4s7" path="res://Terminal/Terminal_Theme_Big.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://otl3jyv0h23v" path="res://Terminal/Menus/Menu_DraftItems.tscn" id="2"]
+[ext_resource type="Script" path="res://Terminal/Menus/Menu_Container.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://cq61nvavqgljf" path="res://Terminal/Menus/Menu_Draft_Buy.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://Terminal/Menus/Menu_Draft_Purchased.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://Terminal/Menus/Menu_Draft_Error.tscn" id="6"]
+
+[node name="Menu_Draft" type="Control"]
+layout_mode = 3
+anchor_right = 0.354
+anchor_bottom = 0.379
+script = ExtResource("3")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+light_mask = 0
+layout_mode = 0
+theme = ExtResource("1")
+text = "DRAFT"
+
+[node name="Menu_Draft_Error" parent="." instance=ExtResource("6")]
+visible = false
+anchors_preset = 0
+
+[node name="Menu_Draft_Purchased" parent="." instance=ExtResource("5")]
+visible = false
+anchors_preset = 0
+
+[node name="Menu_DraftItems" parent="." instance=ExtResource("2")]
+anchors_preset = 0
+
+[node name="Menu_Draft_Buy" parent="." instance=ExtResource("4")]
+visible = false
+layout_mode = 0
+anchors_preset = 0

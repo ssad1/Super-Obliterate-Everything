@@ -1,0 +1,128 @@
+[gd_scene load_steps=17 format=3 uid="uid://bojdta407vuuk"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Structures/Struct_Shield.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://kggbk24miq5v" path="res://Structures/Graphics/Struct_Shield_C.PNG" id="3_f0enj"]
+[ext_resource type="Texture2D" uid="uid://bxgb1c44l6uwo" path="res://Structures/Graphics/Struct_Shield_D.PNG" id="3_jit8x"]
+[ext_resource type="Texture2D" uid="uid://clp3frwm151al" path="res://Structures/Graphics/Struct_Shield_L.PNG" id="4_8vagn"]
+[ext_resource type="Texture2D" uid="uid://dbpq48flnhqhe" path="res://Structures/Graphics/Struct_Shield_N.PNG" id="4_y0tvw"]
+[ext_resource type="Texture2D" uid="uid://ndebfqqflvgd" path="res://Structures/Graphics/newAssets/Struct_Shield_Glow.PNG" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Area_Shield.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="11"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_f0enj")
+shader_parameter/lighting = ExtResource("4_8vagn")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_im5mk"]
+diffuse_texture = ExtResource("3_jit8x")
+normal_texture = ExtResource("4_y0tvw")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="3"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 63]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Struct_Shield_Glow:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 63]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b8ri4"]
+_data = {
+"Spin": SubResource("3")
+}
+
+[node name="Struct_Shield" type="Node2D"]
+script = ExtResource("2")
+name_text = "SHIELD"
+class_text = "AUXILIARY"
+energy_cost = 100
+supply_cost = 1
+credit_cost = 500
+max_armor = 50
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_im5mk")
+hframes = 8
+vframes = 8
+frame = 16
+
+[node name="Struct_Shield_Glow" type="Sprite2D" parent="Hull"]
+visible = false
+modulate = Color(0.772549, 0.894118, 1, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("8")
+hframes = 8
+vframes = 8
+frame = 16
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
+libraries = {
+"": SubResource("AnimationLibrary_b8ri4")
+}
+autoplay = "Spin"
+
+[node name="Module_Area_Shield" parent="." instance=ExtResource("10")]
+anchors_preset = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Medium_Struct_Boom_Large" parent="." instance=ExtResource("9")]
+visible = false
+
+[node name="Module_SFX" parent="." instance=ExtResource("11")]
+build_sfx = 1011

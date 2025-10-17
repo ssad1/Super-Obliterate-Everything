@@ -1,0 +1,107 @@
+[gd_scene load_steps=16 format=3 uid="uid://djwcs64okq8x4"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Structures/Struct_Extractor.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://bq5u0worar52k" path="res://Structures/Graphics/Struct_Extractor_C.PNG" id="3_8jb7e"]
+[ext_resource type="Texture2D" uid="uid://cv3vvi64nmmrb" path="res://Structures/Graphics/Struct_Extractor_L.PNG" id="4_aam7p"]
+[ext_resource type="Texture2D" uid="uid://som45ha5ytp7" path="res://Structures/Graphics/Struct_Extractor_D.PNG" id="5_xw051"]
+[ext_resource type="Texture2D" uid="uid://ch306h3l38ea" path="res://Structures/Graphics/Struct_Extractor_N.PNG" id="6_jaibm"]
+[ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Hangars/Hangar_Factory.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://Hangars/Hangar_Metalporter.tscn" id="11"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_8jb7e")
+shader_parameter/lighting = ExtResource("4_aam7p")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_18i2e"]
+diffuse_texture = ExtResource("5_xw051")
+normal_texture = ExtResource("6_jaibm")
+
+[sub_resource type="Animation" id="2"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 63]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dwyu2"]
+_data = {
+"Spin": SubResource("2")
+}
+
+[node name="Struct_Extractor" type="Node2D"]
+script = ExtResource("2")
+build_size = Vector2(2, 2)
+name_text = "EXTRACTOR"
+class_text = "ECONOMY"
+energy_cost = 250
+supply_cost = 5
+credit_cost = 50
+max_armor = 100
+special = "EXTRACTOR"
+build_speed = 2.0
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_18i2e")
+hframes = 8
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
+libraries = {
+"": SubResource("AnimationLibrary_dwyu2")
+}
+autoplay = "Spin"
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hangar_Factory" parent="." instance=ExtResource("10")]
+ship_id = [2003]
+
+[node name="Hangar_Metalporter" parent="." instance=ExtResource("11")]
+
+[node name="Module_Medium_Struct_Boom_Large" parent="." instance=ExtResource("9")]
+visible = false
+
+[node name="Module_SFX" parent="." instance=ExtResource("8")]
+build_sfx = 1000

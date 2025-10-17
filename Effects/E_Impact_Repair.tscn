@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Effects/Gradients/Gradient_Repair.tres" type="Texture" id=1]
+[ext_resource path="res://Effects/Effect_Clear.gd" type="Script" id=2]
+[ext_resource path="res://Effects/AnimationMultiRandom.gd" type="Script" id=3]
+[ext_resource path="res://Effects/E_Repair.png" type="Texture" id=4]
+[ext_resource path="res://Shaders/Laser_Effects.gdshader" type="Shader" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 5 )
+shader_parameter/colors = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Sparks1"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 54 ]
+}
+
+[node name="E_Impact_Repair" type="Sprite2D"]
+light_mask = 0
+material = SubResource( 1 )
+texture = ExtResource( 4 )
+hframes = 11
+vframes = 5
+frame = 54
+script = ExtResource( 2 )
+effect_layer = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Sparks1 = SubResource( 2 )
+script = ExtResource( 3 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

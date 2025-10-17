@@ -1,0 +1,120 @@
+[gd_scene load_steps=17 format=3 uid="uid://dh6t1vkfernj"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://bfgppodp7y54t" path="res://Ships/Graphics/Goliath_C.PNG" id="4"]
+[ext_resource type="Texture2D" uid="uid://bhip48d5uhoxh" path="res://Ships/Graphics/Goliath_L.PNG" id="5"]
+[ext_resource type="Texture2D" uid="uid://ba2ak66da3ubr" path="res://Ships/Graphics/Goliath_B.PNG" id="6"]
+[ext_resource type="Texture2D" uid="uid://b8jfbodoh6580" path="res://Ships/Graphics/Goliath_N.PNG" id="6_8v30s"]
+[ext_resource type="Texture2D" uid="uid://cnpmgxyyjoqfu" path="res://Ships/Graphics/Goliath_D.PNG" id="7"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_Laser.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://ctpcewov8ruq7" path="res://Effects/E_MuzzleF.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://Shots/Laser_Spartan.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://b7uoppkeik13" path="res://Turrets/Turret_Laser.tscn" id="13"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(16, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("4")
+shader_parameter/lighting = ExtResource("5")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_bc5hw"]
+diffuse_texture = ExtResource("7")
+normal_texture = ExtResource("6_8v30s")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[node name="Ship_Goliath" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.15
+factory = 279
+name_text = "GOLIATH"
+class_text = "CRUISER"
+energy_cost = 600
+metal_cost = 500
+supply_cost = 5
+credit_cost = 2700
+inertia = 0.2
+max_velocity = 4.0
+max_rotate_velocity = 0.04
+max_armor = 100
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_bc5hw")
+hframes = 16
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("6")
+hframes = 16
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -23.0
+offset_top = -20.0
+offset_right = 23.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Turret_Laser" parent="." instance=ExtResource("13")]
+position = Vector2(0, -9)
+
+[node name="Gun_Laser" parent="." instance=ExtResource("8")]
+position = Vector2(-12, -24)
+fire_sound = 3006
+gun_kick = 20.0
+gun_heat = 20
+gun_range = 400
+gun_scale = 0.75
+
+[node name="Laser_Spartan" parent="Gun_Laser" instance=ExtResource("11")]
+visible = false
+
+[node name="E_MuzzleF" parent="Gun_Laser" instance=ExtResource("10")]
+scale = Vector2(2.5, 2.5)
+
+[node name="Gun_Laser2" parent="." instance=ExtResource("8")]
+position = Vector2(12, -24)
+fire_sound = 3006
+gun_kick = 20.0
+gun_heat = 20
+gun_range = 400
+gun_scale = 0.75
+
+[node name="Laser_Spartan" parent="Gun_Laser2" instance=ExtResource("11")]
+visible = false
+
+[node name="E_MuzzleF" parent="Gun_Laser2" instance=ExtResource("10")]
+scale = Vector2(2.5, 2.5)
+
+[node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("9")]

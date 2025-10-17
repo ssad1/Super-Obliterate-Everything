@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Effects/E_SmokeTrail.PNG" type="Texture" id=1]
+[ext_resource path="res://Effects/Effect_Clear.gd" type="Script" id=2]
+[ext_resource path="res://Effects/AnimationMultiRandom.gd" type="Script" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="Animation" id=2]
+resource_name = "Sparks1"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1, 12 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Sparks2"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 14, 26 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Sparks3"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 27, 38 ]
+}
+
+[node name="E_SmokeTrail" type="Sprite2D"]
+modulate = Color( 1, 1, 1, 0.4 )
+light_mask = 0
+material = SubResource( 1 )
+texture = ExtResource( 1 )
+hframes = 13
+vframes = 3
+frame = 27
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Sparks1 = SubResource( 2 )
+anims/Sparks2 = SubResource( 3 )
+anims/Sparks3 = SubResource( 4 )
+script = ExtResource( 3 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

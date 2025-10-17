@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://cogsf3ad1ldu8"]
+
+[ext_resource type="Texture2D" uid="uid://xff7hhi2l1gq" path="res://Shots/Graphics/Debris_D.PNG" id="2_0xpla"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://c4uibxhqn6xm1" path="res://Shots/Graphics/Debris_N.PNG" id="3_amiyf"]
+[ext_resource type="Script" path="res://Shots/Shot_Debris.gd" id="4"]
+[ext_resource type="Script" path="res://Shots/Shot_General.gd" id="5"]
+[ext_resource type="PackedScene" path="res://Modules/Spawn_Effect.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="7"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_bksi6"]
+diffuse_texture = ExtResource("2_0xpla")
+normal_texture = ExtResource("3_amiyf")
+
+[node name="Shot_Debris" type="Node2D"]
+script = ExtResource("5")
+name_text = "Debris"
+
+[node name="Hull" type="Sprite2D" parent="."]
+texture = SubResource("CanvasTexture_bksi6")
+hframes = 24
+vframes = 9
+script = ExtResource("4")
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -11.0
+offset_top = -10.0
+offset_right = 9.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Trigger" parent="." instance=ExtResource("7")]
+death_activate = true
+
+[node name="Spawn_Effect" parent="Module_Trigger" instance=ExtResource("6")]
+spawn_id = 10111
+scale_effect = true
+scale_effect_size = 0.4

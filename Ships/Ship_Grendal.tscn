@@ -1,0 +1,123 @@
+[gd_scene load_steps=20 format=3 uid="uid://dkl4mx05dw2tl"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="4"]
+[ext_resource type="Texture2D" uid="uid://bc8n75b7ps01f" path="res://Ships/Graphics/Grendal_D.PNG" id="5"]
+[ext_resource type="Texture2D" uid="uid://c6uu6e6vl3k11" path="res://Ships/Graphics/Grendal_N.PNG" id="6_eh6jh"]
+[ext_resource type="Texture2D" uid="uid://brpr2bqlw3hgm" path="res://Ships/Graphics/Grendal_C.PNG" id="7"]
+[ext_resource type="Texture2D" uid="uid://c1yhmkj0lnudb" path="res://Ships/Graphics/Grendal_L.PNG" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://yb3pr6cnueq6" path="res://Ships/Graphics/Grendal_B.PNG" id="10"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="14"]
+[ext_resource type="PackedScene" uid="uid://dn6ub42eu2b6i" path="res://Turrets/Turret_Phalanx.tscn" id="15"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("7")
+shader_parameter/lighting = ExtResource("8")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ogsi2"]
+diffuse_texture = ExtResource("5")
+normal_texture = ExtResource("6_eh6jh")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="3"]
+resource_local_to_scene = true
+shader = ExtResource("4")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("14")
+
+[node name="Ship_Grendal" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.4
+aistandoff = 150
+factory = 277
+name_text = "GRENDAL"
+class_text = "FRIGATE"
+energy_cost = 200
+metal_cost = 100
+supply_cost = 3
+credit_cost = 600
+inertia = 0.6
+max_velocity = 7.0
+max_rotate_velocity = 0.2
+max_armor = 25
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_ogsi2")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("10")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+light_mask = 0
+offset_left = -15.0
+offset_top = -19.0
+offset_right = 15.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_General" parent="." instance=ExtResource("11")]
+position = Vector2(0, -20)
+fire_sound = 3002
+gun_heat = 20
+gun_range = 400
+gun_v = 20
+gun_arc = 0.75
+gun_arc_rounds = 5
+gun_scale = 0.6
+
+[node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("12")]
+visible = false
+material = SubResource("3")
+
+[node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("13")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Turret_Phalanx" parent="." instance=ExtResource("15")]
+position = Vector2(0, -7)
+
+[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("9")]

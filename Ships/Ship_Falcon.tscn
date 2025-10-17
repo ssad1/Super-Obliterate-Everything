@@ -1,0 +1,129 @@
+[gd_scene load_steps=19 format=3 uid="uid://dq24j2khj6c1"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Shots/Missile_R1.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://br8li8r6dif2f" path="res://Ships/Graphics/Falcon_D.PNG" id="5"]
+[ext_resource type="Texture2D" uid="uid://cojml0c7ggb6c" path="res://Ships/Graphics/Falcon_N.PNG" id="6_4hdsn"]
+[ext_resource type="Texture2D" uid="uid://c2k2bw5vcytt0" path="res://Ships/Graphics/Falcon_B.PNG" id="7"]
+[ext_resource type="Texture2D" uid="uid://cduxaamdhliof" path="res://Ships/Graphics/Falcon_C.PNG" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://bfajowadqfs20" path="res://Ships/Graphics/Falcon_L.PNG" id="10"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://Shots/Laser_General.tscn" id="15"]
+[ext_resource type="PackedScene" uid="uid://2l4a7xhqw1ki" path="res://Effects/E_MuzzleE.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_Laser.tscn" id="17"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("8")
+shader_parameter/lighting = ExtResource("10")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_256od"]
+diffuse_texture = ExtResource("5")
+normal_texture = ExtResource("6_4hdsn")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[node name="Ship_Falcon" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.3
+aistandoff = 200
+factory = 276
+name_text = "FALCON"
+class_text = "CORVETTE"
+energy_cost = 150
+metal_cost = 25
+supply_cost = 2
+credit_cost = 250
+inertia = 0.8
+max_velocity = 7.0
+max_rotate_velocity = 0.2
+max_armor = 17
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_256od")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("7")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+light_mask = 0
+offset_left = -10.0
+offset_top = -11.0
+offset_right = 10.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_Laser" parent="." instance=ExtResource("17")]
+position = Vector2(0, -20)
+fire_sound = 3001
+gun_heat = 30
+gun_range = 300
+gun_angle = 0.2
+gun_scale = 0.3
+
+[node name="Laser_General" parent="Gun_Laser" instance=ExtResource("15")]
+visible = false
+position = Vector2(12, -8)
+
+[node name="E_MuzzleE" parent="Gun_Laser" instance=ExtResource("16")]
+visible = false
+position = Vector2(12, -8)
+scale = Vector2(0.5, 0.5)
+
+[node name="Gun_General1" parent="." instance=ExtResource("11")]
+position = Vector2(0, -20)
+fire_sound = 3004
+gun_kick = 3.0
+gun_heat = 30
+gun_angle = 0.1
+gun_v = 5
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.4
+velocity_align = false
+
+[node name="Missile_R1" parent="Gun_General1" instance=ExtResource("4")]
+visible = false
+
+[node name="E_MuzzleA" parent="Gun_General1" instance=ExtResource("13")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("9")]

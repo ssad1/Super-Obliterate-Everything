@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Terminal/Terminal_Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Terminal/Galaxy/Zone_Label.gd" type="Script" id=2]
+
+[node name="Zone_Label" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+light_mask = 0
+margin_right = 62.0
+margin_bottom = 32.0
+color = Color( 0, 0, 0, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+light_mask = 0
+margin_right = 42.0
+margin_bottom = 30.0
+size_flags_horizontal = 5
+theme = ExtResource( 1 )
+text = "Zone"
+__meta__ = {
+"_edit_use_anchors_": false
+}

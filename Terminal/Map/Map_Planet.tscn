@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Terminal/Map/Map_Planet.gd" type="Script" id=1]
+[ext_resource path="res://Terminal/Map/BallD.png" type="Texture" id=2]
+[ext_resource path="res://Terminal/Map/BallN.png" type="Texture" id=3]
+[ext_resource path="res://Terminal/Map/BallGlow.png" type="Texture" id=4]
+[ext_resource path="res://Effects/E_MissionHover.tscn" type="PackedScene" id=5]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="MissionHover" parent="." instance=ExtResource( 5 )]
+light_mask = 0
+
+[node name="BallGlow" type="Sprite2D" parent="."]
+modulate = Color( 1, 1, 1, 0.682353 )
+light_mask = 0
+texture = ExtResource( 4 )
+
+[node name="Sprite_Planet" type="Sprite2D" parent="."]
+light_mask = 2
+texture = ExtResource( 2 )
+normal_map = ExtResource( 3 )

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Modules/Spawn_Effect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Modules/Module_Trigger.gd" type="Script" id=2]
+[ext_resource path="res://Modules/Module_Death_SFX.tscn" type="PackedScene" id=3]
+
+[node name="Module_Fighter_Boom" type="Node2D"]
+script = ExtResource( 2 )
+death_activate = true
+
+[node name="Spawn_Effect" parent="." instance=ExtResource( 1 )]
+spawn_id = 10200
+scale_effect = true
+scale_effect_size = 0.5
+
+[node name="Spawn_Effect2" parent="." instance=ExtResource( 1 )]
+spawn_id = 10111
+scale_effect = true
+scale_effect_size = 0.75
+
+[node name="Module_Death_SFX" parent="." instance=ExtResource( 3 )]
+fire_sound = 2003

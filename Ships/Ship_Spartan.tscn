@@ -1,0 +1,99 @@
+[gd_scene load_steps=14 format=3 uid="uid://bvess63yqu48t"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_Laser.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://bxuf8ginbdyl4" path="res://Ships/Graphics/Spartan_N.PNG" id="4_lr5ej"]
+[ext_resource type="Texture2D" uid="uid://ymv8y50biist" path="res://Ships/Graphics/Spartan_D.PNG" id="5"]
+[ext_resource type="Texture2D" uid="uid://j33ni8u3e1p4" path="res://Ships/Graphics/Spartan_B.PNG" id="7"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Shots/Laser_Spartan.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://ctpcewov8ruq7" path="res://Effects/E_MuzzleF.tscn" id="12"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_d33cv"]
+diffuse_texture = ExtResource("5")
+normal_texture = ExtResource("4_lr5ej")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[node name="Ship_Spartan" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.3
+aistandoff = 150
+factory = 277
+name_text = "SPARTAN"
+class_text = "FRIGATE"
+energy_cost = 300
+metal_cost = 150
+supply_cost = 3
+credit_cost = 800
+inertia = 0.6
+max_velocity = 4.0
+max_rotate_velocity = 0.1
+max_armor = 30
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_d33cv")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("7")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_Laser" parent="." instance=ExtResource("4")]
+position = Vector2(0, -24)
+fire_sound = 3006
+gun_kick = 25.0
+gun_heat = 60
+gun_range = 400
+gun_scale = 0.5
+
+[node name="Laser_Spartan" parent="Gun_Laser" instance=ExtResource("11")]
+visible = false
+
+[node name="E_MuzzleF" parent="Gun_Laser" instance=ExtResource("12")]
+scale = Vector2(3, 3)
+
+[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("9")]

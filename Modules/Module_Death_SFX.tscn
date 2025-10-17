@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Modules/Module_Death_SFX.gd" type="Script" id=1]
+
+[node name="Module_Death_SFX" type="Node"]
+script = ExtResource( 1 )

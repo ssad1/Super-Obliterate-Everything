@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Effects/MissionHover.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Boom"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 63 ]
+}
+
+[node name="MissionHover" type="Sprite2D"]
+texture = ExtResource( 1 )
+vframes = 8
+hframes = 8
+frame = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Boom"
+anims/Boom = SubResource( 1 )

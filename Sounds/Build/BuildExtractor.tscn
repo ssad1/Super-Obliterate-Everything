@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckwksu58w1vhe"]
+
+[ext_resource type="AudioStream" uid="uid://13687r4ak3qj" path="res://Sounds/Build/BuildExtractor.wav" id="1"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1")

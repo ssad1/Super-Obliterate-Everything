@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Shots/Explode_Plasma.gd" type="Script" id=1]
+
+[node name="Explode_Plasma" type="Node2D"]
+script = ExtResource( 1 )
+damage = 1
+boom_radius = 100
+boom_scale = 2.0

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Terminal/Terminal_Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Terminal/Menu_Campaign.gd" type="Script" id=2]
+[ext_resource path="res://Terminal/Menu_Map.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Terminal/Menu_New_Map.tscn" type="PackedScene" id=4]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1220.0
+margin_bottom = -481.0
+min_size = Vector2( 700, 600 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+menu_map_path = NodePath("Menu_Map")
+menu_new_map_path = NodePath("Menu_New_Map")
+
+[node name="Menu_Map" parent="." instance=ExtResource( 3 )]
+
+[node name="Menu_New_Map" parent="." instance=ExtResource( 4 )]
+visible = false

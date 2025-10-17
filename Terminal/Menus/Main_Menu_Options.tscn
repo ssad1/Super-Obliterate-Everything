@@ -1,0 +1,279 @@
+[gd_scene load_steps=11 format=3 uid="uid://sq82wqcpvbce"]
+
+[ext_resource type="PackedScene" uid="uid://bn7dr4vti35ee" path="res://Terminal/Menu_Button.tscn" id="1"]
+[ext_resource type="Theme" uid="uid://elferpjtn4s7" path="res://Terminal/Terminal_Theme_Big.tres" id="2"]
+[ext_resource type="Script" path="res://Terminal/Menus/Main_Menu_Options.gd" id="3"]
+[ext_resource type="Script" path="res://Terminal/Menus/Submenu.gd" id="4"]
+[ext_resource type="Theme" uid="uid://18o43qaay3t1" path="res://Terminal/Terminal_Theme_Small.tres" id="5"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_kylvv"]
+resource_local_to_scene = false
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_elwxx"]
+resource_local_to_scene = false
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_e36r6"]
+resource_local_to_scene = false
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_8lvjc"]
+resource_local_to_scene = false
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_pra4r"]
+resource_local_to_scene = false
+
+[node name="Main_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+
+[node name="Main_Menu_Options" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2")
+script = ExtResource("3")
+
+[node name="Button_Missions" parent="VBoxContainer/Main_Menu_Options" instance=ExtResource("1")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+button_pressed = true
+text = " MISSIONS"
+
+[node name="Button_Multiplayer" parent="VBoxContainer/Main_Menu_Options" instance=ExtResource("1")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = " MULTI"
+
+[node name="Button_Armory" parent="VBoxContainer/Main_Menu_Options" instance=ExtResource("1")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = " ARMORY"
+
+[node name="Button_Shop" parent="VBoxContainer/Main_Menu_Options" instance=ExtResource("1")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = " SHOP"
+
+[node name="Button_Options" parent="VBoxContainer/Main_Menu_Options" instance=ExtResource("1")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = " OPTIONS"
+
+[node name="Divider1" type="ColorRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(916, 6)
+layout_mode = 2
+color = Color(0.956863, 0.470588, 0.278431, 1)
+
+[node name="Submenu_Missions" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5")
+script = ExtResource("4")
+
+[node name="Button_Conquest" parent="VBoxContainer/Submenu_Missions" instance=ExtResource("1")]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_pressed = true
+button_group = SubResource("ButtonGroup_kylvv")
+text = " CONQUEST"
+
+[node name="Button_Galaxy" parent="VBoxContainer/Submenu_Missions" instance=ExtResource("1")]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_kylvv")
+text = "GALAXY"
+light_on = false
+
+[node name="Button_Single_Custom" parent="VBoxContainer/Submenu_Missions" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_kylvv")
+text = " CUSTOM"
+light_on = false
+
+[node name="Button_Training" parent="VBoxContainer/Submenu_Missions" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_kylvv")
+text = " TRAINING"
+light_on = false
+
+[node name="Button_Challenges" parent="VBoxContainer/Submenu_Missions" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_kylvv")
+text = " CHALLENGES"
+light_on = false
+
+[node name="Submenu_Multiplayer" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("5")
+script = ExtResource("4")
+
+[node name="Button_Duel" parent="VBoxContainer/Submenu_Multiplayer" instance=ExtResource("1")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+button_group = SubResource("ButtonGroup_elwxx")
+text = " DUEL"
+light_on = false
+
+[node name="Button_Join" parent="VBoxContainer/Submenu_Multiplayer" instance=ExtResource("1")]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_pressed = true
+button_group = SubResource("ButtonGroup_elwxx")
+text = " JOIN"
+
+[node name="Button_Host" parent="VBoxContainer/Submenu_Multiplayer" instance=ExtResource("1")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+button_group = SubResource("ButtonGroup_elwxx")
+text = " HOST"
+light_on = false
+
+[node name="Button_Ladder" parent="VBoxContainer/Submenu_Multiplayer" instance=ExtResource("1")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+button_group = SubResource("ButtonGroup_elwxx")
+text = " LADDER"
+light_on = false
+
+[node name="Button_Challenges" parent="VBoxContainer/Submenu_Multiplayer" instance=ExtResource("1")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+button_group = SubResource("ButtonGroup_elwxx")
+text = " REPLAYS"
+light_on = false
+
+[node name="Submenu_Armory" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("5")
+script = ExtResource("4")
+
+[node name="Button_Equip" parent="VBoxContainer/Submenu_Armory" instance=ExtResource("1")]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_pressed = true
+button_group = SubResource("ButtonGroup_e36r6")
+text = " EQUIP"
+
+[node name="Button_View" parent="VBoxContainer/Submenu_Armory" instance=ExtResource("1")]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_e36r6")
+text = " VIEW"
+light_on = false
+
+[node name="Button_Craft" parent="VBoxContainer/Submenu_Armory" instance=ExtResource("1")]
+visible = false
+layout_mode = 2
+button_group = SubResource("ButtonGroup_e36r6")
+text = " CRAFT"
+light_on = false
+
+[node name="Button_Sell" parent="VBoxContainer/Submenu_Armory" instance=ExtResource("1")]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_e36r6")
+text = " SELL"
+light_on = false
+
+[node name="Submenu_Shop" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("5")
+script = ExtResource("4")
+
+[node name="Button_Draft" parent="VBoxContainer/Submenu_Shop" instance=ExtResource("1")]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_pressed = true
+button_group = SubResource("ButtonGroup_8lvjc")
+text = " DRAFT"
+
+[node name="Button_Packs" parent="VBoxContainer/Submenu_Shop" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_8lvjc")
+text = " PACKS"
+light_on = false
+
+[node name="Button_Vault" parent="VBoxContainer/Submenu_Shop" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_8lvjc")
+text = " VAULT"
+light_on = false
+
+[node name="Button_Currencies" parent="VBoxContainer/Submenu_Shop" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_8lvjc")
+text = " CURRENCY"
+light_on = false
+
+[node name="Button_Extra" parent="VBoxContainer/Submenu_Shop" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_8lvjc")
+text = " EXTRA"
+light_on = false
+
+[node name="Submenu_Options" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("5")
+script = ExtResource("4")
+
+[node name="Button_Exit_Menu" parent="VBoxContainer/Submenu_Options" instance=ExtResource("1")]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_pressed = true
+button_group = SubResource("ButtonGroup_pra4r")
+text = " EXIT TERMINAL"
+
+[node name="Button_Settings" parent="VBoxContainer/Submenu_Options" instance=ExtResource("1")]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_pra4r")
+text = " SETTINGS"
+light_on = false
+
+[node name="Button_Controls" parent="VBoxContainer/Submenu_Options" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_pra4r")
+text = " CONTROLS"
+light_on = false
+
+[node name="Button_Account" parent="VBoxContainer/Submenu_Options" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_pra4r")
+text = " ACCOUNT"
+light_on = false
+
+[node name="Divider2" type="ColorRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(916, 4)
+layout_mode = 2
+color = Color(0.309804, 0.113725, 0.0901961, 1)

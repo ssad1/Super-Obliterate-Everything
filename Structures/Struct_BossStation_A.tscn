@@ -1,0 +1,122 @@
+[gd_scene load_steps=18 format=3 uid="uid://chnsvj34dake0"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://ckmqg1fganhgl" path="res://Structures/Graphics/newAssets/Struct_BossStation_D.PNG" id="4"]
+[ext_resource type="Texture2D" uid="uid://7cwmv33wkp0f" path="res://Structures/Graphics/newAssets/Struct_BossStation_C.PNG" id="4_fohy7"]
+[ext_resource type="Texture2D" uid="uid://xcj7i4plhkuk" path="res://Structures/Graphics/newAssets/Struct_BossStation_N.PNG" id="5_3wvj0"]
+[ext_resource type="Texture2D" uid="uid://8hse4ex8g51j" path="res://Structures/Graphics/newAssets/Struct_BossStation_L.PNG" id="5_hre34"]
+[ext_resource type="PackedScene" path="res://Modules/Generator.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_BossStation_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bl2mxtnhn4slr" path="res://Turrets/Turret_Double_Blaster.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://dn6ub42eu2b6i" path="res://Turrets/Turret_Phalanx.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://ctp4jh83ii4c3" path="res://Modules/Module_Area_Heavy_Shield.tscn" id="12"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("4_fohy7")
+shader_parameter/lighting = ExtResource("5_hre34")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_pt4q0"]
+diffuse_texture = ExtResource("4")
+normal_texture = ExtResource("5_3wvj0")
+
+[sub_resource type="Animation" id="Animation_yp22h"]
+length = 0.001
+
+[sub_resource type="Animation" id="2"]
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 63]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vyb20"]
+_data = {
+"RESET": SubResource("Animation_yp22h"),
+"Spin": SubResource("2")
+}
+
+[node name="Struct_BossStation_A" type="Node2D"]
+script = ExtResource("2")
+build_size = Vector2(4, 4)
+name_text = "BOSS STATION"
+class_text = "STATION"
+energy_cost = 1000
+metal_cost = 1000
+supply_cost = 1
+max_armor = 1000
+special = "STATION"
+
+[node name="Generator" parent="." instance=ExtResource("8")]
+energy_gen = 0.5
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_pt4q0")
+hframes = 8
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
+libraries = {
+"": SubResource("AnimationLibrary_vyb20")
+}
+autoplay = "Spin"
+
+[node name="Module_Area_Shield" parent="." instance=ExtResource("12")]
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -40.0
+offset_top = -44.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Turret_Double_Blaster" parent="." instance=ExtResource("10")]
+position = Vector2(-45, -30)
+
+[node name="Turret_Double_Blaster2" parent="." instance=ExtResource("10")]
+position = Vector2(45, -30)
+
+[node name="Turret_Double_Blaster3" parent="." instance=ExtResource("10")]
+position = Vector2(45, 10)
+
+[node name="Turret_Double_Blaster4" parent="." instance=ExtResource("10")]
+position = Vector2(-45, 10)
+
+[node name="Module_BossStation_Boom_Large" parent="." instance=ExtResource("9")]
+
+[node name="Turret_Phalanx" parent="." instance=ExtResource("11")]
+position = Vector2(0, -40)

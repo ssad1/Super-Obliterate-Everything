@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://bfcgd0exobv5d"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://m4l7y1jj6fxs" path="res://Structures/struct_turret_base_large.tscn" id="2_bc5s5"]
+[ext_resource type="Texture2D" uid="uid://buwlpl23tej3c" path="res://Structures/Graphics/Struct_Large_Turretbase_C.png" id="3_vsxcl"]
+[ext_resource type="Texture2D" uid="uid://d3x3mktw83cka" path="res://Structures/Graphics/Struct_Large_Turretbase_L.png" id="4_43y1x"]
+[ext_resource type="PackedScene" uid="uid://bvll4vuhiotxn" path="res://Turrets/Turret_Mjolnir.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Small_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_irja2"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_vsxcl")
+shader_parameter/lighting = ExtResource("4_43y1x")
+
+[node name="Struct_Mjolnir_Turret" type="Node2D"]
+script = ExtResource("2")
+build_size = Vector2(2, 2)
+name_text = "MJOLNIR"
+class_text = "HEAVY TURRET"
+energy_cost = 500
+metal_cost = 300
+supply_cost = 2
+credit_cost = 2000
+max_armor = 200
+
+[node name="Hull" parent="." instance=ExtResource("2_bc5s5")]
+material = SubResource("ShaderMaterial_irja2")
+
+[node name="Turret_Mjolnir" parent="." instance=ExtResource("8")]
+position = Vector2(0, -4)
+
+[node name="Module_Small_Struct_Boom_Large" parent="." instance=ExtResource("9")]
+
+[node name="Module_SFX" parent="." instance=ExtResource("10")]
+build_sfx = 1009

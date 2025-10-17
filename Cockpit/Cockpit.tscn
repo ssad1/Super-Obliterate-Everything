@@ -1,0 +1,303 @@
+[gd_scene load_steps=22 format=3 uid="uid://bmgxnoyw1wc3y"]
+
+[ext_resource type="Script" path="res://Cockpit/Cockpit.gd" id="1"]
+[ext_resource type="Script" path="res://Cockpit/CockpitGrid.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://dkaicgotf278s" path="res://Terminal/Item_Button.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://vj7cstlbketo" path="res://Cockpit/Cockpit_Item_Data.tscn" id="4"]
+[ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="5"]
+[ext_resource type="Texture2D" uid="uid://6u4lfqdbu8u8" path="res://Cockpit/UIEnergySmall.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://bfuw6w7c4jqne" path="res://Cockpit/UIMetalSmall.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://dhs7ch6m6f5nd" path="res://Cockpit/UISupplySmall.png" id="8"]
+[ext_resource type="PackedScene" uid="uid://b8wqc2un5b5xp" path="res://Cockpit/Menu_Options.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bn7dr4vti35ee" path="res://Terminal/Menu_Button.tscn" id="10"]
+[ext_resource type="Script" path="res://Cockpit/Cockpit_Button_Menu.gd" id="11"]
+[ext_resource type="Texture2D" uid="uid://bxdasdbtjbi84" path="res://Cockpit/UIItemScreen.png" id="12"]
+[ext_resource type="Script" path="res://Cockpit/UIEnergy.gd" id="13"]
+[ext_resource type="Shader" path="res://Cockpit/UIBar.gdshader" id="14"]
+[ext_resource type="PackedScene" path="res://Cockpit/UIMetalBar.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://Cockpit/UIEnergyBar.tscn" id="16"]
+[ext_resource type="Texture2D" uid="uid://b8pe7nuq6djaf" path="res://Cockpit/UIResourceScreen.png" id="18"]
+[ext_resource type="PackedScene" path="res://Cockpit/Button_Cancel.tscn" id="21"]
+[ext_resource type="Script" path="res://Cockpit/Building_Screen.gd" id="22"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("14")
+shader_parameter/offset = Vector2(100, 200)
+shader_parameter/simplex_scale = 0.258
+shader_parameter/fire_strength = 0.0
+shader_parameter/fire_height = 0.0
+shader_parameter/shock_strength = 1.0
+shader_parameter/shock_height = 1.0
+
+[sub_resource type="ShaderMaterial" id="2"]
+resource_local_to_scene = true
+shader = ExtResource("14")
+shader_parameter/offset = Vector2(100, 200)
+shader_parameter/simplex_scale = 0.258
+shader_parameter/fire_strength = 0.7
+shader_parameter/fire_height = 1.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shock_height = 0.0
+
+[node name="Cockpit" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1")
+
+[node name="Menu_Options" parent="." instance=ExtResource("9")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 524.0
+offset_top = 164.0
+offset_right = 1114.0
+offset_bottom = 764.0
+scale = Vector2(0.95, 0.95)
+menu_exit_path = NodePath("../Menu_Options/VBoxContainer/Control/Menu_Exit_Game")
+menu_controls_path = NodePath("../Menu_Options/VBoxContainer/Control/Menu_Controls")
+menu_button_exit_path = NodePath("../Menu_Options/VBoxContainer/HBoxContainer/Menu_Button_Exit")
+menu_button_controls_path = NodePath("../Menu_Options/VBoxContainer/HBoxContainer/Menu_Button_Controls")
+
+[node name="BuildMenu" type="Sprite2D" parent="."]
+light_mask = 0
+position = Vector2(236, 778)
+scale = Vector2(0.95, 0.95)
+texture = ExtResource("12")
+
+[node name="BuildMenuScreen" type="ColorRect" parent="BuildMenu"]
+custom_minimum_size = Vector2(405, 200)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -208.421
+offset_top = -403.158
+offset_right = 191.579
+offset_bottom = -203.158
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Building_Screen" type="Control" parent="BuildMenu/BuildMenuScreen"]
+visible = false
+anchors_preset = 0
+offset_left = 101.053
+offset_top = 29.4737
+offset_right = 101.053
+offset_bottom = 29.4737
+script = ExtResource("22")
+
+[node name="Button_Cancel" parent="BuildMenu/BuildMenuScreen/Building_Screen" instance=ExtResource("21")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -101.053
+offset_top = 106.316
+offset_right = -37.0526
+offset_bottom = 170.316
+grow_vertical = 0
+
+[node name="Build_Text" type="Label" parent="BuildMenu/BuildMenuScreen/Building_Screen"]
+light_mask = 0
+layout_mode = 0
+theme = ExtResource("5")
+text = "BUILD STRUCTURE"
+
+[node name="Alert_Text" type="Label" parent="BuildMenu/BuildMenuScreen/Building_Screen"]
+modulate = Color(1, 0.2, 0.2, 1)
+light_mask = 0
+layout_mode = 0
+offset_left = 1.05263
+offset_top = 53.6842
+offset_right = 2.05263
+offset_bottom = 73.6842
+theme = ExtResource("5")
+
+[node name="Cockpit_Button_Menu" parent="BuildMenu/BuildMenuScreen" instance=ExtResource("10")]
+layout_mode = 0
+offset_left = 1.60619e-05
+offset_top = -27.3684
+offset_right = 64.0
+offset_bottom = -7.36842
+theme = ExtResource("5")
+toggle_mode = false
+shortcut_in_tooltip = false
+text = "MENU"
+script = ExtResource("11")
+
+[node name="Cockpit_Item_Data" parent="BuildMenu/BuildMenuScreen" instance=ExtResource("4")]
+visible = false
+
+[node name="CockpitGrid" type="GridContainer" parent="BuildMenu/BuildMenuScreen"]
+light_mask = 0
+layout_mode = 0
+columns = 6
+script = ExtResource("2")
+
+[node name="Item_Button1" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button2" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button3" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button4" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button5" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button6" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button7" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button8" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button9" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button10" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button11" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button12" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button13" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button14" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button15" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button16" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button17" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Item_Button18" parent="BuildMenu/BuildMenuScreen/CockpitGrid" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Resources" type="Sprite2D" parent="."]
+light_mask = 0
+position = Vector2(825, 40)
+texture = ExtResource("18")
+
+[node name="ResourcesScreen" type="ColorRect" parent="Resources"]
+custom_minimum_size = Vector2(435, 35)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -555.5
+offset_top = -25.0
+offset_right = -120.5
+offset_bottom = 10.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" parent="Resources/ResourcesScreen"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UIEnergyIcon" type="TextureRect" parent="Resources/ResourcesScreen/Control"]
+light_mask = 0
+layout_mode = 0
+offset_top = 2.0
+offset_right = 32.0
+offset_bottom = 34.0
+texture = ExtResource("6")
+
+[node name="UIMetalIcon" type="TextureRect" parent="Resources/ResourcesScreen/Control"]
+light_mask = 0
+layout_mode = 0
+offset_left = 139.0
+offset_top = 2.0
+offset_right = 171.0
+offset_bottom = 34.0
+size_flags_vertical = 4
+texture = ExtResource("7")
+
+[node name="UISupplyIcon" type="TextureRect" parent="Resources/ResourcesScreen/Control"]
+light_mask = 0
+layout_mode = 0
+offset_left = 279.0
+offset_top = 2.0
+offset_right = 311.0
+offset_bottom = 34.0
+texture = ExtResource("8")
+
+[node name="UIEnergy" type="Label" parent="Resources/ResourcesScreen/Control"]
+light_mask = 0
+layout_mode = 0
+offset_left = 36.0
+offset_top = 5.0
+offset_right = 51.0
+offset_bottom = 25.0
+theme = ExtResource("5")
+text = "0"
+script = ExtResource("13")
+mode = 1
+
+[node name="UIEnergyBar" parent="Resources/ResourcesScreen/Control/UIEnergy" instance=ExtResource("16")]
+show_behind_parent = true
+material = SubResource("1")
+layout_mode = 0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 25.0
+
+[node name="UIMetal" type="Label" parent="Resources/ResourcesScreen/Control"]
+light_mask = 0
+layout_mode = 0
+offset_left = 175.0
+offset_top = 5.0
+offset_right = 190.0
+offset_bottom = 25.0
+theme = ExtResource("5")
+text = "0"
+script = ExtResource("13")
+mode = 2
+
+[node name="UIMetalBar" parent="Resources/ResourcesScreen/Control/UIMetal" instance=ExtResource("15")]
+show_behind_parent = true
+material = SubResource("2")
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -6.5
+offset_right = 93.5
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="UISupply" type="Label" parent="Resources/ResourcesScreen/Control"]
+light_mask = 0
+layout_mode = 0
+offset_left = 315.0
+offset_top = 7.0
+offset_right = 330.0
+offset_bottom = 27.0
+theme = ExtResource("5")
+text = "0"
+script = ExtResource("13")
+mode = 3

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Terminal/Terminal_Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Terminal/Menus/Audio_Box.tscn" type="PackedScene" id=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.16632
+margin_right = -322.834
+margin_bottom = -268.0
+min_size = Vector2( 700, 500 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio_Box" parent="." instance=ExtResource( 2 )]

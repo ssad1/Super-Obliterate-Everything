@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdovqa3a0x3gi"]
+
+[ext_resource type="Script" path="res://Background/StarField.gd" id="1"]
+
+[node name="StarField" type="Node2D"]
+light_mask = 0
+z_index = -10
+script = ExtResource("1")
+
+[node name="DeepStars" type="Sprite2D" parent="."]
+visible = false
+light_mask = 0

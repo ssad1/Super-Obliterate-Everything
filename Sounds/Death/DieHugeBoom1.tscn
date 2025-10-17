@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://u8uwb8r3sby6"]
+
+[ext_resource type="AudioStream" uid="uid://bnrwaw7hw6ycb" path="res://Sounds/Death/DieHugeBoom1.wav" id="1"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1")

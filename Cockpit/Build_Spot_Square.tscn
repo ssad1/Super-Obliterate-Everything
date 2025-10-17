@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Cockpit/UIBuildSpotSquare.png" type="Texture" id=1]
+[ext_resource path="res://Cockpit/Build_Spot_Square.gd" type="Script" id=2]
+
+[node name="Build_Spot_Square" type="Sprite2D"]
+light_mask = 0
+texture = ExtResource( 1 )
+offset = Vector2( 16, 16 )
+script = ExtResource( 2 )

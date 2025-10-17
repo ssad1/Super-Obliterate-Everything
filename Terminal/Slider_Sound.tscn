@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Terminal/Slider_Sound.gd" type="Script" id=1]
+
+[node name="Slider_Sound" type="HSlider"]
+margin_left = 276.0
+margin_right = 576.0
+margin_bottom = 32.0
+min_size = Vector2( 300, 32 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="value_changed" from="." to="." method="_on_Slider_Sound_value_changed"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Terminal/Buttons/Button_Logout.gd" type="Script" id=2]
+
+
+[node name="Button_Logout" type="Button"]
+margin_right = 363.0
+margin_bottom = 38.0
+text = "LOG OFF"
+align = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,139 @@
+[gd_scene load_steps=21 format=3 uid="uid://b41k5bge51t20"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="4"]
+[ext_resource type="Texture2D" uid="uid://bhrbnrd3rd55q" path="res://Ships/Graphics/Myrmidon_D.PNG" id="6"]
+[ext_resource type="Texture2D" uid="uid://bjo40xwdq3vdf" path="res://Ships/Graphics/Myrmidon_N.PNG" id="6_rhohn"]
+[ext_resource type="Texture2D" uid="uid://j021robv6xm4" path="res://Ships/Graphics/Myrmidon_C.PNG" id="7"]
+[ext_resource type="Texture2D" uid="uid://7ve5fr1gc6cj" path="res://Ships/Graphics/Myrmidon_L.PNG" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://els6jr7cqpjx" path="res://Ships/Graphics/Myrmidon_B.PNG" id="10"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="14"]
+[ext_resource type="PackedScene" uid="uid://c3ngw8s22lms" path="res://Shots/Shot_Plasma.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://Effects/E_PlasmaMuzzle.tscn" id="16"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("7")
+shader_parameter/lighting = ExtResource("8")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_vshc0"]
+diffuse_texture = ExtResource("6")
+normal_texture = ExtResource("6_rhohn")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="3"]
+resource_local_to_scene = true
+shader = ExtResource("4")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("14")
+
+[node name="Ship_Myrmidon" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.4
+aistandoff = 150
+factory = 278
+name_text = "MYRMIDON"
+class_text = "DESTROYER"
+energy_cost = 300
+metal_cost = 250
+supply_cost = 4
+credit_cost = 1500
+inertia = 0.4
+max_velocity = 5.0
+max_rotate_velocity = 0.1
+max_armor = 40
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_vshc0")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("10")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+light_mask = 0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_General" parent="." instance=ExtResource("11")]
+position = Vector2(0, -30)
+fire_sound = 3002
+gun_heat = 25
+gun_burst_max = 4
+gun_burst_heat = 3
+gun_burst_even_odd = true
+gun_range = 400
+gun_v = 20
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_arc = 0.2
+gun_arc_rounds = 2
+gun_scale = 0.5
+
+[node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("12")]
+visible = false
+material = SubResource("3")
+
+[node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("13")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Gun_General2" parent="." instance=ExtResource("11")]
+position = Vector2(0, -30)
+fire_sound = 3000
+gun_kick = 30.0
+gun_heat = 60
+gun_v = 10
+
+[node name="Shot_Plasma" parent="Gun_General2" instance=ExtResource("15")]
+visible = false
+
+[node name="E_PlasmaMuzzle" parent="Gun_General2" instance=ExtResource("16")]
+visible = false
+
+[node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("9")]

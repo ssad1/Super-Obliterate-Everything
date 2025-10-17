@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1a1onoltxv3g"]
+
+[ext_resource type="Texture2D" uid="uid://cm0qnwdnnf8x1" path="res://Terminal/Map/StarGlow.png" id="1"]
+[ext_resource type="Script" path="res://Game/Sunshine.gd" id="2"]
+
+[node name="Sunshine" type="PointLight2D"]
+energy = 10.0
+range_item_cull_mask = 3
+texture = ExtResource("1")
+texture_scale = 50.0
+script = ExtResource("2")

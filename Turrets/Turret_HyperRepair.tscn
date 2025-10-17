@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://cccyaxk1ksifc"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Texture2D" uid="uid://b7digvr4tvabd" path="res://Turrets/Graphics/Backup/Turret_HyperRepair_L.PNG" id="3_1wxau"]
+[ext_resource type="Texture2D" uid="uid://cwibf1ocycj3h" path="res://Turrets/Graphics/Backup/Turret_HyperRepair_C.PNG" id="3_rac0r"]
+[ext_resource type="Texture2D" uid="uid://d0tcsq1vmqppk" path="res://Turrets/Graphics/Backup/Turret_HyperRepair_D.PNG" id="3_sfdbl"]
+[ext_resource type="Script" path="res://Turrets/Turret_General.gd" id="5"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_Laser.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://c3vw7hwhgwa6j" path="res://Turrets/Graphics/Backup/Turret_HyperRepair_N.PNG" id="6_dinxc"]
+[ext_resource type="PackedScene" path="res://Shots/Laser_Repair.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleI.tscn" id="8"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_rac0r")
+shader_parameter/lighting = ExtResource("3_1wxau")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_8au80"]
+diffuse_texture = ExtResource("3_sfdbl")
+normal_texture = ExtResource("6_dinxc")
+
+[node name="Turret_HyperRepair" type="Node2D"]
+script = ExtResource("5")
+max_rotate_velocity = 0.2
+target_profile = "REPAIR"
+tier = 2
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_8au80")
+hframes = 8
+vframes = 8
+
+[node name="Gun_Laser" parent="." instance=ExtResource("6")]
+position = Vector2(0, -24)
+fire_sound = 3001
+gun_range = 300
+gun_scale = 0.5
+
+[node name="Laser_Repair" parent="Gun_Laser" instance=ExtResource("7")]
+visible = false
+
+[node name="E_MuzzleI" parent="Gun_Laser" instance=ExtResource("8")]
+visible = false

@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://o46vaguvvo2v"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="PackedScene" uid="uid://ck12b11wu20ji" path="res://Ships/hull_halo.tscn" id="2_ye80c"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://ccwls1vlpievb" path="res://Ships/Graphics/Halo_C.PNG" id="3_ga1oh"]
+[ext_resource type="PackedScene" uid="uid://b7uoppkeik13" path="res://Turrets/Turret_Laser.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://c864jwhquyfbj" path="res://Ships/Graphics/Halo_L.PNG" id="4_osq77"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Cruiser_Boom.tscn" id="6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvirt"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(16, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_ga1oh")
+shader_parameter/lighting = ExtResource("4_osq77")
+
+[node name="Ship_Beam_Halo" type="Node2D"]
+script = ExtResource("3")
+thrust = 0.2
+aihigh = "HALO"
+aistandoff = 150
+factory = 279
+name_text = "BEAM HALO"
+class_text = "CRUISER"
+energy_cost = 500
+metal_cost = 350
+supply_cost = 5
+credit_cost = 2000
+inertia = 0.2
+max_velocity = 3.0
+max_armor = 75
+
+[node name="Hull" parent="." instance=ExtResource("2_ye80c")]
+material = SubResource("ShaderMaterial_jvirt")
+
+[node name="Turret_Laser" parent="." instance=ExtResource("4")]
+position = Vector2(0, -30)
+
+[node name="Turret_Laser2" parent="." instance=ExtResource("4")]
+position = Vector2(0, 24)
+
+[node name="Turret_Laser3" parent="." instance=ExtResource("4")]
+position = Vector2(-36, -4)
+
+[node name="Turret_Laser4" parent="." instance=ExtResource("4")]
+position = Vector2(36, -4)
+
+[node name="Turret_Laser5" parent="." instance=ExtResource("4")]
+position = Vector2(23, 14)
+
+[node name="Turret_Laser6" parent="." instance=ExtResource("4")]
+position = Vector2(-24, 14)
+
+[node name="Turret_Laser7" parent="." instance=ExtResource("4")]
+position = Vector2(-24, -23)
+
+[node name="Turret_Laser8" parent="." instance=ExtResource("4")]
+position = Vector2(24, -23)
+
+[node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("6")]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Background/Planets/Planet Graphics/Planet_Metal_6.png" type="Texture" id=1]
+[ext_resource path="res://Background/Planets/Planet.gd" type="Script" id=3]
+
+[node name="Planet" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="PlanetD" type="Sprite2D" parent="."]
+light_mask = 0
+texture = ExtResource( 1 )

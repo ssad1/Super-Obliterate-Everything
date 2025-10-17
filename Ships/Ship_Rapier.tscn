@@ -1,0 +1,102 @@
+[gd_scene load_steps=16 format=3 uid="uid://djnlw75lrto8b"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_Laser.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://cjt44w22ualtt" path="res://Ships/Graphics/Rapier_D.PNG" id="5"]
+[ext_resource type="Texture2D" uid="uid://bduobaqabrauj" path="res://Ships/Graphics/Rapier_N.PNG" id="6_ckuvb"]
+[ext_resource type="Texture2D" uid="uid://bou2dvtchnhlh" path="res://Ships/Graphics/Rapier_C.PNG" id="7"]
+[ext_resource type="Texture2D" uid="uid://bcteacc8bs73g" path="res://Ships/Graphics/Rapier_L.PNG" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://e6amycjldlkb" path="res://Ships/Graphics/Rapier_B.PNG" id="10"]
+[ext_resource type="PackedScene" path="res://Shots/Laser_General.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://2l4a7xhqw1ki" path="res://Effects/E_MuzzleE.tscn" id="12"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("7")
+shader_parameter/lighting = ExtResource("8")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_m53e8"]
+diffuse_texture = ExtResource("5")
+normal_texture = ExtResource("6_ckuvb")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[node name="Ship_Rapier" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.7
+aistandoff = 150
+factory = 275
+name_text = "RAPIER"
+class_text = "FIGHTER"
+energy_cost = 75
+supply_cost = 1
+credit_cost = 80
+inertia = 1.0
+max_velocity = 13.0
+max_rotate_velocity = 0.4
+max_armor = 4
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_m53e8")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("10")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -8.0
+offset_top = -7.0
+offset_right = 8.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_Laser" parent="." instance=ExtResource("4")]
+position = Vector2(0, -12)
+fire_sound = 3001
+gun_heat = 25
+gun_range = 350
+gun_scale = 0.15
+
+[node name="Laser_General" parent="Gun_Laser" instance=ExtResource("11")]
+visible = false
+
+[node name="E_MuzzleE" parent="Gun_Laser" instance=ExtResource("12")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Module_Fighter_Boom" parent="." instance=ExtResource("9")]

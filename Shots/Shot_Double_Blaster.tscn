@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://cfgpyvrafgdu7"]
+
+[ext_resource type="Texture2D" uid="uid://de42p3w231krs" path="res://Shots/Graphics/Double Blaster.PNG" id="1"]
+[ext_resource type="Script" path="res://Shots/Shot_General.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cm0qnwdnnf8x1" path="res://Terminal/Map/StarGlow.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="5"]
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="6"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="7"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("6")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 6.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("7")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="3"]
+resource_name = "Roll"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 35]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bu7h2"]
+_data = {
+"Roll": SubResource("3")
+}
+
+[node name="Shot_Double_Blaster" type="Sprite2D"]
+light_mask = 0
+material = SubResource("1")
+texture = ExtResource("1")
+hframes = 6
+vframes = 6
+frame = 26
+script = ExtResource("2")
+name_text = "Double blaster shot"
+max_velocity = 100.0
+
+[node name="Hull" type="Sprite2D" parent="."]
+modulate = Color(1, 0.372549, 0.203922, 0.301961)
+light_mask = 0
+material = SubResource("2")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3")
+
+[node name="HitBox" parent="." instance=ExtResource("5")]
+offset_left = -42.0
+offset_top = -50.0
+offset_right = -22.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bu7h2")
+}
+autoplay = "Roll"

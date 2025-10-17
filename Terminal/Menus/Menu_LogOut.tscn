@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Terminal/Buttons/Button_Logout.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Terminal/Terminal_Theme.tres" type="Theme" id=2]
+[ext_resource path="res://Terminal/Menus/Menu_Container.gd" type="Script" id=3]
+
+
+[node name="Menu_LogOut" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1680.0
+margin_bottom = -1000.0
+min_size = Vector2( 240, 80 )
+theme = ExtResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -106.0
+margin_right = 106.0
+margin_bottom = 30.0
+text = "LOG OFF ACCOUNT?"
+align = 1
+valign = 1
+
+[node name="Button_Logout" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -45.5
+margin_top = -38.0
+margin_right = 45.5
+margin_bottom = 0.0

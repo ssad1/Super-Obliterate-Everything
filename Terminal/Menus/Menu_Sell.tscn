@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://527u6s4ni5k1"]
+
+[ext_resource type="PackedScene" uid="uid://d277mqsoyvw0x" path="res://Terminal/Menus/Menu_Items.tscn" id="1"]
+[ext_resource type="Theme" uid="uid://elferpjtn4s7" path="res://Terminal/Terminal_Theme_Big.tres" id="2"]
+[ext_resource type="Script" path="res://Terminal/Menus/Menu_Container.gd" id="3"]
+[ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="4"]
+[ext_resource type="Texture2D" uid="uid://b181gcqcova7j" path="res://Icons/Credit.PNG" id="5"]
+[ext_resource type="Script" path="res://Terminal/Menus/Label_Price.gd" id="6"]
+[ext_resource type="Script" path="res://Terminal/Menus/Sell_All_Button.gd" id="7"]
+
+[node name="Menu_Sell" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("3")
+
+[node name="Menu_Items" parent="." instance=ExtResource("1")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+
+[node name="ItemGrid" parent="Menu_Items" index="1"]
+offset_left = 12.0
+offset_top = 64.0
+offset_right = 688.0
+offset_bottom = 740.0
+
+[node name="Label" type="Label" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_top = -34.0
+offset_right = 245.0
+offset_bottom = -14.0
+scale = Vector2(1.5, 1.5)
+theme = ExtResource("2")
+text = "SELECT ITEMS TO SELL"
+
+[node name="Sell_All_Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 12.0
+offset_right = 482.0
+offset_bottom = 52.0
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 25
+text = " SELL "
+script = ExtResource("7")
+
+[node name="Label2" type="Label" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = 12.0
+offset_top = 24.0
+offset_right = 77.0
+offset_bottom = 44.0
+theme = ExtResource("4")
+text = "PRICE:"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(95, 35)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5")
+hframes = 8
+vframes = 8
+
+[node name="Label_Price" type="Label" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = 110.0
+offset_top = 24.0
+offset_right = 125.0
+offset_bottom = 44.0
+theme = ExtResource("4")
+text = "0"
+script = ExtResource("6")
+
+[editable path="Menu_Items"]

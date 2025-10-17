@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=3 uid="uid://cf01c1bprsppd"]
+
+[ext_resource type="Texture2D" uid="uid://c371roi137wxo" path="res://Icons/Trophy.PNG" id="1"]
+[ext_resource type="Texture2D" uid="uid://cbkmsvnoj2pt3" path="res://Terminal/Misc/ItemSquareNormal.png" id="2"]
+[ext_resource type="Theme" uid="uid://elferpjtn4s7" path="res://Terminal/Terminal_Theme_Big.tres" id="3"]
+
+[sub_resource type="Animation" id="2"]
+resource_name = "New Anim"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.7, 1, 1.3, 1.6, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.886275, 0.537255, 1), Color(1, 0.690196, 0.290196, 1), Color(1, 0.333333, 0.180392, 1), Color(1, 0, 0, 1), Color(0.87451, 0, 0.494118, 1), Color(0.811765, 0.478431, 1, 1), Color(0.564706, 0.694118, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dddf1"]
+_data = {
+"New Anim": SubResource("2")
+}
+
+[sub_resource type="Animation" id="1"]
+resource_name = "Credit Spin"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 63]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yqvc1"]
+_data = {
+"Credit Spin": SubResource("1")
+}
+
+[node name="Prize_Boss" type="Control"]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1300.0
+offset_bottom = -825.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 69.0
+offset_bottom = 69.0
+texture = ExtResource("2")
+
+[node name="Label" type="Label" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = 82.0
+offset_top = 16.0
+offset_right = 170.0
+offset_bottom = 59.0
+theme = ExtResource("3")
+text = "SYSTEM 
+CLEAR"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+libraries = {
+"": SubResource("AnimationLibrary_dddf1")
+}
+autoplay = "New Anim"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(37, 37)
+texture = ExtResource("1")
+hframes = 8
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_yqvc1")
+}
+autoplay = "Credit Spin"

@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Structures/Struct_General.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/Unit_Shader.gdshader" type="Shader" id=2]
+[ext_resource path="res://Structures/Asteroid_Animator.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Modules/Module_Asteroid_Boom_Small.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Modules/HitBox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Structures/Graphics/Struct_Asteroid_E_N.png" type="Texture" id=6]
+[ext_resource path="res://Structures/Graphics/Struct_Asteroid_E_D.png" type="Texture" id=7]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_parameter/flag_color = Color( 1, 1, 1, 1 )
+shader_parameter/light_color = Color( 1, 1, 1, 1 )
+shader_parameter/burn_color = Color( 1, 1, 1, 1 )
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = 8.0
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = null
+shader_parameter/select_strength = 0.0
+
+[node name="Struct_Asteroid_E" type="Node2D"]
+script = ExtResource( 1 )
+class_text = "ASTEROID"
+s = 104
+max_armor = 25
+special = "ROCK"
+build_size = Vector2( 1, 1 )
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource( 1 )
+texture = ExtResource( 7 )
+normal_map = ExtResource( 6 )
+vframes = 8
+hframes = 8
+
+[node name="Asteroid_Animator" parent="Hull" instance=ExtResource( 3 )]
+
+[node name="HitBox" parent="." instance=ExtResource( 5 )]
+visible = false
+margin_left = -12.0
+margin_top = -12.0
+margin_right = 12.0
+margin_bottom = 12.0
+
+[node name="Module_Asteroid_Boom_Small" parent="." instance=ExtResource( 4 )]
+visible = false

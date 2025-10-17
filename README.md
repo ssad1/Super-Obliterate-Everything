@@ -1,2 +1,1 @@
-# Super Obliterate Everything
-.
+# superobliterateeverything

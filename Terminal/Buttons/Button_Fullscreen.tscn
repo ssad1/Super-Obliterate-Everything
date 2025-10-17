@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Terminal/Buttons/Button_Fullscreen.gd" type="Script" id=1]
+
+[node name="Button_Fullscreen" type="Button"]
+margin_left = 224.0
+margin_right = 424.0
+margin_bottom = 37.0
+min_size = Vector2( 200, 0 )
+text = "ON"
+script = ExtResource( 1 )

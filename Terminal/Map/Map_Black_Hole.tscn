@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=3 uid="uid://byh8ulm80epdm"]
+
+[ext_resource type="Script" path="res://Terminal/Map/Map_Black_Hole.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cu1vlupiooyx3" path="res://Terminal/Map/Black_Hole_Disk.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cm0qnwdnnf8x1" path="res://Terminal/Map/StarGlow.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://b40ehicl5okoo" path="res://Effects/Lights/L_BigGlow.png" id="11"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="3"]
+resource_name = "Spin"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Disk1:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 180.0, 360.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Disk2:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 360.0, 720.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Disk3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 720.0, 1440.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j0f47"]
+_data = {
+"Spin": SubResource("3")
+}
+
+[node name="Map_Black_Hole" type="Node2D"]
+light_mask = 0
+script = ExtResource("1")
+
+[node name="Light2D" type="PointLight2D" parent="."]
+color = Color(1, 0.129412, 0.129412, 1)
+energy = 3.0
+range_z_min = -4096
+range_z_max = 4096
+range_layer_min = -512
+range_layer_max = 512
+range_item_cull_mask = 2
+shadow_item_cull_mask = 0
+texture = ExtResource("9")
+texture_scale = 2.0
+
+[node name="Star_Bloom" type="Sprite2D" parent="."]
+modulate = Color(1, 0.141176, 0.0980392, 0.207843)
+light_mask = 0
+z_index = -2
+material = SubResource("1")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("11")
+
+[node name="Disk1" type="Sprite2D" parent="."]
+modulate = Color(1, 0.14902, 0.14902, 0.313726)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("2")
+
+[node name="Disk2" type="Sprite2D" parent="."]
+modulate = Color(1, 0.176471, 0.156863, 0.784314)
+light_mask = 0
+material = SubResource("2")
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2")
+
+[node name="Disk3" type="Sprite2D" parent="."]
+modulate = Color(1, 0.607843, 0.345098, 1)
+light_mask = 0
+material = SubResource("2")
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j0f47")
+}
+autoplay = "Spin"

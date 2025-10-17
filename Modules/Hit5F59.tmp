@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2iakrhbb3uws"]
+
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/hitbox2.tscn" id="2_jjixl"]
+
+[sub_resource type="GDScript" id="GDScript_ri4ww"]
+script/source = "class_name Thing_Hitbox
+extends ColorRect
+
+var pos:Vector2 = Vector2(0,0)
+var is_type:String = \"MODULE\"
+var parent_unit:Thing
+@onready var detection_hitbox = $detection_hitbox
+
+func _ready() -> void:
+	
+	parent_unit = get_parent()
+	parent_unit.hitbox = self
+	detection_hitbox.show() #to make debugging easier
+
+	var shape = detection_hitbox.get_node(\"CollisionShape2D\")
+	detection_hitbox.position = Vector2(size.x/2, size.y/2)
+
+	shape.shape.radius = size.y * 1.25
+
+	#hide()
+
+func _process(delta) -> void:
+	var mp := get_global_mouse_position()
+	var p := global_position
+	var border := 10
+	
+	if(parent_unit.visible == true):
+		if(mp.x < p.x + size.x + border && mp.x > p.x - border && mp.y < p.y + size.y +border && mp.y > p.y - border):
+			parent_unit._do_select(true)
+		else:
+			parent_unit._do_select(false)
+
+func _do_tick() -> void:
+	pos = parent_unit.pos + position
+"
+
+[sub_resource type="GDScript" id="GDScript_bu4s1"]
+script/source = "class_name unit_hitbox
+extends Area2D
+
+var pos := Vector2(0,0)
+var is_type = \"MODULE\"
+@onready var parent_unit:Thing = get_parent().get_parent()
+ 
+func _ready():
+	#area_entered.connect(_on_area_entered)
+	pass
+
+'''
+Original attempt on redoing hitboxes, the most performatic option,
+however, it does not succesfully support the current way the game is handled
+so its glitched without a proper rewrite on how damage is handled
+'''
+
+func _on_area_entered(area:Area2D) -> void:
+
+	#cull all the non-valid options
+	if not area is unit_hitbox: return
+	if not \"is_type\" in parent_unit: return
+
+	#hit logic
+
+	var target = area as unit_hitbox
+
+	if not \"is_type\" in target: return
+	if target.parent_unit == parent_unit: return
+
+	if (
+		parent_unit.is_type == \"SHOT\" || 
+		parent_unit.is_type == \"MISSILE\" && 
+		parent_unit.tcpu.targets.has(target.parent_unit)
+	   ):
+			target.parent_unit._hit(parent_unit)
+"
+
+[node name="HitBox" type="ColorRect"]
+modulate = Color(1, 1, 1, 0.513726)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_ri4ww")
+
+[node name="detection_hitbox" parent="." instance=ExtResource("2_jjixl")]
+script = SubResource("GDScript_bu4s1")

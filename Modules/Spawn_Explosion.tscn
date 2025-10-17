@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Modules/Spawn_Explosion.gd" type="Script" id=1]
+
+[node name="Spawn_Explosion" type="Node"]
+script = ExtResource( 1 )

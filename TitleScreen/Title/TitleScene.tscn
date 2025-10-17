@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://dti881w5cvnvb"]
+
+[ext_resource type="Texture2D" uid="uid://cm0qnwdnnf8x1" path="res://Terminal/Map/StarGlow.png" id="1"]
+[ext_resource type="Script" path="res://TitleScreen/Title/TitleSpotlight.gd" id="2"]
+[ext_resource type="Script" path="res://TitleScreen/Title/TitleSpotlight2.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://dn7o1t7dwdqvh" path="res://TitleScreen/Title/TitleD.png" id="4"]
+[ext_resource type="Script" path="res://Shaders/Text_Dissolve_In.gd" id="6"]
+[ext_resource type="Shader" path="res://Shaders/Text_Dissolve.gdshader" id="7"]
+[ext_resource type="Texture2D" uid="uid://d37bhmmxxp3mt" path="res://TitleScreen/Title/TitleN.png" id="7_rvd7t"]
+[ext_resource type="Script" path="res://TitleScreen/Title/TitleFade.gd" id="8"]
+[ext_resource type="Texture2D" uid="uid://cepqvmtm6aies" path="res://TitleScreen/Backdrop3.png" id="9"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+shader = ExtResource("7")
+shader_parameter/dissolve_strength = 1.5
+shader_parameter/offset = Vector2(300, 400)
+shader_parameter/simplex_scale = 0.1
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_t2sd7"]
+diffuse_texture = ExtResource("4")
+normal_texture = ExtResource("7_rvd7t")
+
+[node name="TitleScene" type="Node2D"]
+position = Vector2(800, 450)
+scale = Vector2(0.834, 0.834)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("9")
+
+[node name="TitleSpotlight" type="PointLight2D" parent="."]
+z_index = -2
+position = Vector2(-42.9591, -12.5084)
+energy = 30.0
+range_layer_min = -3
+range_layer_max = 3
+range_item_cull_mask = 1024
+texture = ExtResource("1")
+texture_scale = 2.5
+script = ExtResource("2")
+
+[node name="TitleSpotlight2" type="PointLight2D" parent="."]
+z_index = -2
+position = Vector2(79.2957, 356.097)
+energy = 30.0
+range_layer_min = -3
+range_layer_max = 3
+range_item_cull_mask = 1024
+texture = ExtResource("1")
+texture_scale = 2.5
+script = ExtResource("3")
+
+[node name="TitleD" type="Sprite2D" parent="."]
+light_mask = 1024
+z_index = 1
+material = SubResource("1")
+texture = SubResource("CanvasTexture_t2sd7")
+script = ExtResource("6")
+
+[node name="TitleFade" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(2000, 2000)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1036.0
+offset_top = -928.0
+offset_right = 964.0
+offset_bottom = 1072.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("8")

@@ -1,0 +1,124 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Effects/E_MediumSparks.png" type="Texture" id=1]
+[ext_resource path="res://Effects/Effect_Clear.gd" type="Script" id=2]
+[ext_resource path="res://Effects/AnimationMultiRandom.gd" type="Script" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="Animation" id=2]
+resource_name = "Sparks1"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 21 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Sparks2"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 22, 43 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Sparks3"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 44, 65 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Sparks4"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 66, 87 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Sparks5"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 88, 109 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Sparks6"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 110, 131 ]
+}
+
+[node name="E_SparksM" type="Sprite2D"]
+light_mask = 0
+material = SubResource( 1 )
+texture = ExtResource( 1 )
+vframes = 6
+hframes = 22
+frame = 131
+script = ExtResource( 2 )
+effect_layer = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Sparks1 = SubResource( 2 )
+anims/Sparks2 = SubResource( 3 )
+anims/Sparks3 = SubResource( 4 )
+anims/Sparks4 = SubResource( 5 )
+anims/Sparks5 = SubResource( 6 )
+anims/Sparks6 = SubResource( 7 )
+script = ExtResource( 3 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Terminal/Misc/ItemSquareNormal.png" type="Texture" id=1]
+[ext_resource path="res://Terminal/Misc/ItemSquarePressed.png" type="Texture" id=2]
+[ext_resource path="res://Terminal/Misc/ItemSquare.png" type="Texture" id=3]
+[ext_resource path="res://Cockpit/Button_Cancel.gd" type="Script" id=4]
+[ext_resource path="res://Effects/Lights/L_SmallGlow.png" type="Texture" id=5]
+[ext_resource path="res://Cockpit/UICancel.png" type="Texture" id=6]
+
+[node name="Button_Cancel" type="TextureButton"]
+light_mask = 0
+margin_right = 40.0
+margin_bottom = 40.0
+min_size = Vector2( 64, 64 )
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+texture_disabled = ExtResource( 2 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item_Light" type="Light2D" parent="."]
+visible = false
+light_mask = 0
+position = Vector2( 32, 32 )
+texture = ExtResource( 5 )
+energy = 10.0
+range_item_cull_mask = 4
+shadow_item_cull_mask = 0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+light_mask = 0
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="mouse_entered" from="." to="." method="_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_mouse_exited"]

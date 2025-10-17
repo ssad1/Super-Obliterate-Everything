@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8kp6h711q0kf"]
+
+[ext_resource type="Script" path="res://Terminal/Map/Mission Block/FactionList.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cyb3ha36nu5q3" path="res://Terminal/Map/Mission Block/FactionFlag.tscn" id="2"]
+
+[node name="FactionList" type="HBoxContainer"]
+script = ExtResource("1")
+
+[node name="FactionFlag" parent="." instance=ExtResource("2")]
+layout_mode = 2

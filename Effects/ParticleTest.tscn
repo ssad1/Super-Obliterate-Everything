@@ -1,0 +1,109 @@
+[gd_scene load_steps=16 format=3 uid="uid://cfk773adgdsl7"]
+
+[ext_resource type="Texture2D" uid="uid://4ybjld60su6v" path="res://Effects/SmallSmoke.PNG" id="1"]
+[ext_resource type="Texture2D" uid="uid://ddley82jgyfij" path="res://Effects/MediumSmoke.PNG" id="2"]
+[ext_resource type="Texture2D" uid="uid://b6tg5icqxy7eb" path="res://Effects/LargeSmoke.PNG" id="3"]
+[ext_resource type="PackedScene" uid="uid://dhnr680v83upi" path="res://Structures/Struct_BaseStation_A.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://e2qejudx4wg0" path="res://Effects/GiantSmoke.PNG" id="5"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 8
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="2"]
+offsets = PackedFloat32Array(0, 0.177778, 0.4, 0.740741, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.392157, 1, 1, 1, 0.196078, 1, 1, 1, 0.0588235, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="3"]
+gradient = SubResource("2")
+
+[sub_resource type="Curve" id="4"]
+_data = [Vector2(0, 0.504545), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="5"]
+curve = SubResource("4")
+
+[sub_resource type="ParticleProcessMaterial" id="6"]
+lifetime_randomness = 0.2
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("5")
+color_ramp = SubResource("3")
+
+[sub_resource type="ParticleProcessMaterial" id="7"]
+lifetime_randomness = 0.2
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("5")
+color_ramp = SubResource("3")
+
+[sub_resource type="ParticleProcessMaterial" id="8"]
+lifetime_randomness = 0.2
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("5")
+color_ramp = SubResource("3")
+
+[sub_resource type="CanvasItemMaterial" id="9"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 4
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="10"]
+lifetime_randomness = 0.2
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("5")
+color_ramp = SubResource("3")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Struct_550_BaseStation_A" parent="." instance=ExtResource("4")]
+position = Vector2(592.922, -2.22101)
+
+[node name="Particles2D" type="GPUParticles2D" parent="."]
+material = SubResource("1")
+amount = 24
+process_material = SubResource("6")
+texture = ExtResource("1")
+lifetime = 10.0
+explosiveness = 1.0
+randomness = 0.52
+
+[node name="Particles2D2" type="GPUParticles2D" parent="."]
+material = SubResource("1")
+position = Vector2(250, 2)
+amount = 24
+process_material = SubResource("7")
+texture = ExtResource("2")
+lifetime = 20.0
+explosiveness = 1.0
+randomness = 0.52
+
+[node name="Particles2D3" type="GPUParticles2D" parent="."]
+material = SubResource("1")
+position = Vector2(568, 0)
+amount = 32
+process_material = SubResource("8")
+texture = ExtResource("3")
+lifetime = 40.0
+explosiveness = 1.0
+randomness = 0.52
+
+[node name="Particles2D4" type="GPUParticles2D" parent="."]
+material = SubResource("9")
+position = Vector2(1158, 4)
+amount = 32
+process_material = SubResource("10")
+texture = ExtResource("5")
+lifetime = 80.0
+explosiveness = 1.0
+randomness = 0.52

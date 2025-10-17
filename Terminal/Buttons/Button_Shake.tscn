@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Terminal/Buttons/Button_Shake.gd" type="Script" id=1]
+
+[node name="Button_Shake" type="Button"]
+margin_left = 204.0
+margin_right = 404.0
+margin_bottom = 37.0
+min_size = Vector2( 200, 0 )
+text = "ON"
+script = ExtResource( 1 )

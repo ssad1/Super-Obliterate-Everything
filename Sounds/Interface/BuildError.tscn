@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://caqgsgvogox5i"]
+
+[ext_resource type="AudioStream" uid="uid://bjfh7q5c3xbmr" path="res://Sounds/Interface/BuildError.wav" id="1"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1")

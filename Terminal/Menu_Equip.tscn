@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7gx81jebjtya"]
+
+[ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://dkaicgotf278s" path="res://Terminal/Item_Button.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://bkvakguu38jll" path="res://Terminal/Icons/icon_armory.png" id="3"]
+[ext_resource type="Script" path="res://Terminal/Buttons/Button_Loadout.gd" id="4"]
+[ext_resource type="Script" path="res://Terminal/Menus/Menu_Container.gd" id="5"]
+[ext_resource type="Script" path="res://Terminal/ArmoryGrid.gd" id="6"]
+[ext_resource type="PackedScene" path="res://Terminal/Menus/Drag_Sprite.tscn" id="7"]
+
+[node name="Menu_Equip" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("1")
+script = ExtResource("5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+color = Color(0, 0, 0, 0.784314)
+
+[node name="ArmoryGrid" type="GridContainer" parent="."]
+light_mask = 0
+layout_mode = 0
+columns = 6
+script = ExtResource("6")
+
+[node name="Control" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control2" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control3" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control4" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control5" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control6" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control7" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control8" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control9" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control10" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control11" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control12" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control13" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control14" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control15" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control16" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control17" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Control18" parent="ArmoryGrid" instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Button_Loadout" type="Button" parent="."]
+visible = false
+layout_mode = 0
+text = "LOAD 1"
+icon = ExtResource("3")
+script = ExtResource("4")
+
+[node name="Drag_Sprite" parent="." instance=ExtResource("7")]
+anchors_preset = 0

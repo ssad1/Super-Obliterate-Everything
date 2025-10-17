@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Cockpit/Build_Line.gd" type="Script" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[node name="Build_Line" type="Line2D"]
+modulate = Color( 1, 1, 1, 0.196078 )
+light_mask = 0
+material = SubResource( 1 )
+points = PoolVector2Array( 0, 0 )
+width = 2.0
+default_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )

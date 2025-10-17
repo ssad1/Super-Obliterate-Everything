@@ -1,0 +1,110 @@
+[gd_scene load_steps=16 format=3 uid="uid://ncdvmsk8kmxr"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Shots/Missile_LM1.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://bfdgje0saqnu4" path="res://Ships/Graphics/Knight_D.PNG" id="6"]
+[ext_resource type="Texture2D" uid="uid://dvpe17dten5cx" path="res://Ships/Graphics/Knight_N.PNG" id="6_wl2eg"]
+[ext_resource type="Texture2D" uid="uid://d4ky0h3y6xtiw" path="res://Ships/Graphics/Knight_B.PNG" id="7"]
+[ext_resource type="Texture2D" uid="uid://dnupqwwjknrpi" path="res://Ships/Graphics/Knight_C.PNG" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://y3xxymjtn6ar" path="res://Ships/Graphics/Knight_L.PNG" id="10"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("8")
+shader_parameter/lighting = ExtResource("10")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_tfecn"]
+diffuse_texture = ExtResource("6")
+normal_texture = ExtResource("6_wl2eg")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[node name="Ship_Knight" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.4
+aistandoff = 200
+factory = 276
+name_text = "KNIGHT"
+class_text = "CORVETTE"
+energy_cost = 75
+metal_cost = 35
+supply_cost = 2
+credit_cost = 350
+inertia = 0.8
+max_velocity = 17.0
+max_rotate_velocity = 0.3
+max_armor = 15
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_tfecn")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("7")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+light_mask = 0
+offset_left = -10.0
+offset_top = -9.0
+offset_right = 10.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_General1" parent="." instance=ExtResource("11")]
+position = Vector2(0, -20)
+fire_sound = 3004
+gun_kick = 4.0
+gun_heat = 20
+gun_range = 400
+gun_angle = 0.1
+gun_v = 5
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.4
+velocity_align = false
+
+[node name="Missile_LM1" parent="Gun_General1" instance=ExtResource("4")]
+visible = false
+
+[node name="E_MuzzleA" parent="Gun_General1" instance=ExtResource("13")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("9")]

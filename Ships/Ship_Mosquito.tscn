@@ -1,0 +1,108 @@
+[gd_scene load_steps=16 format=3 uid="uid://bl1vund3tspik"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://caxpyhs1s5q23" path="res://Ships/Graphics/Mosquito_D.PNG" id="4"]
+[ext_resource type="Texture2D" uid="uid://4rstd2j1g8gt" path="res://Ships/Graphics/Mosquito_L.PNG" id="6"]
+[ext_resource type="Texture2D" uid="uid://dbsec4shvpn0e" path="res://Ships/Graphics/Mosquito_N.PNG" id="6_rucgn"]
+[ext_resource type="Texture2D" uid="uid://digfsqadrruot" path="res://Ships/Graphics/Mosquito_C.PNG" id="7"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Shots/Missile_B1.tscn" id="10"]
+[ext_resource type="Texture2D" uid="uid://5y1o6yhy548u" path="res://Ships/Graphics/Mosquito_B.PNG" id="13"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="14"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("7")
+shader_parameter/lighting = ExtResource("6")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_17jxa"]
+diffuse_texture = ExtResource("4")
+normal_texture = ExtResource("6_rucgn")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[node name="Ship_Mosquito" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.2
+factory = 275
+name_text = "MOSQUITO"
+class_text = "FIGHTER"
+energy_cost = 75
+supply_cost = 1
+credit_cost = 150
+inertia = 1.0
+max_velocity = 15.0
+max_rotate_velocity = 0.2
+max_armor = 2
+target_profile = "BOMBER"
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_17jxa")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("13")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -7.0
+offset_top = -6.0
+offset_right = 7.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_General" parent="." instance=ExtResource("8")]
+position = Vector2(0, -16)
+fire_sound = 3004
+gun_kick = 1.0
+gun_heat = 30
+gun_range = 200
+gun_angle = 0.1
+gun_v = 10
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.4
+
+[node name="Missile_B1" parent="Gun_General" instance=ExtResource("10")]
+visible = false
+
+[node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("14")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Module_Fighter_Boom" parent="." instance=ExtResource("9")]
+position = Vector2(0, -16)

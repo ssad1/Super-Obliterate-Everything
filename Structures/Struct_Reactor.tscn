@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3 uid="uid://ckkjx4ui0ndas"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://l3qad0i5p3en" path="res://Structures/Graphics/Struct_Reactor_C.PNG" id="4_2m0gc"]
+[ext_resource type="Texture2D" uid="uid://k22c5p27hb8n" path="res://Structures/Graphics/Struct_Reactor_L.PNG" id="5_bnmd4"]
+[ext_resource type="Texture2D" uid="uid://cmr5bkq0kgrx1" path="res://Structures/Graphics/Struct_Reactor_D.PNG" id="6_sqqnj"]
+[ext_resource type="Texture2D" uid="uid://duui60ku51gl1" path="res://Structures/Graphics/Struct_Reactor_N.PNG" id="7_yxm1m"]
+[ext_resource type="PackedScene" path="res://Modules/Generator.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("4_2m0gc")
+shader_parameter/lighting = ExtResource("5_bnmd4")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_i7yex"]
+diffuse_texture = ExtResource("6_sqqnj")
+normal_texture = ExtResource("7_yxm1m")
+
+[sub_resource type="Animation" id="2"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 63]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_340u0"]
+_data = {
+"Spin": SubResource("2")
+}
+
+[node name="Struct_Reactor" type="Node2D"]
+script = ExtResource("2")
+name_text = "REACTOR"
+class_text = "ECONOMY"
+energy_cost = 100
+supply_cost = 1
+credit_cost = 50
+max_armor = 50
+special = "REACTOR"
+
+[node name="Generator" parent="." instance=ExtResource("8")]
+energy_gen = 1.0
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_i7yex")
+hframes = 8
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
+libraries = {
+"": SubResource("AnimationLibrary_340u0")
+}
+autoplay = "Spin"
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -10.0
+offset_top = -14.0
+offset_right = 10.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Medium_Struct_Boom_Large" parent="." instance=ExtResource("9")]
+visible = false
+
+[node name="Module_SFX" parent="." instance=ExtResource("10")]
+build_sfx = 1001

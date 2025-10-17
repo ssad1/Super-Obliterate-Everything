@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dkaicgotf278s"]
+
+[ext_resource type="Texture2D" uid="uid://cbkmsvnoj2pt3" path="res://Terminal/Misc/ItemSquareNormal.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://co4ddfa77aqsj" path="res://Terminal/Misc/ItemSquarePressed.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://c0b861fqlxpl" path="res://Terminal/Misc/ItemSquare.png" id="3"]
+[ext_resource type="Script" path="res://Terminal/Item_Button.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://cwtntph4380f3" path="res://Icons/Equipped.png" id="6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_galyx"]
+font_size = 10
+font_color = Color(1, 1, 0.639216, 0.843137)
+outline_size = 1
+
+[node name="Item_Button" type="TextureButton"]
+light_mask = 0
+texture_normal = ExtResource("1")
+texture_pressed = ExtResource("2")
+texture_hover = ExtResource("3")
+texture_disabled = ExtResource("2")
+script = ExtResource("4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
+position = Vector2(32, 32)
+
+[node name="Sprite_Equipped" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+texture = ExtResource("6")
+
+[node name="Hotkey" type="Label" parent="."]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 46.0
+offset_right = 87.0
+offset_bottom = 69.0
+text = "[A]"
+label_settings = SubResource("LabelSettings_galyx")
+
+[connection signal="button_down" from="." to="." method="_button_down"]
+[connection signal="button_up" from="." to="." method="_button_up"]
+[connection signal="mouse_entered" from="." to="." method="_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_mouse_exited"]

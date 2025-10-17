@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Modules/Spawn_Effect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Shots/Shot_Asteroid.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Guns/Gun_General.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Modules/Module_Trigger.gd" type="Script" id=4]
+[ext_resource path="res://Modules/Module_Death_SFX.tscn" type="PackedScene" id=5]
+
+[node name="Module_Asteroid_Boom_Large" type="Node2D"]
+script = ExtResource( 4 )
+death_activate = true
+
+[node name="Spawn_Effect" parent="." instance=ExtResource( 1 )]
+spawn_id = 10108
+
+[node name="Gun_General" parent="." instance=ExtResource( 3 )]
+visible = false
+gun_range = 300
+gun_v = 10
+gun_v_noise = 1.0
+gun_r_noise = 1.0
+gun_life_noise = 0.9
+gun_scale_noise = 0.75
+gun_arc = 6.28
+gun_arc_rounds = 12
+gun_circle = true
+gun_scale = 0.75
+
+[node name="Shot_Asteroid" parent="Gun_General" instance=ExtResource( 2 )]
+visible = false
+
+[node name="Module_Death_SFX" parent="." instance=ExtResource( 5 )]
+fire_sound = 2000

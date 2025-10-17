@@ -1,0 +1,126 @@
+[gd_scene load_steps=16 format=3 uid="uid://7xhh2uflff4f"]
+
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Shots/Missile_R1.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://bie44b4axu56" path="res://Ships/Graphics/Scorpion_D.PNG" id="5"]
+[ext_resource type="Texture2D" uid="uid://dji7d28mc4vkt" path="res://Ships/Graphics/Scorpion_N.PNG" id="6_7pqa7"]
+[ext_resource type="Texture2D" uid="uid://dma0qh0qd7iob" path="res://Ships/Graphics/Scorpion_B.PNG" id="7"]
+[ext_resource type="Texture2D" uid="uid://28sit8iq01kw" path="res://Ships/Graphics/Scorpion_L.PNG" id="8"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://mb4i0uby25ey" path="res://Ships/Graphics/Scorpion_C.PNG" id="10"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("10")
+shader_parameter/lighting = ExtResource("8")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_j8a6j"]
+diffuse_texture = ExtResource("5")
+normal_texture = ExtResource("6_7pqa7")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[node name="Ship_Scorpion" type="Node2D"]
+script = ExtResource("2")
+thrust = 0.3
+aistandoff = 300
+factory = 277
+name_text = "SCORPION"
+class_text = "FRIGATE"
+energy_cost = 150
+metal_cost = 300
+supply_cost = 3
+credit_cost = 1200
+inertia = 0.6
+max_velocity = 4.0
+max_rotate_velocity = 0.1
+max_armor = 45
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_j8a6j")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("7")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+light_mask = 0
+offset_left = -16.0
+offset_top = -17.0
+offset_right = 16.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gun_General" parent="." instance=ExtResource("11")]
+position = Vector2(-20, -15)
+fire_sound = 3004
+gun_heat = 50
+gun_burst_max = 3
+gun_burst_heat = 6
+gun_range = 600
+gun_v = 20
+gun_scale = 0.5
+velocity_align = false
+
+[node name="Missile_R1" parent="Gun_General" instance=ExtResource("4")]
+visible = false
+
+[node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("13")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Gun_General2" parent="." instance=ExtResource("11")]
+position = Vector2(20, -15)
+fire_sound = 3004
+gun_heat = 50
+gun_burst_max = 3
+gun_burst_heat = 6
+gun_range = 600
+gun_v = 20
+gun_scale = 0.5
+velocity_align = false
+
+[node name="Missile_R1" parent="Gun_General2" instance=ExtResource("4")]
+visible = false
+
+[node name="E_MuzzleA" parent="Gun_General2" instance=ExtResource("13")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("9")]

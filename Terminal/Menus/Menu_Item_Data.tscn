@@ -1,0 +1,139 @@
+[gd_scene load_steps=9 format=3 uid="uid://cf5cx8yq0pkxp"]
+
+[ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="1"]
+[ext_resource type="Script" path="res://Terminal/Menus/Menu_Item_Data.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://6u4lfqdbu8u8" path="res://Cockpit/UIEnergySmall.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bfuw6w7c4jqne" path="res://Cockpit/UIMetalSmall.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dhs7ch6m6f5nd" path="res://Cockpit/UISupplySmall.png" id="5"]
+[ext_resource type="Theme" uid="uid://18o43qaay3t1" path="res://Terminal/Terminal_Theme_Small.tres" id="6"]
+[ext_resource type="Theme" uid="uid://cn87onodi101q" path="res://Terminal/Terminal_Theme_Tiny.tres" id="7"]
+[ext_resource type="Theme" uid="uid://elferpjtn4s7" path="res://Terminal/Terminal_Theme_Big.tres" id="8"]
+
+[node name="Menu_Item_Data" type="ColorRect"]
+light_mask = 0
+custom_minimum_size = Vector2(200, 200)
+color = Color(0, 0, 0, 0.941176)
+script = ExtResource("2")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 12.0
+offset_right = 181.0
+offset_bottom = 164.0
+
+[node name="UIName" type="Label" parent="VBox"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("8")
+horizontal_alignment = 1
+
+[node name="UIName2" type="Label" parent="VBox/UIName"]
+modulate = Color(1, 1, 1, 0.278431)
+light_mask = 0
+layout_mode = 0
+theme = ExtResource("8")
+horizontal_alignment = 1
+
+[node name="CostMenu" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="UIEnergyIcon" type="TextureRect" parent="VBox/CostMenu"]
+light_mask = 0
+layout_mode = 2
+texture = ExtResource("3")
+
+[node name="UIEnergy" type="Label" parent="VBox/CostMenu"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("1")
+text = "0"
+
+[node name="UIMetalIcon" type="TextureRect" parent="VBox/CostMenu"]
+light_mask = 0
+layout_mode = 2
+texture = ExtResource("4")
+
+[node name="UIMetal" type="Label" parent="VBox/CostMenu"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("1")
+text = "0"
+
+[node name="UISupplyIcon" type="TextureRect" parent="VBox/CostMenu"]
+light_mask = 0
+layout_mode = 2
+texture = ExtResource("5")
+
+[node name="UISupply" type="Label" parent="VBox/CostMenu"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("1")
+text = "0"
+
+[node name="UIClass" type="Label" parent="VBox"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("6")
+text = "CLASS"
+horizontal_alignment = 1
+
+[node name="UIArmor" type="Label" parent="VBox"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "ARMOR:"
+horizontal_alignment = 1
+
+[node name="UIShield" type="Label" parent="VBox"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "SHIELD:"
+horizontal_alignment = 1
+
+[node name="UIMod1" type="Label" parent="VBox"]
+visible = false
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "MOD"
+horizontal_alignment = 1
+
+[node name="UIMod2" type="Label" parent="VBox"]
+visible = false
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "MOD"
+horizontal_alignment = 1
+
+[node name="UIMod3" type="Label" parent="VBox"]
+visible = false
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "MOD"
+horizontal_alignment = 1
+
+[node name="UIMod4" type="Label" parent="VBox"]
+visible = false
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "MOD"
+horizontal_alignment = 1
+
+[node name="UIMod5" type="Label" parent="VBox"]
+visible = false
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "MOD"
+horizontal_alignment = 1
+
+[node name="UICredits" type="Label" parent="VBox"]
+layout_mode = 2
+theme = ExtResource("6")
+text = "VALUE"
+horizontal_alignment = 1

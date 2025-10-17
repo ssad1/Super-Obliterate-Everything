@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmywamfga70nf"]
+
+[ext_resource type="Material" uid="uid://blqjki57p55pu" path="res://Background/Nebula.tres" id="1"]
+[ext_resource type="Script" path="res://Background/Nebula.gd" id="2"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_xta3o"]
+
+[node name="Nebula" type="Sprite2D"]
+light_mask = 0
+z_index = -5
+material = ExtResource("1")
+position = Vector2(800, 450)
+scale = Vector2(1600, 900)
+texture = SubResource("CanvasTexture_xta3o")
+script = ExtResource("2")

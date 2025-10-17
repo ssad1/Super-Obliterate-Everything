@@ -1,0 +1,289 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ctaucx5mrok7p"]
+
+[sub_resource type="Shader" id="1"]
+code = "shader_type canvas_item;
+uniform sampler2D flag_mask : hint_default_black;
+uniform sampler2D lighting : hint_default_black;
+uniform sampler2D burn : hint_default_black;
+uniform vec4 flag_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 light_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 burn_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float light_bright = float(1);
+uniform float burn_bright = float(1);
+
+//Damage Shader
+uniform float damage_strength = 0.0;
+
+//Dissolve Shader
+uniform vec4 dissolve_a : source_color;
+uniform vec4 dissolve_b : source_color;
+uniform vec4 dissolve_c : source_color;
+uniform int OCTAVES = 6;
+uniform float dissolve_strength = 0.0;
+
+//Fire
+uniform vec4 fire_red : source_color;
+uniform vec4 fire_yellow : source_color;
+uniform float fire_strength = 0.0;
+
+//Shock
+uniform vec4 shock_white : source_color;
+uniform vec4 shock_color : source_color;
+uniform float shock_strength = 0.0;
+
+//Noise
+uniform vec2 offset;
+uniform float simplex_scale:hint_range(0.5, 1000.0);
+
+float rand(vec2 coord){
+	return fract(sin(dot(coord, vec2(12.9898, 78.233)))* 43758.5453123);
+	//return fract(sin(dot(coord, vec2(56.0934483, 78.3674596)) * 1000.0) * 1000.0);
+}
+
+vec3 mod289_3(vec3 x) {
+    return x - floor(x * (1.0 / 289.0)) * 289.0;
+}
+
+vec2 mod289_2(vec2 x) {
+    return x - floor(x * (1.0 / 289.0)) * 289.0;
+}
+
+vec3 permute(vec3 x) {
+    return mod289_3(((x*34.0)+1.0)*x);
+}
+
+float snoise(vec2 v) {
+    vec4 C = vec4(0.211324865405187,  // (3.0-sqrt(3.0))/6.0
+                  0.366025403784439,  // 0.5*(sqrt(3.0)-1.0)
+                 -0.577350269189626,  // -1.0 + 2.0 * C.x
+                  0.024390243902439); // 1.0 / 41.0
+    // First corner
+    vec2 i  = floor(v + dot(v, C.yy) );
+    vec2 x0 = v -   i + dot(i, C.xx);
+
+    // Other corners
+    vec2 i1;
+    //i1.x = step( x0.y, x0.x ); // x0.x > x0.y ? 1.0 : 0.0
+    //i1.y = 1.0 - i1.x;
+    i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+    // x0 = x0 - 0.0 + 0.0 * C.xx ;
+    // x1 = x0 - i1 + 1.0 * C.xx ;
+    // x2 = x0 - 1.0 + 2.0 * C.xx ;
+    vec4 x12 = vec4(x0.xy, x0.xy) + C.xxzz;
+    x12.xy -= i1;
+
+    // Permutations
+    i = mod289_2(i); // Avoid truncation effects in permutation
+    vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
+    	+ i.x + vec3(0.0, i1.x, 1.0 ));
+
+    vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), vec3(0.0));
+    m = m*m ;
+    m = m*m ;
+
+    // Gradients: 41 points uniformly over a line, mapped onto a diamond.
+    // The ring size 17*17 = 289 is close to a multiple of 41 (41*7 = 287)
+
+    vec3 x = 2.0 * fract(p * C.www) - 1.0;
+    vec3 h = abs(x) - 0.5;
+    vec3 ox = floor(x + 0.5);
+    vec3 a0 = x - ox;
+
+    // Normalise gradients implicitly by scaling m
+    // Approximation of: m *= inversesqrt( a0*a0 + h*h );
+    m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+
+    // Compute final noise value at P
+    vec3 g;
+    g.x  = a0.x  * x0.x  + h.x  * x0.y;
+    g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+    return 130.0 * dot(m, g);
+}
+
+float fbm(vec2 coord){
+	float value = 0.0;
+	float scale = 0.8;
+	vec2 new_offset = offset;
+
+	for(int i = 0; i < OCTAVES; i++){
+		value += snoise((coord + new_offset) * simplex_scale);
+		coord *= 2.0;
+		scale *= 0.75;
+	}
+	value = value / float(OCTAVES) + 0.5;
+	value = clamp(value,0.0,1.0);
+	return value;
+}
+
+vec4 damage(vec4 original, vec2 uv)
+{
+	vec4 new_col;
+	vec4 damage_color_a = vec4(1.0,0.0,0.0,1.0);
+	vec4 damage_color_b = vec4(1.0,0.3,0.1,1.0);
+	vec4 damage_mix = mix(damage_color_a,damage_color_b, damage_strength);
+	new_col = mix(original, damage_mix, damage_strength);
+	new_col.a *= original.a;
+	return new_col;
+}
+
+vec4 dissolve(vec4 original, vec2 uv, vec2 noiseuv, float time) {
+
+	vec4 new_col = original; // value that will be returned
+	float noise = 0.0;
+
+	float thickness = 0.25;
+	float grad = 0.0;
+	vec4 fire_grad;
+
+	noise = fbm(noiseuv * 6.0);
+	//noise = snoise(noiseuv * simplex_scale);
+	//noise = 0.5 + 0.5 * sin(noise);
+
+	time = (time - 5.0) / 2.0;
+	//time = time / 2.0;
+	if(dissolve_strength > noise && dissolve_strength <= noise + thickness * 0.5)
+	{
+		grad = clamp(2.0 * (dissolve_strength - noise) / (thickness),0.0,1.0);
+		fire_grad = mix(dissolve_a, dissolve_b, grad);
+		fire_grad = mix(new_col, fire_grad, grad);
+		new_col = fire_grad;
+	}
+	if(dissolve_strength > noise + 0.5 * thickness && dissolve_strength < noise + thickness)
+	{
+		grad = clamp(2.0 * ((dissolve_strength - noise) / (thickness) - 0.5),0.0,1.0);
+		fire_grad = mix(dissolve_b, dissolve_c, grad);
+		fire_grad = mix(fire_grad, vec4(0.0), grad);
+		new_col = fire_grad;
+	}
+
+	if(dissolve_strength >= noise + thickness)
+	{
+		new_col.a = 0.0;
+	}
+	new_col.a *= original.a;
+	return new_col;
+}
+
+vec4 shock(vec4 original, vec2 uv, vec2 noiseuv, float time)
+{
+	vec2 coord = noiseuv * 8.0;
+	vec4 new_col = original;
+
+	float noise1 = fbm(coord + vec2(time * -0.3, time * 0.3));
+	float noise2 = fbm(coord + vec2(0, time * -0.6));
+	float combined = (noise1 + noise2) / 2.0;
+	float shock_width = 0.075;
+	float shock_input = shock_strength * 0.7 + 0.3;
+	combined = pow(combined, shock_input);
+	new_col = vec4(vec3(combined), 1.0);
+
+	if (combined > 0.5 - shock_width && combined < 0.5 + shock_width) {
+		if(combined < 0.5)
+		{
+			new_col = mix(shock_white, shock_color, (0.5 - combined) / shock_width);
+			new_col = mix(new_col, original, (0.5 - combined) / shock_width);
+		}
+		if(combined > 0.5)
+		{
+			new_col = mix(shock_color, shock_white, 1.0 - (combined - 0.5) / shock_width);
+			new_col = mix(original, new_col, 1.0 - (combined - 0.5) / shock_width);
+		}
+	} else {
+		new_col = original;
+	}
+	new_col.a *= original.a;
+	return new_col;
+}
+
+vec4 fire(vec4 original, vec2 uv, vec2 noiseuv, float time)
+{
+	vec2 coord = noiseuv * 10.0;
+	vec4 new_col = original;
+
+	float noise1 = fbm(coord + vec2(time * 0.3, time * -0.3));
+	float noise2 = fbm(coord + vec2(0, time * 0.6));
+	float combined = (noise1 + noise2) / 2.0;
+	new_col = vec4(vec3(combined), 1.0);
+
+	if (combined < fire_strength) {
+		new_col = mix(fire_red, fire_yellow, fire_strength - combined);
+		if(combined > fire_strength - 0.3)
+		{
+			new_col = mix(original, new_col, (fire_strength - combined) * 3.33);
+		}
+	} else {
+		new_col = original;
+	}
+	new_col.a *= original.a;
+	return new_col;
+}
+
+void fragment()
+{
+	vec4 current_texture = texture(TEXTURE,UV);
+	vec4 flag_mask_texture = texture(flag_mask,UV);
+	vec4 lighting_texture = texture(lighting,UV);
+	vec4 burn_texture = texture(burn,UV);
+	vec2 outp;
+	vec2 noiseuv = UV;
+
+	if(flag_mask_texture.r > 0.0)
+	{
+		COLOR = current_texture * flag_color;
+	}
+	else
+	{
+		COLOR = current_texture;
+	}
+	if(lighting_texture.r > .2f)
+	{
+		COLOR = lighting_texture * light_color * light_bright;
+	}
+
+	if(burn_texture.r > .2f)
+	{
+		COLOR = COLOR + burn_texture * burn_color * burn_bright;
+	}
+	noiseuv = modf(noiseuv * 8.0, outp);
+	noiseuv = noiseuv / 8.0;
+	if(damage_strength > 0.0)
+	{
+		COLOR = damage(COLOR, UV);
+	}
+	if(shock_strength > 0.0)
+	{
+		COLOR = shock(COLOR, UV, noiseuv, TIME);
+	}
+	if(fire_strength > 0.0)
+	{
+		COLOR = fire(COLOR, UV, noiseuv, TIME);
+	}
+	if(dissolve_strength > 0.0)
+	{
+		COLOR = dissolve(COLOR, UV, noiseuv, TIME);
+	}
+	//COLOR = current_texture;
+}"
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource("1")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/dissolve_a = null
+shader_parameter/dissolve_b = null
+shader_parameter/dissolve_c = null
+shader_parameter/OCTAVES = 6
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_red = null
+shader_parameter/fire_yellow = null
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_white = null
+shader_parameter/shock_color = null
+shader_parameter/shock_strength = 0.0
+shader_parameter/offset = null
+shader_parameter/simplex_scale = null

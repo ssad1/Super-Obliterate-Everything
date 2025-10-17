@@ -1,0 +1,78 @@
+[gd_scene load_steps=14 format=3 uid="uid://dv3qabcu5bdu"]
+
+[ext_resource type="Texture2D" uid="uid://brw0e2plrrd0f" path="res://Shots/Graphics/Missile_LM1_D.PNG" id="1"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" path="res://Shaders/Missile_Shader.gdshader" id="4"]
+[ext_resource type="Script" path="res://Ships/Ship_Missile.gd" id="6"]
+[ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://ojwkfodf3wg1" path="res://Shots/Graphics/Missile_LM1_B.PNG" id="8"]
+[ext_resource type="PackedScene" path="res://Shots/Explode_Rocket.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Modules/Spawn_Explosion.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Death_SFX.tscn" id="11"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("4")
+shader_parameter/light_color = Color(1, 0.52549, 0.180392, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="3"]
+blend_mode = 1
+
+[node name="Missile_LM1" type="Node2D"]
+script = ExtResource("6")
+lifespan = 40
+thrust = 4.0
+aihigh = "M1"
+aistandoff = 0
+inertia = 1.0
+max_velocity = 20.0
+max_rotate_velocity = 0.2
+drag = 0.05
+max_armor = 1
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = ExtResource("1")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0, 0, 1)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("8")
+hframes = 8
+vframes = 8
+
+[node name="Glow" type="Sprite2D" parent="."]
+modulate = Color(1, 0.670588, 0.505882, 0.14902)
+light_mask = 0
+material = SubResource("3")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7")
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -8.0
+offset_top = -7.0
+offset_right = 8.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Trigger" parent="." instance=ExtResource("2")]
+death_activate = true
+
+[node name="Spawn_Explosion" parent="Module_Trigger" instance=ExtResource("10")]
+scale_effect = true
+
+[node name="Explode_Rocket" parent="Module_Trigger/Spawn_Explosion" instance=ExtResource("9")]
+
+[node name="Module_Death_SFX" parent="Module_Trigger" instance=ExtResource("11")]
+fire_sound = 2003

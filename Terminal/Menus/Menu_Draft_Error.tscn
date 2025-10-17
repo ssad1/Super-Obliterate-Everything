@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Terminal/Terminal_Theme_Big.tres" type="Theme" id=1]
+[ext_resource path="res://Terminal/Menus/Menu_Draft_Error.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "New Anim"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.258824, 0.258824, 1 ), Color( 1, 0.478431, 0.478431, 1 ), Color( 1, 0.258824, 0.258824, 1 ), Color( 1, 0.478431, 0.478431, 1 ), Color( 1, 0.258824, 0.258824, 1 ), Color( 1, 0.478431, 0.478431, 1 ), Color( 1, 0.258824, 0.258824, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.188235, 0.188235, 0.25098 ), Color( 1, 0.423529, 0.423529, 0.227451 ), Color( 1, 0.188235, 0.188235, 0.25098 ), Color( 1, 0.423529, 0.423529, 0.227451 ), Color( 1, 0.188235, 0.188235, 0.25098 ), Color( 1, 0.423529, 0.423529, 0.227451 ), Color( 1, 0.188235, 0.188235, 0 ) ]
+}
+
+[node name="Menu_Draft_Error" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1620.0
+margin_bottom = -1032.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+modulate = Color( 1, 0.188235, 0.188235, 0.25098 )
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 280.0
+margin_bottom = 46.0
+theme = ExtResource( 1 )
+text = "ERROR MESSAGE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+modulate = Color( 1, 0.258824, 0.258824, 1 )
+margin_right = 40.0
+margin_bottom = 14.0
+theme = ExtResource( 1 )
+text = "ERROR MESSAGE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/New Anim" = SubResource( 1 )

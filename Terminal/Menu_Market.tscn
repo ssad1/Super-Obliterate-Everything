@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://bn82ghxvgflyu"]
+
+[ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="1"]
+[ext_resource type="Script" path="res://Terminal/Menu_Market.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://bn7dr4vti35ee" path="res://Terminal/Menu_Button.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Terminal/Menu_Shop.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://Terminal/Menu_Packs.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://Terminal/Menu_Extra.tscn" id="6"]
+
+[node name="Menu_Market" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1")
+script = ExtResource("2")
+menu_shop_path = NodePath("VBoxContainer/Control/Menu_Shop")
+menu_packs_path = NodePath("VBoxContainer/Control/Menu_Packs")
+menu_extra_path = NodePath("VBoxContainer/Control/Menu_Extra")
+menu_button_shop_path = NodePath("VBoxContainer/HBoxContainer/Button_Shop")
+menu_button_packs_path = NodePath("VBoxContainer/HBoxContainer/Button_Packs")
+menu_button_extra_path = NodePath("VBoxContainer/HBoxContainer/Button_Extra")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+color = Color(0, 0, 0, 0.784314)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Button_Shop" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3")]
+layout_mode = 2
+text = "SHOP"
+
+[node name="Button_Packs" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3")]
+layout_mode = 2
+text = "PACKS"
+
+[node name="Button_Extra" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3")]
+layout_mode = 2
+text = "EXTRA"
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Menu_Shop" parent="VBoxContainer/Control" instance=ExtResource("4")]
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+
+[node name="Menu_Packs" parent="VBoxContainer/Control" instance=ExtResource("5")]
+visible = false
+anchors_preset = 0
+
+[node name="Menu_Extra" parent="VBoxContainer/Control" instance=ExtResource("6")]
+visible = false
+anchors_preset = 0

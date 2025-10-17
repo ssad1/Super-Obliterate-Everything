@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://dfh5i7h3v2qob"]
+
+[ext_resource type="Texture2D" uid="uid://bmyfbkw4vo6j0" path="res://Shots/Graphics/Asteroid_Tiny_D.PNG" id="2"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Script" path="res://Shots/Shot_Asteroid.gd" id="4"]
+[ext_resource type="Script" path="res://Structures/Asteroid_Animator.gd" id="5"]
+[ext_resource type="PackedScene" path="res://Modules/Spawn_Effect.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://dkf7b5m23hesu" path="res://Shots/Graphics/Asteroid_Tiny_N.PNG" id="6_5frth"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="7"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_oxm4d"]
+diffuse_texture = ExtResource("2")
+normal_texture = ExtResource("6_5frth")
+
+[sub_resource type="Animation" id="1"]
+resource_name = "Roll"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 63]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_msea5"]
+_data = {
+"Roll": SubResource("1")
+}
+
+[node name="Shot_Asteroid" type="Node2D"]
+light_mask = 3
+script = ExtResource("4")
+max_velocity = 100.0
+
+[node name="Hull" type="Sprite2D" parent="."]
+light_mask = 3
+texture = SubResource("CanvasTexture_oxm4d")
+hframes = 8
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_msea5")
+}
+autoplay = "Roll"
+script = ExtResource("5")
+
+[node name="HitBox" parent="." instance=ExtResource("3")]
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Trigger" parent="." instance=ExtResource("7")]
+visible = false
+death_activate = true
+
+[node name="Spawn_Effect" parent="Module_Trigger" instance=ExtResource("6")]
+spawn_id = 10106
+scale_effect = true

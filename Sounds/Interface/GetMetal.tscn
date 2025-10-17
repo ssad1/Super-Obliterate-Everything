@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvtsoqti7v1y5"]
+
+[ext_resource type="AudioStream" uid="uid://b5evvegigiegu" path="res://Sounds/Interface/GetMetal.wav" id="1"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1")

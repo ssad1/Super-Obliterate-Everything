@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsftig2hhdf2y"]
+
+[ext_resource type="PackedScene" path="res://Terminal/Slider_Sound.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://Terminal/Slider_Music.tscn" id="2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_27nxm"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_0mq8c"]
+font_size = 12
+
+[node name="Audio_Box" type="VBoxContainer"]
+light_mask = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 274.0
+offset_bottom = 78.0
+
+[node name="HBoxSound" type="HBoxContainer" parent="."]
+light_mask = 0
+layout_mode = 2
+alignment = 1
+
+[node name="Control" type="Control" parent="HBoxSound"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxSound"]
+light_mask = 0
+layout_mode = 2
+text = "SOUND:"
+label_settings = SubResource("LabelSettings_27nxm")
+horizontal_alignment = 2
+
+[node name="Slider_Sound" parent="HBoxSound" instance=ExtResource("1")]
+light_mask = 0
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="HBoxMusic" type="HBoxContainer" parent="."]
+light_mask = 0
+layout_mode = 2
+alignment = 1
+
+[node name="Control" type="Control" parent="HBoxMusic"]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxMusic"]
+light_mask = 0
+layout_mode = 2
+text = "MUSIC:"
+label_settings = SubResource("LabelSettings_0mq8c")
+horizontal_alignment = 2
+
+[node name="Slider_Music" parent="HBoxMusic" instance=ExtResource("2")]
+light_mask = 0
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+ticks_on_borders = true
