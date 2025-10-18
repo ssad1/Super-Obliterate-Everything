@@ -4,6 +4,7 @@ extends Node2D
 @onready var tcpu_node = preload("res://Modules/TargetCPU.tscn")
 @onready var FOV_node = preload("res://Modules/Target_FOV.tscn")
 @onready var hull:Sprite2D = $Hull
+@onready var mat:Material = $Hull.get_material()
 
 var s
 @export var name_text:String = "" 
@@ -42,10 +43,7 @@ var burn_bright:float = 0
 var cloak_strength:float = 0
 var freeze_strength:float = 0
 var acid_strength:float = 0
-var damage_strength:float = 0
-var burnt_strength:float = 0
 var dissolve_strength:float = 0
-var fire_strength:float = 0
 var shock_strength:float = 0
 var shield_strength:float = 0
 var shield_damage:float = 0
@@ -54,8 +52,10 @@ var swirl_strength:float = 0
 var select_strength:float = 0
 var offset:Vector2 = Vector2(randi() % 1000 + 10,randi() % 1000 + 10)
 
+'''
 var build_clock:float = 0
 var build_max:float = 10
+'''
 
 var player
 var tcpu:TargetCPU 
@@ -70,9 +70,11 @@ var spawn_id:int = 0
 var dead:bool = false
 var vanish:bool = false
 var is_type:String = "THING"
-var is_selected:bool = false
 
 @export var build_speed:float = 1
+
+var _selection:bool
+var is_selected:bool = false
 
 func _ready() -> void:
 	hide()
@@ -103,18 +105,6 @@ func _station_distance() -> float:
 			old_d = d
 
 	return old_d
-
-func _build_mode(init:int) -> void:
-
-	if init != 1: return
-
-	if is_type == "STRUCT":
-		build_max = 10 #+ int(.3 * _station_distance())
-	else:
-		build_max = 10
-	build_clock = build_max
-	build_strength = 1.0
-	_do_shader(0)
 
 func _die() -> void:
 	if stats != null:
@@ -178,44 +168,17 @@ func _do_select(s:bool) -> void:
 	if player != SPAWNER.game.me:
 		is_selected = false
 
-func _do_shader(delta:float) -> void:
-
-	var mat := hull.get_material()
-	if damage_strength > 0:
-		damage_strength = damage_strength - delta
-	damage_strength = clamp(damage_strength, 0, 1)
+func _do_selection(delta:float) -> void:
 	
 	if is_selected:
 		select_strength = 1
 	elif select_strength > 0:
 		select_strength = select_strength - 3 * delta
+		select_strength = clamp(select_strength,0,1)
 
-	if build_clock > 0:
-		select_strength = 0
-
-	select_strength = clamp(select_strength,0,1)
-	
-	burnt_strength = 1 - (armor / max_armor)
-
-	'''commented(#): unused for now'''
-
-	#mat.set_shader_parameter("cloak_strength",cloak_strength)
-	#mat.set_shader_parameter("freeze_strength",freeze_strength)
-	#mat.set_shader_parameter("acid_strength",acid_strength)
-	mat.set_shader_parameter("damage_strength",damage_strength)
-	mat.set_shader_parameter("burnt_strength",burnt_strength)
-	#mat.set_shader_parameter("dissolve_strength",dissolve_strength)
-	mat.set_shader_parameter("fire_strength",fire_strength)
-	#mat.set_shader_parameter("shock_strength",shock_strength)
-	#mat.set_shader_parameter("shield_strength",shield_strength)
-	#mat.set_shader_parameter("shield_damage",shield_damage)
-	#mat.set_shader_parameter("swirl_strength",swirl_strength)
 	mat.set_shader_parameter("select_strength",select_strength)
 
 func _do_tick() -> void:
-
-	if build_clock > 0:
-		build_clock = build_clock - 1
 
 	if tcpu != null:
 		tcpu._do_tick()
@@ -252,7 +215,8 @@ func _hit(s) -> void:
 	if armor > max_armor:
 		armor = max_armor
 
-	damage_strength = 1
+	UNIT_STATE.do_unit_damage_strength(self)
+	#damage_strength = 1
 
 	if s.is_type == "SHOT":
 		s.armor = 0
@@ -286,9 +250,6 @@ func _process(delta:float) -> void:
 	#	hide()
 	#else:
 	#	show()
-
-	#temporary fix till we dont make shaders run every single frame to compute damage
-	if is_type == "STRUCT": _do_shader(delta)
 
 func _remove_ref(s) -> void:
 	if tcpu != null:

@@ -48,18 +48,20 @@ func _do_damage() -> void:
 	var burn_pos := Vector2(0,0)
 	var burn_rand := 0.0
 
-	if armor >= max_armor:
-		fire_strength = 0
+	'''if armor >= max_armor:
+		fire_strength = 0'''
 
 	if armor < max_armor && special == "ARMOR":
-		fire_strength = 1 - armor / max_armor
+		#fire_strength = 1 - armor / max_armor
+		UNIT_STATE.do_unit_damage(self)
 		if armor < 0:
 			hull.frame = 63
 		else:
 			hull.frame = round(63 - 63 * armor/max_armor)
 
 	if armor < max_armor && special != "ROCK" && special != "ARMOR":
-		fire_strength = 1 - armor / max_armor
+		#fire_strength = 1 - armor / max_armor
+		UNIT_STATE.do_unit_damage(self)
 		burn_rand = randf() / (build_size.x * build_size.y) * 4
 
 		if burn_rand < 1 - armor / max_armor:
@@ -70,7 +72,3 @@ func _do_damage() -> void:
 			burn_pos.y = burn_pos.y - .8 * 16 * build_size.y + .8 * randf() * build_size.y * 32
 			
 			SPAWNER._spawn([10310], null, burn_pos, Vector2(0,0), 0, 0, 0)
-
-	
-#func _process(delta):
-#	pass

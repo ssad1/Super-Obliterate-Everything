@@ -78,7 +78,7 @@ func _hit_shield(d:float, hitp:Vector2) -> void:
 	shield_theta = atan2(hitp.y - pos.y, hitp.x - pos.x)
 
 func _do_shader() -> void:
-	glow.set_shader_parameter("hit_angle", float(shield_theta))
-	glow.set_shader_parameter("hit_fade", float(shield_power))
-	glow.set_shader_parameter("shield_radius", float(shield_radius))
+	glow.set_shader_parameter("hit_angle", shield_theta)
+	glow.set_shader_parameter("hit_fade", shield_power)
+	glow.set_shader_parameter("shield_radius", shield_radius)
 	#print("shield: " + str(shield_power))

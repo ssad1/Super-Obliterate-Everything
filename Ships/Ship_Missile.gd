@@ -17,7 +17,6 @@ func _init_missile() -> void:
 	armor = max_armor
 	is_type = "MISSILE"
 	_do_range()
-	#_do_shader(0)
 
 func _do_tick() -> void:
 	scale = shot_scale * Vector2(1,1)

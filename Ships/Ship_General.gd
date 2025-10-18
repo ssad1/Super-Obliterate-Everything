@@ -32,7 +32,6 @@ func _init_ship() -> void:
 	armor = max_armor
 	is_type = "SHIP"
 	_do_range()
-	_do_shader(0)
 	UNIT_STATE.do_unit_build(self, build_speed)
 	UNIT_STATE.do_unit_faction(self)
 	UNIT_STATE.do_unit_frames(self)
@@ -81,7 +80,7 @@ func _process(delta:float) -> void:
 	var blend_pos := position + (pos - position) * 0.1 + 0.2 * velocity
 	set_position(blend_pos)
 	_do_anim(delta)
-	_do_shader(delta)
+	_do_selection(delta)
 
 func _do_anim(delta:float) -> void:
 
@@ -140,13 +139,14 @@ func _do_command(c:String) -> void:
 
 func _do_damage() -> void:
 
-	var burn_pos := Vector2(0,0)
-	var burn_rand := 0.0
+	#var burn_pos := Vector2(0,0)
+	#var burn_rand := 0.0
 
-	if armor >= max_armor:
+	UNIT_STATE.do_unit_damage(self)
+	'''if armor >= max_armor:
 		fire_strength = 0
 	if armor < max_armor && special != "ROCK":
-		fire_strength = 1 - float(armor) / float(max_armor)
+		fire_strength = 1 - armor / max_armor'''
 		#burn_rand = randf()
 		#burn_rand = burn_rand / (build_size.x * build_size.y)
 		#burn_rand = burn_rand * 4

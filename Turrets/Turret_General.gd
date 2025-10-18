@@ -108,30 +108,8 @@ func _do_range():
 	tFOV._initialize_FOV_area(range_radius)
 	tFOV._bind_tcpu(tcpu)
 
-func _do_shader():
-	var mat := hull.get_material()
-	
-	#Fix this some day if needed
-	
-	if player != null:
-		mat.set_shader_parameter("flag_color",player.flag_color)
-		mat.set_shader_parameter("light_color",player.light_color)
-	mat.set_shader_parameter("light_bright",up.light_bright)
-
-	#mat.set_shader_parameter("burn_color",up.burn_color)
-	#mat.set_shader_parameter("burn_bright",up.burn_bright)
-	#mat.set_shader_parameter("cloak_strength",up.cloak_strength)
-	#mat.set_shader_parameter("freeze_strength",up.freeze_strength)
-	#mat.set_shader_parameter("acid_strength",up.acid_strength)
-	#mat.set_shader_parameter("damage_strength",up.damage_strength)
-	#mat.set_shader_parameter("burnt_strength",up.burnt_strength)
-	#mat.set_shader_parameter("dissolve_strength",up.dissolve_strength)
-	#mat.set_shader_parameter("fire_strength",up.fire_strength)
-	#mat.set_shader_parameter("shock_strength",up.shock_strength)
-	#mat.set_shader_parameter("shield_strength",up.shield_strength)
-	#mat.set_shader_parameter("shield_damage",up.shield_damage)
-	#mat.set_shader_parameter("build_strength",up.build_strength)
-	#mat.set_shader_parameter("swirl_strength",up.swirl_strength)
+func _do_selection():
+	pass
 
 func _do_tick():
 	spawn_id = up.spawn_id

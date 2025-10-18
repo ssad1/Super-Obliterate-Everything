@@ -25,7 +25,7 @@ func _do_tick():
 		armor = 0
 	super._do_tick()
 
-func _do_shader(delta):
+func _do_selection(delta:float) -> void:
 	pass
 
 func _set_player(p):

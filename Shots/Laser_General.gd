@@ -94,7 +94,7 @@ func _do_tick():
 	if(armor <= 0):
 		_die()
 
-func _do_shader():
+func _do_selection(delta:float) -> void:
 	pass
 
 func _set_player(p):

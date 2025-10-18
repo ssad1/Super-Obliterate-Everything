@@ -83,7 +83,6 @@ credit_cost = 100
 inertia = 1.0
 max_velocity = 13.0
 max_rotate_velocity = 0.1
-max_armor = 1
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")
@@ -123,6 +122,24 @@ gun_scale = 0.25
 [node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("12")]
 visible = false
 material = SubResource("3")
+base_damage = null
+force = null
+damage_type = null
+shot_scale = null
+spin_mode = null
+class_text = null
+energy_cost = null
+metal_cost = null
+supply_cost = null
+credit_cost = null
+inertia = null
+max_rotate_velocity = null
+drag = null
+max_armor = null
+max_shields = null
+target_profile = null
+special = null
+build_speed = null
 
 [node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("14")]
 visible = false
@@ -144,6 +161,24 @@ gun_scale = 0.7
 [node name="Shot_Blaster" parent="Module_Trigger/Gun_General" instance=ExtResource("12")]
 visible = false
 material = SubResource("4")
+base_damage = null
+force = null
+damage_type = null
+shot_scale = null
+spin_mode = null
+class_text = null
+energy_cost = null
+metal_cost = null
+supply_cost = null
+credit_cost = null
+inertia = null
+max_rotate_velocity = null
+drag = null
+max_armor = null
+max_shields = null
+target_profile = null
+special = null
+build_speed = null
 
 [node name="E_MuzzleA" parent="Module_Trigger/Gun_General" instance=ExtResource("14")]
 visible = false

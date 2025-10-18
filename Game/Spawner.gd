@@ -587,8 +587,6 @@ func _spawn(s, p, position, velocity, rotation, up, init):
 		#Bug Here
 		if(p != null && game.players.size() > p):
 			obj._set_player(game.players[p])
-	if(init > 0): #Build
-		obj._build_mode(init)
 	return obj
 
 func _spawn_dupe(s, p, position, velocity, rotation, up, init):
