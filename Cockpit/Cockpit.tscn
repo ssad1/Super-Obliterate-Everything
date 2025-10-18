@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bmgxnoyw1wc3y"]
+[gd_scene load_steps=23 format=3 uid="uid://bmgxnoyw1wc3y"]
 
 [ext_resource type="Script" path="res://Cockpit/Cockpit.gd" id="1"]
 [ext_resource type="Script" path="res://Cockpit/CockpitGrid.gd" id="2"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://bxdasdbtjbi84" path="res://Cockpit/UIItemScreen.png" id="12"]
 [ext_resource type="Script" path="res://Cockpit/UIEnergy.gd" id="13"]
 [ext_resource type="Shader" path="res://Cockpit/UIBar.gdshader" id="14"]
-[ext_resource type="PackedScene" path="res://Cockpit/UIMetalBar.tscn" id="15"]
 [ext_resource type="PackedScene" path="res://Cockpit/UIEnergyBar.tscn" id="16"]
 [ext_resource type="Texture2D" uid="uid://b8pe7nuq6djaf" path="res://Cockpit/UIResourceScreen.png" id="18"]
 [ext_resource type="PackedScene" path="res://Cockpit/Button_Cancel.tscn" id="21"]
@@ -28,9 +27,9 @@ shader_parameter/simplex_scale = 0.258
 shader_parameter/fire_strength = 0.0
 shader_parameter/fire_height = 0.0
 shader_parameter/shock_strength = 1.0
-shader_parameter/shock_height = 0.0
+shader_parameter/shock_height = 1.0
 
-[sub_resource type="ShaderMaterial" id="2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4r1u1"]
 resource_local_to_scene = true
 shader = ExtResource("14")
 shader_parameter/offset = Vector2(100, 200)
@@ -39,6 +38,40 @@ shader_parameter/fire_strength = 0.7
 shader_parameter/fire_height = 0.0
 shader_parameter/shock_strength = 0.0
 shader_parameter/shock_height = 0.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_js73v"]
+load_path = "res://.godot/imported/UIEnergyBar.png-41f089394a2c2e69a99aaea723a74d06.ctex"
+
+[sub_resource type="GDScript" id="GDScript_ma6jj"]
+script/source = "extends TextureRect
+
+var level = 0.0
+var mode = 0 # 1 - Energy, 2 - Metal
+
+func _ready():
+	var mat = get_material()
+	if(mat.get_shader_parameter(\"shock_strength\") > 0):
+		mode = 1
+		EVENTS.connect(\"ui_energy\", Callable(self, \"_ui_energy\"))
+	if(mat.get_shader_parameter(\"fire_strength\") > 0):
+		mode = 2
+		EVENTS.connect(\"ui_metal\", Callable(self, \"_ui_metal\"))
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+func _ui_energy(n):
+	var mat = get_material()
+	level = floor(n) / 1000.0
+	mat.set_shader_parameter(\"shock_height\",level)
+	
+
+func _ui_metal(n):
+	var mat = get_material()
+	level = floor(n) / 1000.0
+	mat.set_shader_parameter(\"fire_height\",level)
+"
 
 [node name="Cockpit" type="Control"]
 layout_mode = 3
@@ -275,20 +308,14 @@ text = "0"
 script = ExtResource("13")
 mode = 2
 
-[node name="UIMetalBar" parent="Resources/ResourcesScreen/Control/UIMetal" instance=ExtResource("15")]
+[node name="UIMetalBar2" parent="Resources/ResourcesScreen/Control/UIMetal" instance=ExtResource("16")]
 show_behind_parent = true
-material = SubResource("2")
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -6.5
-offset_right = 93.5
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 0
+material = SubResource("ShaderMaterial_4r1u1")
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 25.0
+texture = SubResource("CompressedTexture2D_js73v")
+script = SubResource("GDScript_ma6jj")
 
 [node name="UISupply" type="Label" parent="Resources/ResourcesScreen/Control"]
 light_mask = 0

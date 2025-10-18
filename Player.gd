@@ -73,7 +73,6 @@ var metal:float = _metal_amount:
 			_metal_amount = 1000
 		if me && value != 0:
 			EVENTS.emit_signal("ui_metal", _metal_amount)
-			print("Metal setado.")
 
 var supply:float = 100
 
