@@ -191,6 +191,10 @@ func _clear_game() -> void:
 	ships = []
 	lasers = []
 	explosions = []
+
+	if has_node("Sunshine"):
+		get_node("Sunshine").queue_free()
+
 	EVENTS.emit_signal("clear_build_layer")
 	for child in get_children():
 		while child.get_child_count() > 0:
@@ -433,6 +437,11 @@ func _screen_shake():
 func _start_game() -> void:
 	var bonus = 0
 	GLOBAL.gamemode = 2
+
+	var sunshine = GLOBAL.Sunshine.instantiate()
+
+	add_child(sunshine)
+
 	victory_t = 20
 	LEVELS._design_level()
 	victory_condition = LEVELS.level_mission

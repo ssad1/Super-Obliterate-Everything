@@ -4,6 +4,7 @@ extends Node
 @onready var StarField = load("res://Background/StarField.tscn")
 @onready var Nebula = load("res://Background/Nebula.tscn")
 @onready var PlanetSystem = load("res://Background/PlanetSystem.tscn")
+@onready var Sunshine = load("res://Game/Sunshine.tscn")
 @onready var Game = load("res://Game/Game.tscn")
 @onready var DustLayer = load("res://Background/DustLayer.tscn")
 @onready var FrostScreen = load("res://Background/FrostScreen.tscn")
@@ -53,9 +54,9 @@ func _set_window():
 	print("WINDOW")
 
 func _apply_settings():
-	if(graphics_maximized == true):
+	if graphics_maximized == true:
 		_set_maximized()
-	elif(graphics_maximized == false):
+	elif graphics_maximized == false:
 		_set_window()
 
 func _load_settings():
