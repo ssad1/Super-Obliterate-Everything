@@ -28,7 +28,7 @@ shader_parameter/simplex_scale = 0.258
 shader_parameter/fire_strength = 0.0
 shader_parameter/fire_height = 0.0
 shader_parameter/shock_strength = 1.0
-shader_parameter/shock_height = 1.0
+shader_parameter/shock_height = 0.0
 
 [sub_resource type="ShaderMaterial" id="2"]
 resource_local_to_scene = true
@@ -36,7 +36,7 @@ shader = ExtResource("14")
 shader_parameter/offset = Vector2(100, 200)
 shader_parameter/simplex_scale = 0.258
 shader_parameter/fire_strength = 0.7
-shader_parameter/fire_height = 1.0
+shader_parameter/fire_height = 0.0
 shader_parameter/shock_strength = 0.0
 shader_parameter/shock_height = 0.0
 

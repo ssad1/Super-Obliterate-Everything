@@ -244,7 +244,8 @@ func _spawn_obj(s):
 		hotkey.show()
 	else:
 		obj = SPAWNER._spawn(s, null, Vector2(0,0), Vector2(0,0), 0, 12,0)
-		hotkey.hide()
+		if hotkey != null: 
+			hotkey.hide()
 	
 	if "range_radius" in obj:
 		_remove_obj_from_grid(obj)

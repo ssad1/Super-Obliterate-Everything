@@ -3,6 +3,7 @@ extends Node2D
 @onready var tcpu_node = preload("res://Modules/TargetCPU.tscn")
 @onready var FOV_node = preload("res://Modules/Target_FOV.tscn")
 @onready var hull:Sprite2D = $Hull
+@onready var mat:Material = $Hull.get_material()
 
 var offset_pos:Vector2 = Vector2(0,0)
 var offset_radius:float = 0
