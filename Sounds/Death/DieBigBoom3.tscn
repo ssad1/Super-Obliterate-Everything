@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dk60ums1jcl6g"]
+[gd_scene load_steps=3 format=3 uid="uid://dk60ums1jcl6g"]
 
 [ext_resource type="AudioStream" uid="uid://y82ejmntx045" path="res://Sounds/Death/DieBigBoom3.wav" id="1"]
+[ext_resource type="Script" path="res://Sounds/Sound_Pitch_General.gd" id="2_gmc61"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
 stream = ExtResource("1")
+script = ExtResource("2_gmc61")
+pitch_interval = 0.3

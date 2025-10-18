@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3ggjcr4w0kd7"]
+[gd_scene load_steps=3 format=3 uid="uid://c3ggjcr4w0kd7"]
 
 [ext_resource type="AudioStream" uid="uid://y2tbea155ncn" path="res://Sounds/Interface/ButtonBuild.wav" id="1"]
+[ext_resource type="Script" path="res://Sounds/Sound_Pitch_General.gd" id="2_l3ply"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
 stream = ExtResource("1")
+script = ExtResource("2_l3ply")
+pitch_interval = 0.1
+change_pitch = true

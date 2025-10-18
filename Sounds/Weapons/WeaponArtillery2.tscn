@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://boemxotj10yx2"]
+[gd_scene load_steps=3 format=3 uid="uid://boemxotj10yx2"]
 
 [ext_resource type="AudioStream" uid="uid://c6nux6v0q3bes" path="res://Sounds/Weapons/WeaponArtillery2.wav" id="1"]
+[ext_resource type="Script" path="res://Sounds/Sound_Pitch_General.gd" id="2_wtldk"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
 stream = ExtResource("1")
+script = ExtResource("2_wtldk")
+pitch_interval = 0.2

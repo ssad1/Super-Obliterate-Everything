@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://ee56ri2t7c8e"]
+[gd_scene load_steps=3 format=3 uid="uid://ee56ri2t7c8e"]
 
 [ext_resource type="AudioStream" uid="uid://hfkytkwj0url" path="res://Sounds/Weapons/WeaponMissile5.wav" id="1"]
+[ext_resource type="Script" path="res://Sounds/Sound_Pitch_General.gd" id="2_gm4h5"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
 stream = ExtResource("1")
+script = ExtResource("2_gm4h5")
+pitch_interval = 0.2

@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqrgiley7p3fv"]
+[gd_scene load_steps=3 format=3 uid="uid://dqrgiley7p3fv"]
 
 [ext_resource type="AudioStream" uid="uid://biq05g61n28qi" path="res://Sounds/Weapons/WeaponBeam5.wav" id="1_dlvko"]
+[ext_resource type="Script" path="res://Sounds/Sound_Pitch_General.gd" id="2_bhoro"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
 stream = ExtResource("1_dlvko")
 pitch_scale = 1.2
+script = ExtResource("2_bhoro")
+pitch_interval = 0.3

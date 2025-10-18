@@ -20,7 +20,7 @@ func _ready():
 
 func _submenu_button_press(s):
 	var fd
-	if(s == "Button_Draft"):
+	if s == "Button_Draft":
 		fd = DRAFT._gen_draft(0)
 		show()
 		EVENTS.emit_signal("load_draft", fd)

@@ -64,8 +64,11 @@ func _do_damage() -> void:
 
 		if burn_rand < 1 - armor / max_armor:
 
-			burn_pos = pos - 0.8 * 16 * build_size + 0.8 * randf() * build_size * 32
-
+			#burn_pos = pos - 0.8 * 16 * build_size + 0.8 * randf() * build_size * 32
+			burn_pos = pos
+			burn_pos.x = burn_pos.x - .8 * 16 * build_size.x + .8 * randf() * build_size.x * 32
+			burn_pos.y = burn_pos.y - .8 * 16 * build_size.y + .8 * randf() * build_size.y * 32
+			
 			SPAWNER._spawn([10310], null, burn_pos, Vector2(0,0), 0, 0, 0)
 
 	

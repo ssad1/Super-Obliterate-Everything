@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://152t8oi22wtu"]
+[gd_scene load_steps=3 format=3 uid="uid://152t8oi22wtu"]
 
 [ext_resource type="AudioStream" uid="uid://dyfdvpa4acc0g" path="res://Sounds/Weapons/WeaponBlaster2.wav" id="1"]
+[ext_resource type="Script" path="res://Sounds/Sound_Pitch_General.gd" id="2_k4xan"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
 stream = ExtResource("1")
 pitch_scale = 1.2
+script = ExtResource("2_k4xan")
+pitch_interval = 0.3

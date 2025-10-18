@@ -68,3 +68,5 @@ signal build_spot_ghost(s)
 signal mission_hover_in(pos)
 signal mission_hover_out()
 signal zone_click(zone_name,zone_desc,zone_id)
+
+var current_menu_selected:String

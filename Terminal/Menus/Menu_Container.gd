@@ -10,7 +10,7 @@ func _ready():
 func _process(delta):
 	if visible == true && alpha < 1:
 		alpha = alpha + 3 * delta
-		if(alpha > 1):
+		if alpha > 1:
 			alpha = 1
 		modulate = Color(1,1,1,alpha)
 
@@ -24,7 +24,8 @@ func _submenu_button_press(n):
 	var received = n.substr(7, n.length() - 7)
 	var current = name.substr(5, name.length() - 5)
 
-	if(received == current):
+	if received == current:
 		_ignite()
+		EVENTS.current_menu_selected = current
 	else:
 		hide()
