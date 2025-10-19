@@ -29,3 +29,4 @@ func _submenu_button_press(n):
 		EVENTS.current_menu_selected = current
 	else:
 		hide()
+		EVENTS.current_menu_selected = received

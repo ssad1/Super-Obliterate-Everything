@@ -27,7 +27,7 @@ shader_parameter/simplex_scale = 0.258
 shader_parameter/fire_strength = 0.0
 shader_parameter/fire_height = 0.0
 shader_parameter/shock_strength = 1.0
-shader_parameter/shock_height = 1.0
+shader_parameter/shock_height = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4r1u1"]
 resource_local_to_scene = true
@@ -311,6 +311,7 @@ mode = 2
 [node name="UIMetalBar2" parent="Resources/ResourcesScreen/Control/UIMetal" instance=ExtResource("16")]
 show_behind_parent = true
 material = SubResource("ShaderMaterial_4r1u1")
+layout_mode = 0
 offset_top = 20.0
 offset_right = 100.0
 offset_bottom = 25.0

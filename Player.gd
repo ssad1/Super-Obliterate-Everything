@@ -60,9 +60,8 @@ var energy:float = _energy_amount:
 		_energy_amount = value
 		if _energy_amount > 1000:
 			_energy_amount = 1000
-		if me && value > 0:
+		if me:
 			EVENTS.emit_signal("ui_energy", _energy_amount)
-			#EVENTS.emit_signal("ui_supply",supply)
 
 var metal:float = _metal_amount:
 	get:
@@ -71,10 +70,18 @@ var metal:float = _metal_amount:
 		_metal_amount = value
 		if _metal_amount > 1000:
 			_metal_amount = 1000
-		if me && value != 0:
+		if me:
 			EVENTS.emit_signal("ui_metal", _metal_amount)
 
-var supply:float = 100
+var supply:float = _supply_amount:
+	get:
+		return _supply_amount
+	set(value):
+		_supply_amount = value
+		if _supply_amount > 1000:
+			_supply_amount = 1000
+		if me:
+			EVENTS.emit_signal("ui_supply",_supply_amount)
 
 func _ready() -> void:
 	pass
