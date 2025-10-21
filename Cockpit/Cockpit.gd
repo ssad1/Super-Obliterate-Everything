@@ -11,11 +11,11 @@ func _ready():
 #	pass
 
 func _flipload():
-	if(GLOBAL.nextscreen == 0):
+	if GLOBAL.nextscreen == 0:
 		hide()
-	if(GLOBAL.nextscreen == 1):
+	if GLOBAL.nextscreen == 1:
 		hide()
-	if(GLOBAL.nextscreen == 2):
+	if GLOBAL.nextscreen == 2:
 		$Menu_Options.hide()
 		show()
 

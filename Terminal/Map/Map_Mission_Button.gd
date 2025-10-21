@@ -18,9 +18,9 @@ var v = 0
 func _ready():
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+#Uncomment to make missions be available at any given time
 func _process(delta):
-	show() #TEST
+	show()
 
 func _ignite(s):
 	var d
@@ -77,19 +77,19 @@ func _become_boss():
 
 func _connect(a):
 	var already_connected = false
-	for i in range(connections.size()):
-		if(connections[i].id == a.id):
+	for i in connections.size():
+		if connections[i].id == a.id:
 			already_connected = true
-	if(already_connected == false):
+	if !already_connected:
 		connected = true
 		connections.append(a)
 		a._connect(self)
 
 func _difficulty(d):
-	if(mission_data[5] == 0):
+	if mission_data[5] == 0:
 		mission_data[5] = d
-	for i in range(connections.size()):
-		if(connections[i].mission_data[5] == 0):
+	for i in connections.size():
+		if connections[i].mission_data[5] == 0:
 			connections[i]._difficulty(d + .1)
 
 func _find_closest(mode):
@@ -100,21 +100,23 @@ func _find_closest(mode):
 	var testd = false
 	#mode 0: distance to closest
 	#mode 1: distance to closest connected
-	for i in range(missions.size()):
+	for i in missions.size():
 		testd = false
-		if(mode == 0 && missions[i].id != id):
+		if mode == 0 && missions[i].id != id:
 			testd = true
-		if(mode == 1 && missions[i].id != id && missions[i].connected == true):
+		if mode == 1 && missions[i].id != id && missions[i].connected:
 			testd = true
-		if(testd == true):
+		if testd:
 			db = position.distance_to(missions[i].position)
-			if(db < da):
+			if db < da:
 				da = db
 				c = i
-	if(c != -1):
+
+	if c != -1:
 		result = [da,self,missions[c]]
 	else:
 		result = [3000,self,self]
+
 	return result
 
 func _find_farthest(mode):
@@ -125,51 +127,55 @@ func _find_farthest(mode):
 	var result
 	#mode 0: just calculate
 	#mode 1: assign distance to missions
-	for i in range(missions.size()):
-		if(missions[i].id == id):
+	for i in missions.size():
+		if missions[i].id == id:
 			ds.append(0)
 		else:
 			ds.append(-1)
 	
 	#Flood Fill
-	for k in range(ds.size()):
-		for i in range(ds.size()):
-			if(ds[i] == -1):
+	for k in ds.size():
+		for i in ds.size():
+			if ds[i] == -1:
 				da = 1000
-				for j in range(missions[i].connections.size()):
+				for j in missions[i].connections.size():
 					db = -1
-					if(ds[missions[i].connections[j].id] != -1):
+					if ds[missions[i].connections[j].id] != -1:
 						db = ds[missions[i].connections[j].id]
-						if(db < da):
+						if db < da:
 							da = db
-				if(da != 1000):
+				if da != 1000:
 					ds[i] = da + 1
 	da = 0
-	for i in range(ds.size()):
-		if(ds[i] > da):
+	for i in ds.size():
+		if ds[i] > da:
 			da = ds[i]
 			c = i
-	if(da != 0):
+
+	if da != 0:
 		farthest_id = c
-	if(mode == 1):
-		for i in range(ds.size()):
+
+	if mode == 1:
+		for i in ds.size():
 			missions[i].distance_to_start = ds[i]
-	if(c != -1):
+
+	if c != -1:
 		result = [da,self,missions[c]]
 	else:
 		result = [0,self,self]
+
 	return result
 
 func _set_lock():
 	var locked = true
-	for i in range(connections.size()):
-		if(ACCOUNT.mission_results[connections[i].id] == 1):
+	for i in connections.size():
+		if  ACCOUNT.mission_results[connections[i].id] == 1:
 			locked = false
-	if(ACCOUNT.mission_results[id] == 0 && is_start == true):
+	if ACCOUNT.mission_results[id] == 0 && is_start:
 		locked = false
-	if(ACCOUNT.mission_results[id] == 1):
+	if ACCOUNT.mission_results[id] == 1:
 		locked = true
-	if(locked == true):
+	if locked:
 		hide()
 		planet.selected = false
 	else:

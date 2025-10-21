@@ -15,6 +15,7 @@ var mapsize:Vector2 = Vector2(32*128,32*128)
 var wint:float = 0
 var wint_on:bool = false
 var tick_clock:float = 0
+var collide_clock:float = 0
 var me
 var tx_moves:Array[Array] = []
 var rx_moves:Array[Array] = []
@@ -57,7 +58,8 @@ func _process(delta:float) -> void:
 		EVENTS.emit_signal("show_results",1)
 		wint = 0
 		wint_on = false
-	
+
+
 func _cam_offset() -> Vector2:
 	var pos := position
 	return Vector2(GLOBAL.resx / 2 - (pos.x + .5 * mapsize.x), GLOBAL.resy / 2 - (pos.y + .5 * mapsize.y))
@@ -65,16 +67,6 @@ func _cam_offset() -> Vector2:
 func _control() -> void:
 
 	position += Input.get_vector("ui_right", "ui_left", "ui_down", "ui_up") * 24
-	
-	'''
-	if get_global_mouse_position().x < 16:
-		position.x = position.x + 1000 * delta
-	if get_global_mouse_position().x > GLOBAL.resx - 16:
-		position.x = position.x - 1000 * delta
-	if get_global_mouse_position().y < 16:
-		position.y = position.y + 1000 * delta
-	if get_global_mouse_position().y > GLOBAL.resy - 16:
-		position.y = position.y - 1000 * delta'''
 	
 	_camera_edges()
 
@@ -235,10 +227,10 @@ func _do_tick() -> void:
 	mission_clock = mission_clock + 1
 	_do_event_list()
 	_do_radar()
+	_do_rx_moves()
 	_collide()
 	_collide_explosions()
 	_collide_shields()
-	_do_rx_moves()
 	_do_thing(structs)
 	_do_thing(ships)
 	_do_thing(missiles)
@@ -259,7 +251,7 @@ func _do_tick() -> void:
 	end_clock = Time.get_ticks_usec()
 	if mission_clock % 10 == 0:
 		print("Code Time: " + str(end_clock - start_clock))
-
+	
 func _do_radar() -> void:
 	var pos:Vector2
 	var build_obj
