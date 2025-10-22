@@ -1,34 +1,33 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://dunqn73l0k5ww"]
 
-[ext_resource path="res://Shots/Shot_Debris.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Modules/Spawn_Effect.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Guns/Gun_General.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Modules/Module_Trigger.gd" type="Script" id=4]
-[ext_resource path="res://Modules/Module_Death_SFX.tscn" type="PackedScene" id=5]
+[ext_resource type="PackedScene" uid="uid://cogsf3ad1ldu8" path="res://Shots/Shot_Debris.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://Modules/Spawn_Effect.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="3"]
+[ext_resource type="Script" path="res://Modules/Module_Trigger.gd" id="4"]
+[ext_resource type="PackedScene" path="res://Modules/Module_Death_SFX.tscn" id="5"]
 
 [node name="Module_Corvette_Boom_Large" type="Node2D"]
-script = ExtResource( 4 )
+script = ExtResource("4")
 death_activate = true
 
-[node name="Spawn_Effect" parent="." instance=ExtResource( 2 )]
+[node name="Spawn_Effect" parent="." instance=ExtResource("2")]
 spawn_id = 10111
 scale_effect = true
 scale_effect_size = 0.8
 
-[node name="Spawn_Effect2" parent="." instance=ExtResource( 2 )]
+[node name="Spawn_Effect2" parent="." instance=ExtResource("2")]
 spawn_id = 10200
 scale_effect = true
 scale_effect_size = 0.7
 
-[node name="Spawn_Effect3" parent="." instance=ExtResource( 2 )]
+[node name="Spawn_Effect3" parent="." instance=ExtResource("2")]
 spawn_id = 10304
 scale_effect = true
 scale_effect_size = 0.5
 
-[node name="Gun_General" parent="." instance=ExtResource( 3 )]
+[node name="Gun_General" parent="." instance=ExtResource("3")]
 visible = false
 gun_range = 600
-gun_v = 20
 gun_v_noise = 1.0
 gun_r_noise = 1.0
 gun_life_noise = 0.9
@@ -37,7 +36,8 @@ gun_arc = 6.28
 gun_arc_rounds = 3
 gun_circle = true
 
-[node name="Shot_Debris" parent="Gun_General" instance=ExtResource( 1 )]
+[node name="Shot_Debris" parent="Gun_General" instance=ExtResource("1")]
+visible = false
 
-[node name="Module_Death_SFX" parent="." instance=ExtResource( 5 )]
+[node name="Module_Death_SFX" parent="." instance=ExtResource("5")]
 fire_sound = 2000

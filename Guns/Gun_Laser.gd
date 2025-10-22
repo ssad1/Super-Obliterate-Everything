@@ -20,7 +20,7 @@ var top
 var is_type = "GUN"
 
 func _ready() -> void:
-	gun_cool = gun_heat
+	gun_cool = gun_heat/2 #make laser units have faster reaction speed only when detecting something
 	ammo = get_child(0)
 	up = get_parent()
 	offset_pos = position
@@ -57,29 +57,30 @@ func _fire_control() -> void:
 	var tcpu:TargetCPU = up.tcpu
 	var firing := false
 	var d := 0.0
-	var dd := 0.0
 	var rb := 0.0
 	var a := 0
 	var b := 0
 
-	if tcpu != null && tcpu.target_i != -1 && tcpu.target_in_range:
+	if tcpu != null && tcpu.target_i != -1:
 
 		rb = atan2(up.pos.y - tcpu.target_pos.y, up.pos.x - tcpu.target_pos.x) - PI / 2
-		d = CALC._rotate_direction(up.rotate,rb);
-		dd = (up.pos.x - tcpu.target_pos.x) * (up.pos.x - tcpu.target_pos.x) + (up.pos.y - tcpu.target_pos.y) * (up.pos.y - tcpu.target_pos.y);
+		d = CALC._rotate_direction(up.rotate, rb);
 
-		if abs(d) < gun_angle && gun_range * gun_range > dd:
+		if abs(d) < gun_angle:
 			firing = true
 
-	if top.guns_safety:
-		firing = false
-
-	if tcpu.targets.size() == 0:
+	if top.guns_safety || tcpu.targets.size() == 0 || !tcpu.target_in_range:
 		firing = false
 
 	if firing:
 		a = tcpu.target_i
 		b = tcpu._target_closest(up.pos)
+
+		if b == -1: return
+
+		if up.pos.distance_to(tcpu.targets[b].pos) > up.range_radius:
+			firing = false
+
 		if a != b :
 			firing = false
 		if tcpu.targets.size() == 0:
@@ -91,7 +92,7 @@ func _fire_control() -> void:
 		tcpu.targets[tcpu.target_i].is_type != "MISSILE"):
 			firing = false
 
-	if firing && gun_cool == 0:
+	if firing && gun_cool == 0 && tcpu.target_in_range:
 		_fire()
 		#add in uncloaking
 		gun_cool = gun_heat
@@ -100,7 +101,7 @@ func _fire() -> void:
 	var obj
 	var muzzle_offset := Vector2(0,0)
 	var tcpu:TargetCPU = up.tcpu
-	
+
 	if fire_sound != 0:
 		SFX._play_new([fire_sound])
 

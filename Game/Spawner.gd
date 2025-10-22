@@ -601,6 +601,9 @@ func _spawn_dupe(s, p, position, velocity, rotation, up, init):
 	obj.pos = position
 	obj.rotation = rotation
 	obj.rotate = rotation
+
+	if !obj.is_invisible(): obj.show()
+
 	if(obj.is_type == "STRUCT"):
 		obj._build_fix()
 	if(obj.is_type == "SHIP"):

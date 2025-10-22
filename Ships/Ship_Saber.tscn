@@ -89,7 +89,7 @@ grow_vertical = 2
 position = Vector2(-8, -12)
 fire_sound = 3001
 gun_heat = 2
-gun_range = 100
+gun_angle = 0.12
 gun_scale = 0.15
 
 [node name="Laser_General" parent="Gun_Laser" instance=ExtResource("11")]
@@ -103,7 +103,7 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(8, -12)
 fire_sound = 3001
 gun_heat = 2
-gun_range = 100
+gun_angle = 0.12
 gun_scale = 0.15
 
 [node name="Laser_General" parent="Gun_Laser2" instance=ExtResource("11")]

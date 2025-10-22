@@ -46,6 +46,8 @@ func do_unit_damage(unit) -> void:
 
 func do_unit_damage_strength(unit) -> void:
 
+	if unit.is_type == "SHOT" || unit.is_type == "LASER": return
+
 	get_tree().create_tween().tween_method(
 		_set_damage_strength.bind(unit.mat),
 		1.0,

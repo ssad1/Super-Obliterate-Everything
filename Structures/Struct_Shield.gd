@@ -20,6 +20,9 @@ func _do_tick() -> void:
 			ap.speed_scale = 0
 
 func _process(delta:float) -> void:
+
+	if !is_instance_valid(shield_module): return
+
 	var bright:float = shield_module.shield / shield_module.max_shield
 	glow.modulate = Color(.77,.89,1,.7 * bright)
 	

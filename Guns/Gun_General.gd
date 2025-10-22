@@ -163,7 +163,6 @@ func _fire() -> void:
 					shot_rotate = atan2(shot_velocity.y,shot_velocity.x) + PI / 2
 				else:
 					shot_rotate = up.rotate
-
 				
 				obj = SPAWNER._spawn_dupe(ammo,top.player.id,shot_pos,shot_velocity,shot_rotate,0,0)
 

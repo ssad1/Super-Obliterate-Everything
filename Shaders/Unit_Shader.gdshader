@@ -405,7 +405,7 @@ vec4 build(vec4 original, vec2 uv, vec2 noiseuv, vec2 texture_pixel_size, sample
 		new_col = mix(vec4(0.0,0.0,0.0,0.0), outlined_result, outlined_result.a * linea);
 		/*if(outline + inline > 0.5)
 		{
-			new_col = vec4(1.0,0.0,0.0,1.0)
+			new_col = vec4(1.0,0.0,0.0,1.0);
 		}*/
 	}
 	return new_col;

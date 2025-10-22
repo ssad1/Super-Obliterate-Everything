@@ -73,8 +73,8 @@ func check_target(target) -> bool:
 	if (
 	target.spawn_id == up.spawn_id || 
 	target.armor <= 0 || 
-	target.cloaked == true ||
-	target.visible == false ||
+	target.cloaked ||
+	!target.visible ||
 	dist > scan_d):
 		return false
 
@@ -174,22 +174,37 @@ func _do_scan():
 	var stuff
 	targets = []
 
-	if scan_structs == true:
+	if scan_structs:
 		stuff = SPAWNER.game.structs
 		for i in stuff.size():
-			targets.append(stuff[i])
-	if scan_ships == true:
+
+			var targ = stuff[i]
+			if !check_target(targ): continue
+			targets.append(targ)
+
+	if scan_ships:
 		stuff = SPAWNER.game.ships
 		for i in stuff.size():
-			targets.append(stuff[i])
-	if scan_missiles == true:
+
+			var targ = stuff[i]
+			if !check_target(targ): continue
+			targets.append(targ)
+
+	if scan_missiles:
 		stuff = SPAWNER.game.missiles
 		for i in stuff.size():
-			targets.append(stuff[i])
-	if scan_shots == true:
+
+			var targ = stuff[i]
+			if !check_target(targ): continue
+			targets.append(targ)
+
+	if scan_shots:
 		stuff = SPAWNER.game.shots
 		for i in stuff.size():
-			targets.append(stuff[i])
+
+			var targ = stuff[i]
+			if !check_target(targ): continue
+			targets.append(targ)
 		
 	if "target_hot" in up:
 		found_victim = up.target_hot

@@ -16,7 +16,6 @@ spawn_id = 10107
 [node name="Gun_General" parent="." instance=ExtResource("3")]
 visible = false
 gun_range = 300
-gun_v = 10
 gun_v_noise = 1.0
 gun_r_noise = 1.0
 gun_life_noise = 0.9

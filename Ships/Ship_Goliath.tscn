@@ -94,7 +94,7 @@ position = Vector2(-12, -24)
 fire_sound = 3006
 gun_kick = 20.0
 gun_heat = 20
-gun_range = 400
+gun_angle = 0.03
 gun_scale = 0.75
 
 [node name="Laser_Spartan" parent="Gun_Laser" instance=ExtResource("11")]
@@ -108,7 +108,7 @@ position = Vector2(12, -24)
 fire_sound = 3006
 gun_kick = 20.0
 gun_heat = 20
-gun_range = 400
+gun_angle = 0.03
 gun_scale = 0.75
 
 [node name="Laser_Spartan" parent="Gun_Laser2" instance=ExtResource("11")]

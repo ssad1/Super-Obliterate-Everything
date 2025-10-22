@@ -31,7 +31,7 @@ shader_parameter/shock_strength = 0.0
 shader_parameter/shield_strength = 0.0
 shader_parameter/shield_charging = 0.0
 shader_parameter/shield_damage_strength = 0.0
-shader_parameter/build_strength = 0.0
+shader_parameter/build_strength = 0.31
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
@@ -86,8 +86,8 @@ grow_vertical = 2
 position = Vector2(0, -24)
 fire_sound = 3006
 gun_kick = 25.0
-gun_heat = 60
-gun_range = 400
+gun_heat = 50
+gun_angle = 0.03
 gun_scale = 0.5
 
 [node name="Laser_Spartan" parent="Gun_Laser" instance=ExtResource("11")]

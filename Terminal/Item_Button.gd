@@ -300,7 +300,14 @@ func _remove_obj_from_grid(obj:Thing) -> void:
 	if is_instance_valid(obj.hitbox):
 		obj.hitbox.queue_free()
 		obj.tcpu.queue_free()
-		
+
+		if "modules" in obj:
+
+			for module in obj.modules:
+				module.queue_free()
+
+		obj.hull.queue_free()
+
 	obj.hide()
 
 func _new_build_spot(a,b,c,d,e,f) -> void:
