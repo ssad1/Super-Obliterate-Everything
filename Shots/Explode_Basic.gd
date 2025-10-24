@@ -9,11 +9,11 @@ var s
 @export var boom_radius:int = 0
 #@export var boom_max_radius:int = 0
 #@export var boom_intensity = 0
-@export var boom_flash:int = 10303
+@export var boom_flash:int = SPAWNER.spawn_objs.EFFECT_FLASH_BOOM
 #@export var boom_small_effect:int = 10300
 #@export var boom_medium_effect:int = 10302
-@export var boom_large_effect:int = 10300
-@export var smoke_effect:int = 10304
+@export var boom_large_effect:int = SPAWNER.spawn_objs.EFFECT_BOOM
+@export var smoke_effect:int = SPAWNER.spawn_objs.EFFECT_SMOKE
 @export var boom_reverse:int = 0
 @export var boom_scale:float = 1
 var clock:int = 0

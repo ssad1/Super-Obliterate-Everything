@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ds5cvrx5vpokk" path="res://Ships/Graphics/Puma_N.PNG" id="6_v7glh"]
 [ext_resource type="Texture2D" uid="uid://dui6egce61om8" path="res://Ships/Graphics/Puma_L.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://cnjrs0cbw5po4" path="res://Ships/Graphics/Puma_C.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://dqnxvwejha3cu" path="res://Ships/Graphics/Puma_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
@@ -70,7 +70,7 @@ shader_parameter/colors = ExtResource("14")
 [node name="Ship_Puma" type="Node2D"]
 script = ExtResource("2")
 thrust = 0.4
-factory = 276
+factory = 17
 name_text = "PUMA"
 class_text = "CORVETTE"
 energy_cost = 75

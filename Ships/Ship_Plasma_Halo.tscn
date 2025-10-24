@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ck12b11wu20ji" path="res://Ships/hull_halo.tscn" id="2_n5g27"]
 [ext_resource type="Script" path="res://Ships/Ship_General.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://cmbv27ga3i33w" path="res://Turrets/Turret_Plasmacaster.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Cruiser_Boom.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="6"]
 [ext_resource type="Texture2D" uid="uid://ccwls1vlpievb" path="res://Ships/Graphics/Halo_C.PNG" id="9"]
 [ext_resource type="Texture2D" uid="uid://c864jwhquyfbj" path="res://Ships/Graphics/Halo_L.PNG" id="10"]
 
@@ -40,7 +40,7 @@ script = ExtResource("3")
 thrust = 0.2
 aihigh = "HALO"
 aistandoff = 150
-factory = 279
+factory = 20
 name_text = "PLASMA HALO"
 class_text = "CRUISER"
 energy_cost = 400

@@ -35,8 +35,8 @@ func _ready():
 func _count_spaces():
 	var spaces = 0
 	var total_items = 0
-	for i in range(item_bag.size()):
-		if(item_bag[i] != null):
+	for i in item_bag.size():
+		if item_bag[i] != null:
 			total_items = total_items + 1
 	spaces = item_max - total_items
 	return spaces
@@ -63,50 +63,14 @@ func _default_equip():
 
 func _default_items():
 	var i
-	item_bag.append([250])
-	item_bag.append([251])
-	item_bag.append([300])
-	#item_bag.append([301])
-	item_bag.append([302])
-	#item_bag.append([303])
-	#item_bag.append([304])
-	#item_bag.append([305])
-	#item_bag.append([306])
-	#item_bag.append([307])
-	#item_bag.append([500])
-	#item_bag.append([501])
-	#item_bag.append([502])
-	#item_bag.append([503])
-	#item_bag.append([308])
-	#item_bag.append([504])
-	#item_bag.append([1000])
-	#item_bag.append([1001])
-	#item_bag.append([1002])
-	item_bag.append([2000])
-	item_bag.append([2001])
-	#item_bag.append([2002])
-	item_bag.append([2004])
-	#item_bag.append([2005])
-	#item_bag.append([2006])
-	#item_bag.append([2007])
-	item_bag.append([2501])
-	#item_bag.append([2502])
-	#item_bag.append([2503])
-	#item_bag.append([2504])
-	#item_bag.append([3000])
-	#item_bag.append([3002])
-	#item_bag.append([3004])
-	#item_bag.append([3005])
-	#item_bag.append([3006])
-	#item_bag.append([3007])
-	#item_bag.append([3500])
-	#item_bag.append([4000])
-	#item_bag.append([4001])
-	#item_bag.append([4002])
-	#item_bag.append([4003])
-	#item_bag.append([4004])
-	#item_bag.append([4005])
-	#item_bag.append([4006])
+	item_bag.append([SPAWNER.spawn_objs.REACTOR])
+	item_bag.append([SPAWNER.spawn_objs.EXTRACTOR])
+	item_bag.append([SPAWNER.spawn_objs.BLASTER_TURRET])
+	item_bag.append([SPAWNER.spawn_objs.AUTOGUN])
+	item_bag.append([SPAWNER.spawn_objs.PIRANHA])
+	item_bag.append([SPAWNER.spawn_objs.RAPIER])
+	item_bag.append([SPAWNER.spawn_objs.MOSQUITO])
+	item_bag.append([SPAWNER.spawn_objs.PUMA])
 
 func _draft_buy(price, item):
 	var buy = true
@@ -212,13 +176,13 @@ func _save_game():
 func _add_item(s):
 	var id
 	var added = false
-	for i in range(item_bag.size()):
-		if(item_bag[i] == null && added == false):
+	for i in item_bag.size():
+		if item_bag[i] == null && !added:
 			item_bag[i] = s
 			added = true
 			id = i
 			i = item_bag.size()
-	if(added == false):
+	if !added:
 		item_bag.append(s)
 		id = item_bag.size() - 1
 	return id

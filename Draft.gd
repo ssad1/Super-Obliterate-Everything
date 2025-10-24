@@ -1,13 +1,65 @@
 extends Node
 
-var structures = [250,251,1000,1001,1002]
-var turrets = [300,301,302,303,304,305,306,307,308]
-var big_turrets = [500,501,502,503,504]
-var fighters = [2000,2001,2002,2004,2005,2006,2007]
-var corvettes = [2501,2502,2503,2504]
-var frigates = [3000,3002,3004,3005,3006,3007]
-var destroyers = [3500]
-var cruisers = [4000,4001,4002,4003,4004,4005,4006]
+var structures = [
+	SPAWNER.spawn_objs.REACTOR,
+	SPAWNER.spawn_objs.EXTRACTOR,
+	SPAWNER.spawn_objs.SHIELD_AUXILIARY,
+	SPAWNER.spawn_objs.HEAVY_SHIELD,
+	SPAWNER.spawn_objs.BARRICADE
+]
+var turrets = [
+	SPAWNER.spawn_objs.BLASTER_TURRET,
+	SPAWNER.spawn_objs.DOUBLE_BLASTER,
+	SPAWNER.spawn_objs.AUTOGUN,
+	SPAWNER.spawn_objs.PHALANX,
+	SPAWNER.spawn_objs.ARTILLERY,
+	SPAWNER.spawn_objs.LASER_TURRET,
+	SPAWNER.spawn_objs.LASERCANNON,
+	SPAWNER.spawn_objs.MISSILE_TURRET,
+	SPAWNER.spawn_objs.REPAIR_TURRET
+]
+var big_turrets = [
+	SPAWNER.spawn_objs.MJOLNIR,
+	SPAWNER.spawn_objs.PLASMACASTER,
+	SPAWNER.spawn_objs.QUAD_MISSILE,
+	SPAWNER.spawn_objs.HYPER_REPAIR_TURRET,
+	SPAWNER.spawn_objs.AUTOCANNON
+]
+var fighters = [
+	SPAWNER.spawn_objs.PIRANHA,
+	SPAWNER.spawn_objs.RAPIER,
+	SPAWNER.spawn_objs.SABER,
+	SPAWNER.spawn_objs.MOSQUITO,
+	SPAWNER.spawn_objs.HAWK,
+	SPAWNER.spawn_objs.MANTIS,
+	SPAWNER.spawn_objs.FURY
+]
+var corvettes = [
+	SPAWNER.spawn_objs.PUMA,
+	SPAWNER.spawn_objs.FALCON,
+	SPAWNER.spawn_objs.GLADIATOR,
+	SPAWNER.spawn_objs.KNIGHT
+]
+var frigates = [
+	SPAWNER.spawn_objs.SPARTAN,
+	SPAWNER.spawn_objs.GRENDAL,
+	SPAWNER.spawn_objs.COBRA,
+	SPAWNER.spawn_objs.MINOTAUR,
+	SPAWNER.spawn_objs.ATHENA,
+	SPAWNER.spawn_objs.SCORPION
+]
+var destroyers = [
+	SPAWNER.spawn_objs.MYRMIDON
+]
+var cruisers = [
+	SPAWNER.spawn_objs.TRIDENT,
+	SPAWNER.spawn_objs.GOLIATH,
+	SPAWNER.spawn_objs.BEAM_HALO,
+	SPAWNER.spawn_objs.ARTILLERY_HALO,
+	SPAWNER.spawn_objs.PLASMA_HALO,
+	SPAWNER.spawn_objs.HAMMERHEAD,
+	SPAWNER.spawn_objs.CATACLYSM
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,21 +76,21 @@ func _gen_draft(sd):
 	var s
 	var good = false
 	while i > 0:
-		if (i < 10):
+		if i < 10:
 			s = _get_item("BIG SHIPS")
-		if(i >= 10 && i < 19):
+		if i >= 10 && i < 19:
 			s = _get_item("SMALL SHIPS")
-		if(i >= 19):
+		if i >= 19:
 			s = _get_item("STRUCTURES")
 		good = _check_item(full_draft,s)
-		if(good == true):
+		if good:
 			full_draft.append(s)
 			i = i - 1
 	return full_draft
 
 func _check_item(d,s):
 	var good = true
-	for i in range(d.size()):
+	for i in d.size():
 		if(d[i] == s):
 			good = false
 	return good

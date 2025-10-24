@@ -23,8 +23,8 @@ var level_asteroids
 
 var base_radius = .32
 
-var small_rock = 112
-var big_rock = 113
+var small_rock = SPAWNER.spawn_objs.ROCKY_ASTEROID
+var big_rock = SPAWNER.spawn_objs.BIG_ROCKY_ASTEROID
 
 func _ready():
 	pass # Replace with function body.
@@ -38,28 +38,28 @@ func _add_start_spots():
 
 func _big_rocks():
 	var rockcount = 0
-	for xx in range(grid.size() - 2):
-		for yy in range(grid[xx].size() - 2):
+	for xx in grid.size() - 2:
+		for yy in grid[xx].size() - 2:
 			rockcount = 0
-			for xxx in range(2):
-				for yyy in range(2):
-					if(grid[xx + xxx][yy + yyy] == small_rock):
+			for xxx in 2:
+				for yyy in 2:
+					if grid[xx + xxx][yy + yyy] == small_rock:
 						rockcount = rockcount + 1
-					if(grid[xx + xxx][yy + yyy] == -1):
+					if grid[xx + xxx][yy + yyy] == -1:
 						rockcount = -4
-			if(rockcount >= 3):
+			if rockcount >= 3:
 				grid[xx][yy] = big_rock
 				grid[xx + 1][yy] = -1
 				grid[xx][yy + 1] = -1
 				grid[xx + 1][yy + 1] = -1
-			if(rockcount == 2):
-				if(grid[xx][yy] == small_rock && grid[xx + 1][yy] == small_rock && grid[xx + 2][yy] == small_rock):
+			if rockcount == 2:
+				if grid[xx][yy] == small_rock && grid[xx + 1][yy] == small_rock && grid[xx + 2][yy] == small_rock:
 					grid[xx][yy] = big_rock
 					grid[xx + 1][yy] = -1
 					grid[xx][yy + 1] = -1
 					grid[xx + 1][yy + 1] = -1
 					grid[xx + 2][yy] = 0
-				if(grid[xx][yy] == small_rock && grid[xx][yy + 1] == small_rock && grid[xx][yy + 2] == small_rock):
+				if grid[xx][yy] == small_rock && grid[xx][yy + 1] == small_rock && grid[xx][yy + 2] == small_rock:
 					grid[xx][yy] = big_rock
 					grid[xx][yy + 1] = -1
 					grid[xx + 1][yy] = -1
@@ -437,10 +437,10 @@ func _gen_level():
 	for xx in range(grid.size()):
 		for yy in range(grid[xx].size()):
 			#if(grid[xx][yy] > 0 && grid[xx][yy] < 10): #Station now handled in Player
-				#SPAWNER._spawn([200],grid[xx][yy],Vector2(xx * 32, yy * 32),Vector2(0,0),0,0,0)
-			if(grid[xx][yy] == small_rock):
+				#SPAWNER._spawn([SPAWNER.spawn_objs.BUILDER],grid[xx][yy],Vector2(xx * 32, yy * 32),Vector2(0,0),0,0,0)
+			if grid[xx][yy] == small_rock:
 				SPAWNER._spawn([small_rock],0,Vector2(xx * 32, yy * 32),Vector2(0,0),0,0,0)
-			if(grid[xx][yy] == big_rock):
+			if grid[xx][yy] == big_rock:
 				SPAWNER._spawn([big_rock],0,Vector2(xx * 32, yy * 32),Vector2(0,0),0,0,0)
 
 func _on_grid(spot):
@@ -605,23 +605,23 @@ func _rock_start(s):
 func _set_asteroids():
 	match level_asteroids:
 		"ICY":
-			small_rock = 102
-			big_rock = 103
+			small_rock = SPAWNER.spawn_objs.ICE_ASTEROID
+			big_rock = SPAWNER.spawn_objs.BIG_ICE_ASTEROID
 		"LAVA":
-			small_rock = 104
-			big_rock = 105
+			small_rock = SPAWNER.spawn_objs.LAVA_ASTEROID
+			big_rock = SPAWNER.spawn_objs.BIG_LAVA_ASTEROID
 		"METALLIC":
-			small_rock = 106
-			big_rock = 107
+			small_rock = SPAWNER.spawn_objs.METAL_ASTEROID
+			big_rock = SPAWNER.spawn_objs.BIG_METAL_ASTEROID
 		"STONY":
-			small_rock = 108
-			big_rock = 109
+			small_rock = SPAWNER.spawn_objs.STONY_ASTEROID
+			big_rock = SPAWNER.spawn_objs.BIG_STONY_ASTEROID
 		"CHONDRITE":
-			small_rock = 110
-			big_rock = 111
+			small_rock = SPAWNER.spawn_objs.CHONDRITE_ASTEROID
+			big_rock = SPAWNER.spawn_objs.BIG_CHONDRITE_ASTEROID
 		"ROCKY":
-			small_rock = 112
-			big_rock = 113
+			small_rock = SPAWNER.spawn_objs.ROCKY_ASTEROID
+			big_rock = SPAWNER.spawn_objs.BIG_ROCKY_ASTEROID
 
 func _select_size(playernum):
 	var map_size = 0

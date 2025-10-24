@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://chs65u7q7ea7b" path="res://Structures/Graphics/Struct_Corvette_Bay_D.PNG" id="3_fe007"]
 [ext_resource type="Texture2D" uid="uid://dsxmyg1wg54b2" path="res://Structures/Graphics/Struct_Corvette_Bay_L.PNG" id="3_qheog"]
 [ext_resource type="Texture2D" uid="uid://d2x2wr7h5a76u" path="res://Structures/Graphics/Struct_Corvette_Bay_N.PNG" id="6_10r77"]
-[ext_resource type="PackedScene" path="res://Hangars/Hangar_Factory.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Small_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://cu6eeduu5dbxa" path="res://Hangars/Hangar_Factory.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://cr3uqos0286u2" path="res://Modules/Module_Small_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
 
 [sub_resource type="ShaderMaterial" id="1"]
@@ -65,11 +65,6 @@ _data = {
 
 [node name="Struct_Corvette_Bay" type="Node2D"]
 script = ExtResource("2")
-build_size = Vector2(1, 2)
-name_text = "CORVETTE BAY"
-supply_cost = 1
-max_armor = 50
-special = "OFFENSE"
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")
@@ -94,6 +89,7 @@ grow_vertical = 2
 
 [node name="Hangar_Factory" parent="." instance=ExtResource("8")]
 visible = false
+ship_id = Array[int]([47])
 
 [node name="Module_Small_Struct_Boom_Large" parent="." instance=ExtResource("9")]
 

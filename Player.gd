@@ -121,7 +121,7 @@ func _build(moves:Array) -> void:
 	if station_id != -1:
 
 		build_station = my_stations[station_id]
-		obj = SPAWNER._spawn([2500], id, build_station.pos, Vector2(0,0), 0, 0, 1)
+		obj = SPAWNER._spawn([SPAWNER.spawn_objs.BUILDER], id, build_station.pos, Vector2(0,0), 0, 0, 1)
 		obj.build_mission = moves
 		obj._init_builder()
 		obj._add_payload(s.energy_cost,s.metal_cost,s.supply_cost)
@@ -729,7 +729,7 @@ func _set_me_player() -> void:
 	me = true
 	SPAWNER.game.me = self
 	item_bag = []
-	item_bag.append([200])
+	item_bag.append([SPAWNER.spawn_objs.STATION])
 
 	var current_equip = ACCOUNT.equip_bags[ACCOUNT.current_equip]
 
@@ -758,7 +758,8 @@ func _set_cpu(d:float) -> void:
 func _setup_factory(s,obj) -> void:
 	for i in obj.modules.size():
 		if obj.modules[i].name == "Hangar_Factory":
-			obj.modules[i].ship_id = item_bag[s]
+			print("item: ", item_bag[s])
+			obj.modules[i].ship_id[0] = item_bag[s][0]
 
 func _setup_base() -> void:
 	var mode := 0

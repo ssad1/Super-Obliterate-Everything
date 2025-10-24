@@ -282,7 +282,7 @@ func _spawn_obj(s) -> void:
 		obj = SPAWNER._spawn(s, null, Vector2(0,0), Vector2(0,0), 0, 12,0)
 		if hotkey != null: 
 			hotkey.hide()
-	
+
 	if "range_radius" in obj:
 		_remove_obj_from_grid(obj)
 	t = ICONS._get_icon(obj.name_text)
@@ -339,8 +339,8 @@ func _sell() -> void:
 	var bscale = .25 * randf()
 	var price = ceil(GLOBAL.sell_rate * obj.credit_cost)
 	ACCOUNT._sell_item(item_id,price)
-	e = SPAWNER._spawn([10300],null,get_global_position() + .5 * size,Vector2(0,0),0,14,0)
+	e = SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_BOOM],null,get_global_position() + .5 * size,Vector2(0,0),0,14,0)
 	e.scale = Vector2(.75 + bscale,.75 + bscale)
-	SPAWNER._spawn([10001,price],null,get_global_position() + .5 * size,Vector2(0,0),0,14,0)
+	SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_CREDITS, price],null,get_global_position() + .5 * size,Vector2(0,0),0,14,0)
 	button_pressed = false
 	_clear_obj()

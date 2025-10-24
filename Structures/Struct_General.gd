@@ -71,4 +71,4 @@ func _do_damage() -> void:
 			burn_pos.x = burn_pos.x - .8 * 16 * build_size.x + .8 * randf() * build_size.x * 32
 			burn_pos.y = burn_pos.y - .8 * 16 * build_size.y + .8 * randf() * build_size.y * 32
 			
-			SPAWNER._spawn([10310], null, burn_pos, Vector2(0,0), 0, 0, 0)
+			SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_FIRE], null, burn_pos, Vector2(0,0), 0, 0, 0)

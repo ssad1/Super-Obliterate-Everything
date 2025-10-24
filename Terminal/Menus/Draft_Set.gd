@@ -13,6 +13,6 @@ func _ready():
 
 func _load_draft(fd):
 	print("Draft Received " + str(id))
-	if(id < fd.size()):
+	if id < fd.size():
 		$Item_Button._equip_item(fd[id])
 		$Control/Price.text = str($Item_Button.obj.credit_cost)

@@ -66,5 +66,5 @@ visible = false
 death_activate = true
 
 [node name="Spawn_Effect" parent="Module_Trigger" instance=ExtResource("6")]
-spawn_id = 10106
+spawn_id = 76
 scale_effect = true

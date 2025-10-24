@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cghuqkir5e7ch" path="res://Structures/Graphics/newAssets/Struct_Destroyer_Dock_C.PNG" id="6"]
 [ext_resource type="Texture2D" uid="uid://cnxmc7w4suerh" path="res://Structures/Graphics/newAssets/Struct_Destroyer_Dock_N.PNG" id="6_tn7k5"]
 [ext_resource type="Texture2D" uid="uid://c65velwxdmoiu" path="res://Structures/Graphics/newAssets/Struct_Destroyer_Dock_L.PNG" id="7"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://Hangars/Hangar_Factory.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://2rc1lcifjq2j" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://cu6eeduu5dbxa" path="res://Hangars/Hangar_Factory.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
 
 [sub_resource type="ShaderMaterial" id="1"]
@@ -93,8 +93,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Hangar_Factory" parent="." instance=ExtResource("9")]
-build_max = 90
-ship_max = 2
+ship_id = Array[int]([54])
 
 [node name="Module_Medium_Struct_Boom_Large" parent="." instance=ExtResource("8")]
 

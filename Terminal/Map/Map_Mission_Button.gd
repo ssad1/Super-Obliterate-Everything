@@ -52,7 +52,7 @@ func _pressed():
 	LEVELS.level_asteroids = mission_data[9]
 	GLOBAL.nextscreen = 2
 	EVENTS.emit_signal("flipin")
-	SPAWNER._spawn([10000],null,Vector2(position.x + 16,position.y + 16),Vector2(0,0),0,10,0)
+	SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_CLICK_BOOM],null,Vector2(position.x + 16,position.y + 16),Vector2(0,0),0,10,0)
 	planet.selected = false
 	hide()
 

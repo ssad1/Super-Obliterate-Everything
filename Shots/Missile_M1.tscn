@@ -29,7 +29,7 @@ blend_mode = 1
 [node name="Missile_M1" type="Node2D"]
 script = ExtResource("6")
 lifespan = 50
-smoke_trail = 10311
+smoke_trail = 100
 thrust = 3.0
 aihigh = "M1"
 aistandoff = 0

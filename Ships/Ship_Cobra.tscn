@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c6t1f6hcuwe8x" path="res://Ships/Graphics/Cobra_N.PNG" id="6_qk8wf"]
 [ext_resource type="Texture2D" uid="uid://msdlm6ymcrae" path="res://Ships/Graphics/Cobra_C.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://b0e4tf1sw0emg" path="res://Ships/Graphics/Cobra_L.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://ldrxyn7y7ngk" path="res://Ships/Graphics/Cobra_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://d32aggrenhtof" path="res://Shots/Shot_Artillery.tscn" id="12"]
@@ -62,7 +62,7 @@ shader_parameter/colors = ExtResource("14")
 script = ExtResource("2")
 thrust = 0.35
 aistandoff = 300
-factory = 277
+factory = 18
 name_text = "COBRA"
 class_text = "FRIGATE"
 energy_cost = 300

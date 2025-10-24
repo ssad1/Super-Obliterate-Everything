@@ -55,77 +55,77 @@ func _faction_items(s,v):
 	match s:
 		2: #TEAL
 			if(v == 0):
-				item_bag.append([200]) #Station
+				item_bag.append([SPAWNER.spawn_objs.STATION])
 			else:
-				item_bag.append([230]) #Boss Station
-			item_bag.append([250]) #Reactor
-			item_bag.append([251]) #Extractor
-			item_bag.append([300]) #Turret 1
-			item_bag.append([305]) #Turret 2
-			item_bag.append([306]) #Turret 3
-			item_bag.append([2001]) #Ship 1
-			item_bag.append([2502]) #Ship 2
-			item_bag.append([3000]) #Ship 3
-			item_bag.append([4002]) #Ship 4
-			item_bag.append([1001]) #Defense
+				item_bag.append([SPAWNER.spawn_objs.BOSS_STATION])
+			item_bag.append([SPAWNER.spawn_objs.REACTOR])
+			item_bag.append([SPAWNER.spawn_objs.EXTRACTOR])
+			item_bag.append([SPAWNER.spawn_objs.BLASTER_TURRET]) #Turret 1
+			item_bag.append([SPAWNER.spawn_objs.LASER_TURRET]) #Turret 2
+			item_bag.append([SPAWNER.spawn_objs.LASERCANNON]) #Turret 3
+			item_bag.append([SPAWNER.spawn_objs.RAPIER]) #Ship 1
+			item_bag.append([SPAWNER.spawn_objs.FALCON]) #Ship 2
+			item_bag.append([SPAWNER.spawn_objs.SPARTAN]) #Ship 3
+			item_bag.append([SPAWNER.spawn_objs.BEAM_HALO]) #Ship 4
+			item_bag.append([SPAWNER.spawn_objs.SHIELD_AUXILIARY]) #Defense
 		3: #RED
 			if(v == 0):
-				item_bag.append([200]) #Station
+				item_bag.append([SPAWNER.spawn_objs.STATION]) #Station
 			else:
-				item_bag.append([230]) #Boss Station
-			item_bag.append([250]) #Reactor
-			item_bag.append([251]) #Extractor
-			item_bag.append([300]) #Turret 1
-			item_bag.append([302]) #Turret 2
-			item_bag.append([500]) #Turret 3
-			item_bag.append([2000]) #Ship 1
-			item_bag.append([2501]) #Ship 2
-			item_bag.append([3006]) #Ship 3
-			item_bag.append([4000]) #Ship 4
-			item_bag.append([1001]) #Defense
+				item_bag.append([SPAWNER.spawn_objs.BOSS_STATION]) #Boss Station
+			item_bag.append([SPAWNER.spawn_objs.REACTOR])
+			item_bag.append([SPAWNER.spawn_objs.EXTRACTOR])
+			item_bag.append([SPAWNER.spawn_objs.BLASTER_TURRET]) #Turret 1
+			item_bag.append([SPAWNER.spawn_objs.AUTOGUN]) #Turret 2
+			item_bag.append([SPAWNER.spawn_objs.MJOLNIR]) #Turret 3
+			item_bag.append([SPAWNER.spawn_objs.PIRANHA]) #Ship 1
+			item_bag.append([SPAWNER.spawn_objs.PUMA]) #Ship 2
+			item_bag.append([SPAWNER.spawn_objs.ATHENA]) #Ship 3
+			item_bag.append([SPAWNER.spawn_objs.TRIDENT]) #Ship 4
+			item_bag.append([SPAWNER.spawn_objs.SHIELD_AUXILIARY]) #Defense
 		4: #YELLOW
 			if(v == 0):
-				item_bag.append([200]) #Station
+				item_bag.append([SPAWNER.spawn_objs.STATION]) #Station
 			else:
-				item_bag.append([230]) #Boss Station
-			item_bag.append([250]) #Reactor
-			item_bag.append([251]) #Extractor
-			item_bag.append([300]) #Turret 1
-			item_bag.append([301]) #Turret 2
-			item_bag.append([503]) #Turret 3
-			item_bag.append([2006]) #Ship 1
-			item_bag.append([2504]) #Ship 2
-			item_bag.append([3002]) #Ship 3
-			item_bag.append([4005]) #Ship 4
-			item_bag.append([303]) #Defense
+				item_bag.append([SPAWNER.spawn_objs.BOSS_STATION]) #Boss Station
+			item_bag.append([SPAWNER.spawn_objs.REACTOR])
+			item_bag.append([SPAWNER.spawn_objs.EXTRACTOR])
+			item_bag.append([SPAWNER.spawn_objs.BLASTER_TURRET]) #Turret 1
+			item_bag.append([SPAWNER.spawn_objs.DOUBLE_BLASTER]) #Turret 2
+			item_bag.append([SPAWNER.spawn_objs.QUAD_MISSILE]) #Turret 3
+			item_bag.append([SPAWNER.spawn_objs.MANTIS]) #Ship 1
+			item_bag.append([SPAWNER.spawn_objs.KNIGHT]) #Ship 2
+			item_bag.append([SPAWNER.spawn_objs.GRENDAL]) #Ship 3
+			item_bag.append([SPAWNER.spawn_objs.HAMMERHEAD]) #Ship 4
+			item_bag.append([SPAWNER.spawn_objs.PHALANX]) #Defense
 		5: #ORANGE
 			if(v == 0):
-				item_bag.append([200]) #Station
+				item_bag.append([SPAWNER.spawn_objs.STATION]) #Station
 			else:
-				item_bag.append([230]) #Boss Station
-			item_bag.append([250]) #Reactor
-			item_bag.append([251]) #Extractor
-			item_bag.append([300]) #Turret 1
-			item_bag.append([301]) #Turret 2
-			item_bag.append([502]) #Turret 3
-			item_bag.append([2007]) #Ship 1
-			item_bag.append([3007]) #Ship 2
-			item_bag.append([3500]) #Ship 3
-			item_bag.append([4001]) #Ship 4
-			item_bag.append([1001]) #Defense
+				item_bag.append([SPAWNER.spawn_objs.BOSS_STATION]) #Boss Station
+			item_bag.append([SPAWNER.spawn_objs.REACTOR])
+			item_bag.append([SPAWNER.spawn_objs.EXTRACTOR])
+			item_bag.append([SPAWNER.spawn_objs.BLASTER_TURRET]) #Turret 1
+			item_bag.append([SPAWNER.spawn_objs.DOUBLE_BLASTER]) #Turret 2
+			item_bag.append([SPAWNER.spawn_objs.PLASMACASTER]) #Turret 3
+			item_bag.append([SPAWNER.spawn_objs.FURY]) #Ship 1
+			item_bag.append([SPAWNER.spawn_objs.SCORPION]) #Ship 2
+			item_bag.append([SPAWNER.spawn_objs.MYRMIDON]) #Ship 3
+			item_bag.append([SPAWNER.spawn_objs.GOLIATH]) #Ship 4
+			item_bag.append([SPAWNER.spawn_objs.SHIELD_AUXILIARY]) #Defense
 		6: #PURPLE
 			if(v == 0):
-				item_bag.append([200]) #Station
+				item_bag.append([SPAWNER.spawn_objs.STATION]) #Station
 			else:
-				item_bag.append([230]) #Boss Station
-			item_bag.append([250]) #Reactor
-			item_bag.append([251]) #Extractor
-			item_bag.append([300]) #Turret 1
-			item_bag.append([301]) #Turret 2
-			item_bag.append([501]) #Turret 3
-			item_bag.append([2001]) #Ship 1
-			item_bag.append([3005]) #Ship 2
-			item_bag.append([3007]) #Ship 3
-			item_bag.append([4006]) #Ship 4
-			item_bag.append([303]) #Defense
+				item_bag.append([SPAWNER.spawn_objs.BOSS_STATION]) #Boss Station
+			item_bag.append([SPAWNER.spawn_objs.REACTOR])
+			item_bag.append([SPAWNER.spawn_objs.EXTRACTOR])
+			item_bag.append([SPAWNER.spawn_objs.BLASTER_TURRET]) #Turret 1
+			item_bag.append([SPAWNER.spawn_objs.DOUBLE_BLASTER]) #Turret 2
+			item_bag.append([SPAWNER.spawn_objs.AUTOCANNON]) #Turret 3
+			item_bag.append([SPAWNER.spawn_objs.RAPIER]) #Ship 1
+			item_bag.append([SPAWNER.spawn_objs.MINOTAUR]) #Ship 2
+			item_bag.append([SPAWNER.spawn_objs.SCORPION]) #Ship 3
+			item_bag.append([SPAWNER.spawn_objs.CATACLYSM]) #Ship 4
+			item_bag.append([SPAWNER.spawn_objs.PHALANX]) #Defense
 	return item_bag

@@ -31,7 +31,7 @@ func _equip(bag):
 		item_buttons[i]._clear_obj()
 	#Skip a space for station item
 	for i in range(1,bag.size(),1):
-		if(bag[i] != null):
+		if bag[i] != null:
 			print("Equipping ", i, " ", bag[i])
 			item_buttons[i-1]._equip_item(bag[i])
 

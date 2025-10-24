@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://som45ha5ytp7" path="res://Structures/Graphics/Struct_Extractor_D.PNG" id="5_xw051"]
 [ext_resource type="Texture2D" uid="uid://ch306h3l38ea" path="res://Structures/Graphics/Struct_Extractor_N.PNG" id="6_jaibm"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://2rc1lcifjq2j" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Hangars/Hangar_Factory.tscn" id="10"]
-[ext_resource type="PackedScene" path="res://Hangars/Hangar_Metalporter.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://b8fddygc2a8ui" path="res://Hangars/Hangar_Metalporter.tscn" id="11"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -96,7 +96,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Hangar_Factory" parent="." instance=ExtResource("10")]
-ship_id = [2003]
+ship_id = Array[int]([41])
 
 [node name="Hangar_Metalporter" parent="." instance=ExtResource("11")]
 

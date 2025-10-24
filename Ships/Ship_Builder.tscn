@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://blghdkofadc5u" path="res://Ships/Graphics/Builder_L.PNG" id="4_5nphd"]
 [ext_resource type="Texture2D" uid="uid://5p7v6ulx270r" path="res://Ships/Graphics/Builder_D.PNG" id="5"]
 [ext_resource type="Texture2D" uid="uid://b8r0ub26ckw4g" path="res://Ships/Graphics/Builder_N.PNG" id="6_k1hdg"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://ct61wyprp0kit" path="res://Ships/Graphics/Builder_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Modules/Spawn_Effect.tscn" id="11"]
 
@@ -51,6 +51,7 @@ script = ExtResource("2")
 thrust = 0.5
 aihigh = "BUILDER"
 aistandoff = 150
+factory = 12
 name_text = "BUILDER"
 inertia = 0.8
 max_velocity = 9.0
@@ -81,7 +82,7 @@ grow_vertical = 2
 [node name="Module_Delivery" parent="." instance=ExtResource("4")]
 
 [node name="Spawn_Effect" parent="Module_Delivery" instance=ExtResource("11")]
-spawn_id = 10100
+spawn_id = 73
 scale_effect = true
 scale_effect_size = 0.5
 

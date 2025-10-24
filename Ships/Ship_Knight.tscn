@@ -3,12 +3,12 @@
 [ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
 [ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://Shots/Missile_LM1.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://dv3qabcu5bdu" path="res://Shots/Missile_LM1.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://bfdgje0saqnu4" path="res://Ships/Graphics/Knight_D.PNG" id="6"]
 [ext_resource type="Texture2D" uid="uid://dvpe17dten5cx" path="res://Ships/Graphics/Knight_N.PNG" id="6_wl2eg"]
 [ext_resource type="Texture2D" uid="uid://d4ky0h3y6xtiw" path="res://Ships/Graphics/Knight_B.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://dnupqwwjknrpi" path="res://Ships/Graphics/Knight_C.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://y3xxymjtn6ar" path="res://Ships/Graphics/Knight_L.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
 [ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13"]
@@ -51,7 +51,7 @@ blend_mode = 1
 script = ExtResource("2")
 thrust = 0.4
 aistandoff = 200
-factory = 276
+factory = 17
 name_text = "KNIGHT"
 class_text = "CORVETTE"
 energy_cost = 75

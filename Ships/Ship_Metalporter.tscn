@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://7eo7b2ksvy4d" path="res://Ships/Graphics/Metalporter_N.PNG" id="6_r136x"]
 [ext_resource type="Texture2D" uid="uid://bdsfxswj82yjo" path="res://Ships/Graphics/Metalporter_C.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://cdnng3t05xppp" path="res://Ships/Graphics/Metalporter_L.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://cfp6p0t0vg0au" path="res://Ships/Graphics/Metalporter_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Modules/Spawn_Effect.tscn" id="11"]
 
@@ -51,6 +51,7 @@ script = ExtResource("2")
 thrust = 0.3
 aihigh = "METALPORTER"
 aistandoff = 150
+factory = 15
 name_text = "METALPORTER"
 inertia = 0.6
 max_velocity = 6.0
@@ -83,7 +84,7 @@ grow_vertical = 2
 deliver_metal = 50
 
 [node name="Spawn_Effect" parent="Module_Delivery" instance=ExtResource("11")]
-spawn_id = 10100
+spawn_id = 73
 scale_effect = true
 scale_effect_size = 0.5
 

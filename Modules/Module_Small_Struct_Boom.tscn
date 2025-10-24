@@ -11,17 +11,17 @@ script = ExtResource("4")
 death_activate = true
 
 [node name="Spawn_Effect" parent="." instance=ExtResource("2")]
-spawn_id = 10111
+spawn_id = 81
 scale_effect = true
 scale_effect_size = 0.85
 
 [node name="Spawn_Effect2" parent="." instance=ExtResource("2")]
-spawn_id = 10200
+spawn_id = 83
 scale_effect = true
 scale_effect_size = 0.75
 
 [node name="Spawn_Effect3" parent="." instance=ExtResource("2")]
-spawn_id = 10304
+spawn_id = 93
 scale_effect = true
 scale_effect_size = 0.6
 

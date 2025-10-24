@@ -34,12 +34,12 @@ func _process(delta):
 			
 			var rand_x = $Back.scale.x * randf()
 			var rand_y = $Back.scale.y * randf()
-			SPAWNER._spawn([10100], null, Vector2(rand_x, rand_y), Vector2(0,0), randf() * 2 * PI, 11,0)
-			SPAWNER._spawn([10101], null, Vector2(rand_x, rand_y), Vector2(0,0), randf() * 2 * PI, 11,0)
+			SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_FIREWORK_A], null, Vector2(rand_x, rand_y), Vector2(0,0), randf() * 2 * PI, 11,0)
+			SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_FIREWORK_B], null, Vector2(rand_x, rand_y), Vector2(0,0), randf() * 2 * PI, 11,0)
 
 			fireworkt = 0
 		'''if bigfireworkt > 0.75:
-			SPAWNER._spawn([10105], null, Vector2(0,0), Vector2(0,0), randf() * 2 * PI, 11,0)
+			SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_BIG_FIREWORK], null, Vector2(0,0), Vector2(0,0), randf() * 2 * PI, 11,0)
 			bigfireworkt = 0'''
 
 func _show_results(r):

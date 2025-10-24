@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bjo40xwdq3vdf" path="res://Ships/Graphics/Myrmidon_N.PNG" id="6_rhohn"]
 [ext_resource type="Texture2D" uid="uid://j021robv6xm4" path="res://Ships/Graphics/Myrmidon_C.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://7ve5fr1gc6cj" path="res://Ships/Graphics/Myrmidon_L.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://els6jr7cqpjx" path="res://Ships/Graphics/Myrmidon_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
@@ -64,7 +64,7 @@ shader_parameter/colors = ExtResource("14")
 script = ExtResource("2")
 thrust = 0.4
 aistandoff = 150
-factory = 278
+factory = 19
 name_text = "MYRMIDON"
 class_text = "DESTROYER"
 energy_cost = 300

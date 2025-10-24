@@ -4,7 +4,7 @@ extends Thing
 @export var thrust:float = 0
 @export var aihigh:String = "STANDARD"
 @export var aistandoff:int = 100
-@export var factory:int = 0
+@export var factory:SPAWNER.spawn_objs
 
 var aiclock:int = 0
 var aiflag:String = ""
@@ -110,7 +110,6 @@ func _do_anim(delta:float) -> void:
 
 func _do_build() -> void:
 
-	#TODO: rewrite player AI
 	var success:bool = player._build_struct(build_mission,false)
 
 	if success:
@@ -139,22 +138,7 @@ func _do_command(c:String) -> void:
 
 func _do_damage() -> void:
 
-	#var burn_pos := Vector2(0,0)
-	#var burn_rand := 0.0
-
 	UNIT_STATE.do_unit_damage(self)
-	'''if armor >= max_armor:
-		fire_strength = 0
-	if armor < max_armor && special != "ROCK":
-		fire_strength = 1 - armor / max_armor'''
-		#burn_rand = randf()
-		#burn_rand = burn_rand / (build_size.x * build_size.y)
-		#burn_rand = burn_rand * 4
-		#if(burn_rand < 1 - armor / max_armor):
-		#	burn_pos = pos
-		#	burn_pos.x = burn_pos.x - .8 * 16 * build_size.x + .8 * randf() * build_size.x * 32
-		#	burn_pos.y = burn_pos.y - .8 * 16 * build_size.y + .8 * randf() * build_size.y * 32
-		#	SPAWNER._spawn([10310],null,burn_pos,Vector2(0,0),0,0,0)
 
 func _do_ai() -> void:
 	if tcpu != null:
@@ -405,7 +389,7 @@ func _mine_drop() -> void:
 					module.gun_cool = module.gun_heat
 	if dropped:
 		tcpu.targets = []
-		SPAWNER._spawn([10107], null, tp, Vector2(0,0), 0, 0, 0)
-		SPAWNER._spawn([10112], null, tp, Vector2(0,0), 0, 0, 0)
-		obj = SPAWNER._spawn([10111], null, tp, Vector2(0,0), 0, 0, 0)
+		SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_ASTEROID_BOOM_SMALL], null, tp, Vector2(0,0), 0, 0, 0)
+		SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_MINER_FLASH], null, tp, Vector2(0,0), 0, 0, 0)
+		obj = SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_SPARKS_MEDIUM], null, tp, Vector2(0,0), 0, 0, 0)
 		obj.scale = Vector2(.65,.65)

@@ -7,10 +7,10 @@ var s
 #@export var damage_type = "EXPLOSION"
 @export var force = 0
 @export var boom_radius = 0
-@export var boom_flash = 10306
-@export var boom_effect = 10305
-@export var boom_smoke = 0
-@export var boom_sparks = 0
+@export var boom_flash = SPAWNER.spawn_objs.EFFECT_FLASH_BOOM
+@export var boom_effect = SPAWNER.spawn_objs.EFFECT_BOOM
+@export var boom_smoke = SPAWNER.spawn_objs.EFFECT_BOOM
+@export var boom_sparks = SPAWNER.spawn_objs.EFFECT_BOOM
 @export var boom_scale = 1.0
 @export var flash_scale = 1.0
 @export var smoke_scale = 1.0

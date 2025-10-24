@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var ship_id = [3001]
+@export var ship_id:Array[SPAWNER.spawn_objs] = [SPAWNER.spawn_objs.METAL_PORTER]
 @export var build_max = 10
 var build_cool = 0
 @export var ship_max = 3

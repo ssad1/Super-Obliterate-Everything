@@ -21,7 +21,7 @@ func _process(delta):
 		if(boom_clock > 0.2):
 			booms = booms - 1
 			for i in range(3):
-				obj = SPAWNER._spawn([10300],null,get_global_position() + Vector2(size.x * randf(),size.y * randf()),Vector2(0,0),0,14,0)
+				obj = SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_BOOM],null,get_global_position() + Vector2(size.x * randf(),size.y * randf()),Vector2(0,0),0,14,0)
 				obj.scale = (randf() * .35 + .15) * Vector2(1,1)
 		if(booms == 0):
 			booming = false
@@ -47,9 +47,9 @@ func _setup(s,id):
 func _sell_pressed():
 	var obj
 	ACCOUNT._sell_prize_item(button_id,price)
-	obj = SPAWNER._spawn([10300],null,get_global_position() + $Sell_Button.position + .5 * $Sell_Button.size,Vector2(0,0),0,14,0)
+	obj = SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_BOOM],null,get_global_position() + $Sell_Button.position + .5 * $Sell_Button.size,Vector2(0,0),0,14,0)
 	obj.scale = Vector2(.75,.75)
-	SPAWNER._spawn([10001,price],null,get_global_position() + $Sell_Button.position + .5 * $Sell_Button.size,Vector2(0,0),0,14,0)
+	SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_CREDITS, price],null,get_global_position() + $Sell_Button.position + .5 * $Sell_Button.size,Vector2(0,0),0,14,0)
 	fading = true
 	booming = true
 	$Sell_Button.hide()

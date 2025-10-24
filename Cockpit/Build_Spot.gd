@@ -129,7 +129,7 @@ func _build():
 			EVENTS.emit_signal("do_move",1,SPAWNER.game.me.id,buildid,round(position.x / 32),round(position.y / 32))
 			if(Input.is_key_pressed(KEY_SHIFT) == false):
 				EVENTS.emit_signal("cancel_build")
-			obj = SPAWNER._spawn([10002],null,position + center,Vector2(0,0),0,0,0)
+			obj = SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_BUILD_FLASH],null,position + center,Vector2(0,0),0,0,0)
 			obj.scale = Vector2(.5 * (.5 + center.y / 32),.5 * (.5 + center.y / 32))
 			SFX._play_new([4001])
 		else:

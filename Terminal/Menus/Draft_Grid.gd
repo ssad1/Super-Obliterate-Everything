@@ -10,7 +10,7 @@ extends GridContainer
 func _ready():
 	EVENTS.connect("submenu_button_press", Callable(self,"_submenu_button_press"))
 	EVENTS.connect("draft_bought", Callable(self,"_draft_bought"))
-	for i in range(get_child_count()):
+	for i in get_child_count():
 		get_child(i).id = i
 
 
@@ -28,5 +28,5 @@ func _submenu_button_press(s):
 func _draft_bought():
 	hide()
 	for i in range(4):
-		SPAWNER._spawn([10100], null, global_position + Vector2(randi() % 600,randi() % 250), Vector2(0,0), 0, 14, 0)
-		SPAWNER._spawn([10101], null, global_position + Vector2(randi() % 600,randi() % 250), Vector2(0,0), 0, 14, 0)
+		SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_FIREWORK_A], null, global_position + Vector2(randi() % 600,randi() % 250), Vector2(0,0), 0, 14, 0)
+		SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_FIREWORK_B], null, global_position + Vector2(randi() % 600,randi() % 250), Vector2(0,0), 0, 14, 0)

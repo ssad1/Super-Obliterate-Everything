@@ -53,6 +53,7 @@ script = ExtResource("2")
 thrust = 0.3
 aihigh = "MINER"
 aistandoff = 32
+factory = 15
 name_text = "MINER"
 inertia = 1.0
 max_velocity = 4.0

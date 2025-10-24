@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var ship_id = [2500]
+@export var ship_id:Array[SPAWNER.spawn_objs] = []
 @export var build_max = 60
 var build_cool = 0
 @export var ship_max = 3
@@ -8,17 +8,13 @@ var my_ships = []
 var up
 var is_type = "HANGAR"
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	up = get_parent()
 	up.modules.append(self)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	ship_id = ship_id.duplicate(true) #avoid the ship_id to be overwritten between all the instances.
 
 func _on_death():
-	for i in range(my_ships.size()):
+	for i in my_ships.size():
 		my_ships[i]._free_base()
 
 func _do_tick():
@@ -31,8 +27,7 @@ func _do_tick():
 		build_cool = 0
 
 func _launch_ship():
-	var obj
-	obj = SPAWNER._spawn(ship_id, get_parent().player.id, get_parent().pos + Vector2(0,0), get_parent().velocity + Vector2(0,0), 0, 0, 1)
+	var obj = SPAWNER._spawn(ship_id, get_parent().player.id, get_parent().pos + Vector2(0,0), get_parent().velocity + Vector2(0,0), 0, 0, 1)
 	my_ships.append(obj)
 	obj.base = self
 	obj._init_center()

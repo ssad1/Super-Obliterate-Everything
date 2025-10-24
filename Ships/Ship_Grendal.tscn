@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c6uu6e6vl3k11" path="res://Ships/Graphics/Grendal_N.PNG" id="6_eh6jh"]
 [ext_resource type="Texture2D" uid="uid://brpr2bqlw3hgm" path="res://Ships/Graphics/Grendal_C.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://c1yhmkj0lnudb" path="res://Ships/Graphics/Grendal_L.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://yb3pr6cnueq6" path="res://Ships/Graphics/Grendal_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
@@ -63,7 +63,7 @@ shader_parameter/colors = ExtResource("14")
 script = ExtResource("2")
 thrust = 0.4
 aistandoff = 150
-factory = 277
+factory = 18
 name_text = "GRENDAL"
 class_text = "FRIGATE"
 energy_cost = 200

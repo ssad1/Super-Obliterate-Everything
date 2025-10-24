@@ -21,11 +21,11 @@ func _ready():
 #	pass
 
 func _setup_armory_items():
-	for i in range(buttons.size()):
+	for i in buttons.size():
 		buttons[i]._clear_obj()
-	for i in range(buttons.size()):
+	for i in buttons.size():
 		buttons[i].item_id = ACCOUNT._get_item_id(i)
-		if(buttons[i].item_id != null):
+		if buttons[i].item_id != null:
 			buttons[i]._equip_item(ACCOUNT.item_bag[buttons[i].item_id])
 
 func _button_press(id):

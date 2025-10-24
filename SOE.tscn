@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8i1tyvmlxpy5"]
+[gd_scene load_steps=5 format=3 uid="uid://c8i1tyvmlxpy5"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1"]
 [ext_resource type="Script" path="res://Label.gd" id="2"]
@@ -21,6 +21,10 @@ adjustment_brightness = 3.0
 adjustment_contrast = 3.28
 adjustment_saturation = 1.06
 
+[sub_resource type="LabelSettings" id="LabelSettings_1i8e2"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1")
 
@@ -28,9 +32,10 @@ script = ExtResource("1")
 environment = SubResource("1")
 
 [node name="Label" type="Label" parent="."]
+top_level = true
 light_mask = 0
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
+offset_right = 28.0
+offset_bottom = 23.0
 text = "100"
+label_settings = SubResource("LabelSettings_1i8e2")
 script = ExtResource("2")

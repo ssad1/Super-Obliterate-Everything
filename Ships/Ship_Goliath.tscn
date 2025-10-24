@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b8jfbodoh6580" path="res://Ships/Graphics/Goliath_N.PNG" id="6_8v30s"]
 [ext_resource type="Texture2D" uid="uid://cnpmgxyyjoqfu" path="res://Ships/Graphics/Goliath_D.PNG" id="7"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_Laser.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://ctpcewov8ruq7" path="res://Effects/E_MuzzleF.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://Shots/Laser_Spartan.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://b7uoppkeik13" path="res://Turrets/Turret_Laser.tscn" id="13"]
@@ -51,7 +51,7 @@ blend_mode = 1
 [node name="Ship_Goliath" type="Node2D"]
 script = ExtResource("2")
 thrust = 0.15
-factory = 279
+factory = 20
 name_text = "GOLIATH"
 class_text = "CRUISER"
 energy_cost = 600

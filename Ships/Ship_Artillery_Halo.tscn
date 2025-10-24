@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ccwls1vlpievb" path="res://Ships/Graphics/Halo_C.PNG" id="3_5bpom"]
 [ext_resource type="PackedScene" uid="uid://bvll4vuhiotxn" path="res://Turrets/Turret_Mjolnir.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://c864jwhquyfbj" path="res://Ships/Graphics/Halo_L.PNG" id="4_cd72l"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Cruiser_Boom.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1dtu8"]
 resource_local_to_scene = true
@@ -40,7 +40,7 @@ script = ExtResource("3")
 thrust = 0.2
 aihigh = "HALO"
 aistandoff = 150
-factory = 279
+factory = 20
 name_text = "ARTILLERY HALO"
 class_text = "CRUISER"
 energy_cost = 700

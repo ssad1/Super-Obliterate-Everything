@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dtooocmlbwh3s" path="res://Ships/Graphics/Gladiator_L.PNG" id="6"]
 [ext_resource type="Texture2D" uid="uid://df35n7hmaebrm" path="res://Ships/Graphics/Gladiator_N.PNG" id="6_hljt2"]
 [ext_resource type="Texture2D" uid="uid://vmcbd084kpme" path="res://Ships/Graphics/Gladiator_D.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://dp1ngnixbejvd" path="res://Ships/Graphics/Gladiator_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
@@ -63,7 +63,7 @@ shader_parameter/colors = ExtResource("14")
 script = ExtResource("2")
 thrust = 0.2
 aistandoff = 200
-factory = 276
+factory = 17
 name_text = "GLADIATOR"
 class_text = "CORVETTE"
 energy_cost = 125

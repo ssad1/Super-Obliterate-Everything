@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bxuf8ginbdyl4" path="res://Ships/Graphics/Spartan_N.PNG" id="4_lr5ej"]
 [ext_resource type="Texture2D" uid="uid://ymv8y50biist" path="res://Ships/Graphics/Spartan_D.PNG" id="5"]
 [ext_resource type="Texture2D" uid="uid://j33ni8u3e1p4" path="res://Ships/Graphics/Spartan_B.PNG" id="7"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Shots/Laser_Spartan.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://ctpcewov8ruq7" path="res://Effects/E_MuzzleF.tscn" id="12"]
 
@@ -47,7 +47,7 @@ blend_mode = 1
 script = ExtResource("2")
 thrust = 0.3
 aistandoff = 150
-factory = 277
+factory = 18
 name_text = "SPARTAN"
 class_text = "FRIGATE"
 energy_cost = 300

@@ -176,499 +176,606 @@ extends Node
 @onready var Shot_Double_Blaster = load("res://Shots/Shot_Double_Blaster.tscn")
 @onready var Explode_Basic = load("res://Shots/Explode_Basic.tscn")
 @onready var Explode_Plasma = load("res://Shots/Explode_Plasma.tscn")
+
+enum spawn_objs {
+
+	####### Asteroids #######
+	ICE_ASTEROID,
+	BIG_ICE_ASTEROID,
+	LAVA_ASTEROID,
+	BIG_LAVA_ASTEROID,
+	METAL_ASTEROID,
+	BIG_METAL_ASTEROID,
+	STONY_ASTEROID,
+	BIG_STONY_ASTEROID,
+	CHONDRITE_ASTEROID,
+	BIG_CHONDRITE_ASTEROID,
+	ROCKY_ASTEROID,
+	BIG_ROCKY_ASTEROID,
+
+	####### Human Structs #######
+	STATION,
+	BOSS_STATION,
+	REACTOR,
+	EXTRACTOR,
+	FIGHTER_BAY,
+	CORVETTE_BAY,
+	STARDOCK,
+	DESTROYER_DOCK,
+	STARPORT,
+	BLASTER_TURRET,
+	DOUBLE_BLASTER,
+	AUTOGUN,
+	PHALANX,
+	ARTILLERY,
+	LASER_TURRET,
+	LASERCANNON,
+	MISSILE_TURRET,
+	REPAIR_TURRET,
+	MJOLNIR,
+	AUTOCANNON,
+	PLASMACASTER,
+	QUAD_MISSILE,
+	HYPER_REPAIR_TURRET,
+	BARRICADE,
+	SHIELD_AUXILIARY,
+	HEAVY_SHIELD,
+
+	####### Human Ships #######
+	PIRANHA,
+	RAPIER,
+	SABER,
+	MINER,
+	MOSQUITO,
+	HAWK,
+	MANTIS,
+	FURY,
+	BUILDER,
+	PUMA,
+	FALCON,
+	GLADIATOR,
+	KNIGHT,
+	SPARTAN,
+	METAL_PORTER,
+	GRENDAL,
+	MYRMIDON,
+	COBRA,
+	MINOTAUR,
+	ATHENA,
+	SCORPION,
+	TRIDENT,
+	GOLIATH,
+	BEAM_HALO,
+	ARTILLERY_HALO,
+	PLASMA_HALO,
+	HAMMERHEAD,
+	CATACLYSM,
+
+	####### HAZARDS #######
+	SHOT_BLASTER,
+	SHOT_DOUBLE_BLASTER,
+	EXPLODE_BASIC,
+	EXPLODE_PLASMA,
+
+	####### EFFECTS #######
+	EFFECT_CLICK_BOOM,
+	EFFECT_CREDITS,
+	EFFECT_BUILD_FLASH,
+	EFFECT_FIREWORK_A,
+	EFFECT_FIREWORK_B,
+	EFFECT_BIG_FIREWORK,
+	EFFECT_ASTEROID_BOOM_TINY,
+	EFFECT_ASTEROID_BOOM_SMALL,
+	EFFECT_ASTEORID_BOOM_LARGE,
+	EFFECT_BOOM_STATION,
+	EFFECT_BOOM_SMALL,
+	EFFECT_SPARKS_MEDIUM,
+	EFFECT_MINER_FLASH,
+	EFFECT_IMPACT_KINETIC,
+	EFFECT_IMPACT_LASER,
+	EFFECT_IMPACT_MINING,
+	EFFECT_IMPACT_PHALANX,
+	EFFECT_IMPACT_REPAIR,
+	EFFECT_IMPACT_SHIELD,
+	EFFECT_BOOM,
+	EFFECT_BOOM_PUFF,
+	EFFECT_FLARE,
+	EFFECT_FLASH_BOOM,
+	EFFECT_SMOKE,
+	EFFECT_PLASMA_BOOM,
+	EFFECT_PLASMA_FLASH,
+	EFFECT_PANG,
+	EFFECT_ROCKET_FLASH,
+	EFFECT_PANG_SPARKS,
+	EFFECT_FIRE,
+	EFFECT_SMOKE_TRAIL
+}
+
 var next_spawn_id = 1
 
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-func _spawn(s, p, position, velocity, rotation, up, init):
+func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) -> Node2D:
 	var obj
-	var r = 0.0
-	match int(s[0]):
-		102:
-			r = float(CALC._rand())
-			if(r >= 0 && r < .25):
+	var r := 0.0
+	match s[0]:
+		spawn_objs.ICE_ASTEROID:
+			r = CALC._rand()
+			if r >= 0 && r < .25:
 				obj = Struct_Ice_Asteroid_1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = Struct_Ice_Asteroid_2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = Struct_Ice_Asteroid_3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = Struct_Ice_Asteroid_4.instantiate()
-		103:
-			r = float(CALC._rand())
-			if(r >= 0 && r < .25):
+		spawn_objs.BIG_ICE_ASTEROID:
+			r = CALC._rand()
+			if r >= 0 && r < .25:
 				obj = Struct_Ice_Big_Asteroid_1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = Struct_Ice_Big_Asteroid_2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = Struct_Ice_Big_Asteroid_3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = Struct_Ice_Big_Asteroid_4.instantiate()
-		104:
-			r = float(CALC._rand())
-			if(r >= 0 && r < .25):
+		spawn_objs.LAVA_ASTEROID:
+			r = CALC._rand()
+			if r >= 0 && r < .25:
 				obj = Struct_Lava_Asteroid_1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = Struct_Lava_Asteroid_2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = Struct_Lava_Asteroid_3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = Struct_Lava_Asteroid_4.instantiate()
-		105:
-			r = float(CALC._rand())
-			if(r >= 0 && r < .25):
+		spawn_objs.BIG_LAVA_ASTEROID:
+			r = CALC._rand()
+			if r >= 0 && r < .25:
 				obj = Struct_Lava_Big_Asteroid_1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = Struct_Lava_Big_Asteroid_2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = Struct_Lava_Big_Asteroid_3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = Struct_Lava_Big_Asteroid_4.instantiate()
-		106:
-			r = float(CALC._rand())
-			if(r >= 0 && r < .25):
+		spawn_objs.METAL_ASTEROID:
+			r = CALC._rand()
+			if r >= 0 && r < .25:
 				obj = Struct_Metal_Asteroid_1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = Struct_Metal_Asteroid_2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = Struct_Metal_Asteroid_3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = Struct_Metal_Asteroid_4.instantiate()
-		107:
-			r = float(CALC._rand())
-			if(r >= 0 && r < .25):
+		spawn_objs.BIG_METAL_ASTEROID:
+			r = CALC._rand()
+			if r >= 0 && r < .25:
 				obj = Struct_Metal_Big_Asteroid_1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = Struct_Metal_Big_Asteroid_2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = Struct_Metal_Big_Asteroid_3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = Struct_Metal_Big_Asteroid_4.instantiate()
-		108:
-			r = float(CALC._rand())
-			if(r >= 0 && r < .25):
+		spawn_objs.STONY_ASTEROID:
+			r = CALC._rand()
+			if r >= 0 && r < .25:
 				obj = Struct_Stony_Asteroid_1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = Struct_Stony_Asteroid_2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = Struct_Stony_Asteroid_3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = Struct_Stony_Asteroid_4.instantiate()
-		109:
-			r = float(CALC._rand())
-			if(r >= 0 && r < .25):
+		spawn_objs.BIG_STONY_ASTEROID:
+			r = CALC._rand()
+			if r >= 0 && r < .25:
 				obj = Struct_Stony_Big_Asteroid_1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = Struct_Stony_Big_Asteroid_2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = Struct_Stony_Big_Asteroid_3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = Struct_Stony_Big_Asteroid_4.instantiate()
-		110:
-			r = float(CALC._rand())
-			if(r >= 0 && r < .25):
+		spawn_objs.CHONDRITE_ASTEROID:
+			r = CALC._rand()
+			if r >= 0 && r < .25:
 				obj = Struct_Chondrite_Asteroid_1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = Struct_Chondrite_Asteroid_2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = Struct_Chondrite_Asteroid_3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = Struct_Chondrite_Asteroid_4.instantiate()
-		111:
-			r = float(CALC._rand())
-			if(r >= 0 && r < .25):
+		spawn_objs.BIG_CHONDRITE_ASTEROID:
+			r = CALC._rand()
+			if r >= 0 && r < .25:
 				obj = Struct_Chondrite_Big_Asteroid_1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = Struct_Chondrite_Big_Asteroid_2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = Struct_Chondrite_Big_Asteroid_3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = Struct_Chondrite_Big_Asteroid_4.instantiate()
-		112:
-			r = float(CALC._rand())
-			if(r >= 0 && r < .25):
+		spawn_objs.ROCKY_ASTEROID:
+			r = CALC._rand()
+			if r >= 0 && r < .25:
 				obj = Struct_Rocky_Asteroid_1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = Struct_Rocky_Asteroid_2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = Struct_Rocky_Asteroid_3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = Struct_Rocky_Asteroid_4.instantiate()
-		113:
-			r = float(CALC._rand())
-			if(r >= 0 && r < .25):
+		spawn_objs.BIG_ROCKY_ASTEROID:
+			r = CALC._rand()
+			if r >= 0 && r < .25:
 				obj = Struct_Rocky_Big_Asteroid_1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = Struct_Rocky_Big_Asteroid_2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = Struct_Rocky_Big_Asteroid_3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = Struct_Rocky_Big_Asteroid_4.instantiate()
-		200:
+		spawn_objs.STATION:
 			obj = Struct_BaseStation_A.instantiate()
-		230:
+		spawn_objs.BOSS_STATION:
 			obj = Struct_BossStation_A.instantiate()
-		250:
+		spawn_objs.REACTOR:
 			obj = Struct_Reactor.instantiate()
-		251:
+		spawn_objs.EXTRACTOR:
 			obj = Struct_Extractor.instantiate()
-		275:
+		spawn_objs.FIGHTER_BAY:
 			obj = Struct_Fighter_Bay.instantiate()
-		276:
+		spawn_objs.CORVETTE_BAY:
 			obj = Struct_Corvette_Bay.instantiate()
-		277:
+		spawn_objs.STARDOCK:
 			obj = Struct_Stardock.instantiate()
-		278:
+		spawn_objs.DESTROYER_DOCK:
 			obj = Struct_Destroyer_Dock.instantiate()
-		279:
+		spawn_objs.STARPORT:
 			obj = Struct_Starport.instantiate()
-		300:
+		spawn_objs.BLASTER_TURRET:
 			obj = Struct_Blaster_Turret.instantiate()
-		301:
+		spawn_objs.DOUBLE_BLASTER:
 			obj = Struct_Double_Blaster_Turret.instantiate()
-		302:
+		spawn_objs.AUTOGUN:
 			obj = Struct_Autogun_Turret.instantiate()
-		303:
+		spawn_objs.PHALANX:
 			obj = Struct_Phalanx.instantiate()
-		304:
+		spawn_objs.ARTILLERY:
 			obj = Struct_Artillery_Turret.instantiate()
-		305:
+		spawn_objs.LASER_TURRET:
 			obj = Struct_Laser_Turret.instantiate()
-		306:
+		spawn_objs.LASERCANNON:
 			obj = Struct_Lasercannon_Turret.instantiate()
-		307:
+		spawn_objs.MISSILE_TURRET:
 			obj = Struct_Missile_Turret.instantiate()
-		308:
+		spawn_objs.REPAIR_TURRET:
 			obj = Struct_Repair_Turret.instantiate()
-		500:
+		spawn_objs.MJOLNIR:
 			obj = Struct_Mjolnir_Turret.instantiate()
-		501:
+		spawn_objs.AUTOCANNON:
 			obj = Struct_Autocannon_Turret.instantiate()
-		502:
+		spawn_objs.PLASMACASTER:
 			obj = Struct_Plasmacaster.instantiate()
-		503:
+		spawn_objs.QUAD_MISSILE:
 			obj = Struct_QuadMissile_Turret.instantiate()
-		504:
+		spawn_objs.HYPER_REPAIR_TURRET:
 			obj = Struct_HyperRepair_Turret.instantiate()
-		1000:
+		spawn_objs.BARRICADE:
 			obj = Struct_Barricade.instantiate()
-		1001:
+		spawn_objs.SHIELD_AUXILIARY:
 			obj = Struct_Shield.instantiate()
-		1002:
+		spawn_objs.HEAVY_SHIELD:
 			obj = Struct_Heavy_Shield.instantiate()
-		2000:
+		spawn_objs.PIRANHA:
 			obj = Ship_Piranha.instantiate()
-		2001:
+		spawn_objs.RAPIER:
 			obj = Ship_Rapier.instantiate()
-		2002:
+		spawn_objs.SABER:
 			obj = Ship_Saber.instantiate()
-		2003:
+		spawn_objs.MINER:
 			obj = Ship_Miner.instantiate()
-		2004:
+		spawn_objs.MOSQUITO:
 			obj = Ship_Mosquito.instantiate()
-		2005:
+		spawn_objs.HAWK:
 			obj = Ship_Hawk.instantiate()
-		2006:
+		spawn_objs.MANTIS:
 			obj = Ship_Mantis.instantiate()
-		2007:
+		spawn_objs.FURY:
 			obj = Ship_Fury.instantiate()
-		2500:
+		spawn_objs.BUILDER:
 			obj = Ship_Builder.instantiate()
-		2501:
+		spawn_objs.PUMA:
 			obj = Ship_Puma.instantiate()
-		2502:
+		spawn_objs.FALCON:
 			obj = Ship_Falcon.instantiate()
-		2503:
+		spawn_objs.GLADIATOR:
 			obj = Ship_Gladiator.instantiate()
-		2504:
+		spawn_objs.KNIGHT:
 			obj = Ship_Knight.instantiate()
-		3000:
+		spawn_objs.SPARTAN:
 			obj = Ship_Spartan.instantiate()
-		3001:
+		spawn_objs.METAL_PORTER:
 			obj = Ship_Metalporter.instantiate()
-		3002:
+		spawn_objs.GRENDAL:
 			obj = Ship_Grendal.instantiate()
-		3003:
-			obj = Ship_Myrmidon.instantiate() #Replace
-		3004:
+		spawn_objs.COBRA:
 			obj = Ship_Cobra.instantiate()
-		3005:
+		spawn_objs.MINOTAUR:
 			obj = Ship_Minotaur.instantiate()
-		3006:
+		spawn_objs.ATHENA:
 			obj = Ship_Athena.instantiate()
-		3007:
+		spawn_objs.SCORPION:
 			obj = Ship_Scorpion.instantiate()
-		3500:
+		spawn_objs.MYRMIDON:
 			obj = Ship_Myrmidon.instantiate()
-		4000:
+		spawn_objs.TRIDENT:
 			obj = Ship_Trident.instantiate()
-		4001:
+		spawn_objs.GOLIATH:
 			obj = Ship_Goliath.instantiate()
-		4002:
+		spawn_objs.BEAM_HALO:
 			obj = Ship_Beam_Halo.instantiate()
-		4003:
+		spawn_objs.PLASMA_HALO:
 			obj = Ship_Plasma_Halo.instantiate()
-		4004:
+		spawn_objs.ARTILLERY_HALO:
 			obj = Ship_Artillery_Halo.instantiate()
-		4005:
+		spawn_objs.HAMMERHEAD:
 			obj = Ship_Hammerhead.instantiate()
-		4006:
+		spawn_objs.CATACLYSM:
 			obj = Ship_Cataclysm.instantiate()
-		5000:
+		spawn_objs.SHOT_BLASTER:
 			obj = Shot_Blaster.instantiate()
-		5001:
+		spawn_objs.SHOT_DOUBLE_BLASTER:
 			obj = Shot_Double_Blaster.instantiate()
-		6000:
+		spawn_objs.EXPLODE_BASIC:
 			obj = Explode_Basic.instantiate()
-		6001:
+		spawn_objs.EXPLODE_PLASMA:
 			obj = Explode_Plasma.instantiate()
 			obj.pos = position
 			#obj._boom()
-		10000:
+		spawn_objs.EFFECT_CLICK_BOOM:
 			obj = E_ClickBoom.instantiate()
-		10001:
+		spawn_objs.EFFECT_CREDITS:
 			obj = E_Credits.instantiate()
-			if(s[1] > 100):
-				s[1] = 100
+			if s[1] > 100: s[1] = 100
 			obj.get_node("Credit_Particles").amount = s[1]
-		10002:
+		spawn_objs.EFFECT_BUILD_FLASH:
 			obj = E_BuildFlash.instantiate()
-		10100:
+		spawn_objs.EFFECT_FIREWORK_A:
 			obj = E_FireworkA.instantiate()
-		10101:
+		spawn_objs.EFFECT_FIREWORK_B:
 			obj = E_FireworkB.instantiate()
-		10105:
+		spawn_objs.EFFECT_BIG_FIREWORK:
 			obj = E_BigFirework.instantiate()
-		10106:
+		spawn_objs.EFFECT_ASTEROID_BOOM_TINY:
 			obj = E_AsteroidBoomT.instantiate()
-		10107:
+		spawn_objs.EFFECT_ASTEROID_BOOM_SMALL:
 			obj = E_AsteroidBoomS.instantiate()
-		10108:
+		spawn_objs.EFFECT_ASTEORID_BOOM_LARGE:
 			obj = E_AsteroidBoomL.instantiate()
-		10109:
+		spawn_objs.EFFECT_BOOM_STATION:
 			obj = E_BoomStation.instantiate()
-		10110:
+		spawn_objs.EFFECT_BOOM_SMALL:
 			obj = E_BoomSmall.instantiate()
-		10111:
+		spawn_objs.EFFECT_SPARKS_MEDIUM:
 			obj = E_SparksM.instantiate()
-		10112:
+		spawn_objs.EFFECT_MINER_FLASH:
 			obj = E_Miner_Flash.instantiate()
-		10200:
+		spawn_objs.EFFECT_IMPACT_KINETIC:
 			obj = E_Impact_Kinetic.instantiate()
-		10201:
+		spawn_objs.EFFECT_IMPACT_LASER:
 			obj = E_Impact_Laser.instantiate()
-		10202:
+		spawn_objs.EFFECT_IMPACT_MINING:
 			obj = E_Impact_Mining.instantiate()
-		10203:
+		spawn_objs.EFFECT_IMPACT_PHALANX:
 			obj = E_Impact_Phalanx.instantiate()
-		10204:
+		spawn_objs.EFFECT_IMPACT_REPAIR:
 			obj = E_Impact_Repair.instantiate()
-		10205:
+		spawn_objs.EFFECT_IMPACT_SHIELD:
 			obj = E_Impact_Shield.instantiate()
-		10300:
+		spawn_objs.EFFECT_BOOM:
 			r = randf()
-			if(r >= 0 && r < .2):
+			if r >= 0 && r < .2:
 				obj = E_Boom1.instantiate()
-			if(r >= .2 && r < .4):
+			if r >= .2 && r < .4:
 				obj = E_Boom2.instantiate()
-			if(r >= .4 && r < .6):
+			if r >= .4 && r < .6:
 				obj = E_Boom3.instantiate()
-			if(r >= .6 && r < .8):
+			if r >= .6 && r < .8:
 				obj = E_Boom4.instantiate()
-			if(r >= .8 && r <= 1):
+			if r >= .8 && r <= 1:
 				obj = E_Boom5.instantiate()
-		10301:
+		spawn_objs.EFFECT_BOOM_PUFF:
 			r = randf()
-			if(r >= 0 && r < .2):
+			if r >= 0 && r < .2:
 				obj = E_BoomPuff1.instantiate()
-			if(r >= .2 && r < .4):
+			if r >= .2 && r < .4:
 				obj = E_BoomPuff2.instantiate()
-			if(r >= .4 && r < .6):
+			if r >= .4 && r < .6:
 				obj = E_BoomPuff3.instantiate()
-			if(r >= .6 && r < .8):
+			if r >= .6 && r < .8:
 				obj = E_BoomPuff4.instantiate()
-			if(r >= .8 && r <= 1):
+			if r >= .8 && r <= 1:
 				obj = E_BoomPuff5.instantiate()
-		10302:
+		spawn_objs.EFFECT_FLARE:
 			r = randf()
-			if(r >= 0 && r < .2):
+			if r >= 0 && r < .2:
 				obj = E_Flare1.instantiate()
-			if(r >= .2 && r < .4):
+			if r >= .2 && r < .4:
 				obj = E_Flare2.instantiate()
-			if(r >= .4 && r < .6):
+			if r >= .4 && r < .6:
 				obj = E_Flare3.instantiate()
-			if(r >= .6 && r < .8):
+			if r >= .6 && r < .8:
 				obj = E_Flare4.instantiate()
-			if(r >= .8 && r <= 1):
+			if r >= .8 && r <= 1:
 				obj = E_Flare5.instantiate()
 			obj.scale = Vector2(1,1)
 			obj.modulate = Color(1,1,1,.1)
-		10303:
+		spawn_objs.EFFECT_FLASH_BOOM:
 			obj = E_Flash_Bloom.instantiate()
-		10304:
+		spawn_objs.EFFECT_SMOKE:
 			r = randf()
-			if(r >= 0 && r < .2):
+			if r >= 0 && r < .2:
 				obj = E_Smoke1.instantiate()
-			if(r >= .2 && r < .4):
+			if r >= .2 && r < .4:
 				obj = E_Smoke2.instantiate()
-			if(r >= .4 && r < .6):
+			if r >= .4 && r < .6:
 				obj = E_Smoke3.instantiate()
-			if(r >= .6 && r < .8):
+			if r >= .6 && r < .8:
 				obj = E_Smoke4.instantiate()
-			if(r >= .8 && r <= 1):
+			if r >= .8 && r <= 1:
 				obj = E_Smoke5.instantiate()
-		10305:
+		spawn_objs.EFFECT_PLASMA_BOOM:
 			r = randf()
-			if(r >= 0 && r < .33):
+			if r >= 0 && r < .33:
 				obj = E_PlasmaBoom1.instantiate()
-			if(r >= .33 && r < .66):
+			if r >= .33 && r < .66:
 				obj = E_PlasmaBoom2.instantiate()
-			if(r >= .66 && r <= 1):
+			if r >= .66 && r <= 1:
 				obj = E_PlasmaBoom3.instantiate()
-		10306:
+		spawn_objs.EFFECT_PLASMA_FLASH:
 			obj = E_PlasmaFlash.instantiate()
-		10307:
+		spawn_objs.EFFECT_PANG:
 			r = randf()
-			if(r >= 0 && r < .33):
+			if r >= 0 && r < .33:
 				obj = E_Pang1.instantiate()
-			if(r >= .33 && r < .66):
+			if r >= .33 && r < .66:
 				obj = E_Pang2.instantiate()
-			if(r >= .66 && r <= 1):
+			if r >= .66 && r <= 1:
 				obj = E_Pang3.instantiate()
-		10308:
+		spawn_objs.EFFECT_ROCKET_FLASH:
 			obj = E_RocketFlash.instantiate()
-		10309:
+		spawn_objs.EFFECT_PANG_SPARKS:
 			r = randf()
-			if(r >= 0 && r < .33):
+			if r >= 0 && r < .33:
 				obj = E_Pang_Sparks1.instantiate()
-			if(r >= .25 && r < .5):
+			if r >= .25 && r < .5:
 				obj = E_Pang_Sparks2.instantiate()
-			if(r >= .5 && r < .75):
+			if r >= .5 && r < .75:
 				obj = E_Pang_Sparks3.instantiate()
-			if(r >= .75 && r <= 1):
+			if r >= .75 && r <= 1:
 				obj = E_Pang_Sparks4.instantiate()
-		10310:
+		spawn_objs.EFFECT_FIRE:
 			obj = E_Fire.instantiate()
 			obj.scale = Vector2(.3,.3)
-		10311:
+		spawn_objs.EFFECT_SMOKE_TRAIL:
 			obj = E_SmokeTrail.instantiate()
 			#obj.scale = Vector2(.3,.3)
+
+	#print("Value received: ", s)
 	obj.s = s
-	if(up == 0):
+
+	if up == 0:
 		game._super_add_child(obj)
 		obj.spawn_id = next_spawn_id
 		next_spawn_id = next_spawn_id + 1
 		obj.pos = position
-	if(up == 10):
+	if up == 10:
 		solarsystem.add_child(obj)
-	if(up == 11):
+	if up == 11:
 		results.add_child(obj)
-	if(up == 12):
+	if up == 12:
 		build_button.add_child(obj)
-	if(up == 13):
+	if up == 13:
 		pass
-	if(up == 14):
+	if up == 14:
 		gui.add_child(obj)
 	obj.velocity = velocity
 	obj.position = position
 	obj.pos = position
 	obj.rotation = rotation
 	obj.rotate = rotation
-	if(s[0] < 10000):
-		if(obj.is_type == "STRUCT"):
+
+	#make sure we actually get a struct or a unit
+	if s[0] < spawn_objs.EFFECT_CLICK_BOOM:
+
+		if obj.is_type == "STRUCT":
 			obj._build_fix()
-		if(obj.is_type == "SHIP"):
+		if obj.is_type == "SHIP":
 			obj._ship_fix()
+
 		#Bug Here
-		if(p != null && game.players.size() > p):
+		if p != null && game.players.size() > p:
 			obj._set_player(game.players[p])
+
 	return obj
 
-func _spawn_dupe(s, p, position, velocity, rotation, up, init):
-	var obj
-	obj = s.duplicate()
-	if(up == 0):
+func _spawn_dupe(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) -> Node2D:
+	var obj = s.duplicate()
+
+	if up == 0:
 		game._super_add_child(obj)
 		obj.spawn_id = next_spawn_id
 		next_spawn_id = next_spawn_id + 1
+
 	obj.velocity = velocity
 	obj.position = position
 	obj.pos = position
 	obj.rotation = rotation
 	obj.rotate = rotation
 
-	if !obj.is_invisible(): obj.show()
+	if !obj.is_visible(): obj.show()
 
-	if(obj.is_type == "STRUCT"):
+	if obj.is_type == "STRUCT":
 		obj._build_fix()
-	if(obj.is_type == "SHIP"):
+	if obj.is_type == "SHIP":
 		obj.rotation = 0
-	if(p != null && game.players.size() > p):
-		if(obj.has_method("_set_player")):
+	if p != null && game.players.size() > p:
+		if obj.has_method("_set_player"):
 			obj._set_player(game.players[p])
 	return obj
 
-func _spawn_laser(s, p, pa, pb):
-	var obj
-	var r = 0
-	var theta = 0
-	obj = s.duplicate()
+func _spawn_laser(s, p, pa, pb) -> Node2D:
+	var obj = s.duplicate()
 	game._super_add_child(obj)
 	obj.spawn_id = next_spawn_id
 	next_spawn_id = next_spawn_id + 1
 	obj._ignite(pa,pb)
-	if(p != null && game.players.size() > p):
-		if(obj.has_method("_set_player")):
+	if p != null && game.players.size() > p:
+		if obj.has_method("_set_player"):
 			obj._set_player(game.players[p])
 	return obj
 
-func _spawn_hit(s, damage, position, velocity, rotation):
+func _spawn_hit(s, damage:float, position:Vector2, velocity:Vector2, rotation:float) -> void:
 	var obj
 	match s:
 		"KINETIC":
-			obj = _spawn([10200], null, position, velocity, rotation, 0, 0)
-			obj.scale = Vector2(float(sqrt(damage)) / 4, float(sqrt(damage)) / 4)
+			obj = _spawn([spawn_objs.EFFECT_IMPACT_KINETIC], null, position, velocity, rotation, 0, 0)
+			obj.scale = Vector2(sqrt(damage) / 4, sqrt(damage) / 4)
 		"EXPLOSIVE":
-			obj = _spawn([6000], null, position, velocity, rotation, 0, 0)
+			obj = _spawn([spawn_objs.EXPLODE_BASIC], null, position, velocity, rotation, 0, 0)
 		"LASER":
-			obj = _spawn([10201], null, position, velocity, rotation, 0, 0)
-			obj.scale = Vector2(float(sqrt(damage)) / 4, float(sqrt(damage)) / 4)
+			obj = _spawn([spawn_objs.EFFECT_IMPACT_LASER], null, position, velocity, rotation, 0, 0)
+			obj.scale = Vector2(sqrt(damage) / 4, sqrt(damage) / 4)
 		"MINING":
-			obj = _spawn([10202], null, position, velocity, rotation, 0, 0)
+			obj = _spawn([spawn_objs.EFFECT_IMPACT_MINING], null, position, velocity, rotation, 0, 0)
 			obj.scale = Vector2(1.2,1.2)
-			obj = _spawn([10304], null, position, velocity, rotation, 0, 0)
+			obj = _spawn([spawn_objs.EFFECT_SMOKE], null, position, velocity, rotation, 0, 0)
 			obj.scale = Vector2(.3,.3)
 			obj.modulate = Color(3,3,3,.6)
 		"PHALANX":
-			obj = _spawn([10203], null, position, Vector2(0,0), rotation, 0, 0)
+			obj = _spawn([spawn_objs.EFFECT_IMPACT_PHALANX], null, position, Vector2(0,0), rotation, 0, 0)
 		"REPAIR":
-			obj = _spawn([10204], null, position, velocity, rotation, 0, 0)
-			obj.scale = Vector2(float(sqrt(abs(damage))) / 4, float(sqrt(abs(damage))) / 4)
+			obj = _spawn([spawn_objs.EFFECT_IMPACT_REPAIR], null, position, velocity, rotation, 0, 0)
+			obj.scale = Vector2(sqrt(abs(damage)) / 4, sqrt(abs(damage)) / 4)
 		"PLASMA":
-			obj = _spawn([6001], null, position, velocity, rotation, 0, 0)
-			#obj = _spawn([10305], null, position, Vector2(0,0), rotation, 0, 0)
-			#obj.scale = Vector2(2,2)
-			#obj = _spawn([10306], null, position, Vector2(0,0), rotation, 0, 0)
+			obj = _spawn([spawn_objs.EXPLODE_PLASMA], null, position, velocity, rotation, 0, 0)
 		"SPARTAN":
-			obj = _spawn([6000], null, position, velocity, rotation, 0, 0)
+			obj = _spawn([spawn_objs.EXPLODE_BASIC], null, position, velocity, rotation, 0, 0)
 			obj.boom_scale = .7
 		"SHIELD":
-			obj = _spawn([10205], null, position, velocity, rotation, 0, 0)
-			obj.scale = Vector2(float(sqrt(damage)) / 3, float(sqrt(damage)) / 3)
+			obj = _spawn([spawn_objs.EFFECT_IMPACT_SHIELD], null, position, velocity, rotation, 0, 0)
+			obj.scale = Vector2(sqrt(damage) / 3, sqrt(damage) / 3)
 	
-func _spawn_player(faction,variant):
+func _spawn_player(faction,variant) -> void:
 	var p = Player.new()
 	p._set_faction(faction,variant)
 	p.id = game.players.size()
 	game.players.append(p)
 
-func _spawn_stats():
-	var obj
-	obj = Stats.instantiate()
+func _spawn_stats() -> Node2D:
+	var obj = Stats.instantiate()
 	game._super_add_child(obj)
 	return obj

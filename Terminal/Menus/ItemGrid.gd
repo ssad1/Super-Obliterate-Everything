@@ -37,10 +37,10 @@ func _sort_a(a,b):
 func _setup_items(id):
 	if(get_parent().get_parent().visible == true):
 		_setup_sorted()
-		for i in range(buttons.size()):
+		for i in buttons.size():
 			buttons[i]._clear_obj()
-		for i in range(buttons.size()):
-			if(i+id < sorted_item_bag.size()):
+		for i in buttons.size():
+			if i+id < sorted_item_bag.size():
 				buttons[i].item_id = sorted_item_bag[i+id][0]
 				buttons[i]._equip_item(sorted_item_bag[i + id].slice(1,100))
 

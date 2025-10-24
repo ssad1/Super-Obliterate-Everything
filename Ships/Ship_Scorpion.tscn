@@ -3,12 +3,12 @@
 [ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
 [ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://Shots/Missile_R1.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://b7nu2uc31cdmf" path="res://Shots/Missile_R1.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://bie44b4axu56" path="res://Ships/Graphics/Scorpion_D.PNG" id="5"]
 [ext_resource type="Texture2D" uid="uid://dji7d28mc4vkt" path="res://Ships/Graphics/Scorpion_N.PNG" id="6_7pqa7"]
 [ext_resource type="Texture2D" uid="uid://dma0qh0qd7iob" path="res://Ships/Graphics/Scorpion_B.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://28sit8iq01kw" path="res://Ships/Graphics/Scorpion_L.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://mb4i0uby25ey" path="res://Ships/Graphics/Scorpion_C.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
 [ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13"]
@@ -51,7 +51,7 @@ blend_mode = 1
 script = ExtResource("2")
 thrust = 0.3
 aistandoff = 300
-factory = 277
+factory = 18
 name_text = "SCORPION"
 class_text = "FRIGATE"
 energy_cost = 150

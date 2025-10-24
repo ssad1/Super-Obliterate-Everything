@@ -1,14 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://crf2bjmb8a1iy"]
+[gd_scene load_steps=15 format=3 uid="uid://18qriq2eesk3"]
 
 [ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
 [ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
-[ext_resource type="Texture2D" uid="uid://crqqiiptetxai" path="res://Structures/Graphics/Struct_Fighter_Bay_C.PNG" id="3_02ivx"]
-[ext_resource type="Texture2D" uid="uid://ccsu65hdmrw5f" path="res://Structures/Graphics/Struct_Fighter_Bay_L.PNG" id="3_8n41h"]
-[ext_resource type="Texture2D" uid="uid://73lx6ykf1pmh" path="res://Structures/Graphics/Struct_Fighter_Bay_D.PNG" id="3_iusts"]
-[ext_resource type="Texture2D" uid="uid://dr4c52ymch0uf" path="res://Structures/Graphics/Struct_Fighter_Bay_N.PNG" id="6_b7acv"]
+[ext_resource type="Texture2D" uid="uid://6aqsn8y6c6p" path="res://Structures/Graphics/Struct_Starport_L.PNG" id="3_4qc7p"]
+[ext_resource type="Texture2D" uid="uid://d0sv62necukx2" path="res://Structures/Graphics/Struct_Starport_C.PNG" id="3_v7md7"]
+[ext_resource type="Texture2D" uid="uid://bh3s5epravih6" path="res://Structures/Graphics/Struct_Starport_D.PNG" id="3_wis2g"]
+[ext_resource type="Texture2D" uid="uid://rywv8877jx5b" path="res://Structures/Graphics/Struct_Starport_N.PNG" id="6_cuocq"]
 [ext_resource type="PackedScene" uid="uid://cu6eeduu5dbxa" path="res://Hangars/Hangar_Factory.tscn" id="8"]
-[ext_resource type="PackedScene" uid="uid://cr3uqos0286u2" path="res://Modules/Module_Small_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dbo4trprw6esp" path="res://Modules/Module_Large_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
 
 [sub_resource type="ShaderMaterial" id="1"]
@@ -35,12 +35,12 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("3_02ivx")
-shader_parameter/lighting = ExtResource("3_8n41h")
+shader_parameter/flag_mask = ExtResource("3_v7md7")
+shader_parameter/lighting = ExtResource("3_4qc7p")
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_4dw31"]
-diffuse_texture = ExtResource("3_iusts")
-normal_texture = ExtResource("6_b7acv")
+[sub_resource type="CanvasTexture" id="CanvasTexture_dswfg"]
+diffuse_texture = ExtResource("3_wis2g")
+normal_texture = ExtResource("6_cuocq")
 
 [sub_resource type="Animation" id="2"]
 length = 2.0
@@ -58,42 +58,43 @@ tracks/0/keys = {
 "values": [0, 63]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ipjlw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_exgac"]
 _data = {
 "Spin": SubResource("2")
 }
 
-[node name="Struct_Fighter_Bay" type="Node2D"]
+[node name="Struct_Starport" type="Node2D"]
 script = ExtResource("2")
-name_text = "FIGHTER BAY"
-supply_cost = 1
-max_armor = 25
-special = "OFFENSE"
+build_size = Vector2(3, 3)
+name_text = "Starport"
+build_speed = 2.0
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")
-texture = SubResource("CanvasTexture_4dw31")
+texture = SubResource("CanvasTexture_dswfg")
 hframes = 8
 vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
 libraries = {
-"": SubResource("AnimationLibrary_ipjlw")
+"": SubResource("AnimationLibrary_exgac")
 }
 autoplay = "Spin"
 
 [node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -10.0
-offset_top = -9.0
-offset_right = 10.0
-offset_bottom = 11.0
+offset_left = -30.0
+offset_top = -29.0
+offset_right = 30.0
+offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Hangar_Factory" parent="." instance=ExtResource("8")]
-ship_id = Array[int]([38])
+ship_id = Array[int]([59])
+build_max = 180
+ship_max = 2
 
-[node name="Module_Small_Struct_Boom_Large" parent="." instance=ExtResource("9")]
+[node name="Module_Large_Struct_Boom_Large" parent="." instance=ExtResource("9")]
 
 [node name="Module_SFX" parent="." instance=ExtResource("10")]
-build_sfx = 1002
+build_sfx = 1006

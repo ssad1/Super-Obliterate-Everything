@@ -7,7 +7,7 @@ var missile_clock:int = 0
 @export var shot_scale:float = 1
 @export var damage:float = 1
 @export var force:float = 1
-@export var smoke_trail:int = 0
+@export var smoke_trail:SPAWNER.spawn_objs = 0
 
 func _ready() -> void:
 	_init_missile()

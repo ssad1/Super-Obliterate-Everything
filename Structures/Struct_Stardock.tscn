@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cqueyycgie4c0" path="res://Structures/Graphics/Struct_Stardock_D.PNG" id="3_s1nlf"]
 [ext_resource type="Texture2D" uid="uid://uj88sjq6uplk" path="res://Structures/Graphics/Struct_Stardock_L.PNG" id="4_vmygx"]
 [ext_resource type="Texture2D" uid="uid://bo5oe3xy46kgo" path="res://Structures/Graphics/Struct_Stardock_N.PNG" id="6_2m8re"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://Hangars/Hangar_Factory.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://2rc1lcifjq2j" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://cu6eeduu5dbxa" path="res://Hangars/Hangar_Factory.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
 
 [sub_resource type="ShaderMaterial" id="1"]
@@ -96,6 +96,7 @@ offset_right = 20.0
 offset_bottom = 23.0
 
 [node name="Hangar_Factory" parent="." instance=ExtResource("9")]
+ship_id = Array[int]([51])
 
 [node name="Module_Medium_Struct_Boom_Large" parent="." instance=ExtResource("8")]
 

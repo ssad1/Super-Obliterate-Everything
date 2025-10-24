@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c5kfo0iwrcqvc" path="res://Ships/Graphics/Trident_N.PNG" id="6_xweos"]
 [ext_resource type="Texture2D" uid="uid://n030stav6qvn" path="res://Ships/Graphics/Trident_L.PNG" id="7"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
 [ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="10"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="11"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
@@ -80,7 +80,7 @@ shader_parameter/colors = ExtResource("11")
 [node name="Ship_Trident" type="Node2D"]
 script = ExtResource("2")
 thrust = 0.2
-factory = 279
+factory = 20
 name_text = "TRIDENT"
 class_text = "CRUISER"
 energy_cost = 400

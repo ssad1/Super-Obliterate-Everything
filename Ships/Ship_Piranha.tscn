@@ -61,7 +61,7 @@ shader_parameter/colors = ExtResource("11")
 [node name="Ship_Piranha" type="Node2D"]
 script = ExtResource("2")
 thrust = 0.6
-factory = 275
+factory = 16
 name_text = "PIRANHA"
 class_text = "FIGHTER"
 energy_cost = 45
