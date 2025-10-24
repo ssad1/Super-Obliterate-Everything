@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var tcpu_node = preload("res://Modules/TargetCPU.tscn")
+@onready var tcpu_node := preload("res://Modules/TargetCPU.tscn")
 
 var s
 @export var damage:float = 10

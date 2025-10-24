@@ -7,6 +7,6 @@
 shader = ExtResource("1_4svmr")
 shader_parameter/mode = 5
 shader_parameter/corona_direction = 0
-shader_parameter/offset = Vector2(300, 2000)
+shader_parameter/offset = Vector2(30, 2000)
 shader_parameter/scroll = Vector2(0, 0)
 shader_parameter/colors = ExtResource("2_xri0o")

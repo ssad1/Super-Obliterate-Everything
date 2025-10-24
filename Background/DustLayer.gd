@@ -47,7 +47,7 @@ func _clear_dusts():
 
 func _gen_dusts(a):
 	var s
-	for i in range(100):
+	for i in 100:
 		s = DustA.instantiate()
 		dusts.append(s)
 		add_child(s)

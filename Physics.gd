@@ -8,12 +8,6 @@ var rotate:float = 0
 var rotate_velocity:float = 0
 var max_rotate_velocity:float = 0
 
-#func _ready():
-#	pass # Replace with function body.
-
-#func _process(delta):
-#	pass
-
 func _do_tick():
 	if sqrt(velocity.x * velocity.x + velocity.y * velocity.y) > max_velocity:
 		velocity = velocity * 0.95

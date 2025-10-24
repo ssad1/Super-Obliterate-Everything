@@ -33,17 +33,17 @@ func _gen_galaxies():
 	var total = CALC._randint() % 35 + 15
 	var g
 	CALC.rseed = LEVELS.level_seed
-	for i in range(total):
+	for i in total:
 		g = Galaxy.instantiate()
 		galaxies.append(g)
 		add_child(g)
 	total = CALC._randint() % 35 + 15
-	for i in range(total):
+	for i in total:
 		g = Elliptical.instantiate()
 		galaxies.append(g)
 		add_child(g)
 	total = CALC._randint() % 35 + 15
-	for i in range(total):
+	for i in total:
 		g = Irregular.instantiate()
 		galaxies.append(g)
 		add_child(g)

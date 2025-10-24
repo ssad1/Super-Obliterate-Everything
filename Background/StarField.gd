@@ -52,15 +52,15 @@ func _gen_stars():
 	#$DeepStars._gen_stars()
 	var s
 	CALC.rseed = LEVELS.level_seed
-	for i in range(200):
+	for i in 200:
 		s = StarA.instantiate()
 		stars.append(s)
 		add_child(s)
-	for i in range(30):
+	for i in 30:
 		s = StarB.instantiate()
 		stars.append(s)
 		add_child(s)
-	for i in range(5):
+	for i in 5:
 		_gen_cluster()
 
 func _gen_cluster():
@@ -70,14 +70,14 @@ func _gen_cluster():
 	var dense = 100 + CALC._randint() % 400
 	var starnum = 25 + CALC._randint() % 50
 	var spot = Vector2(CALC._rand() * GLOBAL.resx,CALC._rand() * GLOBAL.resy)
-	for i in range(starnum):
+	for i in starnum:
 		theta = CALC._rand() * 2 * PI
 		r = CALC._rand() * dense
 		s = StarA.instantiate()
 		stars.append(s)
 		add_child(s)
 		s.start_position = spot + Vector2(r * cos(theta),r * sin(theta))
-	for i in range(round(starnum / 10)):
+	for i in round(starnum / 10):
 		theta = CALC._rand() * 2 * PI
 		r = CALC._rand() * dense
 		s = StarB.instantiate()

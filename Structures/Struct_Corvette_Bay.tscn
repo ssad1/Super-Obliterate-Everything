@@ -65,6 +65,11 @@ _data = {
 
 [node name="Struct_Corvette_Bay" type="Node2D"]
 script = ExtResource("2")
+build_size = Vector2(1, 2)
+name_text = "CORVETTE BAY"
+supply_cost = 1
+max_armor = 50.0
+special = "OFFENSE"
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")

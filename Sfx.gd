@@ -1,90 +1,87 @@
 extends Node
 
-var playlist = []
-var newlist = []
+var playlist:Array = []
+var newlist:Array = []
 
-@onready var BuildExtractor = load("res://Sounds/Build/BuildExtractor.tscn")
-@onready var BuildReactor = load("res://Sounds/Build/BuildReactor.tscn")
-@onready var BuildFighter = load("res://Sounds/Build/BuildFighter.tscn")
-@onready var BuildCorvette = load("res://Sounds/Build/BuildCorvette.tscn")
-@onready var BuildFrigate = load("res://Sounds/Build/BuildFrigate.tscn")
-@onready var BuildDestroyer = load("res://Sounds/Build/BuildDestroyer.tscn")
-@onready var BuildCruiser = load("res://Sounds/Build/BuildCruiser.tscn")
-@onready var BuildCapital = load("res://Sounds/Build/BuildCapital.tscn")
-@onready var BuildTurret = load("res://Sounds/Build/BuildTurret.tscn")
-@onready var BuildBigTurret = load("res://Sounds/Build/BuildBigTurret.tscn")
-@onready var BuildHugeTurret = load("res://Sounds/Build/BuildHugeTurret.tscn")
-@onready var BuildShield = load("res://Sounds/Build/BuildShield.tscn")
-@onready var BuildBigShield = load("res://Sounds/Build/BuildBigShield.tscn")
-@onready var BuildBarricade = load("res://Sounds/Build/BuildBarricade.tscn")
-@onready var BuildGas = load("res://Sounds/Build/BuildGas.tscn")
-@onready var BuildRadar = load("res://Sounds/Build/BuildRadar.tscn")
-@onready var BuildResearch = load("res://Sounds/Build/BuildResearch.tscn")
+@onready var BuildExtractor := load("res://Sounds/Build/BuildExtractor.tscn")
+@onready var BuildReactor := load("res://Sounds/Build/BuildReactor.tscn")
+@onready var BuildFighter := load("res://Sounds/Build/BuildFighter.tscn")
+@onready var BuildCorvette := load("res://Sounds/Build/BuildCorvette.tscn")
+@onready var BuildFrigate := load("res://Sounds/Build/BuildFrigate.tscn")
+@onready var BuildDestroyer := load("res://Sounds/Build/BuildDestroyer.tscn")
+@onready var BuildCruiser := load("res://Sounds/Build/BuildCruiser.tscn")
+@onready var BuildCapital := load("res://Sounds/Build/BuildCapital.tscn")
+@onready var BuildTurret := load("res://Sounds/Build/BuildTurret.tscn")
+@onready var BuildBigTurret := load("res://Sounds/Build/BuildBigTurret.tscn")
+@onready var BuildHugeTurret := load("res://Sounds/Build/BuildHugeTurret.tscn")
+@onready var BuildShield := load("res://Sounds/Build/BuildShield.tscn")
+@onready var BuildBigShield := load("res://Sounds/Build/BuildBigShield.tscn")
+@onready var BuildBarricade := load("res://Sounds/Build/BuildBarricade.tscn")
+@onready var BuildGas := load("res://Sounds/Build/BuildGas.tscn")
+@onready var BuildRadar := load("res://Sounds/Build/BuildRadar.tscn")
+@onready var BuildResearch := load("res://Sounds/Build/BuildResearch.tscn")
 
-@onready var DieSmallBoom1 = load("res://Sounds/Death/DieSmallBoom1.tscn")
-@onready var DieSmallBoom2 = load("res://Sounds/Death/DieSmallBoom2.tscn")
-@onready var DieSmallBoom3 = load("res://Sounds/Death/DieSmallBoom3.tscn")
-@onready var DieSmallBoom4 = load("res://Sounds/Death/DieSmallBoom4.tscn")
-@onready var DieSmallBoom5 = load("res://Sounds/Death/DieSmallBoom5.tscn")
-@onready var DieSmallBoom6 = load("res://Sounds/Death/DieSmallBoom6.tscn")
-@onready var DieSmallBoom7 = load("res://Sounds/Death/DieSmallBoom7.tscn")
-@onready var DieSmallBoom8 = load("res://Sounds/Death/DieSmallBoom8.tscn")
-@onready var DieBigBoom1 = load("res://Sounds/Death/DieBigBoom1.tscn")
-@onready var DieBigBoom2 = load("res://Sounds/Death/DieBigBoom2.tscn")
-@onready var DieBigBoom3 = load("res://Sounds/Death/DieBigBoom3.tscn")
-@onready var DieBigBoom4 = load("res://Sounds/Death/DieBigBoom4.tscn")
-@onready var DieBigBoom5 = load("res://Sounds/Death/DieBigBoom5.tscn")
-@onready var DieBigBoom6 = load("res://Sounds/Death/DieBigBoom6.tscn")
-@onready var DieBigBoom7 = load("res://Sounds/Death/DieBigBoom7.tscn")
-@onready var DieBigBoom8 = load("res://Sounds/Death/DieBigBoom8.tscn")
-@onready var DieHugeBoom1 = load("res://Sounds/Death/DieHugeBoom1.tscn")
-@onready var DieHugeBoom2 = load("res://Sounds/Death/DieHugeBoom2.tscn")
-@onready var DieHugeBoom3 = load("res://Sounds/Death/DieHugeBoom3.tscn")
-@onready var DieHugeBoom4 = load("res://Sounds/Death/DieHugeBoom4.tscn")
-@onready var DieTinyBoom1 = load("res://Sounds/Death/DieTinyBoom1.tscn")
-@onready var DieTinyBoom2 = load("res://Sounds/Death/DieTinyBoom2.tscn")
-@onready var DieTinyBoom3 = load("res://Sounds/Death/DieTinyBoom3.tscn")
-@onready var DieTinyBoom4 = load("res://Sounds/Death/DieTinyBoom4.tscn")
+@onready var DieSmallBoom1 := load("res://Sounds/Death/DieSmallBoom1.tscn")
+@onready var DieSmallBoom2 := load("res://Sounds/Death/DieSmallBoom2.tscn")
+@onready var DieSmallBoom3 := load("res://Sounds/Death/DieSmallBoom3.tscn")
+@onready var DieSmallBoom4 := load("res://Sounds/Death/DieSmallBoom4.tscn")
+@onready var DieSmallBoom5 := load("res://Sounds/Death/DieSmallBoom5.tscn")
+@onready var DieSmallBoom6 := load("res://Sounds/Death/DieSmallBoom6.tscn")
+@onready var DieSmallBoom7 := load("res://Sounds/Death/DieSmallBoom7.tscn")
+@onready var DieSmallBoom8 := load("res://Sounds/Death/DieSmallBoom8.tscn")
+@onready var DieBigBoom1 := load("res://Sounds/Death/DieBigBoom1.tscn")
+@onready var DieBigBoom2 := load("res://Sounds/Death/DieBigBoom2.tscn")
+@onready var DieBigBoom3 := load("res://Sounds/Death/DieBigBoom3.tscn")
+@onready var DieBigBoom4 := load("res://Sounds/Death/DieBigBoom4.tscn")
+@onready var DieBigBoom5 := load("res://Sounds/Death/DieBigBoom5.tscn")
+@onready var DieBigBoom6 := load("res://Sounds/Death/DieBigBoom6.tscn")
+@onready var DieBigBoom7 := load("res://Sounds/Death/DieBigBoom7.tscn")
+@onready var DieBigBoom8 := load("res://Sounds/Death/DieBigBoom8.tscn")
+@onready var DieHugeBoom1 := load("res://Sounds/Death/DieHugeBoom1.tscn")
+@onready var DieHugeBoom2 := load("res://Sounds/Death/DieHugeBoom2.tscn")
+@onready var DieHugeBoom3 := load("res://Sounds/Death/DieHugeBoom3.tscn")
+@onready var DieHugeBoom4 := load("res://Sounds/Death/DieHugeBoom4.tscn")
+@onready var DieTinyBoom1 := load("res://Sounds/Death/DieTinyBoom1.tscn")
+@onready var DieTinyBoom2 := load("res://Sounds/Death/DieTinyBoom2.tscn")
+@onready var DieTinyBoom3 := load("res://Sounds/Death/DieTinyBoom3.tscn")
+@onready var DieTinyBoom4 := load("res://Sounds/Death/DieTinyBoom4.tscn")
 
-@onready var WeaponPlasma = load("res://Sounds/Weapons/WeaponPlasma.tscn")
-@onready var WeaponArtillery1 = load("res://Sounds/Weapons/WeaponArtillery1.tscn")
-@onready var WeaponArtillery2 = load("res://Sounds/Weapons/WeaponArtillery2.tscn")
-@onready var WeaponArtillery3 = load("res://Sounds/Weapons/WeaponArtillery3.tscn")
-@onready var WeaponBeam1 = load("res://Sounds/Weapons/WeaponBeam1.tscn")
-@onready var WeaponBeam2 = load("res://Sounds/Weapons/WeaponBeam2.tscn")
-@onready var WeaponBeam3 = load("res://Sounds/Weapons/WeaponBeam3.tscn")
-@onready var WeaponBeam4 = load("res://Sounds/Weapons/WeaponBeam4.tscn")
-@onready var WeaponBeam5 = load("res://Sounds/Weapons/WeaponBeam5.tscn")
-@onready var WeaponBlaster1 = load("res://Sounds/Weapons/WeaponBlaster1.tscn")
-@onready var WeaponBlaster2 = load("res://Sounds/Weapons/WeaponBlaster2.tscn")
-@onready var WeaponBlaster3 = load("res://Sounds/Weapons/WeaponBlaster3.tscn")
-@onready var WeaponBlaster4 = load("res://Sounds/Weapons/WeaponBlaster4.tscn")
-@onready var WeaponBlaster5 = load("res://Sounds/Weapons/WeaponBlaster5.tscn")
-@onready var WeaponMines = load("res://Sounds/Weapons/WeaponMines.tscn")
-@onready var WeaponMissile1 = load("res://Sounds/Weapons/WeaponMissile1.tscn")
-@onready var WeaponMissile2 = load("res://Sounds/Weapons/WeaponMissile2.tscn")
-@onready var WeaponMissile3 = load("res://Sounds/Weapons/WeaponMissile3.tscn")
-@onready var WeaponMissile4 = load("res://Sounds/Weapons/WeaponMissile4.tscn")
-@onready var WeaponMissile5 = load("res://Sounds/Weapons/WeaponMissile5.tscn")
+@onready var WeaponPlasma := load("res://Sounds/Weapons/WeaponPlasma.tscn")
+@onready var WeaponArtillery1 := load("res://Sounds/Weapons/WeaponArtillery1.tscn")
+@onready var WeaponArtillery2 := load("res://Sounds/Weapons/WeaponArtillery2.tscn")
+@onready var WeaponArtillery3 := load("res://Sounds/Weapons/WeaponArtillery3.tscn")
+@onready var WeaponBeam1 := load("res://Sounds/Weapons/WeaponBeam1.tscn")
+@onready var WeaponBeam2 := load("res://Sounds/Weapons/WeaponBeam2.tscn")
+@onready var WeaponBeam3 := load("res://Sounds/Weapons/WeaponBeam3.tscn")
+@onready var WeaponBeam4 := load("res://Sounds/Weapons/WeaponBeam4.tscn")
+@onready var WeaponBeam5 := load("res://Sounds/Weapons/WeaponBeam5.tscn")
+@onready var WeaponBlaster1 := load("res://Sounds/Weapons/WeaponBlaster1.tscn")
+@onready var WeaponBlaster2 := load("res://Sounds/Weapons/WeaponBlaster2.tscn")
+@onready var WeaponBlaster3 := load("res://Sounds/Weapons/WeaponBlaster3.tscn")
+@onready var WeaponBlaster4 := load("res://Sounds/Weapons/WeaponBlaster4.tscn")
+@onready var WeaponBlaster5 := load("res://Sounds/Weapons/WeaponBlaster5.tscn")
+@onready var WeaponMines := load("res://Sounds/Weapons/WeaponMines.tscn")
+@onready var WeaponMissile1 := load("res://Sounds/Weapons/WeaponMissile1.tscn")
+@onready var WeaponMissile2 := load("res://Sounds/Weapons/WeaponMissile2.tscn")
+@onready var WeaponMissile3 := load("res://Sounds/Weapons/WeaponMissile3.tscn")
+@onready var WeaponMissile4 := load("res://Sounds/Weapons/WeaponMissile4.tscn")
+@onready var WeaponMissile5 := load("res://Sounds/Weapons/WeaponMissile5.tscn")
 
-@onready var GetMetal = load("res://Sounds/Interface/GetMetal.tscn")
-@onready var ButtonBuild = load("res://Sounds/Interface/ButtonBuild.tscn")
-@onready var BuildError = load("res://Sounds/Interface/BuildError.tscn")
-@onready var ButtonGalaxy = load("res://Sounds/Interface/ButtonGalaxy.tscn")
-@onready var ButtonTab = load("res://Sounds/Interface/ButtonTab.tscn")
-@onready var ButtonItem = load("res://Sounds/Interface/ButtonItem.tscn")
-@onready var ButtonEquip = load("res://Sounds/Interface/ButtonEquip.tscn")
-@onready var TooPoor = load("res://Sounds/Interface/TooPoor.tscn")
-@onready var Campaign = load("res://Sounds/Interface/Campaign.tscn")
-@onready var ButtonMenu = load("res://Sounds/Interface/ButtonMenu.tscn")
-@onready var ButtonStart = load("res://Sounds/Interface/ButtonStart.tscn")
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@onready var GetMetal := load("res://Sounds/Interface/GetMetal.tscn")
+@onready var ButtonBuild := load("res://Sounds/Interface/ButtonBuild.tscn")
+@onready var BuildError := load("res://Sounds/Interface/BuildError.tscn")
+@onready var ButtonGalaxy := load("res://Sounds/Interface/ButtonGalaxy.tscn")
+@onready var ButtonTab := load("res://Sounds/Interface/ButtonTab.tscn")
+@onready var ButtonItem := load("res://Sounds/Interface/ButtonItem.tscn")
+@onready var ButtonEquip := load("res://Sounds/Interface/ButtonEquip.tscn")
+@onready var TooPoor := load("res://Sounds/Interface/TooPoor.tscn")
+@onready var Campaign := load("res://Sounds/Interface/Campaign.tscn")
+@onready var ButtonMenu := load("res://Sounds/Interface/ButtonMenu.tscn")
+@onready var ButtonStart := load("res://Sounds/Interface/ButtonStart.tscn")
 
-func _play(s):
+func _play(s) -> void:
 	var sfx
-	var r = 0.0
+	var r := 0.0
 	var dice = 0
 	match int(s[0]):
 		1000:
@@ -332,32 +329,32 @@ func _play(s):
 	sfx.playing = true
 	playlist.append(sfx)
 
-func _do_newlist():
-	var i = newlist.size() - 1
-	while(i > -1):
-		if(GLOBAL.sound_volume > 0 && playlist.size() < 15):
+func _do_newlist() -> void:
+	var i := newlist.size() - 1
+	while i > -1:
+		if GLOBAL.sound_volume > 0 && playlist.size() < 15:
 			_play(newlist[i])
 		newlist.remove_at(i)
 		i = i - 1
 	newlist = []
 
-func _do_playlist():
-	var i = playlist.size() - 1
-	while(i > -1):
-		if(playlist[i].playing == false):
+func _do_playlist() -> void:
+	var i := playlist.size() - 1
+	while i > -1:
+		if !playlist[i].playing:
 			remove_child(playlist[i])
 			playlist[i].queue_free()
 			playlist.remove_at(i)
 		i = i - 1
 
-func _do_tick():
+func _do_tick() -> void:
 	_do_newlist()
 	_do_playlist()
 
-func _play_new(s):
-	var found = false
-	for i in range(newlist.size()):
-		if(newlist[i][0] == s[0]):
+func _play_new(s) -> void:
+	var found := false
+	for i in newlist.size():
+		if newlist[i][0] == s[0]:
 			found = true
-	if(found == false):
+	if !found:
 		newlist.append(s)

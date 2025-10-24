@@ -87,7 +87,7 @@ func _clear_planets():
 		i = i - 1
 
 func _gen_planets():
-	for i in range(1):
+	for i in 1:
 		var p
 		print("Planet: " + str(LEVELS.level_planet))
 		p = _select_planet(LEVELS.level_planet)

@@ -1,31 +1,31 @@
 extends Node2D
 
-@onready var tcpu_node = preload("res://Modules/TargetCPU.tscn")
+@onready var tcpu_node := preload("res://Modules/TargetCPU.tscn")
 
 var s
-@export var damage = 10
+@export var damage:float = 10
 #@export var damage_type = "EXPLOSION"
-@export var force = 0
-@export var boom_radius = 0
-@export var boom_flash = SPAWNER.spawn_objs.EFFECT_FLASH_BOOM
-@export var boom_effect = SPAWNER.spawn_objs.EFFECT_BOOM
-@export var boom_smoke = SPAWNER.spawn_objs.EFFECT_BOOM
-@export var boom_sparks = SPAWNER.spawn_objs.EFFECT_BOOM
-@export var boom_scale = 1.0
-@export var flash_scale = 1.0
-@export var smoke_scale = 1.0
-@export var sparks_scale = 1.0
-var clock = 0
-var armor = 0
-@export var lifespan = 20
-var is_type = "EXPLODE"
-var dead = false
-var spawn_id = 0
-var velocity := Vector2(0,0)
-var pos := Vector2(0,0)
-var rotate = 0
-var modules = []
-var tcpu
+@export var force:float = 0
+@export var boom_radius:float = 0
+@export var boom_flash:int = SPAWNER.spawn_objs.EFFECT_FLASH_BOOM
+@export var boom_effect:int = SPAWNER.spawn_objs.EFFECT_BOOM
+@export var boom_smoke:int = SPAWNER.spawn_objs.EFFECT_BOOM
+@export var boom_sparks:int = SPAWNER.spawn_objs.EFFECT_BOOM
+@export var boom_scale:float = 1
+@export var flash_scale:float = 1
+@export var smoke_scale:float = 1
+@export var sparks_scale:float = 1
+var clock:int = 0
+var armor:float = 0
+@export var lifespan:int = 20
+var is_type:String = "EXPLODE"
+var dead:bool = false
+var spawn_id:int = 0
+var velocity:Vector2 = Vector2(0,0)
+var pos:Vector2 = Vector2(0,0)
+var rotate:float = 0
+var modules:Array = []
+var tcpu:TargetCPU
 var player
 
 # Declare member variables here. Examples:
@@ -33,15 +33,15 @@ var player
 # var b = "text"
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	_add_tcpu()
 
-func _add_tcpu():
+func _add_tcpu() -> void:
 	tcpu = tcpu_node.instantiate()
 	tcpu.up = self
 	tcpu.set_target_profile = "EXPLOSION"
 
-func _boom():
+func _boom() -> void:
 	var obj
 	if boom_flash != 0:
 		obj = SPAWNER._spawn([boom_flash],null,pos,Vector2(0,0),0,0,0)
@@ -56,11 +56,11 @@ func _boom():
 		obj = SPAWNER._spawn([boom_sparks],null,pos,Vector2(0,0),0,0,0)
 		obj.scale = Vector2(sparks_scale,sparks_scale)
 
-func _do_modules():
-	for i in range(modules.size()):
+func _do_modules() -> void:
+	for i in modules.size():
 		modules[i]._do_tick()
 
-func _do_tick():
+func _do_tick() -> void:
 	position = pos
 
 	if clock == 0:
@@ -75,11 +75,11 @@ func _do_tick():
 	clock = clock + 1
 	GLOBAL.heatbright = GLOBAL.heatbright + boom_scale
 
-func _remove_ref(s):
-	if(tcpu != null):
+func _remove_ref(s) -> void:
+	if tcpu != null:
 		tcpu._clean_target(s)
-	for i in range(modules.size()):
-		if("_remove_ref" in modules[i]):
+	for i in modules.size():
+		if "_remove_ref" in modules[i]:
 			modules[i]._remove_ref(s)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

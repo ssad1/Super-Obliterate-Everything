@@ -32,7 +32,7 @@ func _process(delta):
 		queue_free()
 
 func _clear_squares():
-	for i in range(squares.size()):
+	for i in squares.size():
 		squares[i].queue_free()
 	squares = []
 
@@ -50,8 +50,8 @@ func _ignite(b):
 		v = SPAWNER.game.players[data[0]].item_bag_factory_objs[data[2]].build_size
 	position = Vector2(32 * data[3], 32 * data[4])
 	dimensions = v
-	for i in range(v.x):
-		for j in range(v.y):
+	for i in v.x:
+		for j in v.y:
 			s = GLOBAL.SquareB.instantiate()
 			add_child(s)
 			s.set_position(Vector2(32 * i, 32 * j))
@@ -65,7 +65,7 @@ func _color_squares():
 	var building = true
 	var light_color = "DIM"
 	#Test Squares
-	for i in range(squares.size()):
+	for i in squares.size():
 		pos = (squares[i].position + self.position) / 32
 		if(int(pos.x) >= 0 && int(pos.x) < SPAWNER.game.radar.size() && int(pos.y) >= 0 && int(pos.y) < SPAWNER.game.radar.size()):
 			if(SPAWNER.game.radar[int(pos.x)][int(pos.y)] != 1):
@@ -78,11 +78,11 @@ func _color_squares():
 			building = false
 	if(building == true):
 		light_color = "DIM"
-		for i in range(squares.size()):
+		for i in squares.size():
 			squares[i].anim = "DIM"
 	else:
 		light_color = "RED"
-		for i in range(squares.size()):
+		for i in squares.size():
 			if(squares[i].anim == "FLASH"):
 				squares[i].anim = "LIGHT RED"
 	buildability = building

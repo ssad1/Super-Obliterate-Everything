@@ -18,16 +18,16 @@ func _ready():
 #	pass
 
 func _on_death():
-	for i in range(my_ships.size()):
+	for i in my_ships.size():
 		my_ships[i]._free_base()
 
 func _do_tick():
-	if(my_ships.size() < ship_max):
+	if my_ships.size() < ship_max:
 		build_cool = build_cool + 1
 	else:
 		build_cool = 0
-	if(build_cool >= build_max):
-		if(up.metal_storage >= 5):
+	if build_cool >= build_max:
+		if up.metal_storage >= 5:
 			_launch_ship()
 			build_cool = 0
 			up.metal_storage = up.metal_storage - 5
@@ -41,8 +41,8 @@ func _launch_ship():
 func _remove_ship(removeid):
 	var i
 	i = my_ships.size() - 1
-	while(i > -1):
-		if(my_ships[i].spawn_id == removeid):
+	while i > -1:
+		if my_ships[i].spawn_id == removeid:
 			my_ships.remove_at(i)
 		i = i - 1
 	
