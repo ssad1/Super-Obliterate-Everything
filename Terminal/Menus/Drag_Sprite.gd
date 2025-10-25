@@ -6,7 +6,8 @@ var dragging = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	EVENTS.connect("dragging", Callable(self, "_dragging"))
+	#EVENTS.connect("dragging", Callable(self, "_dragging"))
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

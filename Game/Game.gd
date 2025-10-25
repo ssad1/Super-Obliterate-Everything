@@ -249,8 +249,8 @@ func _do_tick() -> void:
 	_do_victory()
 	GLOBAL.heatbright = GLOBAL.heatbright * .9 - 1
 	end_clock = Time.get_ticks_usec()
-	if mission_clock % 10 == 0:
-		print("Code Time: " + str(end_clock - start_clock))
+	#if mission_clock % 10 == 0:
+	#	print("Code Time: " + str(end_clock - start_clock))
 	
 func _do_radar() -> void:
 	var pos:Vector2
@@ -469,7 +469,7 @@ func _start_game() -> void:
 
 	for i in players.size():
 		if i > 1:
-			FACTIONS._faction_prizes(players[i].faction,1 / (players.size() - 2))
+			FACTIONS._faction_prizes(players[i].faction, 2 / (players.size() - 1))
 
 	mission_clock = 0
 	tick_clock = 0

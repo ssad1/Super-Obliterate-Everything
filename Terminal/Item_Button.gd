@@ -59,9 +59,12 @@ func _ready() -> void:
 	EVENTS.connect("unequip_buttons", Callable(self, "_unequip_buttons"))
 	EVENTS.connect("equip_buttons", Callable(self, "_equip_buttons"))
 
+	#Currently glitched, will fix later
+	#rest of the code in Drag_Sprite.gd
+	'''
 	if p == "ArmoryGrid":
 		EVENTS.connect("drag_swap", Callable(self, "_drag_swap"))
-		EVENTS.connect("drag_swap_b", Callable(self, "_drag_swap_b"))
+		EVENTS.connect("drag_swap_b", Callable(self, "_drag_swap_b"))'''
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
@@ -91,25 +94,27 @@ func _button_down() -> void:
 	if p == "ArmoryGrid":
 		EVENTS.emit_signal("dragging", $Sprite2D.texture, id, item_id)
 
-func _drag_swap(button_id:int, s) -> void:
+func _drag_swap(button_id, s) -> void:
 	var current_id = item_id
-	var mp = get_viewport().get_mouse_position()
-	var bp = global_position
+	var mp := get_viewport().get_mouse_position()
+	var bp := global_position
 	if (mp.x > bp.x && mp.x < bp.x + 64 && mp.y > bp.y && mp.y < bp.y + 64) && s != null:
 		_clear_obj()
 		item_id = s
-		ACCOUNT._equip_item(id,item_id)
+
+		ACCOUNT._equip_item(id, item_id)
 		_equip_item(ACCOUNT.item_bag[item_id])
+
 		EVENTS.emit_signal("drag_swap_b", button_id, current_id)
+
 		SFX._play_new([SFX.sound.BUTTON_ITEM])
 
-func _drag_swap_b(button_id, current_id) -> void:
+func _drag_swap_b(button_id, current_id, source_id) -> void:
 	if id != button_id: return
-
 	if current_id != null:
 		_clear_obj()
 		item_id = current_id
-		ACCOUNT._equip_item(id,current_id)
+		ACCOUNT._equip_item(id, current_id)
 		_equip_item(ACCOUNT.item_bag[current_id])
 	else:
 		item_id = null
