@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://buwlpl23tej3c" path="res://Structures/Graphics/Struct_Large_Turretbase_C.png" id="4_7dn0w"]
 [ext_resource type="Texture2D" uid="uid://d3x3mktw83cka" path="res://Structures/Graphics/Struct_Large_Turretbase_L.png" id="5_xirvc"]
 [ext_resource type="PackedScene" uid="uid://cmbv27ga3i33w" path="res://Turrets/Turret_Plasmacaster.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Small_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://cr3uqos0286u2" path="res://Modules/Module_Small_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0831c"]
@@ -56,4 +56,4 @@ position = Vector2(0, -10)
 [node name="Module_Small_Struct_Boom_Large" parent="." instance=ExtResource("9")]
 
 [node name="Module_SFX" parent="." instance=ExtResource("10")]
-build_sfx = 1009
+build_sfx = 9

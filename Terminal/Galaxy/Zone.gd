@@ -14,7 +14,7 @@ func _ready():
 #	pass
 
 func _on_TextureButton_pressed():
-	SFX._play_new([4003])
+	SFX._play_new([SFX.sound.BUTTON_GALAXY])
 	EVENTS.emit_signal("zone_click",zone_name,zone_desc,zone_id)
 
 func _mouse_entered():

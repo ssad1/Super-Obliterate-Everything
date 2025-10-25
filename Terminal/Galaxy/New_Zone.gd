@@ -23,7 +23,7 @@ func _ignite():
 	show()
 
 func _cancel():
-	SFX._play_new([4006])
+	SFX._play_new([SFX.sound.BUTTON_ITEM])
 	hide()
 
 func _on_zone_click(zone_name, zone_desc, zone_id):
@@ -39,7 +39,7 @@ func _on_zone_click(zone_name, zone_desc, zone_id):
 
 func _on_Button_Yes_pressed():
 	hide()
-	SFX._play_new([4008])
+	SFX._play_new([SFX.sound.CAMPAIGN])
 	ACCOUNT._new_campaign(conquest_zone_id,danger_level)
 	EVENTS.emit_signal("button_generate_pressed")
 	EVENTS.emit_signal("submenu_button_press", "Button_Conquest")
@@ -51,14 +51,14 @@ func _on_Button_More_Danger_pressed():
 		danger_level = danger_level + 1
 	_button_vis()
 	$Label_Level.text = str(danger_level)
-	SFX._play_new([4006])
+	SFX._play_new([SFX.sound.BUTTON_ITEM])
 
 func _on_Button_Less_Danger_pressed():
 	if(danger_level > 1):
 		danger_level = danger_level - 1
 	_button_vis()
 	$Label_Level.text = str(danger_level)
-	SFX._play_new([4006])
+	SFX._play_new([SFX.sound.BUTTON_ITEM])
 
 func _button_vis():
 	if(danger_level == max_danger_level):

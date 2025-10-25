@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cmr5bkq0kgrx1" path="res://Structures/Graphics/Struct_Reactor_D.PNG" id="6_sqqnj"]
 [ext_resource type="Texture2D" uid="uid://duui60ku51gl1" path="res://Structures/Graphics/Struct_Reactor_N.PNG" id="7_yxm1m"]
 [ext_resource type="PackedScene" path="res://Modules/Generator.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://2rc1lcifjq2j" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
 
 [sub_resource type="ShaderMaterial" id="1"]
@@ -99,4 +99,4 @@ grow_vertical = 2
 visible = false
 
 [node name="Module_SFX" parent="." instance=ExtResource("10")]
-build_sfx = 1001
+build_sfx = 1

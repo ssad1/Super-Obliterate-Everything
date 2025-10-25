@@ -136,4 +136,4 @@ scale_effect = true
 visible = false
 
 [node name="Module_Death_SFX" parent="Module_Trigger" instance=ExtResource("9")]
-fire_sound = 2000
+fire_sound = 17

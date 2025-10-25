@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cr82u34w4b3bf"]
 
 [ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="PackedScene" path="res://Shots/Missile_M1.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dvs0cuom7fkcr" path="res://Shots/Missile_M1.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://ckr763grbf50c" path="res://Turrets/Graphics/Backup/Turret_QuadMissiles_D.PNG" id="3_f6dm4"]
 [ext_resource type="Texture2D" uid="uid://4hjsei1jeaqp" path="res://Turrets/Graphics/Backup/Turret_QuadMissiles_C.PNG" id="3_vf5rk"]
@@ -53,7 +53,7 @@ vframes = 8
 
 [node name="Gun_General" parent="." instance=ExtResource("3")]
 position = Vector2(0, -24)
-fire_sound = 3004
+fire_sound = 23
 gun_heat = 50
 gun_range = 600
 gun_angle = 0.8

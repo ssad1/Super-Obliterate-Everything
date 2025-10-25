@@ -1,7 +1,7 @@
 extends Node2D
 
 var gun_cool:int = 0
-@export var fire_sound:int = 0
+@export var fire_sound:SFX.sound = 0
 @export var gun_kick:float = 0
 @export var gun_heat:int = 0
 

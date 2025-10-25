@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" path="res://Guns/Gun_Laser.tscn" id="6"]
 [ext_resource type="Texture2D" uid="uid://c1cakmp881r5i" path="res://Turrets/Graphics/Backup/Turret_Repair_N.PNG" id="6_umh8o"]
 [ext_resource type="PackedScene" path="res://Shots/Laser_Repair.tscn" id="7"]
-[ext_resource type="PackedScene" path="res://Effects/E_MuzzleI.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://qbp2y3w7trp7" path="res://Effects/E_MuzzleI.tscn" id="8"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -54,7 +54,7 @@ vframes = 8
 
 [node name="Gun_Laser" parent="." instance=ExtResource("6")]
 position = Vector2(0, -16)
-fire_sound = 3001
+fire_sound = 21
 gun_heat = 15
 gun_range = 200
 gun_scale = 0.1

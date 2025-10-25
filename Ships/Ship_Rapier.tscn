@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bduobaqabrauj" path="res://Ships/Graphics/Rapier_N.PNG" id="6_ckuvb"]
 [ext_resource type="Texture2D" uid="uid://bou2dvtchnhlh" path="res://Ships/Graphics/Rapier_C.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://bcteacc8bs73g" path="res://Ships/Graphics/Rapier_L.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://e6amycjldlkb" path="res://Ships/Graphics/Rapier_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Shots/Laser_General.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://2l4a7xhqw1ki" path="res://Effects/E_MuzzleE.tscn" id="12"]
@@ -87,7 +87,7 @@ grow_vertical = 2
 
 [node name="Gun_Laser" parent="." instance=ExtResource("4")]
 position = Vector2(0, -12)
-fire_sound = 3001
+fire_sound = 21
 gun_heat = 25
 gun_range = 350
 gun_scale = 0.15

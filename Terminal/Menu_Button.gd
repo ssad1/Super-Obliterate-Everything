@@ -30,7 +30,7 @@ func _process(delta):
 				light.hide()
 
 func _pressed():
-	SFX._play_new([4004])
+	SFX._play_new([SFX.sound.BUTTON_TAB])
 	if(mode == 1):
 		EVENTS.emit_signal("menu_button_press", name)
 		#if(pressed == true):

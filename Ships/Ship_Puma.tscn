@@ -107,7 +107,7 @@ grow_vertical = 2
 
 [node name="Gun_General" parent="." instance=ExtResource("11")]
 position = Vector2(-10, -15)
-fire_sound = 3002
+fire_sound = 22
 gun_kick = 3.0
 gun_heat = 45
 gun_burst_max = 3
@@ -129,7 +129,7 @@ scale = Vector2(0.5, 0.5)
 
 [node name="Gun_General2" parent="." instance=ExtResource("11")]
 position = Vector2(10, -15)
-fire_sound = 3002
+fire_sound = 22
 gun_kick = 3.0
 gun_heat = 45
 gun_burst_max = 3

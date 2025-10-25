@@ -110,7 +110,7 @@ grow_vertical = 2
 [node name="Gun_General" parent="." instance=ExtResource("11")]
 light_mask = 0
 position = Vector2(-16, -32)
-fire_sound = 3005
+fire_sound = 26
 gun_kick = 5.0
 gun_heat = 10
 gun_range = 800
@@ -130,7 +130,7 @@ visible = false
 [node name="Gun_General2" parent="." instance=ExtResource("11")]
 light_mask = 0
 position = Vector2(16, -32)
-fire_sound = 3005
+fire_sound = 26
 gun_kick = 5.0
 gun_heat = 10
 gun_range = 800

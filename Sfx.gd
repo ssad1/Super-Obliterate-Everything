@@ -79,46 +79,95 @@ var newlist:Array = []
 @onready var ButtonMenu := load("res://Sounds/Interface/ButtonMenu.tscn")
 @onready var ButtonStart := load("res://Sounds/Interface/ButtonStart.tscn")
 
+enum sound {
+
+	BUILD_EXTRACTOR,
+	BUILD_REACTOR,
+	BUILD_FIGHTER,
+	BUILD_CORVETTE,
+	BUILD_FRIGATE,
+	BUILD_DESTROYER,
+	BUILD_CRUISER,
+	BUILD_CAPITAL,
+	BUILD_TURRET,
+	BUILD_BIG_TURRET,
+	BUILD_HUGE_TURRET,
+	BUILD_SHIELD,
+	BUILD_MEGA_SHIELD,
+	BUILD_BARRICADE,
+	BUILD_GAS,
+	BUILD_RADAR,
+	BUILD_RESEARCH,
+
+	SMALL_BOOM,
+	BIG_BOOM,
+	HUGE_BOOM,
+	TINY_BOOM,
+
+	WEAPON_BEAM,
+	WEAPON_BLASTER,
+	WEAPON_MISSILE,
+	WEAPON_PLASMA,
+	WEAPON_MINES,
+	WEAPON_ARTILLERY,
+	WEAPON_SPARTAN,
+	WEAPON_HEAVY_BLASTER,
+	WEAPON_MINER,
+	WEAPON_PHALANX,
+
+	GET_METAL,
+	BUTTON_BUILD,
+	BUILD_ERROR,
+	BUTTON_GALAXY,
+	BUTTON_TAB,
+	BUTTON_EQUIP,
+	BUTTON_ITEM,
+	TOO_POOR,
+	CAMPAIGN,
+	BUTTON_MENU,
+	BUTTON_START
+}
+
 func _play(s) -> void:
 	var sfx
 	var r := 0.0
 	var dice = 0
 	match int(s[0]):
-		1000:
+		sound.BUILD_EXTRACTOR:
 			sfx = BuildExtractor.instantiate()
-		1001:
+		sound.BUILD_REACTOR:
 			sfx = BuildReactor.instantiate()
-		1002:
+		sound.BUILD_FIGHTER:
 			sfx = BuildFighter.instantiate()
-		1003:
+		sound.BUILD_CORVETTE:
 			sfx = BuildCorvette.instantiate()
-		1004:
+		sound.BUILD_FRIGATE:
 			sfx = BuildFrigate.instantiate()
-		1005:
+		sound.BUILD_DESTROYER:
 			sfx = BuildDestroyer.instantiate()
-		1006:
+		sound.BUILD_CRUISER:
 			sfx = BuildCruiser.instantiate()
-		1007:
+		sound.BUILD_CAPITAL:
 			sfx = BuildCapital.instantiate()
-		1008:
+		sound.BUILD_TURRET:
 			sfx = BuildTurret.instantiate()
-		1009:
+		sound.BUILD_BIG_TURRET:
 			sfx = BuildBigTurret.instantiate()
-		1010:
+		sound.BUILD_HUGE_TURRET:
 			sfx = BuildHugeTurret.instantiate()
-		1011:
+		sound.BUILD_SHIELD:
 			sfx = BuildShield.instantiate()
-		1012:
+		sound.BUILD_MEGA_SHIELD:
 			sfx = BuildBigShield.instantiate()
-		1013:
+		sound.BUILD_BARRICADE:
 			sfx = BuildBarricade.instantiate()
-		1014:
+		sound.BUILD_GAS:
 			sfx = BuildGas.instantiate()
-		1015:
+		sound.BUILD_RADAR:
 			sfx = BuildRadar.instantiate()
-		1016:
+		sound.BUILD_RESEARCH:
 			sfx = BuildResearch.instantiate()
-		2000:
+		sound.SMALL_BOOM:
 			dice = randi() % 8
 			match dice:
 				0:
@@ -138,7 +187,7 @@ func _play(s) -> void:
 				7:
 					sfx = DieSmallBoom7.instantiate()
 			sfx.volume_db = sfx.volume_db - 5
-		2001:
+		sound.BIG_BOOM:
 			dice = randi() % 8
 			match dice:
 				0:
@@ -157,7 +206,7 @@ func _play(s) -> void:
 					sfx = DieBigBoom6.instantiate()
 				7:
 					sfx = DieBigBoom7.instantiate()
-		2002:
+		sound.HUGE_BOOM:
 			dice = randi() % 4
 			match dice:
 				0:
@@ -168,7 +217,7 @@ func _play(s) -> void:
 					sfx = DieHugeBoom3.instantiate()
 				3:
 					sfx = DieHugeBoom4.instantiate()
-		2003:
+		sound.TINY_BOOM:
 			dice = randi() % 4
 			match dice:
 				0:
@@ -180,10 +229,10 @@ func _play(s) -> void:
 				3:
 					sfx = DieTinyBoom4.instantiate()
 			sfx.volume_db = sfx.volume_db - 7
-		3000:
+		sound.WEAPON_PLASMA:
 			sfx = WeaponPlasma.instantiate()
 			sfx.volume_db = sfx.volume_db - 5
-		3001:
+		sound.WEAPON_BEAM:
 			dice = randi() % 5
 			match dice:
 				0:
@@ -198,7 +247,7 @@ func _play(s) -> void:
 					sfx = WeaponBeam5.instantiate()
 			sfx.volume_db = sfx.volume_db - 7
 			#sfx.pitch_scale = 2
-		3002:
+		sound.WEAPON_BLASTER:
 			dice = randi() % 5
 			match dice:
 				0:
@@ -213,10 +262,10 @@ func _play(s) -> void:
 					sfx = WeaponBlaster5.instantiate()
 			sfx.volume_db = sfx.volume_db - 10
 			
-		3003:
+		sound.WEAPON_MINES:
 			sfx = WeaponMines.instantiate()
 			sfx.volume_db = sfx.volume_db - 10
-		3004:
+		sound.WEAPON_MISSILE:
 			dice = randi() % 5
 			match dice:
 				0:
@@ -230,7 +279,7 @@ func _play(s) -> void:
 				4:
 					sfx = WeaponMissile5.instantiate()
 			sfx.volume_db = sfx.volume_db - 10
-		3005:
+		sound.WEAPON_ARTILLERY:
 			dice = randi() % 3
 			match dice:
 				0:
@@ -240,7 +289,7 @@ func _play(s) -> void:
 				2:
 					sfx = WeaponArtillery3.instantiate()
 			sfx.volume_db = sfx.volume_db - 5
-		3006: #Spartan
+		sound.WEAPON_SPARTAN: #Spartan
 			dice = randi() % 5
 			match dice:
 				0:
@@ -255,7 +304,7 @@ func _play(s) -> void:
 					sfx = WeaponBeam5.instantiate()
 			sfx.volume_db = sfx.volume_db - 3
 			sfx.pitch_scale = .6
-		3007: #Deep Blaster
+		sound.WEAPON_HEAVY_BLASTER: #Deep Blaster
 			dice = randi() % 5
 			match dice:
 				0:
@@ -270,7 +319,7 @@ func _play(s) -> void:
 					sfx = WeaponBlaster5.instantiate()
 			sfx.volume_db = sfx.volume_db - 6
 			sfx.pitch_scale = .5
-		3008: #Mining
+		sound.WEAPON_MINER: #Mining
 			dice = randi() % 5
 			match dice:
 				0:
@@ -285,7 +334,7 @@ func _play(s) -> void:
 					sfx = WeaponBeam5.instantiate()
 			sfx.volume_db = sfx.volume_db - 12
 			sfx.pitch_scale = 1.3
-		3009: #Phalanx
+		sound.WEAPON_PHALANX: #Phalanx
 			dice = randi() % 5
 			match dice:
 				0:
@@ -300,27 +349,27 @@ func _play(s) -> void:
 					sfx = WeaponBeam5.instantiate()
 			sfx.volume_db = sfx.volume_db - 8
 			sfx.pitch_scale = 2
-		4000:
+		sound.GET_METAL:
 			sfx = GetMetal.instantiate()
-		4001:
+		sound.BUTTON_BUILD:
 			sfx = ButtonBuild.instantiate()
-		4002:
+		sound.BUILD_ERROR:
 			sfx = BuildError.instantiate()
-		4003:
+		sound.BUTTON_GALAXY:
 			sfx = ButtonGalaxy.instantiate()
-		4004:
+		sound.BUTTON_TAB:
 			sfx = ButtonTab.instantiate()
-		4005:
+		sound.BUTTON_EQUIP:
 			sfx = ButtonEquip.instantiate()
-		4006:
+		sound.BUTTON_ITEM:
 			sfx = ButtonItem.instantiate()
-		4007:
+		sound.TOO_POOR:
 			sfx = TooPoor.instantiate()
-		4008:
+		sound.CAMPAIGN:
 			sfx = Campaign.instantiate()
-		4009:
+		sound.BUTTON_MENU:
 			sfx = ButtonMenu.instantiate()
-		4010:
+		sound.BUTTON_START:
 			sfx = ButtonStart.instantiate()
 	sfx.volume_db = sfx.volume_db - 20 * (1 - GLOBAL.sound_volume / 100)
 	add_child(sfx)

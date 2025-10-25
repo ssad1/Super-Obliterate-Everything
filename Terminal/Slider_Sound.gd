@@ -14,6 +14,6 @@ func _ready():
 func _on_Slider_Sound_value_changed(value):
 	GLOBAL.sound_volume = value
 	if(GLOBAL.gamemode != 0):
-		SFX._play_new([3005])
+		SFX._play_new([SFX.sound.WEAPON_ARTILLERY])
 	if(saves_on == true):
 		GLOBAL._save_settings()

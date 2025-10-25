@@ -15,6 +15,7 @@ spawn_id = 78
 
 [node name="Gun_General" parent="." instance=ExtResource("3")]
 visible = false
+fire_sound = 17
 gun_range = 300
 gun_v = 10
 gun_v_noise = 1.0
@@ -30,4 +31,4 @@ gun_scale = 0.75
 visible = false
 
 [node name="Module_Death_SFX" parent="." instance=ExtResource("5")]
-fire_sound = 2000
+fire_sound = 17

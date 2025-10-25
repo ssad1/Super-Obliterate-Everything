@@ -10,5 +10,5 @@ func _ready():
 #	pass
 
 func _pressed():
-	SFX._play_new([4010])
+	SFX._play_new([SFX.sound.BUTTON_START])
 	EVENTS.emit_signal("user_login",0)

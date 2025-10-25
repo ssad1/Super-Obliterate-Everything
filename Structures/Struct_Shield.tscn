@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://clp3frwm151al" path="res://Structures/Graphics/Struct_Shield_L.PNG" id="4_8vagn"]
 [ext_resource type="Texture2D" uid="uid://dbpq48flnhqhe" path="res://Structures/Graphics/Struct_Shield_N.PNG" id="4_y0tvw"]
 [ext_resource type="Texture2D" uid="uid://ndebfqqflvgd" path="res://Structures/Graphics/newAssets/Struct_Shield_Glow.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Area_Shield.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://2rc1lcifjq2j" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://70jdr3qlt5qd" path="res://Modules/Module_Area_Shield.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="11"]
 
 [sub_resource type="ShaderMaterial" id="1"]
@@ -111,7 +111,6 @@ libraries = {
 autoplay = "Spin"
 
 [node name="Module_Area_Shield" parent="." instance=ExtResource("10")]
-anchors_preset = 8
 
 [node name="HitBox" parent="." instance=ExtResource("3")]
 offset_left = -10.0
@@ -125,4 +124,4 @@ grow_vertical = 2
 visible = false
 
 [node name="Module_SFX" parent="." instance=ExtResource("11")]
-build_sfx = 1011
+build_sfx = 11

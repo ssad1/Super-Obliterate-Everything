@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" path="res://Guns/Gun_Laser.tscn" id="6"]
 [ext_resource type="Texture2D" uid="uid://cpn6y3ejjmsdl" path="res://Turrets/Graphics/Backup/Turret_Laser_N.PNG" id="6_rmo4w"]
 [ext_resource type="PackedScene" path="res://Shots/Laser_General.tscn" id="7"]
-[ext_resource type="PackedScene" path="res://Effects/E_MuzzleE.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://2l4a7xhqw1ki" path="res://Effects/E_MuzzleE.tscn" id="8"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -53,7 +53,7 @@ vframes = 8
 
 [node name="Gun_Laser" parent="." instance=ExtResource("6")]
 position = Vector2(0, -16)
-fire_sound = 3001
+fire_sound = 21
 gun_range = 450
 gun_scale = 0.15
 

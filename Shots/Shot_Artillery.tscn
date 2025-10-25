@@ -60,4 +60,4 @@ scale_effect_size = 2.0
 [node name="Explode_Basic" parent="Module_Trigger/Spawn_Explosion" instance=ExtResource("9")]
 
 [node name="Module_Death_SFX" parent="Module_Trigger" instance=ExtResource("11")]
-fire_sound = 2000
+fire_sound = 17

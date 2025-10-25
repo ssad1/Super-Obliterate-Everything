@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://4oat6bgn65rv" path="res://Effects/Gradients/Gradient_Artillery.tres" id="6"]
 [ext_resource type="Texture2D" uid="uid://cvylrsm6qfftj" path="res://Turrets/Graphics/Backup/Turret_Artillery_N.PNG" id="6_l4ooe"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="7"]
-[ext_resource type="PackedScene" path="res://Shots/Shot_Artillery.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://d32aggrenhtof" path="res://Shots/Shot_Artillery.tscn" id="8"]
 [ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="9"]
 [ext_resource type="PackedScene" path="res://Effects/E_MuzzleB.tscn" id="11"]
 
@@ -64,7 +64,7 @@ vframes = 8
 
 [node name="Gun_General" parent="." instance=ExtResource("7")]
 position = Vector2(0, -16)
-fire_sound = 3005
+fire_sound = 25
 gun_heat = 30
 gun_range = 1200
 gun_angle = 0.05

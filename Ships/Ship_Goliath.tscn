@@ -91,7 +91,7 @@ position = Vector2(0, -9)
 
 [node name="Gun_Laser" parent="." instance=ExtResource("8")]
 position = Vector2(-12, -24)
-fire_sound = 3006
+fire_sound = 27
 gun_kick = 20.0
 gun_heat = 20
 gun_angle = 0.03
@@ -105,7 +105,7 @@ scale = Vector2(2.5, 2.5)
 
 [node name="Gun_Laser2" parent="." instance=ExtResource("8")]
 position = Vector2(12, -24)
-fire_sound = 3006
+fire_sound = 27
 gun_kick = 20.0
 gun_heat = 20
 gun_angle = 0.03

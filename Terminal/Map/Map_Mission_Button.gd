@@ -37,7 +37,7 @@ func _ignite(s):
 	mission_data[9] = planet.asteroids
 
 func _pressed():
-	SFX._play_new([2001])
+	SFX._play_new([SFX.sound.BIG_BOOM])
 	LEVELS.mission_id = id
 	LEVELS.level_seed = mission_seed
 	LEVELS.level_mission = mission_data[0]

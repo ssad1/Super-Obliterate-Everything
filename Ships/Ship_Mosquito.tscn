@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dbsec4shvpn0e" path="res://Ships/Graphics/Mosquito_N.PNG" id="6_rucgn"]
 [ext_resource type="Texture2D" uid="uid://digfsqadrruot" path="res://Ships/Graphics/Mosquito_C.PNG" id="7"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://cfxhjbmt2lidm" path="res://Shots/Missile_B1.tscn" id="10"]
 [ext_resource type="Texture2D" uid="uid://5y1o6yhy548u" path="res://Ships/Graphics/Mosquito_B.PNG" id="13"]
 [ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="14"]
@@ -87,7 +87,7 @@ grow_vertical = 2
 
 [node name="Gun_General" parent="." instance=ExtResource("8")]
 position = Vector2(0, -16)
-fire_sound = 3004
+fire_sound = 23
 gun_kick = 1.0
 gun_heat = 30
 gun_range = 200

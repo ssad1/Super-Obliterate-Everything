@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cyq8sbfyg2g5e" path="res://Ships/Graphics/Miner_N.PNG" id="6_daq4m"]
 [ext_resource type="Texture2D" uid="uid://di4v3c5qn5hvs" path="res://Ships/Graphics/Miner_C.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://bf1ni2svaq3bo" path="res://Ships/Graphics/Miner_L.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://ny1gpgmldn51" path="res://Ships/Graphics/Miner_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Shots/Laser_Mining.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://dddaclj1hb48m" path="res://Effects/E_MuzzleH.tscn" id="12"]
@@ -90,7 +90,7 @@ scale = Vector2(0.5, 0.5)
 
 [node name="Gun_Laser" parent="." instance=ExtResource("4")]
 position = Vector2(0, -12)
-fire_sound = 3008
+fire_sound = 29
 gun_heat = 20
 gun_range = 64
 gun_scale = 0.15

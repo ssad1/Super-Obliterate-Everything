@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cyetwarnb2wve" path="res://Structures/Graphics/Struct_Heavy_Shield_D.PNG" id="3_rretx"]
 [ext_resource type="Texture2D" uid="uid://pov00ntnkncm" path="res://Structures/Graphics/Struct_Heavy_Shield_N.PNG" id="4_84hin"]
 [ext_resource type="Texture2D" uid="uid://d3fvog4dxbaeq" path="res://Structures/Graphics/newAssets/Struct_Heavy_Shield_Glow.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://2rc1lcifjq2j" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://ctp4jh83ii4c3" path="res://Modules/Module_Area_Heavy_Shield.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="11"]
 
@@ -119,4 +119,4 @@ grow_vertical = 2
 visible = false
 
 [node name="Module_SFX" parent="." instance=ExtResource("11")]
-build_sfx = 1012
+build_sfx = 12

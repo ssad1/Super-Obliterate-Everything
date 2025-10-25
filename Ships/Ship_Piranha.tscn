@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://3qjtww33ctyv" path="res://Ships/Graphics/Piranha_N.PNG" id="4_438e0"]
 [ext_resource type="Texture2D" uid="uid://cdp0eeabh1o7w" path="res://Ships/Graphics/Piranha_L.PNG" id="4_vhhlj"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
 [ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="10"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="11"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
@@ -97,7 +97,7 @@ grow_vertical = 2
 
 [node name="Gun_General" parent="." instance=ExtResource("8")]
 position = Vector2(0, -16)
-fire_sound = 3002
+fire_sound = 22
 gun_kick = 1.0
 gun_heat = 15
 gun_burst_max = 3

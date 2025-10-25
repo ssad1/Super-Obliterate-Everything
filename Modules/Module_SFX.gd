@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var build_sfx = 0
+@export var build_sfx:SFX.sound = 0
 var clock = 0
 var up
 var is_type = "TRIGGER"

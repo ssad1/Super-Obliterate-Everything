@@ -131,11 +131,11 @@ func _build():
 				EVENTS.emit_signal("cancel_build")
 			obj = SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_BUILD_FLASH],null,position + center,Vector2(0,0),0,0,0)
 			obj.scale = Vector2(.5 * (.5 + center.y / 32),.5 * (.5 + center.y / 32))
-			SFX._play_new([4001])
+			SFX._play_new([SFX.sound.BUTTON_BUILD])
 		else:
 			if(Input.is_key_pressed(KEY_SHIFT) == false):
 				EVENTS.emit_signal("cancel_build")
-			SFX._play_new([4002])
+			SFX._play_new([SFX.sound.BUILD_ERROR])
 
 func _set_stats():
 	if(stats != null):

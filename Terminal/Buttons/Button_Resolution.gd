@@ -8,7 +8,7 @@ func _ready():
 #	pass
 
 func _pressed():
-	SFX._play_new([4006])
+	SFX._play_new([SFX.sound.BUTTON_ITEM])
 	_restext()
 	
 func _restext():

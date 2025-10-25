@@ -758,7 +758,6 @@ func _set_cpu(d:float) -> void:
 func _setup_factory(s,obj) -> void:
 	for i in obj.modules.size():
 		if obj.modules[i].name == "Hangar_Factory":
-			print("item: ", item_bag[s])
 			obj.modules[i].ship_id[0] = item_bag[s][0]
 
 func _setup_base() -> void:

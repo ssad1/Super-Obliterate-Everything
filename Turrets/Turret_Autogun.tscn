@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://crsbpfc8rfaph" path="res://Turrets/Graphics/Backup/Turret_Autogun_C.PNG" id="3_lxkq6"]
 [ext_resource type="Texture2D" uid="uid://kv3pqv16mwvj" path="res://Turrets/Graphics/Backup/Turret_Autogun_L.PNG" id="4_snrop"]
 [ext_resource type="Script" path="res://Turrets/Turret_General.gd" id="5"]
-[ext_resource type="PackedScene" path="res://Shots/Shot_Blaster.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="6"]
 [ext_resource type="Texture2D" uid="uid://cfedhhpkuavqb" path="res://Turrets/Graphics/Backup/Turret_Autogun_N.PNG" id="6_5xihl"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="7"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="8"]
@@ -64,7 +64,7 @@ vframes = 8
 
 [node name="Gun_General" parent="." instance=ExtResource("7")]
 position = Vector2(0, -14)
-fire_sound = 3002
+fire_sound = 22
 gun_heat = 20
 gun_burst_max = 4
 gun_burst_heat = 2

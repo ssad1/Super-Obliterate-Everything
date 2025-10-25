@@ -9,6 +9,6 @@ func _ready():
 #	pass
 
 func _pressed():
-	SFX._play_new([4009])
+	SFX._play_new([SFX.sound.BUTTON_MENU])
 	EVENTS.emit_signal("cancel_build")
 	EVENTS.emit_signal("show_menu_options")

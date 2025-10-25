@@ -98,4 +98,4 @@ ship_id = Array[int]([54])
 [node name="Module_Medium_Struct_Boom_Large" parent="." instance=ExtResource("8")]
 
 [node name="Module_SFX" parent="." instance=ExtResource("10")]
-build_sfx = 1005
+build_sfx = 5

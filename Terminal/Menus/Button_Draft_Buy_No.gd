@@ -17,4 +17,4 @@ func _ready():
 
 func _pressed():
 	EVENTS.emit_signal("close_draft_buy")
-	SFX._play_new([4006])
+	SFX._play_new([SFX.sound.BUTTON_ITEM])

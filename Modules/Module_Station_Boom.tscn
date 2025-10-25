@@ -18,6 +18,7 @@ boom_scale = 2.0
 
 [node name="Gun_General" parent="." instance=ExtResource("4")]
 visible = false
+fire_sound = 19
 gun_range = 600
 gun_v_noise = 1.0
 gun_r_noise = 1.0
@@ -31,4 +32,4 @@ gun_circle = true
 visible = false
 
 [node name="Module_Death_SFX" parent="." instance=ExtResource("6")]
-fire_sound = 2002
+fire_sound = 19

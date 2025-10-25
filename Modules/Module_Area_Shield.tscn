@@ -1,14 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://70jdr3qlt5qd"]
 
-[ext_resource path="res://Modules/Module_Area_Shield.gd" type="Script" id=1]
-[ext_resource path="res://Effects/ShieldGlow.tscn" type="PackedScene" id=2]
+[ext_resource type="Script" path="res://Modules/Module_Area_Shield.gd" id="1"]
+[ext_resource type="PackedScene" path="res://Effects/ShieldGlow.tscn" id="2"]
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="CanvasItemMaterial" id="1"]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id="2"]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id="3"]
 code = "shader_type canvas_item;
 
 //Parameters
@@ -262,9 +262,9 @@ void fragment()
 	//COLOR = vec4(1.0, 0.0, 0.0, 1.0);
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id="4"]
 resource_local_to_scene = true
-shader = SubResource( 3 )
+shader = SubResource("3")
 shader_parameter/shield_radius = 128.0
 shader_parameter/shield_width = 32.0
 shader_parameter/hit_angle = 0.0
@@ -276,16 +276,13 @@ shader_parameter/shield_damage_strength = 0.0
 shader_parameter/offset = null
 
 [node name="Module_Area_Shield" type="ColorRect"]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -960.0
-margin_top = -540.0
-margin_right = -952.0
-margin_bottom = -532.0
-color = Color( 1, 1, 1, 0 )
-script = ExtResource( 1 )
+color = Color(1, 1, 1, 0)
+script = ExtResource("1")
 shield = 100
 max_shield = 100
 shield_radius = 128
@@ -294,11 +291,11 @@ shield_width = 48
 [node name="Shield_Line" type="Line2D" parent="."]
 visible = false
 light_mask = 0
-material = SubResource( 1 )
-default_color = Color( 0.54902, 0.811765, 1, 0.498039 )
-gradient = SubResource( 2 )
+material = SubResource("1")
+default_color = Color(0.54902, 0.811765, 1, 0.498039)
+gradient = SubResource("2")
 
-[node name="ShieldGlow" parent="." instance=ExtResource( 2 )]
-material = SubResource( 4 )
-position = Vector2( 0, 0 )
+[node name="ShieldGlow" parent="." instance=ExtResource("2")]
+material = SubResource("4")
+position = Vector2(0, 0)
 script = null

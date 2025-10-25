@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cmbv27ga3i33w"]
 
 [ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="PackedScene" path="res://Shots/Shot_Plasma.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c3ngw8s22lms" path="res://Shots/Shot_Plasma.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://btyam15rup1lo" path="res://Turrets/Graphics/Backup/Turret_Plasmacaster_L.PNG" id="3_t4en3"]
 [ext_resource type="Texture2D" uid="uid://cxjxcf018b4ex" path="res://Turrets/Graphics/Backup/Turret_Plasmacaster_D.PNG" id="3_vc0ym"]
 [ext_resource type="Script" path="res://Turrets/Turret_General.gd" id="5"]
@@ -52,7 +52,7 @@ vframes = 8
 
 [node name="Gun_General" parent="." instance=ExtResource("7")]
 position = Vector2(0, -24)
-fire_sound = 3000
+fire_sound = 24
 gun_heat = 60
 gun_range = 700
 gun_v = 10

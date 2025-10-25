@@ -27,6 +27,7 @@ scale_effect_size = 0.5
 
 [node name="Gun_General" parent="." instance=ExtResource("3")]
 visible = false
+fire_sound = 17
 gun_range = 600
 gun_v_noise = 1.0
 gun_r_noise = 1.0
@@ -40,4 +41,4 @@ gun_circle = true
 visible = false
 
 [node name="Module_Death_SFX" parent="." instance=ExtResource("5")]
-fire_sound = 2000
+fire_sound = 17

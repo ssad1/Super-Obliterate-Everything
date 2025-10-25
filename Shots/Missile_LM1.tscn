@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Ships/Ship_Missile.gd" id="6"]
 [ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://ojwkfodf3wg1" path="res://Shots/Graphics/Missile_LM1_B.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Shots/Explode_Rocket.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dkaeqtpygrur6" path="res://Shots/Explode_Rocket.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Modules/Spawn_Explosion.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Death_SFX.tscn" id="11"]
 
@@ -75,4 +75,4 @@ scale_effect = true
 [node name="Explode_Rocket" parent="Module_Trigger/Spawn_Explosion" instance=ExtResource("9")]
 
 [node name="Module_Death_SFX" parent="Module_Trigger" instance=ExtResource("11")]
-fire_sound = 2003
+fire_sound = 20

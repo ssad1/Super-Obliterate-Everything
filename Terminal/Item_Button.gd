@@ -101,7 +101,7 @@ func _drag_swap(button_id:int, s) -> void:
 		ACCOUNT._equip_item(id,item_id)
 		_equip_item(ACCOUNT.item_bag[item_id])
 		EVENTS.emit_signal("drag_swap_b", button_id, current_id)
-		SFX._play_new([4006])
+		SFX._play_new([SFX.sound.BUTTON_ITEM])
 
 func _drag_swap_b(button_id, current_id) -> void:
 	if id != button_id: return
@@ -164,7 +164,7 @@ func _mouse_exited() -> void:
 		EVENTS.emit_signal("hide_menu_item_stats")
 
 func _pressed_armory() -> void:
-	SFX._play_new([4006])
+	SFX._play_new([SFX.sound.BUTTON_ITEM])
 	EVENTS.emit_signal("unequip_buttons")
 	equip_me = true
 	EVENTS.emit_signal("submenu_button_press","Button_EquipSelect")
@@ -174,7 +174,7 @@ func _pressed_armory() -> void:
 
 func _pressed_equip() -> void:
 	#Do Equipment Stuff
-	SFX._play_new([4006])
+	SFX._play_new([SFX.sound.BUTTON_ITEM])
 	sprite.scale = Vector2(1,1)
 	EVENTS.emit_signal("submenu_button_press","Button_Equip")
 	EVENTS.emit_signal("hide_menu_item_stats")
@@ -185,11 +185,11 @@ func _pressed_market() -> void:
 	pass
 
 func _pressed_item() -> void:
-	SFX._play_new([4006])
+	SFX._play_new([SFX.sound.BUTTON_ITEM])
 	EVENTS.emit_signal("show_menu_armory")
 
 func _pressed_sell() -> void:
-	SFX._play_new([4006])
+	SFX._play_new([SFX.sound.BUTTON_ITEM])
 	if !button_pressed:
 		_mouse_exited()
 	if button_pressed:
@@ -198,7 +198,7 @@ func _pressed_sell() -> void:
 
 func _pressed_cockpit() -> void:
 	var r = 0
-	SFX._play_new([4006])
+	SFX._play_new([SFX.sound.BUTTON_ITEM])
 	button_pressed = true
 	sprite.scale = Vector2(1,1)
 
@@ -236,7 +236,7 @@ func _pressed_cockpit() -> void:
 func _pressed_draft() -> void:
 	print("Draft Press")
 	print(obj.s)
-	SFX._play_new([4006])
+	SFX._play_new([SFX.sound.BUTTON_ITEM])
 	EVENTS.emit_signal("show_draft_buy",id, global_position, obj.s, obj.name_text, obj.credit_cost)
 
 func _pressed_prize() -> void:

@@ -14,10 +14,10 @@ func _pressed():
 	print(price)
 	if(ACCOUNT.credits >= price):
 		EVENTS.emit_signal("draft_buy",price,item)
-		SFX._play_new([2001])
+		SFX._play_new([SFX.sound.BIG_BOOM])
 	else:
 		EVENTS.emit_signal("draft_error", "POOR")
-		SFX._play_new([4007])
+		SFX._play_new([SFX.sound.TOO_POOR])
 
 func _show_draft_buy(id,pos,s,n,c):
 	price = c

@@ -51,7 +51,7 @@ func _check_delivery() -> void:
 
 func _on_delivery() -> void:
 	if player == SPAWNER.game.me:
-		SFX._play_new([4000])
+		SFX._play_new([SFX.sound.GET_METAL])
 	player._add_resource(deliver_energy, deliver_metal, deliver_supply)
 	up.vanish = true
 	up.armor = -100

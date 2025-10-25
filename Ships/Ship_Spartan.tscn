@@ -84,7 +84,7 @@ grow_vertical = 2
 
 [node name="Gun_Laser" parent="." instance=ExtResource("4")]
 position = Vector2(0, -24)
-fire_sound = 3006
+fire_sound = 27
 gun_kick = 25.0
 gun_heat = 50
 gun_angle = 0.03

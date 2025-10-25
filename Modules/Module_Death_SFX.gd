@@ -1,7 +1,7 @@
 extends Node
 
 var up
-@export var fire_sound = 0
+@export var fire_sound:SFX.sound = 0
 var is_type = "TRIGGER"
 
 # Called when the node enters the scene tree for the first time.

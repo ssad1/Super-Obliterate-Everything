@@ -109,7 +109,7 @@ grow_vertical = 2
 
 [node name="Gun_General" parent="." instance=ExtResource("8")]
 position = Vector2(0, -16)
-fire_sound = 3002
+fire_sound = 22
 gun_kick = 1.0
 gun_heat = 10
 gun_range = 250
@@ -149,7 +149,7 @@ scale = Vector2(0.5, 0.5)
 death_activate = true
 
 [node name="Gun_General" parent="Module_Trigger" instance=ExtResource("8")]
-fire_sound = 3007
+fire_sound = 28
 gun_v = 35
 gun_v_noise = 0.5
 gun_r_noise = 0.2
@@ -191,4 +191,4 @@ scale_effect_size = 0.5
 [node name="Explode_Basic" parent="Module_Trigger/Spawn_Explosion" instance=ExtResource("16")]
 
 [node name="Module_Death_SFX" parent="Module_Trigger" instance=ExtResource("9")]
-fire_sound = 2000
+fire_sound = 17

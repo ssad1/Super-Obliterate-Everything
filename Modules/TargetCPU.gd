@@ -98,12 +98,17 @@ func check_target(target) -> bool:
 	(scan_injured && target.armor >= target.max_armor)):
 		return false
 
+	#avoid units not detecting stuff that was already there before
+
+	if "range_radius" in up:
+		if target.pos.distance_to(up.pos) <= up.range_radius:
+			target_in_range = true
+	
 	return true
 
-func _do_tick():
+func _do_tick() -> void:
 	
 	#make sure we ALWAYS have something to target no matter what
-
 	if target_clock == 0 && !found_victim:
 		
 		_do_scan()
@@ -210,7 +215,7 @@ func _do_scan():
 		found_victim = up.target_hot
 
 	#to not waste resources with trivial units/objects
-	if up.is_type == "STRUCT" || up.is_type == "SHOT" || up.is_type == "LASER": 
+	if (up.is_type == "STRUCT" || up.is_type == "SHOT" || up.is_type == "LASER"): 
 		found_victim = true
 
 	_clean_targets()
@@ -248,21 +253,9 @@ func _do_FOV_entered(obj: Area2D) -> void:
 	if "target_hot" in up:
 		found_victim = up.target_hot
 
-	if up.is_type == "STRUCT" || up.is_type == "SHOT" || up.is_type == "LASER": 
+	if (up.is_type == "STRUCT" || up.is_type == "SHOT" || up.is_type == "LASER") && target_profile != "REPAIR": 
 		found_victim = true
-		
-	'''
-	var parentu = up as Thing
-
-	for target in targets:
-
-		if is_instance_valid(target) && is_instance_valid(parentu) && target_clock == 0: 
-			print("\nThe up's name: ", parentu.name_text)
-			print("The up's path: ", parentu.scene_file_path)
-			print("The up's tree path: ", parentu.get_path())
-			print("The target's path: ", target.name_text)
-			print("The target's path: ", target.scene_file_path)
-			print("The target's tree path: ", target.get_path())'''
+	
 
 func _do_FOV_exited(obj: Area2D):
 	#make sure we got a valid object in our FOV

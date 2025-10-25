@@ -52,7 +52,7 @@ vframes = 8
 
 [node name="Gun_Laser" parent="." instance=ExtResource("6")]
 position = Vector2(0, -14)
-fire_sound = 3009
+fire_sound = 29
 gun_heat = 4
 gun_range = 250
 gun_angle = 0.05

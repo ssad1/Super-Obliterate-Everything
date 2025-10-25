@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dm3fr46h3uqtd" path="res://Ships/Graphics/Saber_N.PNG" id="6_2yo07"]
 [ext_resource type="Texture2D" uid="uid://daot5ismboukf" path="res://Ships/Graphics/Saber_C.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://ce110pbhh2d34" path="res://Ships/Graphics/Saber_L.PNG" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://bpqps0y1ta3kj" path="res://Ships/Graphics/Saber_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Shots/Laser_General.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://2l4a7xhqw1ki" path="res://Effects/E_MuzzleE.tscn" id="12"]
@@ -87,7 +87,7 @@ grow_vertical = 2
 
 [node name="Gun_Laser" parent="." instance=ExtResource("4")]
 position = Vector2(-8, -12)
-fire_sound = 3001
+fire_sound = 21
 gun_heat = 2
 gun_angle = 0.12
 gun_scale = 0.15
@@ -101,7 +101,7 @@ scale = Vector2(0.5, 0.5)
 
 [node name="Gun_Laser2" parent="." instance=ExtResource("4")]
 position = Vector2(8, -12)
-fire_sound = 3001
+fire_sound = 21
 gun_heat = 2
 gun_angle = 0.12
 gun_scale = 0.15

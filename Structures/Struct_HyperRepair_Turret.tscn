@@ -4,12 +4,12 @@
 [ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://buwlpl23tej3c" path="res://Structures/Graphics/Struct_Large_Turretbase_C.png" id="3_2ohlw"]
 [ext_resource type="Texture2D" uid="uid://d3x3mktw83cka" path="res://Structures/Graphics/Struct_Large_Turretbase_L.png" id="4_kwgc2"]
-[ext_resource type="Texture2D" uid="uid://cluvowg4hv2g8" path="res://Structures/Graphics/Struct_Large_Turretbase_D.png" id="5_6fhh8"]
+[ext_resource type="PackedScene" uid="uid://m4l7y1jj6fxs" path="res://Structures/struct_turret_base_large.tscn" id="5_msi0q"]
 [ext_resource type="PackedScene" uid="uid://cccyaxk1ksifc" path="res://Turrets/Turret_HyperRepair.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_Small_Struct_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://cr3uqos0286u2" path="res://Modules/Module_Small_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qea03"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnamt"]
 resource_local_to_scene = true
 shader = ExtResource("1")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
@@ -47,14 +47,12 @@ supply_cost = 2
 credit_cost = 1500
 max_armor = 200
 
-[node name="Hull" type="Sprite2D" parent="."]
-light_mask = 0
-material = SubResource("ShaderMaterial_qea03")
-texture = ExtResource("5_6fhh8")
-
 [node name="Turret_HyperRepair" parent="." instance=ExtResource("8")]
 
 [node name="Module_Small_Struct_Boom_Large" parent="." instance=ExtResource("9")]
 
 [node name="Module_SFX" parent="." instance=ExtResource("10")]
-build_sfx = 1009
+build_sfx = 9
+
+[node name="Hull" parent="." instance=ExtResource("5_msi0q")]
+material = SubResource("ShaderMaterial_pnamt")
