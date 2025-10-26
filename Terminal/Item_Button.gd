@@ -46,7 +46,7 @@ var fading:bool = _fading:
 	get:
 		return _fading
 
-# Called when the node enters the scene tree for the first time.
+var is_being_hovered:bool = false
 func _ready() -> void:
 
 	p = get_parent().name
@@ -61,10 +61,13 @@ func _ready() -> void:
 
 	#Currently glitched, will fix later
 	#rest of the code in Drag_Sprite.gd
-	'''
+	
 	if p == "ArmoryGrid":
 		EVENTS.connect("drag_swap", Callable(self, "_drag_swap"))
-		EVENTS.connect("drag_swap_b", Callable(self, "_drag_swap_b"))'''
+		EVENTS.connect("drag_swap_b", Callable(self, "_drag_swap_b"))
+
+	mouse_entered.connect(func(): is_being_hovered = true)
+	mouse_exited.connect(func(): is_being_hovered = false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
@@ -76,7 +79,7 @@ func _process(delta:float) -> void:
 
 	if button_pressed:
 		sprite.scale = Vector2(1.4,1.4)
-	elif !is_hovered():
+	elif !is_being_hovered:
 		sprite_shrink = true
 
 func _input(event: InputEvent) -> void:
@@ -95,10 +98,11 @@ func _button_down() -> void:
 		EVENTS.emit_signal("dragging", $Sprite2D.texture, id, item_id)
 
 func _drag_swap(button_id, s) -> void:
+
 	var current_id = item_id
-	var mp := get_viewport().get_mouse_position()
 	var bp := global_position
-	if (mp.x > bp.x && mp.x < bp.x + 64 && mp.y > bp.y && mp.y < bp.y + 64) && s != null:
+
+	if is_being_hovered && s != null:
 		_clear_obj()
 		item_id = s
 
@@ -109,8 +113,10 @@ func _drag_swap(button_id, s) -> void:
 
 		SFX._play_new([SFX.sound.BUTTON_ITEM])
 
-func _drag_swap_b(button_id, current_id, source_id) -> void:
+func _drag_swap_b(button_id, current_id) -> void:
+
 	if id != button_id: return
+
 	if current_id != null:
 		_clear_obj()
 		item_id = current_id
@@ -155,8 +161,7 @@ func _mouse_entered() -> void:
 		EVENTS.emit_signal("show_menu_item_stats", global_position, obj)
 
 func _mouse_exited() -> void:
-	if !button_pressed:
-		sprite_shrink = true
+	sprite_shrink = true
 	if p == "CockpitGrid":
 		EVENTS.emit_signal("hide_item_stats")
 	if p == "ArmoryGrid":

@@ -4,13 +4,13 @@ extends Node2D
 
 var s
 @export var damage:float = 10
-#@export var damage_type = "EXPLOSION"
+@export var damage_type = "EXPLOSION"
 @export var force:float = 0
 @export var boom_radius:float = 0
-@export var boom_flash:int = SPAWNER.spawn_objs.EFFECT_FLASH_BOOM
-@export var boom_effect:int = SPAWNER.spawn_objs.EFFECT_BOOM
-@export var boom_smoke:int = SPAWNER.spawn_objs.EFFECT_BOOM
-@export var boom_sparks:int = SPAWNER.spawn_objs.EFFECT_BOOM
+@export var boom_flash:int = SPAWNER.spawn_objs.EFFECT_PLASMA_FLASH
+@export var boom_effect:int = SPAWNER.spawn_objs.EFFECT_PLASMA_BOOM
+@export var boom_smoke:int = 0
+@export var boom_sparks:int = 0
 @export var boom_scale:float = 1
 @export var flash_scale:float = 1
 @export var smoke_scale:float = 1
@@ -27,10 +27,6 @@ var rotate:float = 0
 var modules:Array = []
 var tcpu:TargetCPU
 var player
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

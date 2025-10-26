@@ -74,12 +74,13 @@ factory = 17
 name_text = "PUMA"
 class_text = "CORVETTE"
 energy_cost = 75
-metal_cost = 15
+metal_cost = 20
 supply_cost = 2
 credit_cost = 200
 inertia = 0.8
 max_velocity = 7.0
 max_rotate_velocity = 0.25
+max_armor = 8.0
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")

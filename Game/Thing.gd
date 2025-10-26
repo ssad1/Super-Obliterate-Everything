@@ -216,7 +216,6 @@ func _hit(s) -> void:
 		armor = max_armor
 
 	UNIT_STATE.do_unit_damage_strength(self)
-	#damage_strength = 1
 
 	if s.is_type == "SHOT":
 		s.armor = 0
