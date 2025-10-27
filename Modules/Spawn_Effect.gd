@@ -1,7 +1,7 @@
 extends Node
 
 var up
-@export var spawn_id:int = SPAWNER.spawn_objs.EFFECT_CLICK_BOOM
+@export var spawn_id:SPAWNER.spawn_objs = SPAWNER.spawn_objs.EFFECT_CLICK_BOOM
 @export var scale_effect:bool = false
 @export var scale_effect_size:float = 1
 var is_type:String = "TRIGGER"
