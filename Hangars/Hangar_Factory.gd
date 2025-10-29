@@ -39,4 +39,3 @@ func _remove_ship(removeid):
 		if(my_ships[i].spawn_id == removeid):
 			my_ships.remove_at(i)
 		i = i - 1
-	

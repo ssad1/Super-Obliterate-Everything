@@ -104,4 +104,3 @@ ship_id = Array[int]([41])
 visible = false
 
 [node name="Module_SFX" parent="." instance=ExtResource("8")]
-build_sfx = 0

@@ -171,6 +171,7 @@ extends Node
 @onready var Ship_Artillery_Halo := load("res://Ships/Ship_Artillery_Halo.tscn")
 @onready var Ship_Hammerhead := load("res://Ships/Ship_Hammerhead.tscn")
 @onready var Ship_Cataclysm := load("res://Ships/Ship_Cataclysm.tscn")
+@onready var Ship_Legion := load("res://Ships/Ship_Legion.tscn")
 
 @onready var Shot_Blaster = load("res://Shots/Shot_Blaster.tscn")
 @onready var Shot_Double_Blaster = load("res://Shots/Shot_Double_Blaster.tscn")
@@ -288,7 +289,11 @@ enum spawn_objs {
 	EFFECT_ROCKET_FLASH,
 	EFFECT_PANG_SPARKS,
 	EFFECT_FIRE,
-	EFFECT_SMOKE_TRAIL
+	EFFECT_SMOKE_TRAIL,
+
+	#new added stuff
+
+	LEGION
 }
 
 var next_spawn_id:int = 1
@@ -664,6 +669,11 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 			obj = E_SmokeTrail.instantiate()
 			#obj.scale = Vector2(.3,.3)
 
+		#New units:
+
+		spawn_objs.LEGION:
+			obj = Ship_Legion.instantiate()
+
 	obj.s = s
 
 	if up == 0:
@@ -688,7 +698,7 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 	obj.rotate = rotation
 
 	#make sure we actually get a struct or a unit
-	if s[0] < spawn_objs.EFFECT_CLICK_BOOM:
+	if "is_type" in obj:
 
 		if obj.is_type == "STRUCT":
 			obj._build_fix()

@@ -238,12 +238,14 @@ func _do_tick() -> void:
 	_do_thing(lasers)
 	_do_thing(explosions)
 	SFX._do_tick()
+
 	_remove_thing(structs)
 	_remove_thing(ships)
 	_remove_thing(missiles)
 	_remove_thing(shots)
 	_remove_thing(lasers)
 	_remove_thing(explosions)
+	
 	for player in players:
 		player._do_tick()
 	_do_victory()

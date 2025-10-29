@@ -184,3 +184,6 @@ texture = ExtResource("43")
 
 [node name="TREMOR" type="Sprite2D" parent="."]
 texture = ExtResource("37")
+
+[node name="LEGION" type="Sprite2D" parent="."]
+texture = ExtResource("18")

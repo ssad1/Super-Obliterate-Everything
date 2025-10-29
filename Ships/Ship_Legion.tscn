@@ -1,0 +1,142 @@
+[gd_scene load_steps=21 format=3 uid="uid://bq8racpjchq4l"]
+
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="1_vcaka"]
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_5bptc"]
+[ext_resource type="Texture2D" uid="uid://cul0isylh8snj" path="res://Ships/Graphics/Trident_C.PNG" id="3_78ugk"]
+[ext_resource type="Texture2D" uid="uid://n030stav6qvn" path="res://Ships/Graphics/Trident_L.PNG" id="4_c3l2f"]
+[ext_resource type="Texture2D" uid="uid://dii4e4h8qwwca" path="res://Ships/Graphics/Trident_D.PNG" id="5_sqsdj"]
+[ext_resource type="Texture2D" uid="uid://c5kfo0iwrcqvc" path="res://Ships/Graphics/Trident_N.PNG" id="6_yu224"]
+[ext_resource type="Texture2D" uid="uid://coj75qg2iw5je" path="res://Ships/Graphics/Trident_B.PNG" id="7_d8wd4"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="8_cigix"]
+[ext_resource type="PackedScene" uid="uid://dsmpb7fkxj0b4" path="res://Turrets/Turret_Autogun.tscn" id="9_d8ngd"]
+[ext_resource type="PackedScene" uid="uid://dqsn1ygjynlmr" path="res://Hangars/Carrier_Hangar.tscn" id="10_syl7d"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="10_um4q6"]
+[ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="11_n84xv"]
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="12_3xhdf"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="13_445s5"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="14_fsaj3"]
+[ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="15_wyxlu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dc0rr"]
+resource_local_to_scene = true
+shader = ExtResource("2_5bptc")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(16, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_78ugk")
+shader_parameter/lighting = ExtResource("4_c3l2f")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3oc5i"]
+diffuse_texture = ExtResource("5_sqsdj")
+normal_texture = ExtResource("6_yu224")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_887ny"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l5vvb"]
+resource_local_to_scene = true
+shader = ExtResource("12_3xhdf")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("13_445s5")
+
+[node name="Ship_Legion" type="Node2D"]
+script = ExtResource("1_vcaka")
+thrust = 0.1
+aistandoff = 110
+factory = 20
+name_text = "LEGION"
+class_text = "CRUISER"
+energy_cost = 500
+metal_cost = 400
+supply_cost = 5
+credit_cost = 2400
+inertia = 0.2
+max_velocity = 3.0
+max_rotate_velocity = 0.06
+max_armor = 80.0
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_dc0rr")
+texture = SubResource("CanvasTexture_3oc5i")
+hframes = 16
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_887ny")
+texture = ExtResource("7_d8wd4")
+hframes = 16
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("8_cigix")]
+offset_left = -20.0
+offset_top = -26.0
+offset_right = 20.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Turret_Autogun" parent="." instance=ExtResource("9_d8ngd")]
+position = Vector2(0, -9)
+
+[node name="CarrierHangar_LU" parent="." instance=ExtResource("10_syl7d")]
+position = Vector2(20, -9)
+launch_velocity = 8
+
+[node name="CarrierHangar_LD" parent="." instance=ExtResource("10_syl7d")]
+position = Vector2(20, 6)
+launch_velocity = 8
+
+[node name="CarrierHangar_RU" parent="." instance=ExtResource("10_syl7d")]
+position = Vector2(-20, -9)
+rotation = -3.14159
+launch_velocity = 8
+
+[node name="CarrierHangar_RD" parent="." instance=ExtResource("10_syl7d")]
+position = Vector2(-20, 6)
+rotation = -3.14159
+launch_velocity = 8
+
+[node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("15_wyxlu")]
+
+[node name="Gun_Main" parent="." instance=ExtResource("10_um4q6")]
+position = Vector2(0, -32)
+fire_sound = 28
+gun_kick = 1.0
+gun_heat = 4
+gun_angle = 0.1
+gun_v = 45
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.9
+
+[node name="Shot_Blaster" parent="Gun_Main" instance=ExtResource("11_n84xv")]
+visible = false
+material = SubResource("ShaderMaterial_l5vvb")
+base_damage = 1.1
+
+[node name="E_MuzzleA" parent="Gun_Main" instance=ExtResource("14_fsaj3")]
+visible = false
+scale = Vector2(0.75, 0.75)
