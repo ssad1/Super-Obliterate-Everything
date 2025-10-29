@@ -52,11 +52,6 @@ var swirl_strength:float = 0
 var select_strength:float = 0
 var offset:Vector2 = Vector2(randi() % 1000 + 10,randi() % 1000 + 10)
 
-'''
-var build_clock:float = 0
-var build_max:float = 10
-'''
-
 var player
 var tcpu:TargetCPU 
 var tFOV
@@ -67,7 +62,21 @@ var stats
 var ai_box = null
 var modules = []
 var spawn_id:int = 0
-var dead:bool = false
+
+var death:bool = false
+var dead:bool = death:
+	set(value):
+		if value:
+			var game_arr:Array = Main.game.get_thing_array(is_type)
+
+			_remove_ref(spawn_id)
+			queue_free()
+			tree_exited.connect(func(): game_arr.erase(self))
+
+		death = value
+	get:
+		return death
+
 var vanish:bool = false
 var is_type:String = "THING"
 

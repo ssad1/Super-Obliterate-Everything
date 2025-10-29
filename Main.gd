@@ -1,11 +1,12 @@
+class_name Main
 extends Node2D
 
+static var game
 var galaxylayer
 var starfield
 var planetsystem
 var nebula
 var nebulab
-var game
 var dustlayer
 var frostscreen
 var heatlayer

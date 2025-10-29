@@ -20,7 +20,21 @@ var clock:int = 0
 var armor:float = 0
 var lifespan:int = 12
 var is_type:String = "EXPLODE"
-var dead:bool = false
+
+var death:bool = false
+var dead:bool = death:
+	set(value):
+		if value:
+			var game_arr:Array = Main.game.get_thing_array(is_type)
+
+			_remove_ref(spawn_id)
+			queue_free()
+			tree_exited.connect(func(): game_arr.erase(self))
+
+		death = value
+	get:
+		return death
+
 var spawn_id:int = 0
 var velocity:Vector2 = Vector2(0,0)
 var pos:Vector2 = Vector2(0,0)

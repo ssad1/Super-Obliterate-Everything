@@ -239,13 +239,6 @@ func _do_tick() -> void:
 	_do_thing(explosions)
 	SFX._do_tick()
 
-	_remove_thing(structs)
-	_remove_thing(ships)
-	_remove_thing(missiles)
-	_remove_thing(shots)
-	_remove_thing(lasers)
-	_remove_thing(explosions)
-	
 	for player in players:
 		player._do_tick()
 	_do_victory()
@@ -312,32 +305,6 @@ func _do_thing(a) -> void:
 			s.queue_free()
 			a.remove_at(i)
 		i = i - 1
-
-func _remove_thing(a) -> void:
-	var i:int = a.size() - 1
-	var s
-	var sid:int = 0
-	while i >= 0:
-		s = a[i]
-		if s.dead:
-			if "spawn_id" in a:
-				sid = a.spawn_id
-			s.queue_free()
-			a.remove_at(i)
-			_remove_refs(sid)
-		i = i - 1
-
-func _remove_refs(sid) -> void:
-	_remove_refs_sub(ships,sid)
-	_remove_refs_sub(structs,sid)
-	_remove_refs_sub(missiles,sid)
-	_remove_refs_sub(shots,sid)
-	_remove_refs_sub(lasers,sid)
-	_remove_refs_sub(explosions,sid)
-	
-func _remove_refs_sub(a,sid) -> void:
-	for i in a:
-		i._remove_ref(sid)
 
 func _do_victory() -> void:
 	if victory_t > 0:
@@ -424,6 +391,23 @@ func _super_add_child(obj) -> void:
 			$Layer_Effects_Bright.add_child(obj)
 	if obj.is_type == "STATS":
 		$Layer_Stats.add_child(obj)
+
+func get_thing_array(is_type:String) -> Array:
+	match is_type:
+		"STRUCT":
+			return structs
+		"SHIP":
+			return ships
+		"MISSILE":
+			return missiles
+		"SHOT":
+			return shots
+		"LASER":
+			return lasers
+		"EXPLODE":
+			return explosions
+	print("No corresponding array for object type! Returning [].")
+	return []
 
 func _screen_shake():
 	pass

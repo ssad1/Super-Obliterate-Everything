@@ -13,7 +13,21 @@ var mat
 @onready var beam = $Sprite2D
 var beam_wide = 1.0
 var beam_long = 1.0
-var dead = false
+
+var death:bool = false
+var dead:bool = death:
+	set(value):
+		if value:
+			var game_arr:Array = Main.game.get_thing_array(is_type)
+			tree_exited.connect(func(): game_arr.erase(self))
+
+			_remove_ref(spawn_id)
+			queue_free()
+
+		death = value
+	get:
+		return death
+
 var is_type = "LASER"
 var armor = 1
 var player

@@ -46,9 +46,15 @@ func _clean_target(s) -> void:
 
 	while i >= 0:
 		var target = targets[i] 
+		
+		if !is_instance_valid(target):
+			targets.remove_at(i)
+			return
+
 		if "spawn_id" in target && target.spawn_id == s:
 			targets.remove_at(i)
-			i = 0
+			return
+			
 		i = i - 1
 
 func _clean_targets() -> void:
