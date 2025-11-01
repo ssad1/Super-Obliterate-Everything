@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://cifkeew8b0ob2"]
+
+[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="1_ncbw6"]
+[ext_resource type="PackedScene" uid="uid://brpe75s174365" path="res://Turrets/Turret_Autocaster.tscn" id="2_6gbtm"]
+[ext_resource type="PackedScene" uid="uid://dg2fumnmi6k64" path="res://Structures/struct_turret_base_small.tscn" id="2_puat8"]
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="3_xcwi4"]
+[ext_resource type="Texture2D" uid="uid://benf2gd3aiu3j" path="res://Structures/Graphics/Struct_Turret_Base_Small_C.png" id="4_vn23m"]
+[ext_resource type="Texture2D" uid="uid://f1x41ecwblna" path="res://Structures/Graphics/Struct_Turret_Base_Small_L.png" id="5_8mfew"]
+[ext_resource type="PackedScene" uid="uid://cr3uqos0286u2" path="res://Modules/Module_Small_Struct_Boom.tscn" id="7_gg0lu"]
+[ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="8_iexj3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n45yo"]
+resource_local_to_scene = true
+shader = ExtResource("3_xcwi4")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("4_vn23m")
+shader_parameter/lighting = ExtResource("5_8mfew")
+
+[node name="Struct_Autocaster" type="Node2D"]
+script = ExtResource("1_ncbw6")
+name_text = "AUTOCASTER"
+class_text = "TURRET"
+energy_cost = 100
+metal_cost = 20
+supply_cost = 1
+credit_cost = 500
+max_armor = 50.0
+
+[node name="Turret_Autocaster" parent="." instance=ExtResource("2_6gbtm")]
+
+[node name="Hull" parent="." instance=ExtResource("2_puat8")]
+material = SubResource("ShaderMaterial_n45yo")
+
+[node name="Module_Small_Struct_Boom_Large" parent="." instance=ExtResource("7_gg0lu")]
+
+[node name="Module_SFX" parent="." instance=ExtResource("8_iexj3")]
+build_sfx = 8

@@ -48,9 +48,6 @@ func _do_damage() -> void:
 	var burn_pos := Vector2(0,0)
 	var burn_rand := 0.0
 
-	'''if armor >= max_armor:
-		fire_strength = 0'''
-
 	if armor < max_armor && special == "ARMOR":
 		#fire_strength = 1 - armor / max_armor
 		UNIT_STATE.do_unit_damage(self)

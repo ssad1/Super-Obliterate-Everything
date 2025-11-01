@@ -94,6 +94,7 @@ grow_vertical = 2
 
 [node name="Hangar_Factory" parent="." instance=ExtResource("9")]
 ship_id = Array[int]([54])
+build_max = 120
 
 [node name="Module_Medium_Struct_Boom_Large" parent="." instance=ExtResource("8")]
 

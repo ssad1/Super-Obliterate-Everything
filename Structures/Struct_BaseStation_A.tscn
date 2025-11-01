@@ -69,7 +69,7 @@ class_text = "STATION"
 energy_cost = 1000
 metal_cost = 1000
 supply_cost = 1
-max_armor = 300
+max_armor = 300.0
 special = "STATION"
 
 [node name="Generator" parent="." instance=ExtResource("8")]

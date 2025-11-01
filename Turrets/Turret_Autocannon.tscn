@@ -43,7 +43,7 @@ shader_parameter/lighting = ExtResource("4_d8y5p")
 diffuse_texture = ExtResource("5_bmqu4")
 normal_texture = ExtResource("6_cum36")
 
-[sub_resource type="ShaderMaterial" id="2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hnpoa"]
 resource_local_to_scene = true
 shader = ExtResource("9")
 shader_parameter/shimmer_strength = 0.2
@@ -75,7 +75,7 @@ gun_scale = 0.8
 
 [node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("6")]
 visible = false
-material = SubResource("2")
+material = SubResource("ShaderMaterial_hnpoa")
 
 [node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("11")]
 visible = false

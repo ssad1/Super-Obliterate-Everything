@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://qvc0lxdot1wy"]
+
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="1_mcddi"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="2_qx6yu"]
+[ext_resource type="Texture2D" uid="uid://cxk66tlaciat2" path="res://Shots/Graphics/Boomerang.png" id="3_kwmbc"]
+[ext_resource type="Script" path="res://Shots/Shot_Boomerang.gd" id="4_bmdex"]
+[ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="5_3agxq"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="6_2upu2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pep6i"]
+resource_local_to_scene = true
+shader = ExtResource("1_mcddi")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.05
+shader_parameter/frames = 8.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("2_qx6yu")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0345i"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_ej1q0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_sjry5"]
+resource_name = "Spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7m0qb"]
+_data = {
+"RESET": SubResource("Animation_ej1q0"),
+"Spin": SubResource("Animation_sjry5")
+}
+
+[node name="Shot_Boomerang" type="Sprite2D"]
+material = SubResource("ShaderMaterial_pep6i")
+texture = ExtResource("3_kwmbc")
+hframes = 8
+script = ExtResource("4_bmdex")
+max_velocity = 120.0
+
+[node name="Hull" type="Sprite2D" parent="."]
+modulate = Color(1, 0.372549, 0.203922, 0.301961)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_0345i")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_3agxq")
+
+[node name="HitBox" parent="." instance=ExtResource("6_2upu2")]
+offset_left = -46.0
+offset_top = -46.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7m0qb")
+}
+speed_scale = 4.0

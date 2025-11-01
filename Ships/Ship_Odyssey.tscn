@@ -1,0 +1,154 @@
+[gd_scene load_steps=19 format=3 uid="uid://cu4th8iytd2t8"]
+
+[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="1_c0pl7"]
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_aic6i"]
+[ext_resource type="Texture2D" uid="uid://ymv8y50biist" path="res://Ships/Graphics/Spartan_D.PNG" id="3_p77xg"]
+[ext_resource type="Texture2D" uid="uid://bxuf8ginbdyl4" path="res://Ships/Graphics/Spartan_N.PNG" id="4_ocndy"]
+[ext_resource type="Texture2D" uid="uid://j33ni8u3e1p4" path="res://Ships/Graphics/Spartan_B.PNG" id="5_4xeci"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="6_tbw3t"]
+[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="7_lflsw"]
+[ext_resource type="PackedScene" uid="uid://dqsn1ygjynlmr" path="res://Hangars/Carrier_Hangar.tscn" id="8_6t64d"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="9_4k61k"]
+[ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="10_ft5vq"]
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="11_e8gjm"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="12_umel6"]
+[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13_yj7nt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8oag3"]
+resource_local_to_scene = true
+shader = ExtResource("2_aic6i")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.31
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rcu8a"]
+diffuse_texture = ExtResource("3_p77xg")
+normal_texture = ExtResource("4_ocndy")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5240m"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2juv"]
+resource_local_to_scene = true
+shader = ExtResource("11_e8gjm")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("12_umel6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_11du2"]
+resource_local_to_scene = true
+shader = ExtResource("11_e8gjm")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("12_umel6")
+
+[node name="Ship_Odyssey" type="Node2D"]
+script = ExtResource("1_c0pl7")
+thrust = 0.2
+factory = 18
+name_text = "ODYSSEY"
+class_text = "FRIGATE"
+energy_cost = 250
+metal_cost = 125
+supply_cost = 3
+credit_cost = 750
+inertia = 0.6
+max_velocity = 3.0
+max_rotate_velocity = 0.2
+max_armor = 25.0
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8oag3")
+texture = SubResource("CanvasTexture_rcu8a")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.054902, 0.054902, 1)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_5240m")
+texture = ExtResource("5_4xeci")
+hframes = 8
+vframes = 8
+
+[node name="HitBox" parent="." instance=ExtResource("6_tbw3t")]
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("7_lflsw")]
+
+[node name="CarrierHangar" parent="." instance=ExtResource("8_6t64d")]
+position = Vector2(0, -12)
+rotation = -1.5708
+launch_velocity = 2.0
+
+[node name="Gun_General" parent="." instance=ExtResource("9_4k61k")]
+position = Vector2(-10, -11)
+fire_sound = 22
+gun_kick = 2.0
+gun_heat = 30
+gun_burst_max = 2
+gun_burst_heat = 1
+gun_range = 300
+gun_angle = 0.1
+gun_v = 30
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.4
+
+[node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("10_ft5vq")]
+visible = false
+material = SubResource("ShaderMaterial_h2juv")
+
+[node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("13_yj7nt")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Gun_General2" parent="." instance=ExtResource("9_4k61k")]
+position = Vector2(10, -11)
+fire_sound = 22
+gun_kick = 2.0
+gun_heat = 30
+gun_burst_max = 2
+gun_burst_heat = 1
+gun_range = 300
+gun_angle = 0.1
+gun_v = 30
+gun_v_noise = 0.1
+gun_r_noise = 0.1
+gun_scale = 0.4
+
+[node name="Shot_Blaster" parent="Gun_General2" instance=ExtResource("10_ft5vq")]
+visible = false
+material = SubResource("ShaderMaterial_11du2")
+
+[node name="E_MuzzleA" parent="Gun_General2" instance=ExtResource("13_yj7nt")]
+visible = false
+scale = Vector2(0.5, 0.5)

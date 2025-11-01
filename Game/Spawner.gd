@@ -139,6 +139,8 @@ extends Node
 @onready var Struct_HyperRepair_Turret := load("res://Structures/Struct_HyperRepair_Turret.tscn")
 @onready var Struct_Shield := load("res://Structures/Struct_Shield.tscn")
 @onready var Struct_Heavy_Shield := load("res://Structures/Struct_Heavy_Shield.tscn")
+@onready var Struct_AutoCaster_Turret := load("res://Structures/Struct_Autocaster_Turret.tscn")
+@onready var Struct_Edgeslasher_Turret := load("res://Structures/Struct_Edgeslasher_Turret.tscn")
 
 @onready var Ship_Piranha := load("res://Ships/Ship_Piranha.tscn")
 @onready var Ship_Rapier := load("res://Ships/Ship_Rapier.tscn")
@@ -158,11 +160,14 @@ extends Node
 @onready var Ship_Spartan := load("res://Ships/Ship_Spartan.tscn")
 @onready var Ship_Metalporter := load("res://Ships/Ship_Metalporter.tscn")
 @onready var Ship_Grendal := load("res://Ships/Ship_Grendal.tscn")
-@onready var Ship_Myrmidon := load("res://Ships/Ship_Myrmidon.tscn")
 @onready var Ship_Cobra := load("res://Ships/Ship_Cobra.tscn")
 @onready var Ship_Minotaur := load("res://Ships/Ship_Minotaur.tscn")
 @onready var Ship_Athena := load("res://Ships/Ship_Athena.tscn")
 @onready var Ship_Scorpion := load("res://Ships/Ship_Scorpion.tscn")
+@onready var Ship_Odyssey := load("res://Ships/Ship_Odyssey.tscn")
+
+@onready var Ship_Myrmidon := load("res://Ships/Ship_Myrmidon.tscn")
+@onready var Ship_Mastodon := load("res://Ships/Ship_Mastodon.tscn")
 
 @onready var Ship_Trident := load("res://Ships/Ship_Trident.tscn")
 @onready var Ship_Goliath := load("res://Ships/Ship_Goliath.tscn")
@@ -293,7 +298,11 @@ enum spawn_objs {
 
 	#new added stuff
 
-	LEGION
+	LEGION,
+	ODYSSEY,
+	MASTODON,
+	AUTOCASTER,
+	EDGESLASHER,
 }
 
 var next_spawn_id:int = 1
@@ -673,6 +682,14 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 
 		spawn_objs.LEGION:
 			obj = Ship_Legion.instantiate()
+		spawn_objs.ODYSSEY:
+			obj = Ship_Odyssey.instantiate()
+		spawn_objs.MASTODON:
+			obj = Ship_Mastodon.instantiate()
+		spawn_objs.AUTOCASTER:
+			obj = Struct_AutoCaster_Turret.instantiate()
+		spawn_objs.EDGESLASHER:
+			obj = Struct_Edgeslasher_Turret.instantiate()
 
 	obj.s = s
 

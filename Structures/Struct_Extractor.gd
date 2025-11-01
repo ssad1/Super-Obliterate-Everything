@@ -1,4 +1,4 @@
-extends "res://Structures/Struct_General.gd"
+extends Struct_General
 
 var metal_storage = 0
 @onready var anim = $Hull/AnimationPlayer

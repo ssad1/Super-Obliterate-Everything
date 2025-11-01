@@ -1,3 +1,4 @@
+class_name Shot_General
 extends Thing
 
 @export var base_damage:float = 1
@@ -12,7 +13,10 @@ var lifespan:int = 20
 @export var spin_mode:int = 0
 
 func _ready() -> void:
-	scale = shot_scale * Vector2(1,1)
+	_init_shot()
+
+func _init_shot():
+	scale = Vector2(shot_scale, shot_scale)
 	mat = get_material()
 	_calc_damage()
 	is_type = "SHOT"
@@ -39,9 +43,7 @@ func _calc_damage() -> void:
 	damage = round(base_damage * pow(1 + shot_scale,2) + 1)
 	
 func _do_tick() -> void:
-	scale = shot_scale * Vector2(1,1)
 	clock = clock + 1
-	_calc_damage()
 	if clock >= lifespan:
 		armor = 0
 	super._do_tick()
