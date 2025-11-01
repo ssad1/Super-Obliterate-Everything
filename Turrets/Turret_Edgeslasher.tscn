@@ -62,10 +62,10 @@ vframes = 8
 [node name="Gun_General" parent="." instance=ExtResource("6_whxvo")]
 position = Vector2(0, -32)
 fire_sound = 22
-gun_heat = 50
+gun_heat = 30
 gun_burst_max = 3
-gun_burst_heat = 5
-gun_range = 420
+gun_burst_heat = 3
+gun_angle = 0.3
 gun_v = 30
 gun_scale = 0.35
 

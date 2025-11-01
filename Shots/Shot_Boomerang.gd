@@ -24,7 +24,7 @@ func _process(delta:float) -> void:
 			self.frame = f
 
 func _do_tick() -> void:
-	clock = clock + 1
+	#clock = clock + 1
 	if clock >= lifespan:
 		armor = 0
 
@@ -38,10 +38,10 @@ func _do_rebound() -> void:
 	if id <= -1: return
 
 	var target = tcpu.targets[id]
-	var to_target:Vector2 = (target.pos - pos).normalized()
-	var dist = pos.distance_to(target.pos)
+	var vel_dot = target.velocity.normalized().dot((global_position - target.global_position).normalized())
+	var dist = global_position.distance_to(target.global_position)
 
-	if dist < detection_range:
+	if vel_dot < 0.8 && dist < detection_range:
 
-		var velocity_coeff: Vector2 = to_target * acceleration
-		velocity = (vel_offset + velocity_coeff).normalized() * velocity.length()
+		var velocity_coeff:Vector2 = (target.global_position - global_position).normalized()
+		velocity = (vel_offset + velocity_coeff).normalized() * (velocity.length() * acceleration)

@@ -61,8 +61,8 @@ material = SubResource("ShaderMaterial_pep6i")
 texture = ExtResource("3_kwmbc")
 hframes = 8
 script = ExtResource("4_bmdex")
-acceleration = 2.0
-detection_range = 75.0
+acceleration = 0.8
+detection_range = 50.0
 max_velocity = 100.0
 
 [node name="Hull" type="Sprite2D" parent="."]
@@ -73,10 +73,10 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("5_3agxq")
 
 [node name="HitBox" parent="." instance=ExtResource("6_2upu2")]
-offset_left = -46.0
-offset_top = -46.0
-offset_right = -16.0
-offset_bottom = -16.0
+offset_left = -39.0
+offset_top = -39.0
+offset_right = -24.0
+offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
