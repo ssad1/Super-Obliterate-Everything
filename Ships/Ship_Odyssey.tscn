@@ -76,7 +76,7 @@ supply_cost = 3
 credit_cost = 750
 inertia = 0.6
 max_velocity = 3.0
-max_rotate_velocity = 0.2
+max_rotate_velocity = 0.15
 max_armor = 25.0
 
 [node name="Hull" type="Sprite2D" parent="."]
@@ -102,11 +102,10 @@ offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("7_lflsw")]
-
 [node name="CarrierHangar" parent="." instance=ExtResource("8_6t64d")]
 position = Vector2(0, -12)
 rotation = -1.5708
+carrier_interval = 75
 launch_velocity = 2.0
 
 [node name="Gun_General" parent="." instance=ExtResource("9_4k61k")]
@@ -152,3 +151,5 @@ material = SubResource("ShaderMaterial_11du2")
 [node name="E_MuzzleA" parent="Gun_General2" instance=ExtResource("13_yj7nt")]
 visible = false
 scale = Vector2(0.5, 0.5)
+
+[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("7_lflsw")]

@@ -113,6 +113,7 @@ extends Node
 @onready var Struct_Rocky_Big_Asteroid_2 := load("res://Structures/Asteroids/Struct_Rocky_Big_Asteroid_2.tscn")
 @onready var Struct_Rocky_Big_Asteroid_3 := load("res://Structures/Asteroids/Struct_Rocky_Big_Asteroid_3.tscn")
 @onready var Struct_Rocky_Big_Asteroid_4 := load("res://Structures/Asteroids/Struct_Rocky_Big_Asteroid_4.tscn")
+
 @onready var Struct_BaseStation_A := load("res://Structures/Struct_BaseStation_A.tscn")
 @onready var Struct_BossStation_A := load("res://Structures/Struct_BossStation_A.tscn")
 @onready var Struct_Reactor := load("res://Structures/Struct_Reactor.tscn")
@@ -141,6 +142,7 @@ extends Node
 @onready var Struct_Heavy_Shield := load("res://Structures/Struct_Heavy_Shield.tscn")
 @onready var Struct_AutoCaster_Turret := load("res://Structures/Struct_Autocaster_Turret.tscn")
 @onready var Struct_Edgeslasher_Turret := load("res://Structures/Struct_Edgeslasher_Turret.tscn")
+@onready var Struct_Microlaser_Turret := load("res://Structures/Struct_Microlaser_Turret.tscn")
 
 @onready var Ship_Piranha := load("res://Ships/Ship_Piranha.tscn")
 @onready var Ship_Rapier := load("res://Ships/Ship_Rapier.tscn")
@@ -156,6 +158,7 @@ extends Node
 @onready var Ship_Falcon := load("res://Ships/Ship_Falcon.tscn")
 @onready var Ship_Gladiator := load("res://Ships/Ship_Gladiator.tscn")
 @onready var Ship_Knight := load("res://Ships/Ship_Knight.tscn")
+@onready var Ship_Sapphire := load("res://Ships/Ship_Sapphire.tscn")
 
 @onready var Ship_Spartan := load("res://Ships/Ship_Spartan.tscn")
 @onready var Ship_Metalporter := load("res://Ships/Ship_Metalporter.tscn")
@@ -165,6 +168,7 @@ extends Node
 @onready var Ship_Athena := load("res://Ships/Ship_Athena.tscn")
 @onready var Ship_Scorpion := load("res://Ships/Ship_Scorpion.tscn")
 @onready var Ship_Odyssey := load("res://Ships/Ship_Odyssey.tscn")
+@onready var Ship_Sloop := load("res://Ships/Ship_Sloop.tscn")
 
 @onready var Ship_Myrmidon := load("res://Ships/Ship_Myrmidon.tscn")
 @onready var Ship_Mastodon := load("res://Ships/Ship_Mastodon.tscn")
@@ -177,6 +181,7 @@ extends Node
 @onready var Ship_Hammerhead := load("res://Ships/Ship_Hammerhead.tscn")
 @onready var Ship_Cataclysm := load("res://Ships/Ship_Cataclysm.tscn")
 @onready var Ship_Legion := load("res://Ships/Ship_Legion.tscn")
+@onready var Ship_Jupiter := load("res://Ships/Ship_Jupiter.tscn")
 
 @onready var Shot_Blaster = load("res://Shots/Shot_Blaster.tscn")
 @onready var Shot_Double_Blaster = load("res://Shots/Shot_Double_Blaster.tscn")
@@ -303,6 +308,10 @@ enum spawn_objs {
 	MASTODON,
 	AUTOCASTER,
 	EDGESLASHER,
+	SAPPHIRE,
+	JUPITER,
+	MICROLASER_TURRET,
+	SLOOP
 }
 
 var next_spawn_id:int = 1
@@ -690,6 +699,14 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 			obj = Struct_AutoCaster_Turret.instantiate()
 		spawn_objs.EDGESLASHER:
 			obj = Struct_Edgeslasher_Turret.instantiate()
+		spawn_objs.SAPPHIRE:
+			obj = Ship_Sapphire.instantiate()
+		spawn_objs.JUPITER:
+			obj = Ship_Jupiter.instantiate()
+		spawn_objs.MICROLASER_TURRET:
+			obj = Struct_Microlaser_Turret.instantiate()
+		spawn_objs.SLOOP:
+			obj = Ship_Sloop.instantiate()
 
 	obj.s = s
 

@@ -38,8 +38,8 @@ func _do_rebound() -> void:
 	if id <= -1: return
 
 	var target = tcpu.targets[id]
-	var vel_dot = target.velocity.normalized().dot((global_position - target.global_position).normalized())
-	var dist = global_position.distance_to(target.global_position)
+	var vel_dot:float = target.velocity.normalized().dot((global_position - target.global_position).normalized())
+	var dist:float = global_position.distance_to(target.global_position)
 
 	if vel_dot < 0.8 && dist < detection_range:
 

@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://dv0g0xp2ejs4c"]
+
+[ext_resource type="Script" path="res://Turrets/Turret_General.gd" id="1_0w306"]
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_h5xjy"]
+[ext_resource type="Texture2D" uid="uid://0di0raqehu62" path="res://Turrets/Graphics/Backup/Turret_Repair_C.PNG" id="3_vjdrk"]
+[ext_resource type="Texture2D" uid="uid://n0xsf4t3ijxp" path="res://Turrets/Graphics/Backup/Turret_Repair_L.PNG" id="4_2vo18"]
+[ext_resource type="Texture2D" uid="uid://bh8bvunqrid0s" path="res://Turrets/Graphics/Backup/Turret_Repair_D.PNG" id="5_aer64"]
+[ext_resource type="Texture2D" uid="uid://c1cakmp881r5i" path="res://Turrets/Graphics/Backup/Turret_Repair_N.PNG" id="6_t5gnf"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_Laser.tscn" id="7_ktkuy"]
+[ext_resource type="PackedScene" path="res://Shots/Laser_General.tscn" id="8_sqivs"]
+[ext_resource type="PackedScene" uid="uid://2l4a7xhqw1ki" path="res://Effects/E_MuzzleE.tscn" id="9_7e88x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tm4eu"]
+resource_local_to_scene = true
+shader = ExtResource("2_h5xjy")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+shader_parameter/flag_mask = ExtResource("3_vjdrk")
+shader_parameter/lighting = ExtResource("4_2vo18")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7w3kq"]
+diffuse_texture = ExtResource("5_aer64")
+normal_texture = ExtResource("6_t5gnf")
+
+[node name="Turret_Microlaser" type="Node2D"]
+script = ExtResource("1_0w306")
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tm4eu")
+texture = SubResource("CanvasTexture_7w3kq")
+hframes = 8
+vframes = 8
+
+[node name="Gun_Laser" parent="." instance=ExtResource("7_ktkuy")]
+position = Vector2(-8, -9)
+fire_sound = 21
+gun_heat = 2
+gun_range = 250
+gun_angle = 0.12
+gun_scale = 0.15
+
+[node name="Laser_General" parent="Gun_Laser" instance=ExtResource("8_sqivs")]
+visible = false
+
+[node name="E_MuzzleE" parent="Gun_Laser" instance=ExtResource("9_7e88x")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Gun_Laser2" parent="." instance=ExtResource("7_ktkuy")]
+position = Vector2(8, -9)
+fire_sound = 21
+gun_heat = 2
+gun_range = 250
+gun_angle = 0.12
+gun_scale = 0.15
+
+[node name="Laser_General" parent="Gun_Laser2" instance=ExtResource("8_sqivs")]
+visible = false
+
+[node name="E_MuzzleE" parent="Gun_Laser2" instance=ExtResource("9_7e88x")]
+visible = false
+scale = Vector2(0.5, 0.5)
