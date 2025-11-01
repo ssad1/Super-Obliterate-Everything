@@ -198,8 +198,9 @@ func _do_tick() -> void:
 	if hitbox != null:
 		hitbox._do_tick()
 
-	_do_modules()
-	_do_shield_range()
+	if modules.size() > 0:
+		_do_modules()
+		_do_shield_range()
 
 	if !visible:
 		show()

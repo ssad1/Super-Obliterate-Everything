@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b15u4mldmk5k1"]
+[gd_scene load_steps=14 format=3 uid="uid://b15u4mldmk5k1"]
 
 [ext_resource type="Script" path="res://Turrets/Turret_General.gd" id="1_ytp6n"]
 [ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_rgl4m"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bi56cukv3fp70" path="res://Turrets/Graphics/Backup/Blaster_Turret_N.PNG" id="5_vokfj"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="6_whxvo"]
 [ext_resource type="PackedScene" uid="uid://qvc0lxdot1wy" path="res://Shots/Shot_Boomerang.tscn" id="7_touuu"]
+[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="8_g6m4r"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="9_2cruy"]
 [ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="10_rcf15"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3ce3g"]
@@ -39,6 +41,15 @@ shader_parameter/lighting = ExtResource("3_2xm1x")
 diffuse_texture = ExtResource("4_gfk4d")
 normal_texture = ExtResource("5_vokfj")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jaj0u"]
+resource_local_to_scene = true
+shader = ExtResource("8_g6m4r")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.05
+shader_parameter/frames = 8.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("9_2cruy")
+
 [node name="Turret_Edgeslasher" type="Node2D"]
 script = ExtResource("1_ytp6n")
 
@@ -49,20 +60,20 @@ hframes = 8
 vframes = 8
 
 [node name="Gun_General" parent="." instance=ExtResource("6_whxvo")]
-position = Vector2(0, -16)
+position = Vector2(0, -32)
 fire_sound = 22
-gun_heat = 60
+gun_heat = 50
 gun_burst_max = 3
-gun_burst_heat = 2
+gun_burst_heat = 5
 gun_range = 420
-gun_angle = 0.1
 gun_v = 30
 gun_scale = 0.35
 
 [node name="Shot_Boomerang" parent="Gun_General" instance=ExtResource("7_touuu")]
 visible = false
+material = SubResource("ShaderMaterial_jaj0u")
+position = Vector2(0, 16)
 base_damage = 1.1
-max_velocity = 120.0
 
 [node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("10_rcf15")]
 visible = false

@@ -10,8 +10,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pep6i"]
 resource_local_to_scene = true
 shader = ExtResource("1_mcddi")
-shader_parameter/shimmer_strength = 0.2
-shader_parameter/pulse_strength = 0.05
+shader_parameter/shimmer_strength = 0.1
+shader_parameter/pulse_strength = 0.1
 shader_parameter/frames = 8.0
 shader_parameter/phase = 0.0
 shader_parameter/colors = ExtResource("2_qx6yu")
@@ -61,7 +61,9 @@ material = SubResource("ShaderMaterial_pep6i")
 texture = ExtResource("3_kwmbc")
 hframes = 8
 script = ExtResource("4_bmdex")
-max_velocity = 120.0
+acceleration = 2.0
+detection_range = 75.0
+max_velocity = 100.0
 
 [node name="Hull" type="Sprite2D" parent="."]
 modulate = Color(1, 0.372549, 0.203922, 0.301961)
