@@ -19,7 +19,7 @@ func _init_shot():
 	scale = Vector2(shot_scale, shot_scale)
 	mat = get_material()
 	_calc_damage()
-	is_type = "SHOT"
+	is_type = UNIT_STATE.type.SHOT
 	
 	if mat != null && "set_shader_parameter" in mat:
 		mat.set_shader_parameter("phase",randf() * 2 * PI)

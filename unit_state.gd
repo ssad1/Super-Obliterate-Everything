@@ -1,9 +1,29 @@
 '''
 THE NODE THAT TAKES CARE OF ALL THE SHADER STUFF REGARDING UNITS, FACTION COLORS, DAMAGE, ETC.
 HAS ALL THE NECESSARY FUNCTIONS FOR ONLY THE NECESSARY SHADER PARAMETERS.
+NOW IT ALSO TAKES CARE OF THE UNIT'S TYPE FOR PERFORMANCE REASONS
 '''
 
 extends Node
+
+enum type 
+{
+	STRUCT,
+	TURRET,
+	SHIP,
+	MISSILE,
+	SHOT,
+	LASER,
+	EXPLODE,
+	EFFECT,
+	STATS,
+	THING,
+	GUN,
+	SHIELD,
+	TRIGGER,
+	HANGAR,
+	MODULE,
+}
 
 func do_unit_build(unit, duration:float) -> void:
 
@@ -46,7 +66,7 @@ func do_unit_damage(unit) -> void:
 
 func do_unit_damage_strength(unit) -> void:
 
-	if unit.is_type == "SHOT" || unit.is_type == "LASER": return
+	if unit.is_type == UNIT_STATE.type.SHOT || unit.is_type == UNIT_STATE.type.LASER: return
 
 	get_tree().create_tween().tween_method(
 		_set_damage_strength.bind(unit.mat),

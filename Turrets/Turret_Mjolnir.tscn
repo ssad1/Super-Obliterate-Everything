@@ -54,7 +54,7 @@ shader_parameter/colors = ExtResource("6")
 
 [node name="Turret_Mjolnir" type="Node2D"]
 script = ExtResource("5")
-target_profile = "BOMBER"
+target_profile = 1
 tier = 2
 
 [node name="Hull" type="Sprite2D" parent="."]

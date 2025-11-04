@@ -43,7 +43,7 @@ class_text = "TURRET"
 energy_cost = 75
 supply_cost = 1
 credit_cost = 500
-max_armor = 50
+max_armor = 50.0
 
 [node name="Hull" parent="." instance=ExtResource("2_ivley")]
 material = SubResource("ShaderMaterial_vo5re")

@@ -734,9 +734,9 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 	#make sure we actually get a struct or a unit
 	if "is_type" in obj:
 
-		if obj.is_type == "STRUCT":
+		if obj.is_type == UNIT_STATE.type.STRUCT:
 			obj._build_fix()
-		if obj.is_type == "SHIP":
+		if obj.is_type == UNIT_STATE.type.SHIP:
 			obj._ship_fix()
 
 		#Bug Here
@@ -761,9 +761,9 @@ func _spawn_dupe(s, p, position:Vector2, velocity:Vector2, rotation:float, up, i
 
 	if !obj.is_visible(): obj.show()
 
-	if obj.is_type == "STRUCT":
+	if obj.is_type == UNIT_STATE.type.STRUCT:
 		obj._build_fix()
-	if obj.is_type == "SHIP":
+	if obj.is_type == UNIT_STATE.type.SHIP:
 		obj.rotation = 0
 	if p != null && game.players.size() > p:
 		if obj.has_method("_set_player"):

@@ -154,12 +154,12 @@ func _collide_shields() -> void:
 	for struct in structs:
 		for module in struct.modules:
 
-			if module.is_type == "SHIELD" && module.shield > 0:
+			if module.is_type == UNIT_STATE.type.SHIELD && module.shield > 0:
 				_collide_shields_b(struct.player.id, module)
 
 func _collide_shields_b(f,s) -> void:
 	for shot in shots:
-		if shot.is_type != "LASER" && DIPLOMACY.grid[shot.player.id][f] == 0:
+		if shot.is_type != UNIT_STATE.type.LASER && DIPLOMACY.grid[shot.player.id][f] == 0:
 			_collide_shields_c(shot,s)
 			
 	for missile in missiles:
@@ -366,45 +366,45 @@ func _set_players() -> void:
 func _super_add_child(obj) -> void:
 	add_child(obj)
 	remove_child(obj)
-	if obj.is_type == "STRUCT":
+	if obj.is_type == UNIT_STATE.type.STRUCT:
 		$Layer_Structs.add_child(obj)
 		structs.append(obj)
-	if obj.is_type == "SHIP":
+	if obj.is_type == UNIT_STATE.type.SHIP:
 		$Layer_Ships.add_child(obj)
 		ships.append(obj)
-	if obj.is_type == "MISSILE":
+	if obj.is_type == UNIT_STATE.type.MISSILE:
 		$Layer_Shots.add_child(obj)
 		missiles.append(obj)
-	if obj.is_type == "SHOT":
+	if obj.is_type == UNIT_STATE.type.SHOT:
 		$Layer_Shots.add_child(obj)
 		shots.append(obj)
-	if obj.is_type == "LASER":
+	if obj.is_type == UNIT_STATE.type.LASER:
 		$Layer_Shots.add_child(obj)
 		lasers.append(obj)
-	if obj.is_type == "EXPLODE":
+	if obj.is_type == UNIT_STATE.type.EXPLODE:
 		$Layer_Shots.add_child(obj)
 		explosions.append(obj)
-	if obj.is_type == "EFFECT":
+	if obj.is_type == UNIT_STATE.type.EFFECT:
 		if obj.effect_layer == 0:
 			$Layer_Effects_Normal.add_child(obj)
 		else:
 			$Layer_Effects_Bright.add_child(obj)
-	if obj.is_type == "STATS":
+	if obj.is_type == UNIT_STATE.type.STATS:
 		$Layer_Stats.add_child(obj)
 
-func get_thing_array(is_type:String) -> Array:
+func get_thing_array(is_type:UNIT_STATE.type) -> Array:
 	match is_type:
-		"STRUCT":
+		UNIT_STATE.type.STRUCT:
 			return structs
-		"SHIP":
+		UNIT_STATE.type.SHIP:
 			return ships
-		"MISSILE":
+		UNIT_STATE.type.MISSILE:
 			return missiles
-		"SHOT":
+		UNIT_STATE.type.SHOT:
 			return shots
-		"LASER":
+		UNIT_STATE.type.LASER:
 			return lasers
-		"EXPLODE":
+		UNIT_STATE.type.EXPLODE:
 			return explosions
 	print("No corresponding array for object type! Returning [].")
 	return []

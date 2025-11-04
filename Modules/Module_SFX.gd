@@ -3,7 +3,7 @@ extends Node2D
 @export var build_sfx:SFX.sound = 0
 var clock = 0
 var up
-var is_type = "TRIGGER"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.TRIGGER
 
 func _ready():
 	up = get_parent()

@@ -2,7 +2,7 @@ extends Node
 
 var up
 @export var fire_sound:SFX.sound = 0
-var is_type = "TRIGGER"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.TRIGGER
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

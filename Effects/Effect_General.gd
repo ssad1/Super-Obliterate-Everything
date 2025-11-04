@@ -11,7 +11,7 @@ var rotate_velocity:float = 0
 @export var effect_layer:int = 0
 var clock:int = 0
 
-var is_type:String = "EFFECT"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.EFFECT
 var spawn_id:int = 0
 var dead:bool = false
 

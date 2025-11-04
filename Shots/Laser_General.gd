@@ -28,7 +28,7 @@ var dead:bool = death:
 	get:
 		return death
 
-var is_type = "LASER"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.LASER
 var armor = 1
 var player
 var pos := Vector2(0,0)

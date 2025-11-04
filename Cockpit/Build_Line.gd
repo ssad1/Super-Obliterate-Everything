@@ -11,7 +11,7 @@ func _process(delta):
 	clear_points()
 	if(weakref(builder).get_ref() != null):
 		if("is_type" in builder):
-			if(builder.is_type != "SHIP"):
+			if(builder.is_type != UNIT_STATE.type.SHIP):
 				destroy = true
 			else:
 				if(builder.build_mission != null):

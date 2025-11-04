@@ -62,7 +62,7 @@ inertia = 0.6
 max_velocity = 7.0
 max_rotate_velocity = 0.1
 max_armor = 15
-target_profile = "BOMBER"
+target_profile = 1
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")

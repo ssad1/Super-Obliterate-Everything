@@ -30,7 +30,7 @@ func _add_payload(e,m,s) -> void:
 
 func _init_ship() -> void:
 	armor = max_armor
-	is_type = "SHIP"
+	is_type = UNIT_STATE.type.SHIP
 	_do_range()
 	UNIT_STATE.do_unit_build(self, build_speed)
 	UNIT_STATE.do_unit_faction(self)
@@ -90,7 +90,7 @@ func _do_anim(delta:float) -> void:
 	_ship_fix()
 
 	if aihigh != "HALO":
-		f = floor(rotate * hull.hframes * hull.vframes / (2 * PI))
+		f = floor(rotate * hull.hframes * hull.vframes / TAU)
 		hull.frame = f
 
 	if engine_burn > 0:
@@ -160,30 +160,30 @@ func _ai_high() -> void:
 			aimid = "HALO COMBAT"
 		"MINER":
 			if !miner_rock:
-				tcpu.set_target_profile = "MINER_MINE"
+				tcpu.set_target_profile = tcpu.profile.MINER_MINE
 				aimid = "COMBAT"
 				guns_safety = false
 				tcpu.found_victim = false
 				if player != null:
 					if player.ai_no_rocks:
-						tcpu.set_target_profile = "MINER_RETURN"
+						tcpu.set_target_profile = tcpu.profile.MINER_RETURN
 						aimid = "INTERCEPT"
 						guns_safety = true
 						tcpu.found_victim = false
 			if miner_rock:
-				tcpu.set_target_profile = "MINER_RETURN"
+				tcpu.set_target_profile = tcpu.profile.MINER_RETURN
 				aimid = "INTERCEPT"
 				guns_safety = true
 				_mine_drop()
 		"METALPORTER":
-			tcpu.set_target_profile = "STATION"
+			tcpu.set_target_profile = tcpu.profile.STATION
 			aimid = "INTERCEPT"
 		"BUILDER":
 			if aiflag == "":
 				aimid = "BUILDER"
 			if aiflag == "RETURN":
 				build_mission = null
-				tcpu.set_target_profile = "STATION"
+				tcpu.set_target_profile = tcpu.profile.STATION
 				aimid = "INTERCEPT"
 		"KAMIKAZE":
 			aimid = "KAMIKAZE"

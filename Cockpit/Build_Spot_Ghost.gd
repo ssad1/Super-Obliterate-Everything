@@ -19,7 +19,7 @@ func _process(delta):
 		destroy = true
 	else:
 		if("is_type" in builder):
-			if(builder.is_type == "SHIP"):
+			if(builder.is_type == UNIT_STATE.type.SHIP):
 				if(builder.build_mission == null):
 					destroy = true
 			else:

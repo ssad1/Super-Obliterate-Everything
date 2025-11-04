@@ -9,7 +9,7 @@ var lifespan = 20
 
 func _ready():
 	scale = shot_scale * Vector2(1,1)
-	is_type = "SHOT"
+	is_type = UNIT_STATE.type.SHOT
 	_do_range()
 
 func _process(delta):

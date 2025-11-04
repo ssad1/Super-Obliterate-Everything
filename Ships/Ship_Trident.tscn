@@ -90,6 +90,7 @@ credit_cost = 2000
 inertia = 0.2
 max_velocity = 5.0
 max_rotate_velocity = 0.05
+max_armor = 100.0
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")

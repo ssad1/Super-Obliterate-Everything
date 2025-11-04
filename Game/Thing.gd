@@ -33,7 +33,8 @@ var cloaked:bool = false
 var range_radius:int = 100
 var shield_radius:float = 0 #display only, set in area shield module
 
-@export var target_profile:String = "NORMAL"
+@export var target_profile:TargetCPU.profile = TargetCPU.profile.NORMAL
+@export var scan_only_in_range:bool = false
 @export var special:String = ""
 var guns_safety:bool = false
 
@@ -78,7 +79,7 @@ var dead:bool = death:
 		return death
 
 var vanish:bool = false
-var is_type:String = "THING"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.THING
 
 @export var build_speed:float = 1
 
@@ -88,6 +89,8 @@ var is_selected:bool = false
 func _ready() -> void:
 	hide()
 	_do_range()
+	if !visible:
+		show()
 
 func _add_tcpu() -> void:
 	tcpu = tcpu_node.instantiate()
@@ -192,7 +195,7 @@ func _do_tick() -> void:
 	if tcpu != null:
 		tcpu._do_tick()
 
-	if is_type != "STRUCT":
+	if is_type != UNIT_STATE.type.STRUCT:
 		_do_physics()
 
 	if hitbox != null:
@@ -201,9 +204,6 @@ func _do_tick() -> void:
 	if modules.size() > 0:
 		_do_modules()
 		_do_shield_range()
-
-	if !visible:
-		show()
 
 	_set_stats()
 
@@ -214,7 +214,7 @@ func _get_turret_score() -> int:
 	var score := 0
 
 	for module in modules:
-		if module.is_type == "TURRET":
+		if module.is_type == UNIT_STATE.type.TURRET:
 			score = score + module.tier
 
 	return score
@@ -227,18 +227,18 @@ func _hit(s) -> void:
 
 	UNIT_STATE.do_unit_damage_strength(self)
 
-	if s.is_type == "SHOT":
+	if s.is_type == UNIT_STATE.type.SHOT:
 		s.armor = 0
 		_apply_force(s.force, s.velocity)
 		SPAWNER._spawn_hit(s.damage_type, s.damage, s.pos, velocity, s.rotate)
 
-	if s.is_type == "EXPLODE":
+	if s.is_type == UNIT_STATE.type.EXPLODE:
 		_apply_force(s.force, s.pos.direction_to(pos))
 
-	if s.is_type == "LASER":
+	if s.is_type == UNIT_STATE.type.LASER:
 		SPAWNER._spawn_hit(s.damage_type, s.damage, pos, velocity, s.rotate)
 
-	if s.is_type == "MISSILE":
+	if s.is_type == UNIT_STATE.type.MISSILE:
 		s.armor = 0
 		_apply_force(s.force, s.velocity)
 

@@ -1,6 +1,6 @@
 extends Node2D
 
-var is_type = "STATS"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.STATS
 @onready var range_line = $Range_Line
 @onready var shield_line = $Shield_Line
 @onready var armor = $Armor
@@ -37,12 +37,12 @@ func _gen_circle(l,r):
 	var samples = 0
 	var p
 	l.clear_points()
-	samples = round(2 * PI * r / 10)
+	samples = round(TAU * r / 10)
 	theta = 0
 	for i in range(samples + 1):
 		p = Vector2(r * sin(theta),r * cos(theta))
 		l.add_point(p)
-		theta = theta + 2 * PI / samples
+		theta = theta + TAU / samples
 
 func _set_stats(a,s,sb,r,sr):
 	if(r > 0):

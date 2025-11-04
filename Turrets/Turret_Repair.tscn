@@ -44,7 +44,8 @@ normal_texture = ExtResource("6_umh8o")
 [node name="Turret_Repair" type="Node2D"]
 script = ExtResource("5")
 max_rotate_velocity = 0.4
-target_profile = "REPAIR"
+target_profile = 7
+scan_only_in_range = true
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")

@@ -4,7 +4,7 @@ var up
 @export var spawn_id:SPAWNER.spawn_objs = SPAWNER.spawn_objs.EFFECT_CLICK_BOOM
 @export var scale_effect:bool = false
 @export var scale_effect_size:float = 1
-var is_type:String = "TRIGGER"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.TRIGGER
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

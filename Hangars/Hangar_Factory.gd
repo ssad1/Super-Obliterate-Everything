@@ -6,7 +6,7 @@ var build_cool = 0
 @export var ship_max = 3
 var my_ships = []
 var up
-var is_type = "HANGAR"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.HANGAR
 
 func _ready():
 	up = get_parent()

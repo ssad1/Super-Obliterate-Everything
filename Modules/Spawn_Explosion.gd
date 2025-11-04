@@ -3,7 +3,7 @@ extends Node
 var up
 @export var scale_effect:bool = false
 @export var scale_effect_size:float = 1
-var is_type:String = "TRIGGER"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.TRIGGER
 
 func _ready() -> void:
 	up = get_parent()

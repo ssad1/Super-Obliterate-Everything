@@ -3,7 +3,7 @@ extends Node
 var up
 @export var energy_gen = 0.0
 @export var metal_gen = 0.0
-var is_type = "MODULE"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.MODULE
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

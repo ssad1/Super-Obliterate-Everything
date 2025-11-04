@@ -17,7 +17,7 @@ var ammo
 var muzzle
 var up
 var top
-var is_type = "GUN"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.GUN
 
 func _ready() -> void:
 	gun_cool = gun_heat/2 #make laser units have faster reaction speed only when detecting something
@@ -28,7 +28,7 @@ func _ready() -> void:
 	offset_rotate = atan2(offset_pos.y,offset_pos.x) + PI / 2
 	up.modules.append(self)
 	
-	if up.is_type == "TURRET" or up.is_type == "TRIGGER":
+	if up.is_type == UNIT_STATE.type.TURRET or up.is_type == UNIT_STATE.type.TRIGGER:
 		top = up.get_parent()
 	else:
 		top = up
@@ -37,7 +37,7 @@ func _process(delta:float) -> void:
 
 	var rotation:float = up.rotate + offset_rotate
 
-	if up.is_type != "TURRET":
+	if up.is_type != UNIT_STATE.type.TURRET:
 		shot_pos.x = up.position.x + offset_radius * sin(rotation)
 		shot_pos.y = up.position.y - offset_radius * cos(rotation)
 	else:
@@ -86,10 +86,10 @@ func _fire_control() -> void:
 		if tcpu.targets.size() == 0:
 			firing == false
 		if(
-		tcpu.targets[tcpu.target_i].is_type != "SHIP" && 
-		tcpu.targets[tcpu.target_i].is_type != "STRUCT" && 
-		tcpu.targets[tcpu.target_i].is_type != "SHOT" && 
-		tcpu.targets[tcpu.target_i].is_type != "MISSILE"):
+		tcpu.targets[tcpu.target_i].is_type != UNIT_STATE.type.SHIP && 
+		tcpu.targets[tcpu.target_i].is_type != UNIT_STATE.type.STRUCT && 
+		tcpu.targets[tcpu.target_i].is_type != UNIT_STATE.type.SHOT && 
+		tcpu.targets[tcpu.target_i].is_type != UNIT_STATE.type.MISSILE):
 			firing = false
 
 	if firing && gun_cool == 0 && tcpu.target_in_range:

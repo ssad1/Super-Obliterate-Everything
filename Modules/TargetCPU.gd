@@ -10,7 +10,6 @@ var target_i:int = -1
 #var target_d = 0
 var target_pos:Vector2 = Vector2(0,0)
 var target_velocity:Vector2 = Vector2(0,0)
-var target_profile:String = "NORMAL"
 
 #var scan_type:int = 1
 var scan_range:int = 10000
@@ -27,13 +26,30 @@ var scan_special_only:bool = false
 var scan_special:String = ""
 
 var found_victim:bool = false
-var target_in_range: bool = false
+var target_in_range:bool = false
 
-var set_target_profile = target_profile : 
+#to not waste resources with trivial units/objects
+var cull_check:bool = false
+var is_repair:bool = false
+enum profile
+{
+	NORMAL,
+	BOMBER,
+	PHALANX,
+	MINER_MINE,
+	MINER_RETURN,
+	EXPLOSION,
+	STATION,
+	REPAIR,
+}
+var target_profile:profile = profile.NORMAL
+
+var set_target_profile:profile = target_profile: 
 	get:
 		return target_profile
 	set(value):
 		target_profile = value
+		cull_check = (up.is_type == UNIT_STATE.type.STRUCT || up.is_type == UNIT_STATE.type.SHOT || up.is_type == UNIT_STATE.type.LASER) && target_profile != profile.REPAIR
 		_do_profile()
 
 func _ready():
@@ -73,15 +89,20 @@ func check_target(target) -> bool:
 
 	target_pos = target.pos
 
-	var dist := pow((target_pos.x - up.pos.x),2) + pow((target_pos.y - up.pos.y),2)
+	var dist:float = up.pos.distance_to(target.pos)
 	var scan_d := scan_range * scan_range
+
+	if "scan_only_in_range" in up:
+		if up.scan_only_in_range && dist > up.range_radius: 
+			return false
+	elif dist > scan_d: 
+		return false
 
 	if (
 	target.spawn_id == up.spawn_id || 
 	target.armor <= 0 || 
 	target.cloaked ||
-	!target.visible ||
-	dist > scan_d):
+	!target.visible):
 		return false
 
 	#check which faction we are in
@@ -113,10 +134,10 @@ func check_target(target) -> bool:
 	return true
 
 func _do_tick() -> void:
-	
+
 	#make sure we ALWAYS have something to target no matter what
-	if target_clock == 0 && !found_victim:
-		
+	if target_clock <= 0 && (!found_victim || targets.size() == 0):
+
 		_do_scan()
 
 		target_clock = 4
@@ -134,29 +155,29 @@ func _do_profile() -> void:
 	scan_enemy = false
 	scan_special_only = false
 	match target_profile:
-		"NORMAL":
+		profile.NORMAL:
 			scan_ships = true
 			scan_structs = true
 			scan_enemy = true
-		"BOMBER":
+		profile.BOMBER:
 			scan_structs = true
 			scan_enemy = true
-		"PHALANX":
+		profile.PHALANX:
 			scan_shots = true
 			scan_missiles = true
 			scan_enemy = true
-		"MINER_MINE":
+		profile.MINER_MINE:
 			scan_structs = true
 			scan_rocks = true
 			scan_neutral = true
 			scan_special_only = true
 			scan_special = "ROCK"
-		"MINER_RETURN":
+		profile.MINER_RETURN:
 			scan_ally = true
 			scan_structs = true
 			scan_special_only = true
 			scan_special = "EXTRACTOR"
-		"EXPLOSION":
+		profile.EXPLOSION:
 			scan_ships = true
 			scan_structs = true
 			scan_missiles = false
@@ -164,22 +185,23 @@ func _do_profile() -> void:
 			scan_ally = true
 			scan_enemy = true
 			scan_neutral = true
-		"STATION":
+		profile.STATION:
 			scan_ally = true
 			scan_structs = true
 			scan_special_only = true
 			scan_special = "STATION"
-		"REPAIR":
+		profile.REPAIR:
 			scan_ally = true
 			scan_injured = true
 			scan_ships = true
 			scan_structs = true
+			is_repair = true
 
 #to immediately search for something else and attack it
 
 func _do_scan():
-
-	if found_victim:
+	
+	if found_victim && !is_repair:
 		return
 
 	var stuff
@@ -220,9 +242,9 @@ func _do_scan():
 	if "target_hot" in up:
 		found_victim = up.target_hot
 
-	#to not waste resources with trivial units/objects
-	if (up.is_type == "STRUCT" || up.is_type == "SHOT" || up.is_type == "LASER"): 
+	if cull_check: 
 		found_victim = true
+		if is_repair: up.target_hot == true
 
 	_clean_targets()
 
@@ -243,25 +265,25 @@ func _do_FOV_entered(obj: Area2D) -> void:
 
 	if !check_target(parent): return
 
-	if parent.is_type == "STRUCT" && scan_structs:
+	if parent.is_type == UNIT_STATE.type.STRUCT && scan_structs:
 		targets.append(parent)
 		target_in_range = true
-	if parent.is_type == "SHIP" && scan_ships:
+	if parent.is_type == UNIT_STATE.type.SHIP && scan_ships:
 		targets.append(parent)
 		target_in_range = true
-	if parent.is_type == "MISSILE" && scan_missiles:
+	if parent.is_type == UNIT_STATE.type.MISSILE && scan_missiles:
 		targets.append(parent)
 		target_in_range = true
-	if parent.is_type == "SHOT" && scan_shots:
+	if parent.is_type == UNIT_STATE.type.SHOT && scan_shots:
 		targets.append(parent)
 		target_in_range = true
 
 	if "target_hot" in up:
 		found_victim = up.target_hot
 
-	if (up.is_type == "STRUCT" || up.is_type == "SHOT" || up.is_type == "LASER") && target_profile != "REPAIR": 
+	if cull_check: 
 		found_victim = true
-	
+		if is_repair: up.target_hot == true
 
 func _do_FOV_exited(obj: Area2D):
 	#make sure we got a valid object in our FOV

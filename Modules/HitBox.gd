@@ -1,7 +1,7 @@
 extends ColorRect
 
 var pos:Vector2 = Vector2(0,0)
-var is_type:String = "MODULE"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.MODULE
 var parent_unit:Thing
 @export var parent_type := "DIRECT"
 @onready var detection_hitbox := $detection_hitbox

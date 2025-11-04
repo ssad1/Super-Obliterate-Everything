@@ -40,7 +40,7 @@ var ammo
 var muzzle
 var up
 var top
-var is_type:String = "GUN"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.GUN
 
 func _ready() -> void:
 	gun_burst = gun_burst_max
@@ -52,7 +52,7 @@ func _ready() -> void:
 	offset_rotate = atan2(offset_pos.y,offset_pos.x) + PI / 2
 	up.modules.append(self)
 	
-	if up.is_type == "TURRET" or up.is_type == "TRIGGER":
+	if up.is_type == UNIT_STATE.type.TURRET or up.is_type == UNIT_STATE.type.TRIGGER:
 		top = up.get_parent()
 	else:
 		top = up
@@ -171,7 +171,7 @@ func _fire() -> void:
 					obj.scale = obj.shot_scale * Vector2(1,1)
 
 				
-				if "lifespan" in obj && obj.is_type != "MISSILE":
+				if "lifespan" in obj && obj.is_type != UNIT_STATE.type.MISSILE:
 					if mod_gun_v != 0:
 						obj.lifespan = ceil(gun_range / mod_gun_v)
 						obj.lifespan = obj.lifespan * (1.0 - gun_life_noise * randf())

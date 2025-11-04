@@ -42,7 +42,7 @@ normal_texture = ExtResource("5_8o8gq")
 [node name="Turret_Phalanx" type="Node2D"]
 script = ExtResource("5")
 max_rotate_velocity = 0.5
-target_profile = "PHALANX"
+target_profile = 2
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")

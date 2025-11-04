@@ -18,7 +18,7 @@ var s
 var clock:int = 0
 var armor:float = 0
 @export var lifespan:int = 20
-var is_type:String = "EXPLODE"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.EXPLODE
 var dead:bool = false
 var spawn_id:int = 0
 var velocity:Vector2 = Vector2(0,0)
@@ -35,7 +35,7 @@ func _ready() -> void:
 func _add_tcpu() -> void:
 	tcpu = tcpu_node.instantiate()
 	tcpu.up = self
-	tcpu.set_target_profile = "EXPLOSION"
+	tcpu.set_target_profile = tcpu.profile.EXPLOSION
 
 func _boom() -> void:
 	var obj

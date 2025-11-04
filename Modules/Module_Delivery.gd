@@ -14,7 +14,7 @@ var velocity:Vector2 = Vector2(0.0,0.0)
 @export var deliver_supply:int = 0
 
 var modules = []
-var is_type:String = "TRIGGER"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.TRIGGER
 
 @export var target_special:String = "STATION"
 

@@ -10,7 +10,7 @@ extends Sprite2D
 func _ready():
 	var s = CALC._rand() * 0.9 + .1
 	var c = CALC._randint() % 100
-	rotation = 2 * PI * CALC._rand()
+	rotation = TAU * CALC._rand()
 	position = Vector2(CALC._rand() * GLOBAL.resx, CALC._rand() * GLOBAL.resy)
 	s = .4 * pow(s, 3)
 	if(CALC._rand() > 0.975):

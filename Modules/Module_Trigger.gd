@@ -10,7 +10,7 @@ var rotate:float = 0
 var velocity:Vector2 = Vector2(0.0,0.0)
 
 var modules:Array = []
-var is_type:String = "TRIGGER"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.TRIGGER
 
 @export var death_activate:bool = false
 

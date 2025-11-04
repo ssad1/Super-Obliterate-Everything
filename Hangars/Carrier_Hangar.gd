@@ -15,7 +15,7 @@ extends Node2D
 
 var build_cool:int = 0
 var my_ships:Array[Node2D] = []
-var is_type:String = "HANGAR"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.HANGAR
 
 func _ready() -> void:
 	up.modules.append(self)

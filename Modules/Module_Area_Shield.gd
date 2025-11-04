@@ -6,7 +6,7 @@ extends ColorRect
 
 var up
 var pos:Vector2 = Vector2(0,0)
-var is_type:String = "SHIELD"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.SHIELD
 var shield_power:float = 0
 var shield_theta:float = 0
 @export var shield:float = 30
@@ -60,13 +60,13 @@ func _gen_circle(r:float) -> void:
 	var p:Vector2
 
 	shield_line.clear_points()
-	samples = round(2 * PI * r / 10)
+	samples = round(TAU * r / 10)
 	theta = 0
 
 	for i in samples + 1:
 		p = Vector2(r * sin(theta),r * cos(theta))
 		shield_line.add_point(p)
-		theta = theta + 2 * PI / samples
+		theta = theta + TAU / samples
 
 func _hit_shield(d:float, hitp:Vector2) -> void:
 	shield = shield - d

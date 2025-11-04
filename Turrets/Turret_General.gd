@@ -13,7 +13,8 @@ var rotate:float = 0
 var rotate_velocity:float = 0
 var last_rotate:float = 0
 @export var max_rotate_velocity:float = 0.1
-@export var target_profile:String = "NORMAL"
+@export var target_profile:TargetCPU.profile = TargetCPU.profile.NORMAL
+@export var scan_only_in_range:bool = false
 @export var tier:float = 1
 var up
 var player
@@ -22,7 +23,7 @@ var tFOV:Area2D
 var ai_mode:int = 1
 var spawn_id:int = 0
 var modules = []
-var is_type:String = "TURRET"
+var is_type:UNIT_STATE.type = UNIT_STATE.type.TURRET
 var range_radius:int = 0
 var target_hot:bool = false
 
@@ -75,7 +76,7 @@ func _do_ai():
 
 func _do_anim():
 	var f:int
-	f = floor(rotate * hull.hframes * hull.vframes / (2 * PI))
+	f = floor(rotate * hull.hframes * hull.vframes / TAU)
 	hull.frame = f
 
 func _do_command(c):

@@ -12,7 +12,7 @@ func _init_struct() -> void:
 	velocity = Vector2(0.0,0.0)
 	max_velocity = 0.0
 	max_rotate_velocity = 0.0
-	is_type = "STRUCT"
+	is_type = UNIT_STATE.type.STRUCT
 	_do_range()
 
 	if special != "ROCK":
@@ -34,7 +34,7 @@ func _get_ship() -> int:
 	var m
 	for i in modules.size():
 		m = modules[i]
-		if m.is_type == "HANGAR" && "ship_id" in m:
+		if m.is_type == UNIT_STATE.type.HANGAR && "ship_id" in m:
 			s = m.ship_id[0]
 	return s
 

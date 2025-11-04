@@ -59,7 +59,7 @@ inertia = 1.0
 max_velocity = 4.0
 max_rotate_velocity = 0.2
 max_armor = 6
-target_profile = "MINER_MINE"
+target_profile = 3
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")
