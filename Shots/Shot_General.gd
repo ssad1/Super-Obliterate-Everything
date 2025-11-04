@@ -36,7 +36,6 @@ func _process(delta:float) -> void:
 			rotation = rotate
 		1:
 			rotation = 0
-			f = floor(rotate * self.hframes * self.vframes / (2 * PI))
 			self.frame = f
 
 func _calc_damage() -> void:

@@ -38,7 +38,7 @@ func _fire() -> void:
 
 func _on_death() -> void:
 	var obj
-	if death_activate == false: return
+	if !death_activate: return
 	for i in modules.size():
 		if modules[i].has_method("_fire"):
 			modules[i]._fire()
