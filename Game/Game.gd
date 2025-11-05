@@ -363,34 +363,41 @@ func _set_players() -> void:
 			player._setup_base()
 			player._setup_resources(LEVELS.level_resources)
 
+@onready var layer_structs:Node = $Layer_Structs
+@onready var layer_ships:Node = $Layer_Ships
+@onready var layer_shots:Node = $Layer_Shots
+@onready var layer_normal_effects:Node = $Layer_Effects_Normal
+@onready var layer_bright_effects:Node = $Layer_Effects_Bright
+@onready var layer_stats:Node = $Layer_Stats
+
 func _super_add_child(obj) -> void:
 	add_child(obj)
 	remove_child(obj)
 	if obj.is_type == UNIT_STATE.type.STRUCT:
-		$Layer_Structs.add_child(obj)
+		layer_structs.add_child(obj)
 		structs.append(obj)
 	if obj.is_type == UNIT_STATE.type.SHIP:
-		$Layer_Ships.add_child(obj)
+		layer_ships.add_child(obj)
 		ships.append(obj)
 	if obj.is_type == UNIT_STATE.type.MISSILE:
-		$Layer_Shots.add_child(obj)
+		layer_shots.add_child(obj)
 		missiles.append(obj)
 	if obj.is_type == UNIT_STATE.type.SHOT:
-		$Layer_Shots.add_child(obj)
+		layer_shots.add_child(obj)
 		shots.append(obj)
 	if obj.is_type == UNIT_STATE.type.LASER:
-		$Layer_Shots.add_child(obj)
+		layer_shots.add_child(obj)
 		lasers.append(obj)
 	if obj.is_type == UNIT_STATE.type.EXPLODE:
-		$Layer_Shots.add_child(obj)
+		layer_shots.add_child(obj)
 		explosions.append(obj)
 	if obj.is_type == UNIT_STATE.type.EFFECT:
 		if obj.effect_layer == 0:
-			$Layer_Effects_Normal.add_child(obj)
+			layer_normal_effects.add_child(obj)
 		else:
-			$Layer_Effects_Bright.add_child(obj)
+			layer_bright_effects.add_child(obj)
 	if obj.is_type == UNIT_STATE.type.STATS:
-		$Layer_Stats.add_child(obj)
+		layer_stats.add_child(obj)
 
 func get_thing_array(is_type:UNIT_STATE.type) -> Array:
 	match is_type:

@@ -84,7 +84,6 @@ fire_sound = 23
 gun_kick = 5.0
 gun_heat = 20
 gun_angle = 0.8
-gun_v = 15
 gun_v_noise = 0.3
 gun_r_noise = 0.3
 gun_arc = 1.0

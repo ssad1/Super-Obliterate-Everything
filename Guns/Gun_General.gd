@@ -178,7 +178,7 @@ func _fire() -> void:
 			if !gun_circle:
 				if diff_arc:
 					mod_gun_arc = mod_arc
-				arc_theta = -(half_arc + j * (mod_gun_arc / arc_M))
+				arc_theta = -half_arc + j * (mod_gun_arc / arc_M)
 			else:
 				arc_theta = TAU * (j / mod_gun_arc_rounds)
 			mod_gun_arc_v = gun_arc_v * abs(j - half_arc_M)
@@ -200,8 +200,6 @@ func _fire() -> void:
 			
 			for i in gun_dupes:
 
-				var random := randf()
-
 				mod_gun_v = gun_v + i * gun_dupe_v_shift + gun_burst_v_shift * (gun_burst_max - gun_burst) + mod_gun_arc_v
 
 				var off:float = up.rotate + offset_rotate + mod_arc_theta
@@ -209,8 +207,8 @@ func _fire() -> void:
 				shot_pos.x = up.pos.x + offset_radius * sin(off)
 				shot_pos.y = up.pos.y - offset_radius * cos(off)
 
-				var rotation:float = up.rotate + mod_arc_theta + PI * (random - .5) * gun_r_noise
-				var velocity:float = mod_gun_v + mod_gun_v * (random - .5) * gun_v_noise
+				var rotation:float = up.rotate + mod_arc_theta + PI * (randf() - .5) * gun_r_noise
+				var velocity:float = mod_gun_v + mod_gun_v * (randf() - .5) * gun_v_noise
 
 				shot_velocity.x = top.velocity.x + velocity * sin(rotation)
 				shot_velocity.y = top.velocity.y - velocity * cos(rotation)
@@ -224,14 +222,14 @@ func _fire() -> void:
 				obj = SPAWNER._spawn_dupe(ammo,top.player.id,shot_pos,shot_velocity,shot_rotate,0,0)
 
 				if has_scale:
-					obj.shot_scale = gun_scale * (1.0 - gun_scale_noise * random)
+					obj.shot_scale = gun_scale * (1.0 - gun_scale_noise * randf())
 					obj.scale = obj.shot_scale * Vector2(1,1)
 
 				
 				if treated_lifespan:
 					if mod_gun_v != 0:
 						obj.lifespan = ceil(gun_range / mod_gun_v)
-						obj.lifespan = obj.lifespan * (1.0 - gun_life_noise * random)
+						obj.lifespan = obj.lifespan * (1.0 - gun_life_noise * randf())
 					else:
 						obj.lifespan = 20
 				

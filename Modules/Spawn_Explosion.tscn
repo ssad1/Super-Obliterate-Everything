@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://chsnqngu671vk"]
 
-[ext_resource path="res://Modules/Spawn_Explosion.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://Modules/Spawn_Explosion.gd" id="1"]
 
 [node name="Spawn_Explosion" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1")
