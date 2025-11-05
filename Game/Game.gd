@@ -244,8 +244,6 @@ func _do_tick() -> void:
 	_do_victory()
 	GLOBAL.heatbright = GLOBAL.heatbright * .9 - 1
 	end_clock = Time.get_ticks_usec()
-	#if mission_clock % 10 == 0:
-	#	print("Code Time: " + str(end_clock - start_clock))
 	
 func _do_radar() -> void:
 	var pos:Vector2
@@ -294,16 +292,16 @@ func _do_radar() -> void:
 				if radar[pos.x + xx][pos.y + yy] == 0:
 					radar[pos.x + xx][pos.y + yy] = 2
 
-func _do_thing(a) -> void:
+func _do_thing(a:Array) -> void:
 	var i:int = a.size() - 1
 	var s
 	while i >= 0:
 		s = a[i]
 		s._do_tick()
-
+		'''
 		if s.dead:
 			s.queue_free()
-			a.remove_at(i)
+			a.remove_at(i)'''
 		i = i - 1
 
 func _do_victory() -> void:

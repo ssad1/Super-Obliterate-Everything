@@ -7,11 +7,7 @@ var s
 @export var damage_type:String = "EXPLOSION"
 @export var force:float = 5
 @export var boom_radius:int = 0
-#@export var boom_max_radius:int = 0
-#@export var boom_intensity = 0
 @export var boom_flash:int = SPAWNER.spawn_objs.EFFECT_FLASH_BOOM
-#@export var boom_small_effect:int = 10300
-#@export var boom_medium_effect:int = 10302
 @export var boom_large_effect:int = SPAWNER.spawn_objs.EFFECT_BOOM
 @export var smoke_effect:int = SPAWNER.spawn_objs.EFFECT_SMOKE
 @export var boom_reverse:int = 0
@@ -42,10 +38,6 @@ var rotate:float = 0
 var modules = []
 var tcpu:TargetCPU
 var player
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -91,8 +83,6 @@ func _do_tick() -> void:
 
 	if tcpu != null:
 		tcpu._do_tick()
-
-	_do_modules()
 
 	if clock < lifespan - 5:
 		_boom()
@@ -140,6 +130,3 @@ func _remove_ref(s) -> void:
 		if "_remove_ref" in modules[i]:
 			modules[i]._remove_ref(s)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

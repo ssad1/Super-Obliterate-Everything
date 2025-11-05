@@ -28,7 +28,7 @@ func _ready() -> void:
 
 	hide()
 
-func _process(delta) -> void:
+func _process(delta:float) -> void:
 	var mp := get_global_mouse_position()
 	var p := global_position
 	var border := 10

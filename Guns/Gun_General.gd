@@ -243,5 +243,5 @@ func _fire() -> void:
 				
 	if has_muzzle:
 		muzzle_offset.x = offset_radius * sin(up.rotate + offset_rotate) - offset_pos.x
-		muzzle_offset.y = -(offset_radius * cos(up.rotate + offset_rotate) - offset_pos.y)
+		muzzle_offset.y = -offset_radius * cos(up.rotate + offset_rotate) - offset_pos.y
 		muzzle._shoot(muzzle_offset,up.rotate)

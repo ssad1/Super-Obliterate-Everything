@@ -13,7 +13,19 @@ var clock:int = 0
 
 var is_type:UNIT_STATE.type = UNIT_STATE.type.EFFECT
 var spawn_id:int = 0
-var dead:bool = false
+
+var death:bool = false
+var dead:bool = death:
+	set(value):
+		if value:
+			var game_arr:Array = Main.game.get_thing_array(is_type)
+
+			queue_free()
+			tree_exited.connect(func(): game_arr.erase(self))
+
+		death = value
+	get:
+		return death
 
 func _ready():
 	for i in get_child_count():

@@ -148,8 +148,14 @@ func _do_physics() -> void:
 		rotate = rotate + TAU
 
 func _do_modules() -> void:
+	shield_radius = 0
 	for module in modules:
 		module._do_tick()
+		
+		if "shield_radius" in module && module.shield_radius - module.shield_width / 2 > shield_radius:
+			shield_radius = module.shield_radius - module.shield_width / 2
+			area_shield = module.shield
+			max_area_shield = module.max_shield
 
 func _do_range() -> void:
 	_add_tcpu()
@@ -166,6 +172,7 @@ func _do_range() -> void:
 	tFOV._initialize_FOV_area(range_radius)
 	tFOV._bind_tcpu(tcpu)
 
+'''
 func _do_shield_range() -> void:
 	shield_radius = 0
 	for module in modules:
@@ -173,7 +180,7 @@ func _do_shield_range() -> void:
 		if "shield_radius" in module && module.shield_radius - module.shield_width / 2 > shield_radius:
 			shield_radius = module.shield_radius - module.shield_width / 2
 			area_shield = module.shield
-			max_area_shield = module.max_shield
+			max_area_shield = module.max_shield'''
 
 func _do_select(s:bool) -> void:
 	is_selected = s
@@ -190,20 +197,24 @@ func _do_selection(delta:float) -> void:
 
 	mat.set_shader_parameter("select_strength",select_strength)
 
+@onready var has_modules:bool = modules.size() > 0
+@onready var has_tcpu:bool = tcpu != null
+@onready var is_not_struct:bool = is_type != UNIT_STATE.type.STRUCT
+@onready var has_hitbox:bool = hitbox != null
+
 func _do_tick() -> void:
 
 	if tcpu != null:
 		tcpu._do_tick()
 
-	if is_type != UNIT_STATE.type.STRUCT:
+	if is_not_struct:
 		_do_physics()
 
-	if hitbox != null:
+	if has_hitbox:
 		hitbox._do_tick()
 
-	if modules.size() > 0:
+	if has_modules:
 		_do_modules()
-		_do_shield_range()
 
 	_set_stats()
 

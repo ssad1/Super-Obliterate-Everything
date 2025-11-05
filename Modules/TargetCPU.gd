@@ -4,14 +4,11 @@ extends Node
 var up
 
 var targets = []
-		
 var target_clock:int = 1
 var target_i:int = -1
-#var target_d = 0
 var target_pos:Vector2 = Vector2(0,0)
 var target_velocity:Vector2 = Vector2(0,0)
 
-#var scan_type:int = 1
 var scan_range:int = 10000
 var scan_ships:bool = false
 var scan_structs:bool = false

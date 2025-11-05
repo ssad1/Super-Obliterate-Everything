@@ -55,7 +55,7 @@ position = Vector2(0, -24)
 fire_sound = 24
 gun_heat = 60
 gun_range = 700
-gun_v = 10
+gun_v = 10.0
 gun_v_noise = 0.1
 
 [node name="Shot_Plasma" parent="Gun_General" instance=ExtResource("2")]

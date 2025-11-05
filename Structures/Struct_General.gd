@@ -39,25 +39,24 @@ func _get_ship() -> int:
 	return s
 
 func _do_tick() -> void:
-	velocity = Vector2(0,0)
-
 	super._do_tick()
 	_do_damage()
+
+@onready var is_armor:bool = special == "ARMOR"
+@onready var is_proper_struct = special != "ROCK" && !is_armor
 
 func _do_damage() -> void:
 	var burn_pos := Vector2(0,0)
 	var burn_rand := 0.0
 
-	if armor < max_armor && special == "ARMOR":
-		#fire_strength = 1 - armor / max_armor
+	if armor < max_armor && is_armor:
 		UNIT_STATE.do_unit_damage(self)
 		if armor < 0:
 			hull.frame = 63
 		else:
 			hull.frame = round(63 - 63 * armor/max_armor)
 
-	if armor < max_armor && special != "ROCK" && special != "ARMOR":
-		#fire_strength = 1 - armor / max_armor
+	if armor < max_armor && is_proper_struct:
 		UNIT_STATE.do_unit_damage(self)
 		burn_rand = randf() / (build_size.x * build_size.y) * 4
 
