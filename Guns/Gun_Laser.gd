@@ -89,6 +89,7 @@ func _fire_control() -> void:
 		tcpu.targets[tcpu.target_i].is_type != UNIT_STATE.type.SHIP && 
 		tcpu.targets[tcpu.target_i].is_type != UNIT_STATE.type.STRUCT && 
 		tcpu.targets[tcpu.target_i].is_type != UNIT_STATE.type.SHOT && 
+		tcpu.targets[tcpu.target_i].is_type != UNIT_STATE.type.SINGULARITY && 
 		tcpu.targets[tcpu.target_i].is_type != UNIT_STATE.type.MISSILE):
 			firing = false
 

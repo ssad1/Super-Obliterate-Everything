@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://coxjddpqipkgg"]
+
+[ext_resource type="Texture2D" uid="uid://vcul7cayynvp" path="res://Effects/E_MuzzleJ.png" id="1_bcbg3"]
+[ext_resource type="Script" path="res://Effects/E_Muzzle_Laser.gd" id="2_kjxcc"]
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Burn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hsiyn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a41k1"]
+_data = {
+"Burn": SubResource("2"),
+"RESET": SubResource("Animation_hsiyn")
+}
+
+[node name="Node2D" type="Sprite2D"]
+script = ExtResource("2_kjxcc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bcbg3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a41k1")
+}
+speed_scale = 1.5

@@ -25,6 +25,7 @@ func _on_area_entered(area:Area2D) -> void:
 
 	if (
 		parent_unit.is_type == UNIT_STATE.type.SHOT || 
+		parent_unit.is_type == UNIT_STATE.type.SINGULARITY || 
 		parent_unit.is_type == UNIT_STATE.type.MISSILE && 
 		parent_unit.tcpu.targets.has(target.parent_unit)
 	   ):

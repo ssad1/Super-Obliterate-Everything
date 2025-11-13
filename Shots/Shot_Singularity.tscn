@@ -1,0 +1,165 @@
+[gd_scene load_steps=12 format=3 uid="uid://dtud28wlroesr"]
+
+[ext_resource type="Script" path="res://Shots/Shot_Singularity.gd" id="1_28i65"]
+[ext_resource type="Shader" path="res://Shaders/Singularity_effects.gdshader" id="2_ycwa3"]
+[ext_resource type="Texture2D" uid="uid://cvxjha7j78ofh" path="res://Shots/Graphics/Singularity.png" id="3_0d0ix"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3_yysjj"]
+[ext_resource type="Texture2D" uid="uid://vcul7cayynvp" path="res://Effects/E_MuzzleJ.png" id="5_dqd46"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vx8k"]
+shader = ExtResource("2_ycwa3")
+shader_parameter/distort_strenght = 0.09
+shader_parameter/wave_strenght = 0.3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tji82"]
+radius = 350.0
+
+[sub_resource type="Animation" id="Animation_mnhkd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hull:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v7u1j"]
+resource_name = "grow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hull:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_f27gc"]
+resource_name = "evaporate"
+length = 2.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hull:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.15, 1.15), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.03333, 1.06667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 2.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6jj7u"]
+_data = {
+"RESET": SubResource("Animation_mnhkd"),
+"evaporate": SubResource("Animation_f27gc"),
+"grow": SubResource("Animation_v7u1j")
+}
+
+[node name="ShotSingularity" type="Node2D"]
+script = ExtResource("1_28i65")
+attraction_force = 0.05
+base_damage = 0.0
+force = 0.0
+damage_type = ""
+name_text = "BLACK HOLE"
+max_armor = 10000.0
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 0
+rect = Rect2(-48, -48, 96, 96)
+
+[node name="Hull" type="Sprite2D" parent="."]
+light_mask = 0
+material = SubResource("ShaderMaterial_5vx8k")
+texture = ExtResource("3_0d0ix")
+
+[node name="Horizon" type="Sprite2D" parent="Hull"]
+light_mask = 0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_0d0ix")
+
+[node name="Light" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("5_dqd46")
+
+[node name="HitBox" parent="." instance=ExtResource("3_yysjj")]
+visible = false
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AttractionArea" type="Area2D" parent="."]
+editor_description = "The area were it starts attracting units."
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttractionArea"]
+shape = SubResource("CircleShape2D_tji82")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6jj7u")
+}
+speed_scale = 3.0

@@ -3,7 +3,7 @@ extends Node
 
 var up
 
-var targets = []
+var targets:Array = []
 var target_clock:int = 1
 var target_i:int = -1
 var target_pos:Vector2 = Vector2(0,0)
@@ -38,6 +38,7 @@ enum profile
 	EXPLOSION,
 	STATION,
 	REPAIR,
+	SINGULARITY
 }
 var target_profile:profile = profile.NORMAL
 
@@ -46,7 +47,7 @@ var set_target_profile:profile = target_profile:
 		return target_profile
 	set(value):
 		target_profile = value
-		cull_check = (up.is_type == UNIT_STATE.type.STRUCT || up.is_type == UNIT_STATE.type.SHOT || up.is_type == UNIT_STATE.type.LASER) && target_profile != profile.REPAIR
+		cull_check = (up.is_type == UNIT_STATE.type.STRUCT || up.is_type == UNIT_STATE.type.SINGULARITY || up.is_type == UNIT_STATE.type.SHOT || up.is_type == UNIT_STATE.type.LASER) && target_profile != profile.REPAIR
 		_do_profile()
 
 func _ready():
@@ -193,6 +194,12 @@ func _do_profile() -> void:
 			scan_ships = true
 			scan_structs = true
 			is_repair = true
+		profile.SINGULARITY:
+			scan_ships = true
+			scan_structs = true
+			scan_enemy = true
+			scan_rocks = true
+			scan_special = "ROCK"
 
 #to immediately search for something else and attack it
 

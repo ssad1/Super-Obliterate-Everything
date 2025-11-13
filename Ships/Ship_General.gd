@@ -141,6 +141,9 @@ func _do_damage() -> void:
 	UNIT_STATE.do_unit_damage(self)
 
 func _do_ai() -> void:
+
+	if spaghettified: return
+
 	if tcpu != null:
 		_ai_high()
 		_ai_mid()

@@ -38,6 +38,7 @@ var shield_radius:float = 0 #display only, set in area shield module
 @export var special:String = ""
 var guns_safety:bool = false
 
+
 var burn_color = Color(1,0,0,1)
 var light_bright:float = 1
 var burn_bright:float = 0
@@ -50,6 +51,9 @@ var shield_strength:float = 0
 var shield_damage:float = 0
 var build_strength:float = 0
 var swirl_strength:float = 0
+
+
+var spaghettified:bool = false
 var select_strength:float = 0
 var offset:Vector2 = Vector2(randi() % 1000 + 10,randi() % 1000 + 10)
 
@@ -67,12 +71,7 @@ var spawn_id:int = 0
 var death:bool = false
 var dead:bool = death:
 	set(value):
-		if value:
-			var game_arr:Array = Main.game.get_thing_array(is_type)
-
-			_remove_ref(spawn_id)
-			queue_free()
-			tree_exited.connect(func(): game_arr.erase(self))
+		_do_death(value)
 
 		death = value
 	get:
@@ -129,6 +128,14 @@ func _die() -> void:
 				module._on_death()
 	dead = true
 
+func _do_death(value:bool) -> void:
+	if value:
+		var game_arr:Array = Main.game.get_thing_array(is_type)
+
+		_remove_ref(spawn_id)
+		queue_free()
+		tree_exited.connect(func(): game_arr.erase(self))
+
 func _do_physics() -> void:
 	if sqrt(velocity.x * velocity.x + velocity.y * velocity.y) > max_velocity:
 		velocity = velocity * 0.95
@@ -171,16 +178,6 @@ func _do_range() -> void:
 
 	tFOV._initialize_FOV_area(range_radius)
 	tFOV._bind_tcpu(tcpu)
-
-'''
-func _do_shield_range() -> void:
-	shield_radius = 0
-	for module in modules:
-
-		if "shield_radius" in module && module.shield_radius - module.shield_width / 2 > shield_radius:
-			shield_radius = module.shield_radius - module.shield_width / 2
-			area_shield = module.shield
-			max_area_shield = module.max_shield'''
 
 func _do_select(s:bool) -> void:
 	is_selected = s
@@ -231,6 +228,11 @@ func _get_turret_score() -> int:
 	return score
 
 func _hit(s) -> void:
+
+	if s.is_type == UNIT_STATE.type.SINGULARITY:
+		UNIT_STATE._do_black_hole_death(self)
+		return
+
 	armor = armor - s.damage
 
 	if armor > max_armor:
@@ -253,6 +255,7 @@ func _hit(s) -> void:
 		s.armor = 0
 		_apply_force(s.force, s.velocity)
 
+
 func _process(delta:float) -> void:
 
 	if stats == null && is_selected:
@@ -266,10 +269,6 @@ func _process(delta:float) -> void:
 		if is_selected == false:
 			stats.queue_free()
 			stats = null
-	#if(global_position.x < -200 || global_position.x > GLOBAL.resx || global_position.y < -200 || global_position.y > GLOBAL.resy ):
-	#	hide()
-	#else:
-	#	show()
 
 func _remove_ref(s) -> void:
 	if tcpu != null:

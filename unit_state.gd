@@ -23,6 +23,7 @@ enum type
 	TRIGGER,
 	HANGAR,
 	MODULE,
+	SINGULARITY,
 }
 
 func do_unit_build(unit, duration:float) -> void:
@@ -66,7 +67,7 @@ func do_unit_damage(unit) -> void:
 
 func do_unit_damage_strength(unit) -> void:
 
-	if unit.is_type == UNIT_STATE.type.SHOT || unit.is_type == UNIT_STATE.type.LASER: return
+	if unit.is_type == UNIT_STATE.type.SHOT || unit.is_type == UNIT_STATE.type.LASER || unit.is_type == UNIT_STATE.type.SINGULARITY: return
 
 	get_tree().create_tween().tween_method(
 		_set_damage_strength.bind(unit.mat),
@@ -77,3 +78,19 @@ func do_unit_damage_strength(unit) -> void:
 
 func _set_damage_strength(val:float, mat:Material) -> void:
 	mat.set_shader_parameter("damage_strength", val)
+
+func _do_black_hole_death(unit) -> void:
+
+	if unit.spaghettified: return
+	unit.spaghettified = true
+
+	get_tree().create_tween().tween_method(
+		_set_swirl_strength.bind(unit.mat),
+		0.0,
+		0.5,
+		1.5
+	)
+	get_tree().create_tween().tween_property(unit, "scale", Vector2(0,0), 1.5).finished.connect(func(): unit._die())
+
+func _set_swirl_strength(val:float, mat:Material) -> void:
+	mat.set_shader_parameter("swirl_strength", val)

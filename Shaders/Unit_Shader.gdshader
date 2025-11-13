@@ -426,8 +426,8 @@ vec2 swirl(vec2 uv, float t)
 	position -= vec2(0.5 / frames.x, 0.5 / frames.y);
 
     // apply rotation transformation
-    mat2 rotation_matrix = mat2(vec2(cos(rotation_index), -sin(rotation_index)),
-                                vec2(sin(rotation_index), cos(rotation_index)));
+    mat2 rotation_matrix = mat2(vec2(-cos(rotation_index), sin(rotation_index)),
+                                vec2(-sin(rotation_index), -cos(rotation_index)));
     position = position * rotation_matrix;
 
     // move back

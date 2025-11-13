@@ -26,6 +26,7 @@ var modules = []
 var is_type:UNIT_STATE.type = UNIT_STATE.type.TURRET
 var range_radius:int = 0
 var target_hot:bool = false
+var spaghettified:bool = false
 
 @export var build_speed:float = 1
 
@@ -54,6 +55,9 @@ func _process(delta):
 	pass
 
 func _do_ai():
+
+	if spaghettified: return
+
 	var target_rotate := 0.0
 	var rotate_d := 0.0
 	target_hot = false

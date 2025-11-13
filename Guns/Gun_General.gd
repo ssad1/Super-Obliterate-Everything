@@ -32,6 +32,7 @@ var gun_burst_cool:int = 0
 @export var gun_circle:bool = false
 @export var gun_scale:float = 1
 @export var velocity_align:bool = true
+@export var shot_lifespan:float = 20
 
 var offset_pos:Vector2 = Vector2(0,0)
 var offset_rotate:float = 0
@@ -93,7 +94,7 @@ func _fire_control() -> void:
 	if top.guns_safety:
 		firing = false
 
-	if firing && gun_cool == 0 && gun_burst_cool == 0:
+	if firing && gun_cool == 0 && gun_burst_cool == 0 && !up.spaghettified:
 		_fire()
 		#add in uncloaking
 		gun_cool = gun_burst_heat
@@ -231,7 +232,7 @@ func _fire() -> void:
 						obj.lifespan = ceil(gun_range / mod_gun_v)
 						obj.lifespan = obj.lifespan * (1.0 - gun_life_noise * randf())
 					else:
-						obj.lifespan = 20
+						obj.lifespan = shot_lifespan
 				
 				if has_proper_cpu:
 					obj.tcpu.targets = up.tcpu.targets

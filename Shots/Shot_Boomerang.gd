@@ -18,7 +18,6 @@ func _process(delta:float) -> void:
 	rotation = rotate
 
 func _do_tick() -> void:
-	#clock = clock + 1
 	if clock >= lifespan:
 		armor = 0
 

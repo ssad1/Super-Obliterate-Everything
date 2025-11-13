@@ -92,6 +92,7 @@ func _camera_edges() -> void:
 
 func _collide() -> void:
 	for shot in shots:
+
 		for target in shot.tcpu.targets:
 
 			if !is_instance_valid(target): continue
@@ -298,10 +299,6 @@ func _do_thing(a:Array) -> void:
 	while i >= 0:
 		s = a[i]
 		s._do_tick()
-		'''
-		if s.dead:
-			s.queue_free()
-			a.remove_at(i)'''
 		i = i - 1
 
 func _do_victory() -> void:
@@ -380,7 +377,7 @@ func _super_add_child(obj) -> void:
 	if obj.is_type == UNIT_STATE.type.MISSILE:
 		layer_shots.add_child(obj)
 		missiles.append(obj)
-	if obj.is_type == UNIT_STATE.type.SHOT:
+	if obj.is_type == UNIT_STATE.type.SHOT || obj.is_type == UNIT_STATE.type.SINGULARITY:
 		layer_shots.add_child(obj)
 		shots.append(obj)
 	if obj.is_type == UNIT_STATE.type.LASER:
@@ -406,6 +403,8 @@ func get_thing_array(is_type:UNIT_STATE.type) -> Array:
 		UNIT_STATE.type.MISSILE:
 			return missiles
 		UNIT_STATE.type.SHOT:
+			return shots
+		UNIT_STATE.type.SINGULARITY:
 			return shots
 		UNIT_STATE.type.LASER:
 			return lasers

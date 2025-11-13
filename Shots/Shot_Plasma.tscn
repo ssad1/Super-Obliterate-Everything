@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c6y02ueavkcdm" path="res://Shots/Graphics/Plasma.png" id="1"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://Modules/Spawn_Explosion.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://chsnqngu671vk" path="res://Modules/Spawn_Explosion.tscn" id="5"]
 [ext_resource type="Script" path="res://Shots/Shot_General.gd" id="6"]
 [ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="7"]
 [ext_resource type="PackedScene" uid="uid://bpx3w6rav7hni" path="res://Shots/Explode_Plasma.tscn" id="8"]
@@ -98,6 +98,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("1")
 hframes = 6
 vframes = 6
+frame = 5
 
 [node name="Hull" type="Sprite2D" parent="."]
 modulate = Color(1, 0.203922, 0.203922, 0.705882)
