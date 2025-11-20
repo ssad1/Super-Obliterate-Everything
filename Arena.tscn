@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7847kdn2ror0"]
+
+[ext_resource type="Script" path="res://Arena.gd" id="1_cgmb8"]
+[ext_resource type="PackedScene" uid="uid://bmywamfga70nf" path="res://Background/Nebula.tscn" id="2_voxvv"]
+
+[node name="Arena" type="Node2D"]
+editor_description = "Test arena for new implemented ships."
+script = ExtResource("1_cgmb8")
+units_blue = Array[int]([61])
+units_red = Array[int]([47])
+arena_size = Vector2(2000, 1000)
+
+[node name="Layer_Structs" type="Node2D" parent="."]
+
+[node name="Layer_Ships" type="Node2D" parent="."]
+
+[node name="Layer_Shots" type="Node2D" parent="."]
+
+[node name="Layer_Effects_Normal" type="Node2D" parent="."]
+
+[node name="Layer_Effects_Bright" type="Node2D" parent="."]
+
+[node name="Layer_Stats" type="Node2D" parent="."]
+
+[node name="Layer_New" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Nebula" parent="Background" instance=ExtResource("2_voxvv")]

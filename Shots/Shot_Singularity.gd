@@ -13,6 +13,10 @@ func _ready() -> void:
 
 	up = get_parent().get_parent()
 
+	if get_parent() is Gun_General: 
+		attraction_area.monitoring = false
+		attraction_area.monitorable = false
+
 	attraction_area.area_entered.connect(_on_unit_approached)
 	attraction_area.area_exited.connect(_on_unit_got_away)
 	anim.play("grow")
@@ -20,7 +24,7 @@ func _ready() -> void:
 func _do_death(value:bool) -> void:
 	if value:
 		velocity = Vector2.ZERO
-		var game_arr:Array = Main.game.get_thing_array(is_type)
+		var game_arr:Array = SPAWNER.game.get_thing_array(is_type)
 
 		anim.play("evaporate")
 

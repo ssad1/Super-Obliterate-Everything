@@ -44,7 +44,6 @@ func _launch_ship(rows:int) -> void:
 	while rows > 0:
 		spawn_row()
 		rows -= 1
-		#await get_tree().create_timer(release_delay).timeout
 		row_timer.start(release_delay)
 		await row_timer.timeout
 

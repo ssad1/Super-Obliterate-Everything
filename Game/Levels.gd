@@ -80,8 +80,8 @@ func _convert_grid_to_polar(spot):
 	var dx = spot.x - size
 	var dy = spot.y - size
 	
-	var r = Vector2(dx, dy).length()      # distância ao centro
-	var theta = atan2(dy, dx)             # ângulo em radianos
+	var r = Vector2(dx, dy).length()
+	var theta = atan2(dy, dx)       
 	
 	return Vector2(r, theta)
 

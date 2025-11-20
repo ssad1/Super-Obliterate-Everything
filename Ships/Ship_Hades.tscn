@@ -56,7 +56,7 @@ credit_cost = 1800
 inertia = 0.2
 max_velocity = 3.0
 max_rotate_velocity = 0.2
-max_armor = 35.0
+max_armor = 40.0
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_annps")
@@ -85,8 +85,8 @@ grow_vertical = 2
 [node name="Gun_General" parent="." instance=ExtResource("7_m6irg")]
 position = Vector2(0, -16)
 fire_sound = 22
-gun_heat = 90
-gun_range = 1260
+gun_heat = 85
+gun_range = 840
 gun_v = 40.0
 gun_scale = 0.7
 shot_lifespan = 100.0

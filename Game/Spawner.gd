@@ -764,6 +764,9 @@ func _spawn_dupe(s, p, position:Vector2, velocity:Vector2, rotation:float, up, i
 	obj.rotate = rotation
 
 	if !obj.is_visible(): obj.show()
+	
+	if obj.is_type == UNIT_STATE.type.SINGULARITY:
+		obj.attraction_area.monitoring = true
 
 	if obj.is_type == UNIT_STATE.type.STRUCT:
 		obj._build_fix()

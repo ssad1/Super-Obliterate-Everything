@@ -1,3 +1,4 @@
+class_name Gun_General
 extends Node2D
 
 var gun_cool:int = 0

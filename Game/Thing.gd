@@ -130,7 +130,7 @@ func _die() -> void:
 
 func _do_death(value:bool) -> void:
 	if value:
-		var game_arr:Array = Main.game.get_thing_array(is_type)
+		var game_arr:Array = SPAWNER.game.get_thing_array(is_type)
 
 		_remove_ref(spawn_id)
 		queue_free()
