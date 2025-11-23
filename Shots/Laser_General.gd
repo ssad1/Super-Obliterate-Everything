@@ -18,7 +18,7 @@ var death:bool = false
 var dead:bool = death:
 	set(value):
 		if value:
-			var game_arr:Array = Main.game.get_thing_array(is_type)
+			var game_arr:Array = SPAWNER.game.get_thing_array(is_type)
 			tree_exited.connect(func(): game_arr.erase(self))
 
 			_remove_ref(spawn_id)
@@ -76,7 +76,7 @@ func _draw_laser():
 	position = pa_pos
 	pos = pa_pos
 	r = pos.distance_to(pb_pos)
-	theta = atan2(pb_pos.y - pos.y, pb_pos.x - pos.x) + PI / 2
+	theta = atan2(pb_pos.y - pos.y, pb_pos.x - pos.x) + CALC.half_PI
 	
 	beam_long = r / 128
 	beam.scale = Vector2(shot_scale * beam_wide, beam_long)

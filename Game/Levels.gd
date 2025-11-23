@@ -101,7 +101,7 @@ func _design_level():
 	match level_map:
 		"SOLO ARCS":
 			_start_spots_solo()
-			_rock_arc(small_rock,spots[0], 10, 2 * PI * CALC._rand(), PI / 2, 2)
+			_rock_arc(small_rock,spots[0], 10, 2 * PI * CALC._rand(), CALC.half_PI, 2)
 			_rock_arc(small_rock,spots[0], 16, 2 * PI * CALC._rand(), PI / 3, 2)
 			_rock_arc(small_rock,spots[0], 22, 2 * PI * CALC._rand(), PI / 4, 2)
 			_rock_arc(small_rock,spots[0], 28, 2 * PI * CALC._rand(), PI / 5, 2)
@@ -128,9 +128,9 @@ func _design_level():
 		"SOLO SPIRAL":
 			_start_spots_solo()
 			for j in range(round(.35 * grid.size())):
-				spot = _convert_polar_to_grid(j  * grid.size() / 64 + 8,_convert_grid_to_polar(spots[0]).y + j * .1 * (PI / 2))
+				spot = _convert_polar_to_grid(j  * grid.size() / 64 + 8,_convert_grid_to_polar(spots[0]).y + j * .1 * (CALC.half_PI))
 				_rock_blob(small_rock,spot,4,3)
-				spot = _convert_polar_to_grid(j  * grid.size() / 64 + 8,_convert_grid_to_polar(spots[0]).y + j * .1 * (PI / 2) + PI)
+				spot = _convert_polar_to_grid(j  * grid.size() / 64 + 8,_convert_grid_to_polar(spots[0]).y + j * .1 * (CALC.half_PI) + PI)
 				_rock_blob(small_rock,spot,4,3)
 			_rock_random(round(.5 * grid.size()))
 		"SOLO CLUMPS":
@@ -213,7 +213,7 @@ func _design_level():
 			_rock_random(round(.5 * grid.size()))
 		"ARCS":
 			_start_spots(players.size() - 1)
-			_rock_arc(small_rock,spots[0], 10, 2 * PI * CALC._rand(), PI / 2, 2)
+			_rock_arc(small_rock,spots[0], 10, 2 * PI * CALC._rand(), CALC.half_PI, 2)
 			_rock_arc(small_rock,spots[0], 16, 2 * PI * CALC._rand(), PI / 3, 2)
 			_rock_arc(small_rock,spots[0], 22, 2 * PI * CALC._rand(), PI / 4, 2)
 			_rock_arc(small_rock,spots[0], 28, 2 * PI * CALC._rand(), PI / 5, 2)
@@ -232,7 +232,7 @@ func _design_level():
 			_start_spots(players.size() - 1)
 			for i in range(players.size() - 1):
 				for j in range(round(.35 * grid.size())):
-					spot = _convert_polar_to_grid(j  * grid.size() / 64 + 8,_convert_grid_to_polar(spots[i]).y + j * .1 * (PI / 2))
+					spot = _convert_polar_to_grid(j  * grid.size() / 64 + 8,_convert_grid_to_polar(spots[i]).y + j * .1 * (CALC.half_PI))
 					_rock_blob(small_rock,spot,4,3)
 			_rock_random(round(.5 * grid.size()))
 		"CLUMPS":
@@ -537,15 +537,15 @@ func _rock_expansion(s):
 			polar.x = polar.x / 2
 			polar.y = polar.y - .6 * max_arc + CALC._rand() * max_arc
 			coord = _convert_polar_to_grid(polar.x, polar.y)
-			_rock_arc(small_rock, coord, 6, 2 * PI * CALC._rand(), PI / 2, 2)
+			_rock_arc(small_rock, coord, 6, 2 * PI * CALC._rand(), CALC.half_PI, 2)
 		1:
 			coord = spots[0]
 			polar = _convert_grid_to_polar(coord)
 			polar.x = polar.x / 2
 			polar.y = polar.y - .6 * max_arc + CALC._rand() * max_arc
 			coord = _convert_polar_to_grid(polar.x, polar.y)
-			_rock_arc(small_rock, coord, 6, 2 * PI * CALC._rand(), PI / 2, 2)
-			_rock_arc(small_rock, coord, 10, 2 * PI * CALC._rand(), PI / 2, 4)
+			_rock_arc(small_rock, coord, 6, 2 * PI * CALC._rand(), CALC.half_PI, 2)
+			_rock_arc(small_rock, coord, 10, 2 * PI * CALC._rand(), CALC.half_PI, 4)
 		2:
 			coord = spots[0]
 			polar = _convert_grid_to_polar(coord)
@@ -557,13 +557,13 @@ func _rock_expansion(s):
 			coord = spots[0]
 			theta = CALC._rand() * 2 * PI
 			coord = Vector2(spots[0].x + 14 * cos(theta), spots[0].y - 14 * sin(theta))
-			_rock_arc(small_rock, coord, 6, 2 * PI * CALC._rand(), PI / 2, 2)
+			_rock_arc(small_rock, coord, 6, 2 * PI * CALC._rand(), CALC.half_PI, 2)
 		4:	#Solo Dense Field
 			coord = spots[0]
 			theta = CALC._rand() * 2 * PI
 			coord = Vector2(spots[0].x + 14 * cos(theta), spots[0].y - 14 * sin(theta))
-			_rock_arc(small_rock, coord, 6, 2 * PI * CALC._rand(), PI / 2, 2)
-			_rock_arc(small_rock, coord, 10, 2 * PI * CALC._rand(), PI / 2, 4)
+			_rock_arc(small_rock, coord, 6, 2 * PI * CALC._rand(), CALC.half_PI, 2)
+			_rock_arc(small_rock, coord, 10, 2 * PI * CALC._rand(), CALC.half_PI, 4)
 	
 func _rock_polar_line(s, center, ra, rb, theta, diffuse):
 	var spot = Vector2(0,0)
@@ -593,7 +593,7 @@ func _rock_start(s):
 	#var i = 0
 	match s:
 		0:
-			_rock_arc(small_rock,spots[0], 12, 2 * PI * CALC._rand(), PI / 2, 2)
+			_rock_arc(small_rock,spots[0], 12, 2 * PI * CALC._rand(), CALC.half_PI, 2)
 		1:
 			_rock_arc(small_rock,spots[0], 10, 2 * PI * CALC._rand(), PI, 2)
 			_rock_arc(small_rock,spots[0], 14, 2 * PI * CALC._rand(), PI / 3, 3)

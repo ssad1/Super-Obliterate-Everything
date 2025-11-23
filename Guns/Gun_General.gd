@@ -51,7 +51,7 @@ func _ready() -> void:
 	up = get_parent()
 	offset_pos = position
 	offset_radius = sqrt(pow(offset_pos.x,2) + pow(offset_pos.y,2))
-	offset_rotate = atan2(offset_pos.y,offset_pos.x) + PI / 2
+	offset_rotate = atan2(offset_pos.y,offset_pos.x) + CALC.half_PI
 	up.modules.append(self)
 	
 	if up.is_type == UNIT_STATE.type.TURRET or up.is_type == UNIT_STATE.type.TRIGGER:
@@ -82,7 +82,7 @@ func _fire_control() -> void:
 
 		var prod:Vector2 = up.pos - tcpu.target_pos
 
-		rb = atan2(prod.y, prod.x) - PI / 2
+		rb = atan2(prod.y, prod.x) - CALC.half_PI
 		d = CALC._rotate_direction(up.rotate, rb)
 		dd = prod.x * prod.x + prod.y * prod.y
 
@@ -217,7 +217,7 @@ func _fire() -> void:
 
 
 				if velocity_align:
-					shot_rotate = atan2(shot_velocity.y,shot_velocity.x) + PI / 2
+					shot_rotate = atan2(shot_velocity.y,shot_velocity.x) + CALC.half_PI
 				else:
 					shot_rotate = up.rotate
 				

@@ -79,7 +79,7 @@ func do_unit_damage_strength(unit) -> void:
 func _set_damage_strength(val:float, mat:Material) -> void:
 	mat.set_shader_parameter("damage_strength", val)
 
-func _do_black_hole_death(unit) -> void:
+func do_black_hole_death(unit) -> void:
 
 	if unit.spaghettified: return
 	unit.spaghettified = true
@@ -94,3 +94,16 @@ func _do_black_hole_death(unit) -> void:
 
 func _set_swirl_strength(val:float, mat:Material) -> void:
 	mat.set_shader_parameter("swirl_strength", val)
+
+func fade_stats(stat:Stats, from:float, to:float) -> void:
+	get_tree().create_tween().tween_method(
+		_set_build_strength.bind(stat),
+		from,
+		to,
+		1
+	)
+
+func _set_stat_modulate(val:float, stat:Stats) -> void:
+	stat.modulate.a = val
+	stat.range_line.scale = Vector2(.5 + .5 * val,.5 + .5 * val)
+	stat.shield_line.scale = Vector2(1.2 - .2 * val,1.2 - .2 * val)

@@ -38,7 +38,7 @@ shader_parameter/lighting = ExtResource("10")
 [node name="Ship_Plasma_Halo" type="Node2D"]
 script = ExtResource("3")
 thrust = 0.2
-aihigh = "HALO"
+aihigh = 2
 aistandoff = 150
 factory = 20
 name_text = "PLASMA HALO"
@@ -50,6 +50,14 @@ credit_cost = 2400
 inertia = 0.2
 max_velocity = 3.0
 max_armor = 75
+max_rotate_velocity = null
+drag = null
+max_armor = 75.0
+max_shields = null
+target_profile = null
+scan_only_in_range = null
+special = null
+build_speed = null
 
 [node name="Hull" parent="." instance=ExtResource("2_n5g27")]
 material = SubResource("ShaderMaterial_chbsr")

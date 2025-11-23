@@ -38,7 +38,7 @@ func _set_lights():
 		theta = CALC._rand() * PI + PI
 		set_height(-300 - CALC._randint() % 1000)
 	if(style >= 1):
-		theta = CALC._rand() * PI / 2 - PI / 4
+		theta = CALC._rand() * CALC.half_PI - PI / 4
 		if(CALC._rand() > 0.5):
 			theta = theta + PI
 		set_height(CALC._randint() % 1500)
@@ -52,9 +52,9 @@ func _envset(s,a,d):
 				1:
 					theta = PI
 				2:
-					theta = PI / 2
+					theta = CALC.half_PI
 				3:
-					theta = 3 * PI / 2
+					theta = 3 * CALC.half_PI
 		3:
 			match d:
 				0:
@@ -64,10 +64,10 @@ func _envset(s,a,d):
 					theta = PI
 					anim_mode = 1
 				2:
-					theta = PI / 2
+					theta = CALC.half_PI
 					anim_mode = 2
 				3:
-					theta = 3 * PI / 2
+					theta = 3 * CALC.half_PI
 					anim_mode = 2
 
 func _anim_coords(delta):

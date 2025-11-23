@@ -38,7 +38,7 @@ shader_parameter/lighting = ExtResource("4_cd72l")
 [node name="Ship_Artillery_Halo" type="Node2D"]
 script = ExtResource("3")
 thrust = 0.2
-aihigh = "HALO"
+aihigh = 2
 aistandoff = 150
 factory = 20
 name_text = "ARTILLERY HALO"
@@ -50,6 +50,14 @@ credit_cost = 2500
 inertia = 0.2
 max_velocity = 3.0
 max_armor = 75
+max_rotate_velocity = null
+drag = null
+max_armor = null
+max_shields = null
+target_profile = null
+scan_only_in_range = null
+special = null
+build_speed = null
 
 [node name="Hull" parent="." instance=ExtResource("2_bo8v3")]
 material = SubResource("ShaderMaterial_1dtu8")

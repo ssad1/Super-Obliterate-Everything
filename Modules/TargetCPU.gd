@@ -101,6 +101,19 @@ func check_target(target) -> bool:
 	target.armor <= 0 || 
 	target.cloaked ||
 	!target.visible):
+		'''
+		if target_profile != profile.EXPLOSION:
+
+			if "name_text" in up || "name_text" in target:
+
+				print("1) Deu merda!")
+				if "name_text" in up: print("name up: ", up.name_text)
+				if "name_text" in target: print("name targ: ", target.name_text)
+				print("spawn_id ", target.spawn_id == up.spawn_id)
+				print("target.armor ", target.armor <= 0)
+				print("target.cloaked ", target.cloaked)
+				print("target.visible ", target.visible) '''
+
 		return false
 
 	#check which faction we are in
@@ -113,14 +126,30 @@ func check_target(target) -> bool:
 		!scan_enemy && diplo == 0 || 
 		!scan_neutral && diplo == 1 || 
 		!scan_ally && diplo == 2):
+
+			'''
+			if target_profile != profile.EXPLOSION:
+				if "name_text" in up || "name_text" in target:
+
+					print("2) Deu merda!")
+					if "name_text" in up: print("name up: ", up.name_text)
+					if "name_text" in target: print("name targ: ", target.name_text)
+					print("diplo: ", diplo)
+					print("target.player.id: ", target.player.id)
+					print("up.player.id: ", up.player.id)
+					print("scan_enemy && diplo: ", !scan_enemy && diplo == 0)
+					print("scan_neutral && diplo: ", !scan_neutral && diplo == 1)
+					print("scan_ally && diplo ", !scan_ally && diplo == 2)'''
+
 			return false
-		
+
 	#miners, metalporters, etc
 
 	if (
 	(scan_special_only && target.special != scan_special) ||
 	(!scan_rocks && target.special == "ROCK") ||
 	(scan_injured && target.armor >= target.max_armor)):
+		print("3) Deu merda!")
 		return false
 
 	#avoid units not detecting stuff that was already there before

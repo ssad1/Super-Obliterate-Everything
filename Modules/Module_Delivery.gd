@@ -22,7 +22,7 @@ func _ready() -> void:
 	up = get_parent()
 	offset_pos = position
 	offset_radius = sqrt(pow(offset_pos.x,2) + pow(offset_pos.y,2))
-	offset_rotate = atan2(offset_pos.y, offset_pos.x) - PI/2
+	offset_rotate = atan2(offset_pos.y, offset_pos.x) - CALC.half_PI
 	up.modules.append(self)
 
 func _process(delta:float) -> void:

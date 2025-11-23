@@ -35,7 +35,7 @@ func _ready():
 	up = get_parent()
 	offset_pos = position
 	offset_radius = sqrt(pow(offset_pos.x,2) + pow(offset_pos.y,2))
-	offset_rotate = atan2(offset_pos.y, offset_pos.x) - PI/2
+	offset_rotate = atan2(offset_pos.y, offset_pos.x) - CALC.half_PI
 	up.modules.append(self)
 	tcpu = tcpu_node.instantiate()
 
@@ -65,7 +65,7 @@ func _do_ai():
 		1:
 			if tcpu._target_closest(pos) != -1:
 				target_hot = true
-				target_rotate = atan2(pos.y - tcpu.target_pos.y,pos.x - tcpu.target_pos.x) - PI/2
+				target_rotate = atan2(pos.y - tcpu.target_pos.y,pos.x - tcpu.target_pos.x) - CALC.half_PI
 			else:
 				target_rotate = last_rotate
 			rotate_d = CALC._rotate_direction(rotate,target_rotate)

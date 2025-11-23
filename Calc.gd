@@ -1,6 +1,7 @@
 extends Node
 
 var rseed:int = 0
+var half_PI:float = PI/2
 
 func _ready() -> void:
 	pass # Replace with function body.

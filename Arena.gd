@@ -8,6 +8,9 @@ var blue_spawn:Vector2 = Vector2(0, 4096/2)
 var red_spawn:Vector2 = Vector2(4096, 4096/2)
 
 func _ready() -> void:
+
+	GLOBAL.gamemode = 2
+
 	SPAWNER.game = self
 	mapsize = arena_size
 
@@ -15,32 +18,33 @@ func _ready() -> void:
 	red_spawn = Vector2(arena_size.x, arena_size.y/2)
 
 	SPAWNER._spawn_player(1,0)
-	SPAWNER._spawn_player(2,0)
+	SPAWNER._spawn_player(2,1)
+	SPAWNER._spawn_player(3,0)
+	SPAWNER._spawn_player(4,1)
+	SPAWNER._spawn_player(5,0)
 
 	for i in units_blue:
 		var obj = SPAWNER._spawn(
 			[i],
-			SPAWNER.game.players[1].id,
+			2,
 			blue_spawn,
 			Vector2(0,0),
 			0,
 			0,
 			0
 		)
-		#_super_add_child(obj)
 	
 	for i in units_red:
 		var obj = SPAWNER._spawn(
 			[i],
-			SPAWNER.game.players[2].id,
+			3,
 			red_spawn,
 			Vector2(0,0),
 			0,
 			0,
 			0
 		)
-		#_super_add_child(obj)
-
+	
 func _process(delta:float) -> void:
 
 	_control()

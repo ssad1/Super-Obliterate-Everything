@@ -27,7 +27,6 @@ func _ready():
 	_init_dangers()
 	#_load_game()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
@@ -71,7 +70,7 @@ func _default_items():
 	item_bag.append([SPAWNER.spawn_objs.RAPIER])
 	item_bag.append([SPAWNER.spawn_objs.MOSQUITO])
 	item_bag.append([SPAWNER.spawn_objs.PUMA])
-	item_bag.append([SPAWNER.spawn_objs.HADES])
+	item_bag.append([SPAWNER.spawn_objs.LEGION])
 
 func _draft_buy(price, item):
 	var buy = true

@@ -6,7 +6,7 @@ extends Sprite2D
 var final = false
 
 func _ready():
-	set_rotation(PI / 2 * float(randi() % 4))
+	set_rotation(CALC.half_PI * float(randi() % 4))
 	hide()
 	pass
 

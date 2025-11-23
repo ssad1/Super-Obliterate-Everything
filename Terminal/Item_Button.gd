@@ -318,6 +318,9 @@ func _remove_obj_from_grid(obj:Thing) -> void:
 
 		obj.hull.queue_free()
 
+		if "has_hull" in obj:
+			obj.has_hull = false
+
 	obj.hide()
 
 func _new_build_spot(a,b,c,d,e,f) -> void:

@@ -230,7 +230,7 @@ func _get_turret_score() -> int:
 func _hit(s) -> void:
 
 	if s.is_type == UNIT_STATE.type.SINGULARITY:
-		UNIT_STATE._do_black_hole_death(self)
+		UNIT_STATE.do_black_hole_death(self)
 		return
 
 	armor = armor - s.damage

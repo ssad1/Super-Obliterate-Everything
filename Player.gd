@@ -83,13 +83,6 @@ var supply:float = _supply_amount:
 		if me:
 			EVENTS.emit_signal("ui_supply",_supply_amount)
 
-func _ready() -> void:
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta:float) -> void:
-	pass
-
 func _add_resource(e:float, m:float, s:float) -> void:
 	var difficulty_coeff = 0
 	if !cpu:
@@ -665,6 +658,9 @@ func _find_closest_station(pa:Vector2) -> int:
 	var pb := Vector2(0,0)
 
 	for i in my_stations.size():
+
+		if !is_instance_valid(my_stations[i]):
+			continue
 
 		pb = my_stations[i].pos
 

@@ -6,6 +6,7 @@
 resource_local_to_scene = true
 
 [node name="TargetFov" type="Area2D"]
+monitorable = false
 script = ExtResource("1_fg0qm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

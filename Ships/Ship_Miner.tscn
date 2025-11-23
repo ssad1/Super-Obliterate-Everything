@@ -51,7 +51,7 @@ blend_mode = 1
 [node name="Ship_Miner" type="Node2D"]
 script = ExtResource("2")
 thrust = 0.3
-aihigh = "MINER"
+aihigh = 4
 aistandoff = 32
 factory = 15
 name_text = "MINER"
