@@ -34,7 +34,7 @@ inertia = 1.0
 max_velocity = 20.0
 max_rotate_velocity = 0.2
 drag = 0.05
-max_armor = 1
+max_armor = 1.0
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")

@@ -13,10 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="11"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
 [ext_resource type="Texture2D" uid="uid://cbleooxn7mtkr" path="res://Ships/Graphics/Fury_L.PNG" id="13"]
-[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="14"]
+[ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="14"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="15"]
-[ext_resource type="PackedScene" path="res://Shots/Explode_Basic.tscn" id="16"]
-[ext_resource type="PackedScene" path="res://Modules/Spawn_Explosion.tscn" id="17"]
+[ext_resource type="PackedScene" uid="uid://d7lxvfirg4je" path="res://Shots/Explode_Basic.tscn" id="16"]
+[ext_resource type="PackedScene" uid="uid://chsnqngu671vk" path="res://Modules/Spawn_Explosion.tscn" id="17"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -122,24 +122,6 @@ gun_scale = 0.25
 [node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("12")]
 visible = false
 material = SubResource("3")
-base_damage = null
-force = null
-damage_type = null
-shot_scale = null
-spin_mode = null
-class_text = null
-energy_cost = null
-metal_cost = null
-supply_cost = null
-credit_cost = null
-inertia = null
-max_rotate_velocity = null
-drag = null
-max_armor = null
-max_shields = null
-target_profile = null
-special = null
-build_speed = null
 
 [node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("14")]
 visible = false
@@ -161,24 +143,6 @@ gun_scale = 0.7
 [node name="Shot_Blaster" parent="Module_Trigger/Gun_General" instance=ExtResource("12")]
 visible = false
 material = SubResource("4")
-base_damage = null
-force = null
-damage_type = null
-shot_scale = null
-spin_mode = null
-class_text = null
-energy_cost = null
-metal_cost = null
-supply_cost = null
-credit_cost = null
-inertia = null
-max_rotate_velocity = null
-drag = null
-max_armor = null
-max_shields = null
-target_profile = null
-special = null
-build_speed = null
 
 [node name="E_MuzzleA" parent="Module_Trigger/Gun_General" instance=ExtResource("14")]
 visible = false

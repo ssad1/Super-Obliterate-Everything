@@ -752,6 +752,8 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 func _spawn_dupe(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) -> Node2D:
 	var obj = s.duplicate()
 
+	obj.inactive = false
+
 	if up == 0:
 		game._super_add_child(obj)
 		obj.spawn_id = next_spawn_id

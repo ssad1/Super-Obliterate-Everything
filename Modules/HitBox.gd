@@ -39,5 +39,6 @@ func _process(delta:float) -> void:
 		else:
 			parent_unit._do_select(false)
 
+'''
 func _do_tick() -> void:
-	pos = parent_unit.pos + position
+	pos = parent_unit.pos + position'''

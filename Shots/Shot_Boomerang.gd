@@ -17,6 +17,26 @@ func _process(delta:float) -> void:
 	set_position(blend_pos)
 	rotation = rotate
 
+	if inactive: return
+
+	tick_clock += delta
+	if tick_clock > 0.1:
+		tick_clock -= 0.1
+		_do_tick()
+	if tick_clock > 0.2:
+		tick_clock = 0.2
+
+	physics_clock += delta
+	if physics_clock > 0.1:
+		physics_clock -= 0.1
+
+		_do_physics()
+
+		if has_hitbox: hitbox.pos = pos + position
+
+	if physics_clock > 0.2:
+		physics_clock = 0.2
+
 func _do_tick() -> void:
 	if clock >= lifespan:
 		armor = 0

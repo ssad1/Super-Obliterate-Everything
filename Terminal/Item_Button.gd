@@ -308,7 +308,10 @@ func _spawn_obj(s) -> void:
 func _remove_obj_from_grid(obj:Thing) -> void:
 
 	if is_instance_valid(obj.hitbox):
+		obj.has_hitbox = false
 		obj.hitbox.queue_free()
+		obj.has_tcpu = false
+		obj.tick_speed = 0
 		obj.tcpu.queue_free()
 
 		if "modules" in obj:

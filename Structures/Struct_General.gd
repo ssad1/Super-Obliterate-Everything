@@ -20,6 +20,9 @@ func _init_struct() -> void:
 		UNIT_STATE.do_unit_faction(self)
 		UNIT_STATE.do_unit_frames(self)
 		UNIT_STATE.do_unit_light_bright(self)
+	
+	#hitbox.tree_exited.connect(func(): has_hitbox = false)
+	inactive = false
 
 func _build_fix() -> void:
 	pos = position
@@ -27,7 +30,7 @@ func _build_fix() -> void:
 	pos.y = pos.y + 32 * build_size.y / 2
 	position = pos
 	if hitbox != null:
-		hitbox._do_tick()
+		hitbox.pos = pos + position
 
 func _get_ship() -> int:
 	var s:int
@@ -40,7 +43,7 @@ func _get_ship() -> int:
 
 func _do_tick() -> void:
 	super._do_tick()
-	_do_damage()
+	#_do_damage()
 
 @onready var is_armor:bool = special == "ARMOR"
 @onready var is_proper_struct = special != "ROCK" && !is_armor

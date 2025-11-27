@@ -3,9 +3,10 @@ extends Game
 @export var units_blue:Array[SPAWNER.spawn_objs]
 @export var units_red:Array[SPAWNER.spawn_objs]
 @export var arena_size:Vector2 = Vector2(4096,4096)
+@export var distribute_evenly:bool = false
 
-var blue_spawn:Vector2 = Vector2(0, 4096/2)
-var red_spawn:Vector2 = Vector2(4096, 4096/2)
+@onready var blue_spawn:Vector2 = Vector2(0, arena_size.y/2)
+@onready var red_spawn:Vector2 = Vector2(arena_size.x, arena_size.y/2)
 
 func _ready() -> void:
 
@@ -14,18 +15,23 @@ func _ready() -> void:
 	SPAWNER.game = self
 	mapsize = arena_size
 
-	blue_spawn = Vector2(0, arena_size.y/2)
-	red_spawn = Vector2(arena_size.x, arena_size.y/2)
-
 	SPAWNER._spawn_player(1,0)
 	SPAWNER._spawn_player(2,1)
 	SPAWNER._spawn_player(3,0)
 	SPAWNER._spawn_player(4,1)
 	SPAWNER._spawn_player(5,0)
 
-	for i in units_blue:
+	#in case we need to distribute evenly
+	var blue_part = arena_size.y / units_blue.size()
+	var red_part = arena_size.y / units_red.size()
+
+	for i in units_blue.size():
+
+		if distribute_evenly:
+			blue_spawn.y = blue_part * i
+
 		var obj = SPAWNER._spawn(
-			[i],
+			[units_blue[i]],
 			2,
 			blue_spawn,
 			Vector2(0,0),
@@ -34,9 +40,13 @@ func _ready() -> void:
 			0
 		)
 	
-	for i in units_red:
+	for i in units_red.size():
+
+		if distribute_evenly:
+			red_spawn.y = red_part * i
+
 		var obj = SPAWNER._spawn(
-			[i],
+			[units_red[i]],
 			3,
 			red_spawn,
 			Vector2(0,0),

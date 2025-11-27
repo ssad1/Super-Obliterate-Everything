@@ -125,7 +125,7 @@ func _die() -> void:
 
 func _do_tick() -> void:
 	super._do_tick()
-	_do_damage()
+	#_do_damage()
 	_do_ai()
 	
 func _process(delta:float) -> void:
@@ -133,6 +133,24 @@ func _process(delta:float) -> void:
 	set_position(blend_pos)
 	_do_anim(delta)
 	_do_selection(delta)
+
+	tick_clock += delta
+	if tick_clock > 0.1:
+		tick_clock -= 0.1
+		_do_tick()
+	if tick_clock > 0.2 / tick_speed:
+		tick_clock = 0.2 / tick_speed
+	
+	physics_clock += delta
+	if physics_clock > 0.1:
+		physics_clock -= 0.1
+
+		if is_not_struct: _do_physics()
+
+		if has_hitbox: hitbox.pos = pos + position
+
+	if physics_clock > 0.2:
+		physics_clock = 0.2
 
 func _do_anim(delta:float) -> void:
 
@@ -155,12 +173,6 @@ func _do_anim(delta:float) -> void:
 
 		burn.frame = f
 		burn.modulate = Color(1,0,0,engine_burn)
-
-		'''
-		if engine_burn == 0:
-			burn.hide()
-		else:
-			burn.show()'''
 
 func _do_build() -> void:
 
@@ -190,18 +202,14 @@ func _do_command(c:int) -> void:
 			engine_burn = engine_burn + .2
 			engine_burn = clamp(engine_burn,0.0,1.0)
 
-func _do_damage() -> void:
-
-	UNIT_STATE.do_unit_damage(self)
-
 func _do_ai() -> void:
-
 	if has_tcpu && !spaghettified:
 		_ai_high()
 		_ai_mid()
 		_ai_low()
 
 func _ai_high() -> void:
+
 	if armor <= 0:
 		aihigh = ai_high.NONE
 		aimid = ai_mid.NONE
@@ -242,6 +250,7 @@ func _ai_high() -> void:
 				aimid = ai_mid.INTERCEPT
 		ai_high.KAMIZAZE:
 			aimid = ai_mid.KAMIKAZE
+		
 
 func _ai_mid() -> void:
 	var d := 0.0
@@ -250,7 +259,6 @@ func _ai_mid() -> void:
 
 	match aimid:
 		ai_mid.COMBAT:
-
 			if tcpu._target_closest(pos) != -1:
 				target_pos = tcpu.target_pos
 				target_velocity = tcpu.target_velocity

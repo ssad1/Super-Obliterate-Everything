@@ -7,9 +7,21 @@
 [node name="Arena" type="Node2D"]
 editor_description = "Test arena for new implemented ships."
 script = ExtResource("1_cgmb8")
-units_blue = Array[int]([61])
-units_red = Array[int]([59])
+units_blue = Array[int]([61, 61, 61])
+units_red = Array[int]([101, 109, 101, 109, 101])
 arena_size = Vector2(2000, 1000)
+distribute_evenly = true
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Nebula" parent="Background" instance=ExtResource("2_voxvv")]
+show_behind_parent = true
+
+[node name="PointLight2D" type="PointLight2D" parent="Background"]
+energy = 60.0
+texture = ExtResource("3_lky7c")
+texture_scale = 50.0
 
 [node name="Layer_Structs" type="Node2D" parent="."]
 
@@ -25,14 +37,3 @@ arena_size = Vector2(2000, 1000)
 
 [node name="Layer_New" type="Node2D" parent="."]
 visible = false
-
-[node name="Background" type="CanvasLayer" parent="."]
-layer = 0
-
-[node name="Nebula" parent="Background" instance=ExtResource("2_voxvv")]
-show_behind_parent = true
-
-[node name="PointLight2D" type="PointLight2D" parent="Background"]
-energy = 60.0
-texture = ExtResource("3_lky7c")
-texture_scale = 50.0

@@ -233,12 +233,12 @@ func _do_tick() -> void:
 	_collide()
 	_collide_explosions()
 	_collide_shields()
-	_do_thing(structs)
+	'''_do_thing(structs)
 	_do_thing(ships)
 	_do_thing(missiles)
 	_do_thing(shots)
 	_do_thing(lasers)
-	_do_thing(explosions)
+	_do_thing(explosions)'''
 	SFX._do_tick()
 
 	for player in players:

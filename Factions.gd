@@ -51,7 +51,7 @@ func _faction_items(s,v):
 	var item_bag = []
 	#v 0 standard
 	#v 1 boss
-	print("V: " + str(v))
+	#print("V: " + str(v))
 	match s:
 		2: #TEAL
 			if(v == 0):

@@ -41,14 +41,17 @@ var pb_pos := Vector2(0,0)
 var pa_id = 0
 var pb_id = 0
 
-func _ready():
+var tick_clock:float = 0
+var inactive:bool = true
+
+func _ready() -> void:
 	_calc_damage()
 	
 	#mat = get_material()
 	#if(mat != null):
 	#	mat.set_shader_parameter("phase",randf() * 2 * PI)
 
-func _ignite(new_pa,new_pb):
+func _ignite(new_pa,new_pb) -> void:
 	pa_id = new_pa.top.spawn_id
 	pb_id = new_pb.spawn_id
 	pa = weakref(new_pa)
@@ -57,22 +60,23 @@ func _ignite(new_pa,new_pb):
 	pb_pos = pb.get_ref().pos
 	_draw_laser()
 
-func _draw_laser():
+func _draw_laser() -> void:
 	var r = 0
 	var theta = 0
 	
-	if(pa != null):
-		if (!pa.get_ref()):
+	if pa != null:
+		if  !pa.get_ref():
 			pa = null
 		else:
 			pa_pos = pa.get_ref().shot_pos;
-	if(pb != null):
-		if (!pb.get_ref()):
+	if pb != null:
+		if  !pb.get_ref():
 			pb = null
 		else:
 			pb_pos = pb.get_ref().pos;
-			if(visual_target == true):
+			if visual_target:
 				pb_pos = pb.get_ref().position;
+
 	position = pa_pos
 	pos = pa_pos
 	r = pos.distance_to(pb_pos)
@@ -84,40 +88,49 @@ func _draw_laser():
 	rotate = theta
 	show()
 
-func _process(delta):
-	var fade_rate = 10 / lifespan
+func _process(delta:float) -> void:
+	var fade_rate:float = 10 / lifespan
 	modulate = Color(1,1,1,beam_wide)
 	beam_wide = beam_wide - fade_rate * delta
 	beam_wide = clamp(beam_wide,0,1)
 	beam.scale = Vector2(shot_scale * beam_wide,beam_long)
 	position = pos
 
-func _calc_damage():
+	if inactive: return
+
+	tick_clock += delta
+	if tick_clock > 0.1:
+		tick_clock -= 0.1
+		_do_tick()
+	if tick_clock > 0.2:
+		tick_clock = 0.2
+
+func _calc_damage() -> void:
 	damage = round(base_damage * 1 * pow(1 + shot_scale,2) + 1)
 
-func _die():
+func _die() -> void:
 	dead = true
 
-func _do_tick():
+func _do_tick() -> void:
 	clock = clock + 1
 	_calc_damage()
-	if(pa_id != -1 && pb_id != -1):
+	if pa_id != -1 && pb_id != -1:
 		_draw_laser()
-	if(clock >= lifespan):
+	if clock >= lifespan:
 		armor = 0
-	if(armor <= 0):
+	if armor <= 0:
 		_die()
 
 func _do_selection(delta:float) -> void:
 	pass
 
-func _set_player(p):
-	if(p != null):
+func _set_player(p) -> void:
+	if p != null:
 		player = p
 
-func _remove_ref(s):
+func _remove_ref(s) -> void:
 	var i = 0
-	if(pa_id == s || pb_id == s):
+	if pa_id == s || pb_id == s:
 		hide()
 		pa_id = -1
 		pb_id = -1

@@ -38,6 +38,26 @@ func _process(delta:float) -> void:
 			rotation = 0
 			self.frame = f
 
+	if inactive: return
+
+	tick_clock += delta
+	if tick_clock > 0.1:
+		tick_clock -= 0.1
+		_do_tick()
+	if tick_clock > 0.2:
+		tick_clock = 0.2
+	
+	physics_clock += delta
+	if physics_clock > 0.1:
+		physics_clock -= 0.1
+
+		_do_physics()
+
+		if has_hitbox: hitbox.pos = pos + position
+
+	if physics_clock > 0.2:
+		physics_clock = 0.2
+
 func _calc_damage() -> void:
 	damage = round(base_damage * pow(1 + shot_scale,2) + 1)
 	

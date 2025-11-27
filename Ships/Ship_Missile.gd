@@ -12,18 +12,44 @@ var missile_clock:int = 0
 func _ready() -> void:
 	_init_missile()
 
+func _process(delta:float) -> void:
+	var blend_pos := position + (pos - position) * 0.1 + 0.2 * velocity
+	set_position(blend_pos)
+	_do_anim(delta)
+	_do_selection(delta)
+
+	if inactive: return
+
+	tick_clock += delta
+	if tick_clock > 0.1:
+		tick_clock -= 0.1
+		_do_tick()
+	if tick_clock > 0.2 / tick_speed:
+		tick_clock = 0.2 / tick_speed
+	
+	physics_clock += delta
+	if physics_clock > 0.1:
+		physics_clock -= 0.1
+
+		_do_physics()
+
+		if has_hitbox: hitbox.pos = pos + position
+
+	if physics_clock > 0.2:
+		physics_clock = 0.2
+
 func _init_missile() -> void:
 	scale = shot_scale * Vector2(1,1)
 	armor = max_armor
 	is_type = UNIT_STATE.type.MISSILE
 	_do_range()
+	has_tcpu = tcpu != null
 
 func _do_tick() -> void:
-	scale = shot_scale * Vector2(1,1)
 	missile_clock = missile_clock + 1
 	if missile_clock >= lifespan:
-		#print("BOOM TIME")
 		armor = -100
+	
 	super._do_tick()
 
 func _do_smoke() -> void:
@@ -109,4 +135,4 @@ func _ai_mid() -> void:
 
 			else:
 				ailow = ai_low.NONE
-			
+		

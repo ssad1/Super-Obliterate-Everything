@@ -39,10 +39,24 @@ var modules = []
 var tcpu:TargetCPU
 var player
 
+var tick_clock:float = 0
+var inactive:bool = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_add_tcpu()
 	boom_reverse = lifespan - 5
+
+func _process(delta:float) -> void:
+
+	if inactive: return
+
+	tick_clock += delta
+	if tick_clock > 0.1:
+		tick_clock -= 0.1
+		_do_tick()
+	if tick_clock > 0.2:
+		tick_clock = 0.2
 
 func _add_tcpu() -> void:
 	tcpu = tcpu_node.instantiate()

@@ -85,11 +85,64 @@ var is_type:UNIT_STATE.type = UNIT_STATE.type.THING
 var _selection:bool
 var is_selected:bool = false
 
+var tick_clock:float = 0
+var physics_clock:float = 0
+var tick_speed:float = 1:
+	set(value):
+		if value < 0:
+			value = 0
+		
+		tick_speed = value
+	get:
+		return tick_speed
+
+@onready var has_modules:bool = modules.size() > 0
+@onready var has_tcpu:bool = tcpu != null
+@onready var is_not_struct:bool = is_type != UNIT_STATE.type.STRUCT
+@onready var has_hitbox:bool = hitbox != null
+var inactive:bool = true
+
 func _ready() -> void:
 	hide()
 	_do_range()
 	if !visible:
 		show()
+
+	#hitbox.tree_exited.connect(func(): has_hitbox = false)
+
+func _process(delta:float) -> void:
+
+	if stats == null && is_selected:
+		stats = SPAWNER._spawn_stats()
+		stats.set_position(position)
+		_set_stats()
+
+	if stats != null:
+		if is_instance_valid(stats):
+			stats.set_position(position)
+		if is_selected == false:
+			stats.queue_free()
+			stats = null
+	
+	if inactive: return
+
+	tick_clock += delta
+	if tick_clock > 0.1:
+		tick_clock -= 0.1
+		_do_tick()
+	if tick_clock > 0.2 / tick_speed:
+		tick_clock = 0.2 / tick_speed
+	
+	physics_clock += delta
+	if physics_clock > 0.1:
+		physics_clock -= 0.1
+
+		if is_not_struct: _do_physics()
+
+		if has_hitbox: hitbox.pos = pos + position
+
+	if physics_clock > 0.2:
+		physics_clock = 0.2
 
 func _add_tcpu() -> void:
 	tcpu = tcpu_node.instantiate()
@@ -154,9 +207,19 @@ func _do_physics() -> void:
 	if rotate < 0:
 		rotate = rotate + TAU
 
+var has_no_modules:bool = false
+
 func _do_modules() -> void:
+
+	if has_no_modules: return
+
 	shield_radius = 0
 	for module in modules:
+
+		if !is_instance_valid(module):
+			has_no_modules = true
+			return
+
 		module._do_tick()
 		
 		if "shield_radius" in module && module.shield_radius - module.shield_width / 2 > shield_radius:
@@ -194,21 +257,10 @@ func _do_selection(delta:float) -> void:
 
 	mat.set_shader_parameter("select_strength",select_strength)
 
-@onready var has_modules:bool = modules.size() > 0
-@onready var has_tcpu:bool = tcpu != null
-@onready var is_not_struct:bool = is_type != UNIT_STATE.type.STRUCT
-@onready var has_hitbox:bool = hitbox != null
-
 func _do_tick() -> void:
 
 	if tcpu != null:
 		tcpu._do_tick()
-
-	if is_not_struct:
-		_do_physics()
-
-	if has_hitbox:
-		hitbox._do_tick()
 
 	if has_modules:
 		_do_modules()
@@ -227,6 +279,10 @@ func _get_turret_score() -> int:
 
 	return score
 
+func _do_damage() -> void:
+
+	UNIT_STATE.do_unit_damage(self)
+
 func _hit(s) -> void:
 
 	if s.is_type == UNIT_STATE.type.SINGULARITY:
@@ -239,7 +295,8 @@ func _hit(s) -> void:
 		armor = max_armor
 
 	UNIT_STATE.do_unit_damage_strength(self)
-
+	_do_damage()
+	
 	if s.is_type == UNIT_STATE.type.SHOT:
 		s.armor = 0
 		_apply_force(s.force, s.velocity)
@@ -254,21 +311,6 @@ func _hit(s) -> void:
 	if s.is_type == UNIT_STATE.type.MISSILE:
 		s.armor = 0
 		_apply_force(s.force, s.velocity)
-
-
-func _process(delta:float) -> void:
-
-	if stats == null && is_selected:
-		stats = SPAWNER._spawn_stats()
-		stats.set_position(position)
-		_set_stats()
-
-	if stats != null:
-		if is_instance_valid(stats):
-			stats.set_position(position)
-		if is_selected == false:
-			stats.queue_free()
-			stats = null
 
 func _remove_ref(s) -> void:
 	if tcpu != null:

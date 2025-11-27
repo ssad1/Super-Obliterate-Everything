@@ -4,7 +4,7 @@ extends Shot_General
 @onready var attraction_area:Area2D = $AttractionArea;
 @onready var anim:AnimationPlayer = $AnimationPlayer;
 var units_being_atracted:Array = []
-var up:Node2D
+var up
 
 func _ready() -> void:
 	_init_shot()
@@ -40,6 +40,26 @@ func _process(delta:float) -> void:
 	var blend_pos := position + (pos - position) * .1 + .2 * velocity
 	set_position(blend_pos)
 
+	if inactive: return
+
+	tick_clock += delta
+	if tick_clock > 0.1:
+		tick_clock -= 0.1
+		_do_tick()
+	if tick_clock > 0.2:
+		tick_clock = 0.2
+	
+	physics_clock += delta
+	if physics_clock > 0.1:
+		physics_clock -= 0.1
+
+		_do_physics()
+
+		if has_hitbox: hitbox.pos = pos + position
+
+	if physics_clock > 0.2:
+		physics_clock = 0.2
+
 	if units_being_atracted.size() == 0: return
 
 	for i in units_being_atracted.size():
@@ -59,12 +79,6 @@ func _process(delta:float) -> void:
 		terminal_velocity = terminal_velocity.normalized() * speed
 
 		unit.velocity -= terminal_velocity
-		
-	#rotation = rotate
-
-func _do_tick() -> void:
-
-	super._do_tick()
 
 func _hit(s) -> void:
 	pass

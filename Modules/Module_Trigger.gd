@@ -13,6 +13,7 @@ var modules:Array = []
 var is_type:UNIT_STATE.type = UNIT_STATE.type.TRIGGER
 
 @export var death_activate:bool = false
+var s:Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,6 +22,9 @@ func _ready() -> void:
 	offset_radius = sqrt(pow(offset_pos.x,2) + pow(offset_pos.y,2))
 	offset_rotate = atan2(offset_pos.y, offset_pos.x) - CALC.half_PI
 	up.modules.append(self)
+
+	if has_node("Sprite2D"): 
+		s = $Sprite2D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta:float) -> void:
@@ -32,13 +36,13 @@ func _do_tick() -> void:
 	pos = up.pos + offset_pos
 
 func _fire() -> void:
-	var s:Sprite2D = $Sprite2D
 	s.frame = randi() % (s.hframes * s.vframes - 1)
 	show()
 
 func _on_death() -> void:
-	var obj
+	#var obj
 	if !death_activate: return
 	for i in modules.size():
 		if modules[i].has_method("_fire"):
 			modules[i]._fire()
+	#pass
