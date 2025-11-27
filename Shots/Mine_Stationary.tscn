@@ -1,0 +1,177 @@
+[gd_scene load_steps=16 format=3 uid="uid://dcnvq3lb8g0pq"]
+
+[ext_resource type="Script" path="res://Shots/Mine_Stationary.gd" id="1_2txew"]
+[ext_resource type="Texture2D" uid="uid://b40330dus2fma" path="res://Shots/Graphics/Mine_D.png" id="1_5bt0y"]
+[ext_resource type="Texture2D" uid="uid://bx6cy0um4qpye" path="res://Shots/Graphics/Mine_N.png" id="2_p0akl"]
+[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_wqdcy"]
+[ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="3_mdary"]
+[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="5_n05oj"]
+[ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="6_op4ay"]
+[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="7_p7g32"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bkl4r"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8nrkj"]
+shader = ExtResource("2_wqdcy")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 5.21541e-06
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = null
+shader_parameter/select_strength = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rfqm6"]
+diffuse_texture = ExtResource("1_5bt0y")
+normal_texture = ExtResource("2_p0akl")
+
+[sub_resource type="Animation" id="Animation_ret6d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Glow:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hull:material:shader_parameter/fire_strength")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hull:material:shader_parameter/burnt_strength")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_bxera"]
+resource_name = "detonate"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Glow:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.3, 0.3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hull:material:shader_parameter/fire_strength")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.7, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hull:material:shader_parameter/burnt_strength")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.366667, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 2.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1q4c6"]
+_data = {
+"RESET": SubResource("Animation_ret6d"),
+"detonate": SubResource("Animation_bxera")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7i3mg"]
+radius = 100.0
+
+[node name="Mine_Stationary" type="Node2D"]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_2txew")
+detection_range = 250
+base_damage = 10.0
+force = 2.0
+name_text = "MINE"
+
+[node name="Glow" type="Sprite2D" parent="."]
+modulate = Color(1, 0.203922, 0.203922, 0.705882)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_bkl4r")
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_mdary")
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8nrkj")
+scale = Vector2(1.2, 1.2)
+texture = SubResource("CanvasTexture_rfqm6")
+hframes = 8
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1q4c6")
+}
+speed_scale = 0.7
+
+[node name="HitBox" parent="." instance=ExtResource("5_n05oj")]
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Module_Fighter_Boom" parent="." instance=ExtResource("6_op4ay")]
+position = Vector2(0, -16)
+
+[node name="Detonator" parent="." instance=ExtResource("7_p7g32")]
+death_activate = false
+
+[node name="Detection_Area" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area"]
+shape = SubResource("CircleShape2D_7i3mg")
+debug_color = Color(0.72606, 0.475685, 0.0201204, 0.42)

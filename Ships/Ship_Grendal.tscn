@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://yb3pr6cnueq6" path="res://Ships/Graphics/Grendal_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
-[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="13"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="14"]
 [ext_resource type="PackedScene" uid="uid://dn6ub42eu2b6i" path="res://Turrets/Turret_Phalanx.tscn" id="15"]
 

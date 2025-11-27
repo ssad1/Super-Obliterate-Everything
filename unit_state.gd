@@ -59,7 +59,7 @@ func do_unit_light_bright(unit) -> void:
 
 func do_unit_damage(unit) -> void:
 
-	if unit.armor >= unit.max_armor: return
+	if unit.armor >= unit.max_armor || unit.mat == null: return
 	var strength:float = 1.0 - (unit.armor / unit.max_armor)
 
 	unit.mat.set_shader_parameter("burnt_strength", strength)

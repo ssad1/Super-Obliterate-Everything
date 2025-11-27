@@ -12,7 +12,7 @@
 [ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="10"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="11"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="12"]
-[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="14"]
+[ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="14"]
 [ext_resource type="Texture2D" uid="uid://csn65w646t8de" path="res://Ships/Graphics/Piranha_B.PNG" id="16"]
 
 [sub_resource type="ShaderMaterial" id="1"]
