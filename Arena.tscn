@@ -1,15 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7847kdn2ror0"]
 
-[ext_resource type="Script" path="res://Arena.gd" id="1_cgmb8"]
+[ext_resource type="Script" uid="uid://dxh7cbeu38enu" path="res://Arena.gd" id="1_cgmb8"]
 [ext_resource type="PackedScene" uid="uid://bmywamfga70nf" path="res://Background/Nebula.tscn" id="2_voxvv"]
 [ext_resource type="Texture2D" uid="uid://cm0qnwdnnf8x1" path="res://Terminal/Map/StarGlow.png" id="3_lky7c"]
 
 [node name="Arena" type="Node2D"]
 editor_description = "Test arena for new implemented ships."
 script = ExtResource("1_cgmb8")
-units_blue = Array[int]([111])
-units_red = Array[int]([53])
+units_blue = Array[int]([111, 59, 111])
+units_red = Array[int]([101, 59])
 arena_size = Vector2(2000, 1000)
+distribute_evenly = true
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = 0

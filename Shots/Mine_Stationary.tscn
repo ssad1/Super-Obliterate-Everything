@@ -1,18 +1,21 @@
 [gd_scene load_steps=16 format=3 uid="uid://dcnvq3lb8g0pq"]
 
-[ext_resource type="Script" path="res://Shots/Mine_Stationary.gd" id="1_2txew"]
+[ext_resource type="Script" uid="uid://bxrpq3wqjp8v2" path="res://Shots/Mine_Stationary.gd" id="1_2txew"]
 [ext_resource type="Texture2D" uid="uid://b40330dus2fma" path="res://Shots/Graphics/Mine_D.png" id="1_5bt0y"]
 [ext_resource type="Texture2D" uid="uid://bx6cy0um4qpye" path="res://Shots/Graphics/Mine_N.png" id="2_p0akl"]
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_wqdcy"]
-[ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="3_mdary"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_wqdcy"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="5_n05oj"]
 [ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="6_op4ay"]
-[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="7_p7g32"]
+[ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="8_ybeel"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bkl4r"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2jihc"]
 blend_mode = 1
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8nrkj"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ybeel"]
+load_path = "res://.godot/imported/L_SmallGlow.png-ce8d09d5b06f0837dbf15c53cb772a8f.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ybeel"]
+resource_local_to_scene = true
 shader = ExtResource("2_wqdcy")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
@@ -33,10 +36,10 @@ shader_parameter/shield_charging = 0.0
 shader_parameter/shield_damage_strength = 0.0
 shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/select_strength = 0.0
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_rfqm6"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_8haug"]
 diffuse_texture = ExtResource("1_5bt0y")
 normal_texture = ExtResource("2_p0akl")
 
@@ -120,38 +123,38 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1q4c6"]
 _data = {
-"RESET": SubResource("Animation_ret6d"),
-"detonate": SubResource("Animation_bxera")
+&"RESET": SubResource("Animation_ret6d"),
+&"detonate": SubResource("Animation_bxera")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7i3mg"]
 radius = 100.0
 
 [node name="Mine_Stationary" type="Node2D"]
-scale = Vector2(0.2, 0.2)
 script = ExtResource("1_2txew")
+blow_time = 300
 detection_range = 250
-base_damage = 10.0
+base_damage = 2.0
 force = 2.0
 name_text = "MINE"
 
 [node name="Glow" type="Sprite2D" parent="."]
 modulate = Color(1, 0.203922, 0.203922, 0.705882)
 light_mask = 0
-material = SubResource("CanvasItemMaterial_bkl4r")
+material = SubResource("CanvasItemMaterial_2jihc")
 scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("3_mdary")
+texture = SubResource("CompressedTexture2D_ybeel")
 
 [node name="Hull" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_8nrkj")
+material = SubResource("ShaderMaterial_ybeel")
 scale = Vector2(1.2, 1.2)
-texture = SubResource("CanvasTexture_rfqm6")
+texture = SubResource("CanvasTexture_8haug")
 hframes = 8
 vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_1q4c6")
+&"": SubResource("AnimationLibrary_1q4c6")
 }
 speed_scale = 0.7
 
@@ -166,12 +169,16 @@ grow_vertical = 2
 [node name="Module_Fighter_Boom" parent="." instance=ExtResource("6_op4ay")]
 position = Vector2(0, -16)
 
-[node name="Detonator" parent="." instance=ExtResource("7_p7g32")]
+[node name="Detonator" parent="." instance=ExtResource("8_ybeel")]
 death_activate = false
 
+[node name="Explode_Basic" parent="Detonator/Spawn_Explosion" index="0"]
+damage = 5.0
+
 [node name="Detection_Area" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area"]
 shape = SubResource("CircleShape2D_7i3mg")
 debug_color = Color(0.72606, 0.475685, 0.0201204, 0.42)
+
+[editable path="Detonator"]

@@ -4,6 +4,7 @@ extends Shot_General
 @export var detection_range = 100
 @onready var detect_area:Area2D = $Detection_Area;
 @onready var anim:AnimationPlayer = $AnimationPlayer;
+@onready var detonator = $Detonator
 var about_to_explode:bool = false
 
 func _ready() -> void:
@@ -14,6 +15,20 @@ func _ready() -> void:
 	detect_area.area_entered.connect(_on_unit_approached)
 
 	hull.frame = randi_range(0, 63)
+	range_radius = detection_range
+
+	UNIT_STATE.do_unit_build(self, 0.5)
+
+func _init_shot():
+	mat = get_material()
+	_calc_damage()
+	is_type = UNIT_STATE.type.SHOT
+	
+	if mat != null && "set_shader_parameter" in mat:
+		mat.set_shader_parameter("phase",randf() * 2 * PI)
+
+	_do_range()
+	UNIT_STATE.do_unit_build(self, 0.5)
 
 func _process(delta:float) -> void:
 	var blend_pos := position + (pos - position) * .1 + .2 * velocity
@@ -40,12 +55,21 @@ func _process(delta:float) -> void:
 		physics_clock = 0.2
 
 func _on_unit_approached(area:Area2D) -> void:
-	#cull all the non-valid options
+
+	if about_to_explode || inactive: return
 	if not area is unit_hitbox: return
 
 	#hit logic
 
 	var target := area as unit_hitbox
 
-	if tcpu.targets.has(target.parent_unit):
-		print("Algo entrou na area")
+	if tcpu.check_target(target.parent_unit):
+		detonator.death_activate = true
+		about_to_explode = true
+		anim.play("detonate")
+
+		anim.animation_finished.connect(
+			func(anim_name:String):
+				armor = 0
+		)
+	

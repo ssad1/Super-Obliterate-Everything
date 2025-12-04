@@ -125,7 +125,7 @@ enum sound {
 	TOO_POOR,
 	CAMPAIGN,
 	BUTTON_MENU,
-	BUTTON_START
+	BUTTON_START,
 }
 
 func _play(s) -> void:

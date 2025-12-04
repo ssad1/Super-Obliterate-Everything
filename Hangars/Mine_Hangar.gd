@@ -1,10 +1,11 @@
 extends Node2D
 
-@export var carrier_interval:int = 60
+@export var release_interval:int = 60
 @export var release_delay:float = 1
 @export var maximum_releases:int = 2
 @export var mine_amount:int = 3
 @export var launch_velocity:float = 3
+@export var mine_size:float = 1
 
 @onready var total_mines:int = mine_amount * maximum_releases
 @onready var up := get_parent()
@@ -31,7 +32,7 @@ func _do_tick() -> void:
 	else:
 		build_cool = 0
 
-	if build_cool >= carrier_interval:
+	if build_cool >= release_interval:
 		_launch_ship(mine_amount)
 		build_cool = 0
 
@@ -42,6 +43,7 @@ func _do_tick() -> void:
 func _launch_ship(rows:int) -> void:
 	while rows > 0:
 		spawn_row()
+		SFX._play_new([SFX.sound.WEAPON_MINES])
 		rows -= 1
 		row_timer.start(release_delay)
 		await row_timer.timeout
@@ -57,6 +59,8 @@ func spawn_row() -> void:
         0, 
         1
     )
+	obj.detect_area.scale *= Vector2(mine_size, mine_size)
+	obj.hull.scale *= Vector2(mine_size, mine_size)
 	mines.append(obj)
 
 

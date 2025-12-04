@@ -28,6 +28,8 @@ enum type
 
 func do_unit_build(unit, duration:float) -> void:
 
+	if unit.mat == null: return
+
 	get_tree().create_tween().tween_method(
 		_set_build_strength.bind(unit.mat),
 		1.0,

@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://bhcll4jhhqfij"]
 
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="1_o7fyo"]
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_f57qt"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_o7fyo"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_f57qt"]
 [ext_resource type="Texture2D" uid="uid://bbbd67lbl5pf1" path="res://Ships/Graphics/Tremor_C.PNG" id="3_6l3yf"]
 [ext_resource type="Texture2D" uid="uid://cfmhvw28uakji" path="res://Ships/Graphics/Tremor_L.PNG" id="4_kuxik"]
 [ext_resource type="Texture2D" uid="uid://dia4oochvnf80" path="res://Ships/Graphics/Tremor_D.PNG" id="5_mey8u"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="8_5rdsd"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="9_diqvk"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="10_1bktn"]
-[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="11_rc7sh"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="11_rc7sh"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="12_m2qls"]
 [ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="13_purvt"]
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="14_c0iw8"]
@@ -20,6 +20,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w6ngk"]
 resource_local_to_scene = true
 shader = ExtResource("2_f57qt")
+shader_parameter/flag_mask = ExtResource("3_6l3yf")
+shader_parameter/lighting = ExtResource("4_kuxik")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -41,10 +43,9 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("3_6l3yf")
-shader_parameter/lighting = ExtResource("4_kuxik")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_rxc0k"]
+resource_local_to_scene = true
 diffuse_texture = ExtResource("5_mey8u")
 normal_texture = ExtResource("6_0gexl")
 
@@ -63,13 +64,13 @@ shader_parameter/colors = ExtResource("12_m2qls")
 [node name="Ship_Tremor" type="Node2D"]
 script = ExtResource("1_o7fyo")
 thrust = 0.4
-factory = 18
+factory = 17
 name_text = "TREMOR"
 class_text = "CORVETTE"
-energy_cost = 130
+energy_cost = 150
 metal_cost = 50
-supply_cost = 3
-credit_cost = 700
+supply_cost = 2
+credit_cost = 300
 inertia = 0.6
 max_velocity = 6.0
 max_rotate_velocity = 0.2
@@ -112,7 +113,7 @@ gun_angle = 0.1
 gun_v = 30.0
 gun_v_noise = 0.1
 gun_r_noise = 0.1
-gun_scale = 0.3
+gun_scale = 0.25
 
 [node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("10_1bktn")]
 visible = false
@@ -125,21 +126,23 @@ scale = Vector2(0.5, 0.5)
 [node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("14_c0iw8")]
 
 [node name="Mine_Hangar" parent="." instance=ExtResource("15_p6exu")]
-position = Vector2(7, 0)
-carrier_interval = 90
-maximum_releases = 6
+position = Vector2(7, 6)
+release_interval = 90
+maximum_releases = 3
 mine_amount = 1
+launch_velocity = 5.0
 
 [node name="Mine_Stationary" parent="Mine_Hangar" instance=ExtResource("16_n28v3")]
 visible = false
 position = Vector2(4, 0)
 
 [node name="Mine_Hangar2" parent="." instance=ExtResource("15_p6exu")]
-position = Vector2(-7, 0)
+position = Vector2(-7, 6)
 rotation = 3.14159
-carrier_interval = 90
-maximum_releases = 6
+release_interval = 90
+maximum_releases = 3
 mine_amount = 1
+launch_velocity = 5.0
 
 [node name="Mine_Stationary" parent="Mine_Hangar2" instance=ExtResource("16_n28v3")]
 visible = false

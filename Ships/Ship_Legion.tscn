@@ -1,25 +1,25 @@
-[gd_scene load_steps=21 format=3 uid="uid://bq8racpjchq4l"]
+[gd_scene load_steps=20 format=3 uid="uid://bq8racpjchq4l"]
 
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="1_vcaka"]
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_5bptc"]
-[ext_resource type="Texture2D" uid="uid://cul0isylh8snj" path="res://Ships/Graphics/Trident_C.PNG" id="3_78ugk"]
-[ext_resource type="Texture2D" uid="uid://n030stav6qvn" path="res://Ships/Graphics/Trident_L.PNG" id="4_c3l2f"]
-[ext_resource type="Texture2D" uid="uid://dii4e4h8qwwca" path="res://Ships/Graphics/Trident_D.PNG" id="5_sqsdj"]
-[ext_resource type="Texture2D" uid="uid://c5kfo0iwrcqvc" path="res://Ships/Graphics/Trident_N.PNG" id="6_yu224"]
-[ext_resource type="Texture2D" uid="uid://coj75qg2iw5je" path="res://Ships/Graphics/Trident_B.PNG" id="7_d8wd4"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_vcaka"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_5bptc"]
+[ext_resource type="Texture2D" uid="uid://wwxplgujg4ut" path="res://Ships/Graphics/Legion_L.png" id="3_cfi7n"]
+[ext_resource type="Texture2D" uid="uid://hg0643wlqft8" path="res://Ships/Graphics/Legion_D.png" id="4_hii8q"]
+[ext_resource type="Texture2D" uid="uid://bcbgf72ugvg1f" path="res://Ships/Graphics/Legion_N.png" id="5_yslh1"]
+[ext_resource type="Texture2D" uid="uid://5mc5tljyr5kd" path="res://Ships/Graphics/Legion_B.png" id="6_gdbhv"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="8_cigix"]
 [ext_resource type="PackedScene" uid="uid://dsmpb7fkxj0b4" path="res://Turrets/Turret_Autogun.tscn" id="9_d8ngd"]
 [ext_resource type="PackedScene" uid="uid://dqsn1ygjynlmr" path="res://Hangars/Carrier_Hangar.tscn" id="10_syl7d"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="10_um4q6"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="11_n84xv"]
-[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="12_3xhdf"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="12_3xhdf"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="13_445s5"]
-[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="14_fsaj3"]
+[ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="14_fsaj3"]
 [ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="15_wyxlu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dc0rr"]
 resource_local_to_scene = true
 shader = ExtResource("2_5bptc")
+shader_parameter/lighting = ExtResource("3_cfi7n")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -41,12 +41,10 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("3_78ugk")
-shader_parameter/lighting = ExtResource("4_c3l2f")
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_3oc5i"]
-diffuse_texture = ExtResource("5_sqsdj")
-normal_texture = ExtResource("6_yu224")
+[sub_resource type="CanvasTexture" id="CanvasTexture_cfi7n"]
+diffuse_texture = ExtResource("4_hii8q")
+normal_texture = ExtResource("5_yslh1")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_887ny"]
 blend_mode = 1
@@ -78,19 +76,21 @@ max_armor = 80.0
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_dc0rr")
-texture = SubResource("CanvasTexture_3oc5i")
+texture = SubResource("CanvasTexture_cfi7n")
 hframes = 16
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 0.054902, 0.054902, 1)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_887ny")
-texture = ExtResource("7_d8wd4")
+texture = ExtResource("6_gdbhv")
 hframes = 16
 vframes = 8
 
 [node name="HitBox" parent="." instance=ExtResource("8_cigix")]
+visible = false
 offset_left = -20.0
 offset_top = -26.0
 offset_right = 20.0
@@ -102,20 +102,20 @@ grow_vertical = 2
 position = Vector2(0, -9)
 
 [node name="CarrierHangar_LU" parent="." instance=ExtResource("10_syl7d")]
-position = Vector2(20, -9)
-launch_velocity = 8
-
-[node name="CarrierHangar_LD" parent="." instance=ExtResource("10_syl7d")]
-position = Vector2(20, 6)
+position = Vector2(20, -13)
 launch_velocity = 8
 
 [node name="CarrierHangar_RU" parent="." instance=ExtResource("10_syl7d")]
-position = Vector2(-20, -9)
+position = Vector2(-20, -13)
 rotation = -3.14159
 launch_velocity = 8
 
+[node name="CarrierHangar_LD" parent="." instance=ExtResource("10_syl7d")]
+position = Vector2(20, 1)
+launch_velocity = 8
+
 [node name="CarrierHangar_RD" parent="." instance=ExtResource("10_syl7d")]
-position = Vector2(-20, 6)
+position = Vector2(-20, 1)
 rotation = -3.14159
 launch_velocity = 8
 

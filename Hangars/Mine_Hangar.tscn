@@ -5,6 +5,7 @@
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_qiyia")
+mine_size = 0.3
 
 [node name="Indicator" type="TextureRect" parent="."]
 editor_description = "Just to help indicate the direction the fighters will be launched-off"

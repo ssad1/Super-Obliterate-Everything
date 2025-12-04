@@ -71,6 +71,18 @@ func _default_items():
 	item_bag.append([SPAWNER.spawn_objs.MOSQUITO])
 	item_bag.append([SPAWNER.spawn_objs.PUMA])
 
+	item_bag.append([SPAWNER.spawn_objs.TREMOR])
+	item_bag.append([SPAWNER.spawn_objs.LEGION])
+	item_bag.append([SPAWNER.spawn_objs.ODYSSEY])
+	item_bag.append([SPAWNER.spawn_objs.MASTODON])
+	item_bag.append([SPAWNER.spawn_objs.AUTOCASTER])
+	item_bag.append([SPAWNER.spawn_objs.EDGESLASHER])
+	item_bag.append([SPAWNER.spawn_objs.SAPPHIRE])
+	item_bag.append([SPAWNER.spawn_objs.JUPITER])
+	item_bag.append([SPAWNER.spawn_objs.MICROLASER_TURRET])
+	item_bag.append([SPAWNER.spawn_objs.SLOOP])
+	item_bag.append([SPAWNER.spawn_objs.HADES])
+
 func _draft_buy(price, item):
 	var buy = true
 	var err = ""
