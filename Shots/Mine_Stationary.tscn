@@ -159,6 +159,7 @@ libraries = {
 speed_scale = 0.7
 
 [node name="HitBox" parent="." instance=ExtResource("5_n05oj")]
+visible = false
 offset_left = -15.0
 offset_top = -15.0
 offset_right = 15.0
@@ -176,6 +177,7 @@ death_activate = false
 damage = 5.0
 
 [node name="Detection_Area" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area"]
 shape = SubResource("CircleShape2D_7i3mg")

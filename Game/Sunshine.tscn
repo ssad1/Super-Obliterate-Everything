@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d1a1onoltxv3g"]
 
 [ext_resource type="Texture2D" uid="uid://cm0qnwdnnf8x1" path="res://Terminal/Map/StarGlow.png" id="1"]
-[ext_resource type="Script" path="res://Game/Sunshine.gd" id="2"]
+[ext_resource type="Script" uid="uid://d0n7wo7ov3xr1" path="res://Game/Sunshine.gd" id="2"]
 
 [node name="Sunshine" type="PointLight2D"]
 energy = 10.0

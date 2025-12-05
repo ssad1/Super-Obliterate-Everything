@@ -1,22 +1,26 @@
-[gd_scene load_steps=19 format=3 uid="uid://cu4th8iytd2t8"]
+[gd_scene load_steps=21 format=3 uid="uid://cu4th8iytd2t8"]
 
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="1_c0pl7"]
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_aic6i"]
-[ext_resource type="Texture2D" uid="uid://ymv8y50biist" path="res://Ships/Graphics/Spartan_D.PNG" id="3_p77xg"]
-[ext_resource type="Texture2D" uid="uid://bxuf8ginbdyl4" path="res://Ships/Graphics/Spartan_N.PNG" id="4_ocndy"]
-[ext_resource type="Texture2D" uid="uid://j33ni8u3e1p4" path="res://Ships/Graphics/Spartan_B.PNG" id="5_4xeci"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_c0pl7"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_aic6i"]
+[ext_resource type="Texture2D" uid="uid://mgxjwqlko0tw" path="res://Ships/Graphics/Odyssey_D.png" id="3_j3miv"]
+[ext_resource type="Texture2D" uid="uid://dtdk2tdmxhqv2" path="res://Ships/Graphics/Odyssey_C.png" id="3_yt85j"]
+[ext_resource type="Texture2D" uid="uid://bfu8kjsy3ucgm" path="res://Ships/Graphics/Odyssey_N.png" id="4_3nxfv"]
+[ext_resource type="Texture2D" uid="uid://bck603of3om2i" path="res://Ships/Graphics/Odyssey_L.png" id="4_ot61r"]
+[ext_resource type="Texture2D" uid="uid://cwfcrjkm1gptl" path="res://Ships/Graphics/Odyssey_B.png" id="5_yt85j"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="6_tbw3t"]
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="7_lflsw"]
 [ext_resource type="PackedScene" uid="uid://dqsn1ygjynlmr" path="res://Hangars/Carrier_Hangar.tscn" id="8_6t64d"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="9_4k61k"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="10_ft5vq"]
-[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="11_e8gjm"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="11_e8gjm"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="12_umel6"]
-[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13_yj7nt"]
+[ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="13_yj7nt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8oag3"]
 resource_local_to_scene = true
 shader = ExtResource("2_aic6i")
+shader_parameter/flag_mask = ExtResource("3_yt85j")
+shader_parameter/lighting = ExtResource("4_ot61r")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -34,14 +38,14 @@ shader_parameter/shock_strength = 0.0
 shader_parameter/shield_strength = 0.0
 shader_parameter/shield_charging = 0.0
 shader_parameter/shield_damage_strength = 0.0
-shader_parameter/build_strength = 0.31
+shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_rcu8a"]
-diffuse_texture = ExtResource("3_p77xg")
-normal_texture = ExtResource("4_ocndy")
+diffuse_texture = ExtResource("3_j3miv")
+normal_texture = ExtResource("4_3nxfv")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5240m"]
 blend_mode = 1
@@ -90,11 +94,12 @@ visible = false
 modulate = Color(1, 0.054902, 0.054902, 1)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_5240m")
-texture = ExtResource("5_4xeci")
+texture = ExtResource("5_yt85j")
 hframes = 8
 vframes = 8
 
 [node name="HitBox" parent="." instance=ExtResource("6_tbw3t")]
+visible = false
 offset_left = -15.0
 offset_top = -15.0
 offset_right = 15.0
@@ -103,9 +108,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CarrierHangar" parent="." instance=ExtResource("8_6t64d")]
-position = Vector2(0, -12)
+position = Vector2(0, -20)
 rotation = -1.5708
-carrier_interval = 75
+carrier_interval = 60
 launch_velocity = 2.0
 
 [node name="Gun_General" parent="." instance=ExtResource("9_4k61k")]
@@ -114,10 +119,10 @@ fire_sound = 22
 gun_kick = 2.0
 gun_heat = 30
 gun_burst_max = 2
-gun_burst_heat = 1
+gun_burst_heat = 2
 gun_range = 300
 gun_angle = 0.1
-gun_v = 30
+gun_v = 40.0
 gun_v_noise = 0.1
 gun_r_noise = 0.1
 gun_scale = 0.4
@@ -136,10 +141,10 @@ fire_sound = 22
 gun_kick = 2.0
 gun_heat = 30
 gun_burst_max = 2
-gun_burst_heat = 1
+gun_burst_heat = 2
 gun_range = 300
 gun_angle = 0.1
-gun_v = 30
+gun_v = 40.0
 gun_v_noise = 0.1
 gun_r_noise = 0.1
 gun_scale = 0.4

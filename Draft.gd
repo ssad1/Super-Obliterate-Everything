@@ -38,7 +38,8 @@ var corvettes = [
 	SPAWNER.spawn_objs.PUMA,
 	SPAWNER.spawn_objs.FALCON,
 	SPAWNER.spawn_objs.GLADIATOR,
-	SPAWNER.spawn_objs.KNIGHT
+	SPAWNER.spawn_objs.KNIGHT,
+	SPAWNER.spawn_objs.TREMOR
 ]
 var frigates = [
 	SPAWNER.spawn_objs.SPARTAN,
@@ -46,7 +47,8 @@ var frigates = [
 	SPAWNER.spawn_objs.COBRA,
 	SPAWNER.spawn_objs.MINOTAUR,
 	SPAWNER.spawn_objs.ATHENA,
-	SPAWNER.spawn_objs.SCORPION
+	SPAWNER.spawn_objs.SCORPION,
+	SPAWNER.spawn_objs.ODYSSEY
 ]
 var destroyers = [
 	SPAWNER.spawn_objs.MYRMIDON
@@ -59,7 +61,7 @@ var cruisers = [
 	SPAWNER.spawn_objs.PLASMA_HALO,
 	SPAWNER.spawn_objs.HAMMERHEAD,
 	SPAWNER.spawn_objs.CATACLYSM,
-	#SPAWNER.spawn_objs.LEGION
+	SPAWNER.spawn_objs.LEGION
 ]
 
 # Called when the node enters the scene tree for the first time.

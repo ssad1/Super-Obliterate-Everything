@@ -781,7 +781,7 @@ func _set_lights():
 					light = Color(1.3,1.3,2,1)
 				86:
 					light = Color(1,1,3,1)
-	EVENTS.emit_signal("lightset", light, bright)
+	EVENTS.emit_signal("lightset", light, bright * 2)
 	EVENTS.emit_signal("fadeset",fade)
 	EVENTS.emit_signal("envset",s,a,d)
 	EVENTS.emit_signal("starheatset",level_temperature,light)

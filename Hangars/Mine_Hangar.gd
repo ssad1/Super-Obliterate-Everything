@@ -62,6 +62,7 @@ func spawn_row() -> void:
 	obj.detect_area.scale *= Vector2(mine_size, mine_size)
 	obj.hull.scale *= Vector2(mine_size, mine_size)
 	mines.append(obj)
+	UNIT_STATE.do_unit_build(obj, 1)
 
 
 func _remove_ship(removeid:int) -> void:

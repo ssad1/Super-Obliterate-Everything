@@ -87,6 +87,8 @@ func _init_ship() -> void:
 	
 	if has_burn: 
 		burn = $Burn
+		if !burn.visible: 
+			burn.show()
 	
 	has_tcpu = tcpu != null
 

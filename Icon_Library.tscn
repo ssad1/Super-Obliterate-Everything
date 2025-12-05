@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://sixtbslqbh8r"]
+[gd_scene load_steps=49 format=3 uid="uid://sixtbslqbh8r"]
 
 [ext_resource type="Texture2D" uid="uid://bqviofh0l2qjf" path="res://Icons/Icon_Artillery.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://dgvl73f5nxsjy" path="res://Icons/Icon_Autocannon.png" id="2"]
@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cng1he4oqpkep" path="res://Icons/Icon_Reactor.png" id="16"]
 [ext_resource type="Texture2D" uid="uid://t1l5xoyjpdis" path="res://Icons/Icon_Spartan.png" id="17"]
 [ext_resource type="Texture2D" uid="uid://du1yybgepaya4" path="res://Icons/Icon_Trident.png" id="18"]
-[ext_resource type="Script" path="res://Icon_Library.gd" id="19"]
+[ext_resource type="Script" uid="uid://ccljmrkthxmsf" path="res://Icon_Library.gd" id="19"]
 [ext_resource type="Texture2D" uid="uid://b8cgotyrkbv4v" path="res://Icons/Icon_Plasmacaster.png" id="20"]
 [ext_resource type="Texture2D" uid="uid://dwrwfrijrw24x" path="res://Icons/Icon_Grendal.png" id="21"]
 [ext_resource type="Texture2D" uid="uid://b0hoek7q5p5f" path="res://Icons/Icon_Myrmidon.png" id="22"]
@@ -46,6 +46,8 @@
 [ext_resource type="Texture2D" uid="uid://bikoruuu4su8p" path="res://Icons/Icon_HyperRepair.png" id="42"]
 [ext_resource type="Texture2D" uid="uid://bgt17n74r2gj0" path="res://Icons/Icon_Shield.png" id="43"]
 [ext_resource type="Texture2D" uid="uid://dxnw0u2y3uaf2" path="res://Icons/Icon_Heavy_Shield.png" id="44"]
+[ext_resource type="Texture2D" uid="uid://d4gaqkcrwftwm" path="res://Icons/Icon_Legion.png" id="47_onxgr"]
+[ext_resource type="Texture2D" uid="uid://pbdw5ana3vid" path="res://Icons/Icon_Odyssey.png" id="48_is8oq"]
 
 [node name="Icon_Library" type="Node2D"]
 script = ExtResource("19")
@@ -186,4 +188,7 @@ texture = ExtResource("43")
 texture = ExtResource("37")
 
 [node name="LEGION" type="Sprite2D" parent="."]
-texture = ExtResource("18")
+texture = ExtResource("47_onxgr")
+
+[node name="ODYSSEY" type="Sprite2D" parent="."]
+texture = ExtResource("48_is8oq")

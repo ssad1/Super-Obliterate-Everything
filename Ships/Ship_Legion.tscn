@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://bq8racpjchq4l"]
+[gd_scene load_steps=21 format=3 uid="uid://bq8racpjchq4l"]
 
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_vcaka"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_5bptc"]
 [ext_resource type="Texture2D" uid="uid://wwxplgujg4ut" path="res://Ships/Graphics/Legion_L.png" id="3_cfi7n"]
+[ext_resource type="Texture2D" uid="uid://11s20dtxcvlh" path="res://Ships/Graphics/Legion_C.png" id="3_hii8q"]
 [ext_resource type="Texture2D" uid="uid://hg0643wlqft8" path="res://Ships/Graphics/Legion_D.png" id="4_hii8q"]
 [ext_resource type="Texture2D" uid="uid://bcbgf72ugvg1f" path="res://Ships/Graphics/Legion_N.png" id="5_yslh1"]
 [ext_resource type="Texture2D" uid="uid://5mc5tljyr5kd" path="res://Ships/Graphics/Legion_B.png" id="6_gdbhv"]
@@ -19,6 +20,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dc0rr"]
 resource_local_to_scene = true
 shader = ExtResource("2_5bptc")
+shader_parameter/flag_mask = ExtResource("3_hii8q")
 shader_parameter/lighting = ExtResource("3_cfi7n")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
@@ -102,20 +104,20 @@ grow_vertical = 2
 position = Vector2(0, -9)
 
 [node name="CarrierHangar_LU" parent="." instance=ExtResource("10_syl7d")]
-position = Vector2(20, -13)
+position = Vector2(20, -10)
 launch_velocity = 8
 
 [node name="CarrierHangar_RU" parent="." instance=ExtResource("10_syl7d")]
-position = Vector2(-20, -13)
+position = Vector2(-20, -10)
 rotation = -3.14159
 launch_velocity = 8
 
 [node name="CarrierHangar_LD" parent="." instance=ExtResource("10_syl7d")]
-position = Vector2(20, 1)
+position = Vector2(20, 5)
 launch_velocity = 8
 
 [node name="CarrierHangar_RD" parent="." instance=ExtResource("10_syl7d")]
-position = Vector2(-20, 1)
+position = Vector2(-20, 5)
 rotation = -3.14159
 launch_velocity = 8
 
