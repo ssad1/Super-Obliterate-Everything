@@ -16,7 +16,8 @@ var turrets = [
 	SPAWNER.spawn_objs.LASER_TURRET,
 	SPAWNER.spawn_objs.LASERCANNON,
 	SPAWNER.spawn_objs.MISSILE_TURRET,
-	SPAWNER.spawn_objs.REPAIR_TURRET
+	SPAWNER.spawn_objs.REPAIR_TURRET,
+	SPAWNER.spawn_objs.AUTOCASTER
 ]
 var big_turrets = [
 	SPAWNER.spawn_objs.MJOLNIR,
@@ -51,7 +52,8 @@ var frigates = [
 	SPAWNER.spawn_objs.ODYSSEY
 ]
 var destroyers = [
-	SPAWNER.spawn_objs.MYRMIDON
+	SPAWNER.spawn_objs.MYRMIDON,
+	SPAWNER.spawn_objs.MASTODON
 ]
 var cruisers = [
 	SPAWNER.spawn_objs.TRIDENT,

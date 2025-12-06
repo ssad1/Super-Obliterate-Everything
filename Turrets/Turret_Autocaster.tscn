@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://brpe75s174365"]
+[gd_scene load_steps=11 format=3 uid="uid://brpe75s174365"]
 
-[ext_resource type="Script" path="res://Turrets/Turret_General.gd" id="1_ioh8j"]
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_eg2qu"]
-[ext_resource type="Texture2D" uid="uid://crsbpfc8rfaph" path="res://Turrets/Graphics/Backup/Turret_Autogun_C.PNG" id="3_cft5b"]
-[ext_resource type="Texture2D" uid="uid://kv3pqv16mwvj" path="res://Turrets/Graphics/Backup/Turret_Autogun_L.PNG" id="4_hl20o"]
-[ext_resource type="Texture2D" uid="uid://cyh2v40euvxhq" path="res://Turrets/Graphics/Backup/Turret_Autogun_D.PNG" id="5_wqdce"]
-[ext_resource type="Texture2D" uid="uid://cfedhhpkuavqb" path="res://Turrets/Graphics/Backup/Turret_Autogun_N.PNG" id="6_wqrbe"]
+[ext_resource type="Script" uid="uid://bjump45wwa6a5" path="res://Turrets/Turret_General.gd" id="1_ioh8j"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_eg2qu"]
+[ext_resource type="Texture2D" uid="uid://cm8tuklbvlopc" path="res://Turrets/Graphics/Backup/Autocaster_L.png" id="3_y7xrp"]
+[ext_resource type="Texture2D" uid="uid://cejajf7una1w" path="res://Turrets/Graphics/Backup/Autocaster_D.png" id="4_mnugf"]
+[ext_resource type="Texture2D" uid="uid://dnbvvx7w1vc22" path="res://Turrets/Graphics/Backup/Autocaster_N.png" id="5_6o7fw"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="7_apcn4"]
 [ext_resource type="PackedScene" uid="uid://c3ngw8s22lms" path="res://Shots/Shot_Plasma.tscn" id="8_4oihl"]
 [ext_resource type="PackedScene" path="res://Effects/E_PlasmaMuzzle.tscn" id="9_puu6x"]
@@ -13,6 +12,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_60ca8"]
 resource_local_to_scene = true
 shader = ExtResource("2_eg2qu")
+shader_parameter/lighting = ExtResource("3_y7xrp")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -34,12 +34,10 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("3_cft5b")
-shader_parameter/lighting = ExtResource("4_hl20o")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_6b64g"]
-diffuse_texture = ExtResource("5_wqdce")
-normal_texture = ExtResource("6_wqrbe")
+diffuse_texture = ExtResource("4_mnugf")
+normal_texture = ExtResource("5_6o7fw")
 
 [node name="Turret_Autocaster" type="Node2D"]
 script = ExtResource("1_ioh8j")
