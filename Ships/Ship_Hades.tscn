@@ -1,12 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://cr47g32ojqjqb"]
+[gd_scene load_steps=16 format=3 uid="uid://cr47g32ojqjqb"]
 
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="1_wpkus"]
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_2igwy"]
-[ext_resource type="Texture2D" uid="uid://ymv8y50biist" path="res://Ships/Graphics/Spartan_D.PNG" id="3_kmvn4"]
-[ext_resource type="Texture2D" uid="uid://bxuf8ginbdyl4" path="res://Ships/Graphics/Spartan_N.PNG" id="4_a5tam"]
-[ext_resource type="Texture2D" uid="uid://j33ni8u3e1p4" path="res://Ships/Graphics/Spartan_B.PNG" id="5_d7qw2"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_wpkus"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_2igwy"]
+[ext_resource type="Texture2D" uid="uid://by01c25nta7yo" path="res://Ships/Graphics/Hades_C.png" id="3_wg38p"]
+[ext_resource type="Texture2D" uid="uid://tv0vgs1ldmr8" path="res://Ships/Graphics/Hades_L.png" id="4_c1cer"]
+[ext_resource type="Texture2D" uid="uid://cwlerml0p8wih" path="res://Ships/Graphics/Hades_D.png" id="5_ljnal"]
+[ext_resource type="Texture2D" uid="uid://b1ouulb3rwu7m" path="res://Ships/Graphics/Hades_N.png" id="6_iashb"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="6_vnqy2"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="7_m6irg"]
+[ext_resource type="Texture2D" uid="uid://co7vsvianca8v" path="res://Ships/Graphics/Hades_B.png" id="7_wlryh"]
 [ext_resource type="PackedScene" uid="uid://dtud28wlroesr" path="res://Shots/Shot_Singularity.tscn" id="8_roivg"]
 [ext_resource type="PackedScene" uid="uid://coxjddpqipkgg" path="res://Effects/E_MuzzleJ.tscn" id="9_1codc"]
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="10_q0c83"]
@@ -14,6 +16,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_annps"]
 resource_local_to_scene = true
 shader = ExtResource("2_2igwy")
+shader_parameter/flag_mask = ExtResource("3_wg38p")
+shader_parameter/lighting = ExtResource("4_c1cer")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -37,8 +41,8 @@ shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j6ia1"]
-diffuse_texture = ExtResource("3_kmvn4")
-normal_texture = ExtResource("4_a5tam")
+diffuse_texture = ExtResource("5_ljnal")
+normal_texture = ExtResource("6_iashb")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5s4lu"]
 blend_mode = 1
@@ -69,7 +73,7 @@ visible = false
 modulate = Color(1, 0.054902, 0.054902, 1)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_5s4lu")
-texture = ExtResource("5_d7qw2")
+texture = ExtResource("7_wlryh")
 hframes = 8
 vframes = 8
 

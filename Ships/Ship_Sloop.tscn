@@ -1,22 +1,26 @@
-[gd_scene load_steps=18 format=3 uid="uid://b4ijbam0ghk43"]
+[gd_scene load_steps=20 format=3 uid="uid://b4ijbam0ghk43"]
 
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="1_o81td"]
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_17mjl"]
-[ext_resource type="Texture2D" uid="uid://ymv8y50biist" path="res://Ships/Graphics/Spartan_D.PNG" id="3_4h0nr"]
-[ext_resource type="Texture2D" uid="uid://bxuf8ginbdyl4" path="res://Ships/Graphics/Spartan_N.PNG" id="4_ykp1y"]
-[ext_resource type="Texture2D" uid="uid://j33ni8u3e1p4" path="res://Ships/Graphics/Spartan_B.PNG" id="5_juqo6"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_o81td"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_17mjl"]
+[ext_resource type="Texture2D" uid="uid://5repbwyy7cqu" path="res://Ships/Graphics/Sloop_C.png" id="3_qv674"]
+[ext_resource type="Texture2D" uid="uid://vp7u0wu87n34" path="res://Ships/Graphics/Sloop_L.png" id="4_curex"]
+[ext_resource type="Texture2D" uid="uid://cnshq7rfalefl" path="res://Ships/Graphics/Sloop_D.png" id="5_5xlgd"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="6_8uw63"]
+[ext_resource type="Texture2D" uid="uid://befo6yuq8k2xi" path="res://Ships/Graphics/Sloop_N.png" id="6_gdj4o"]
+[ext_resource type="Texture2D" uid="uid://du2i5e3fujtfj" path="res://Ships/Graphics/Sloop_B.png" id="7_4qid3"]
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="7_127qr"]
 [ext_resource type="PackedScene" uid="uid://dqsn1ygjynlmr" path="res://Hangars/Carrier_Hangar.tscn" id="8_dc80c"]
 [ext_resource type="PackedScene" uid="uid://qvc0lxdot1wy" path="res://Shots/Shot_Boomerang.tscn" id="9_hvlur"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="9_s1evb"]
-[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="11_4qiwh"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="11_4qiwh"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="12_tyrxx"]
-[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13_goo6g"]
+[ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="13_goo6g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_itgms"]
 resource_local_to_scene = true
 shader = ExtResource("2_17mjl")
+shader_parameter/flag_mask = ExtResource("3_qv674")
+shader_parameter/lighting = ExtResource("4_curex")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -40,8 +44,8 @@ shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_6hnuq"]
-diffuse_texture = ExtResource("3_4h0nr")
-normal_texture = ExtResource("4_ykp1y")
+diffuse_texture = ExtResource("5_5xlgd")
+normal_texture = ExtResource("6_gdj4o")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_362mu"]
 blend_mode = 1
@@ -61,14 +65,14 @@ thrust = 0.2
 factory = 18
 name_text = "SLOOP"
 class_text = "FRIGATE"
-energy_cost = 250
-metal_cost = 100
+energy_cost = 200
+metal_cost = 115
 supply_cost = 3
 credit_cost = 750
 inertia = 0.6
 max_velocity = 2.0
 max_rotate_velocity = 0.2
-max_armor = 30.0
+max_armor = 20.0
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_itgms")
@@ -81,7 +85,7 @@ visible = false
 modulate = Color(1, 0.054902, 0.054902, 1)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_362mu")
-texture = ExtResource("5_juqo6")
+texture = ExtResource("7_4qid3")
 hframes = 8
 vframes = 8
 
@@ -112,7 +116,7 @@ gun_burst_max = 3
 gun_burst_heat = 3
 gun_angle = 0.3
 gun_v = 30
-gun_scale = 0.4
+gun_scale = 0.3
 
 [node name="Shot_Boomerang" parent="Gun_General" instance=ExtResource("9_hvlur")]
 visible = false

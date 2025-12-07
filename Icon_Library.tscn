@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://sixtbslqbh8r"]
+[gd_scene load_steps=57 format=3 uid="uid://sixtbslqbh8r"]
 
 [ext_resource type="Texture2D" uid="uid://bqviofh0l2qjf" path="res://Icons/Icon_Artillery.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://dgvl73f5nxsjy" path="res://Icons/Icon_Autocannon.png" id="2"]
@@ -53,7 +53,9 @@
 [ext_resource type="Texture2D" uid="uid://8bwp31rsy16h" path="res://Icons/Icon_Edgeslasher.png" id="51_ctfjf"]
 [ext_resource type="Texture2D" uid="uid://crwqgjad2uney" path="res://Icons/Icon_Sapphire.png" id="52_6w0ya"]
 [ext_resource type="Texture2D" uid="uid://6qjflc47jjlc" path="res://Icons/Icon_Jupiter.png" id="53_gs40p"]
+[ext_resource type="Texture2D" uid="uid://btdoupvgqge45" path="res://Icons/Icon_Hades.png" id="54_4dgg4"]
 [ext_resource type="Texture2D" uid="uid://c3ckjxympnsds" path="res://Icons/Icon_Microlaser.png" id="54_6jhyi"]
+[ext_resource type="Texture2D" uid="uid://di5e7pprxka5s" path="res://Icons/Icon_Sloop.png" id="56_fg2rr"]
 
 [node name="Icon_Library" type="Node2D"]
 script = ExtResource("19")
@@ -214,5 +216,11 @@ texture = ExtResource("52_6w0ya")
 [node name="JUPITER" type="Sprite2D" parent="."]
 texture = ExtResource("53_gs40p")
 
+[node name="HADES" type="Sprite2D" parent="."]
+texture = ExtResource("54_4dgg4")
+
 [node name="MICROLASER" type="Sprite2D" parent="."]
 texture = ExtResource("54_6jhyi")
+
+[node name="SLOOP" type="Sprite2D" parent="."]
+texture = ExtResource("56_fg2rr")
