@@ -1,19 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://b15u4mldmk5k1"]
+[gd_scene load_steps=15 format=3 uid="uid://b15u4mldmk5k1"]
 
-[ext_resource type="Script" path="res://Turrets/Turret_General.gd" id="1_ytp6n"]
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="2_rgl4m"]
-[ext_resource type="Texture2D" uid="uid://drjdjawxjalsm" path="res://Turrets/Graphics/Backup/Blaster_Turret_L.PNG" id="3_2xm1x"]
-[ext_resource type="Texture2D" uid="uid://dej6quj4qike1" path="res://Turrets/Graphics/Backup/Blaster_Turret_D.PNG" id="4_gfk4d"]
-[ext_resource type="Texture2D" uid="uid://bi56cukv3fp70" path="res://Turrets/Graphics/Backup/Blaster_Turret_N.PNG" id="5_vokfj"]
+[ext_resource type="Script" uid="uid://bjump45wwa6a5" path="res://Turrets/Turret_General.gd" id="1_ytp6n"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_rgl4m"]
+[ext_resource type="Texture2D" uid="uid://cb140ohcf1u36" path="res://Turrets/Graphics/Backup/Edgeslasher_C.png" id="3_itexa"]
+[ext_resource type="Texture2D" uid="uid://bhm0jak7p5am" path="res://Turrets/Graphics/Backup/Edgeslasher_L.png" id="4_pn8fj"]
+[ext_resource type="Texture2D" uid="uid://d21k3grufa0aq" path="res://Turrets/Graphics/Backup/Edgeslasher_D.png" id="5_8ckve"]
+[ext_resource type="Texture2D" uid="uid://bw72adwbstufa" path="res://Turrets/Graphics/Backup/Edgeslasher_N.png" id="6_5onaj"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="6_whxvo"]
 [ext_resource type="PackedScene" uid="uid://qvc0lxdot1wy" path="res://Shots/Shot_Boomerang.tscn" id="7_touuu"]
-[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="8_g6m4r"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="8_g6m4r"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="9_2cruy"]
-[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="10_rcf15"]
+[ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="10_rcf15"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3ce3g"]
 resource_local_to_scene = true
 shader = ExtResource("2_rgl4m")
+shader_parameter/flag_mask = ExtResource("3_itexa")
+shader_parameter/lighting = ExtResource("4_pn8fj")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -35,11 +38,10 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/lighting = ExtResource("3_2xm1x")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_8illn"]
-diffuse_texture = ExtResource("4_gfk4d")
-normal_texture = ExtResource("5_vokfj")
+diffuse_texture = ExtResource("5_8ckve")
+normal_texture = ExtResource("6_5onaj")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jaj0u"]
 resource_local_to_scene = true
@@ -60,7 +62,7 @@ hframes = 8
 vframes = 8
 
 [node name="Gun_General" parent="." instance=ExtResource("6_whxvo")]
-position = Vector2(0, -32)
+position = Vector2(0, -14)
 fire_sound = 22
 gun_heat = 30
 gun_burst_max = 3

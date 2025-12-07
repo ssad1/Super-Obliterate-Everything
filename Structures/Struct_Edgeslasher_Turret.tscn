@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://l0dqj3ne7u03"]
 
-[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="1_k1dwb"]
+[ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="1_k1dwb"]
 [ext_resource type="PackedScene" uid="uid://b15u4mldmk5k1" path="res://Turrets/Turret_Edgeslasher.tscn" id="2_tgrvl"]
 [ext_resource type="PackedScene" uid="uid://dg2fumnmi6k64" path="res://Structures/struct_turret_base_small.tscn" id="3_trfli"]
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="4_nhqnq"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="4_nhqnq"]
 [ext_resource type="Texture2D" uid="uid://benf2gd3aiu3j" path="res://Structures/Graphics/Struct_Turret_Base_Small_C.png" id="5_78pcj"]
 [ext_resource type="Texture2D" uid="uid://f1x41ecwblna" path="res://Structures/Graphics/Struct_Turret_Base_Small_L.png" id="6_lffya"]
 [ext_resource type="PackedScene" uid="uid://cr3uqos0286u2" path="res://Modules/Module_Small_Struct_Boom.tscn" id="7_36hgx"]
@@ -12,6 +12,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6464w"]
 resource_local_to_scene = true
 shader = ExtResource("4_nhqnq")
+shader_parameter/flag_mask = ExtResource("5_78pcj")
+shader_parameter/lighting = ExtResource("6_lffya")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -33,23 +35,20 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("5_78pcj")
-shader_parameter/lighting = ExtResource("6_lffya")
 
 [node name="Struct_Edgeslasher" type="Node2D"]
 script = ExtResource("1_k1dwb")
 name_text = "EDGESLASHER"
 class_text = "TURRET"
 energy_cost = 80
-metal_cost = 10
 supply_cost = 1
 credit_cost = 300
 max_armor = 50.0
 
-[node name="Turret_Edgeslasher" parent="." instance=ExtResource("2_tgrvl")]
-
 [node name="Hull" parent="." instance=ExtResource("3_trfli")]
 material = SubResource("ShaderMaterial_6464w")
+
+[node name="Turret_Edgeslasher" parent="." instance=ExtResource("2_tgrvl")]
 
 [node name="Module_Small_Struct_Boom_Large" parent="." instance=ExtResource("7_36hgx")]
 

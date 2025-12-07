@@ -17,7 +17,9 @@ var turrets = [
 	SPAWNER.spawn_objs.LASERCANNON,
 	SPAWNER.spawn_objs.MISSILE_TURRET,
 	SPAWNER.spawn_objs.REPAIR_TURRET,
-	SPAWNER.spawn_objs.AUTOCASTER
+	SPAWNER.spawn_objs.AUTOCASTER,
+	SPAWNER.spawn_objs.EDGESLASHER,
+	SPAWNER.spawn_objs.MICROLASER_TURRET
 ]
 var big_turrets = [
 	SPAWNER.spawn_objs.MJOLNIR,
@@ -40,7 +42,8 @@ var corvettes = [
 	SPAWNER.spawn_objs.FALCON,
 	SPAWNER.spawn_objs.GLADIATOR,
 	SPAWNER.spawn_objs.KNIGHT,
-	SPAWNER.spawn_objs.TREMOR
+	SPAWNER.spawn_objs.TREMOR,
+	SPAWNER.spawn_objs.SAPPHIRE
 ]
 var frigates = [
 	SPAWNER.spawn_objs.SPARTAN,
@@ -63,7 +66,8 @@ var cruisers = [
 	SPAWNER.spawn_objs.PLASMA_HALO,
 	SPAWNER.spawn_objs.HAMMERHEAD,
 	SPAWNER.spawn_objs.CATACLYSM,
-	SPAWNER.spawn_objs.LEGION
+	SPAWNER.spawn_objs.LEGION,
+	SPAWNER.spawn_objs.JUPITER
 ]
 
 # Called when the node enters the scene tree for the first time.
