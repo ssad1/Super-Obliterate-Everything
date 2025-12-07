@@ -52,7 +52,8 @@ var frigates = [
 	SPAWNER.spawn_objs.MINOTAUR,
 	SPAWNER.spawn_objs.ATHENA,
 	SPAWNER.spawn_objs.SCORPION,
-	SPAWNER.spawn_objs.ODYSSEY
+	SPAWNER.spawn_objs.ODYSSEY,
+	SPAWNER.spawn_objs.SLOOP
 ]
 var destroyers = [
 	SPAWNER.spawn_objs.MYRMIDON,
