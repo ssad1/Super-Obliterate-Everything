@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://dh6t1vkfernj"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://bfgppodp7y54t" path="res://Ships/Graphics/Goliath_C.PNG" id="4"]
 [ext_resource type="Texture2D" uid="uid://bhip48d5uhoxh" path="res://Ships/Graphics/Goliath_L.PNG" id="5"]
@@ -17,6 +17,8 @@
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("4")
+shader_parameter/lighting = ExtResource("5")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -38,8 +40,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("4")
-shader_parameter/lighting = ExtResource("5")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_bc5hw"]
 diffuse_texture = ExtResource("7")
@@ -61,7 +61,7 @@ credit_cost = 2700
 inertia = 0.2
 max_velocity = 4.0
 max_rotate_velocity = 0.04
-max_armor = 100
+max_armor = 90.0
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")

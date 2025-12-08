@@ -92,7 +92,14 @@ func do_black_hole_death(unit) -> void:
 		0.5,
 		1.5
 	)
-	get_tree().create_tween().tween_property(unit, "scale", Vector2(0,0), 1.5).finished.connect(func(): unit._die())
+	get_tree().create_tween().tween_property(unit, "scale", Vector2(0,0), 1.5).finished.connect(
+		_kill_unit.bind(unit)
+	)
+
+func _kill_unit(unit) -> void:
+	if !is_instance_valid(unit): return
+	if unit == null: return
+	unit._die()
 
 func _set_swirl_strength(val:float, mat:Material) -> void:
 	mat.set_shader_parameter("swirl_strength", val)

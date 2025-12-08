@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://cqk21c3rncnb8"]
 
-[ext_resource type="Script" path="res://Terminal/Galaxy/GalaxyMap.gd" id="1"]
+[ext_resource type="Script" uid="uid://ddlo8b7uwj0bi" path="res://Terminal/Galaxy/GalaxyMap.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cdvk6gsr4bfko" path="res://Terminal/Galaxy/Final_Galaxy.png" id="2"]
 [ext_resource type="PackedScene" path="res://Terminal/Galaxy/Zone.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://Terminal/Galaxy/New_Zone.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://Terminal/Galaxy/Zone_Label.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://brrgpdkjh1xkn" path="res://Terminal/Galaxy/New_Zone.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://pl81kit1dw6n" path="res://Terminal/Galaxy/Zone_Label.tscn" id="6"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 
@@ -22,10 +22,11 @@ zone_desc = "FACTIONS FROM OE3"
 
 [node name="New_Zone" parent="." instance=ExtResource("5")]
 visible = false
-layout_mode = 3
-anchors_preset = 8
+offset_top = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Zone_Label" parent="." instance=ExtResource("6")]
-visible = false
-layout_mode = 3
-anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
