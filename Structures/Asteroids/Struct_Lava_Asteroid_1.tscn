@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cfj4gchgsrc2g"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cy6v3cwkrm1cx" path="res://Structures/Graphics/Backup/Struct_Lava_Asteroid_1_D.PNG" id="3_j0r7m"]
 [ext_resource type="Texture2D" uid="uid://bi5qd8puctppr" path="res://Structures/Graphics/Backup/Struct_Lava_Asteroid_1_N.PNG" id="4_hb1rm"]
 [ext_resource type="PackedScene" uid="uid://rop0ns3hf55s" path="res://Modules/Module_Asteroid_Boom_Small.tscn" id="5"]
@@ -30,7 +30,7 @@ shader_parameter/shield_charging = 0.0
 shader_parameter/shield_damage_strength = 0.0
 shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/select_strength = 0.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_eg8rd"]
@@ -55,12 +55,13 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tgto3"]
 _data = {
-"Roll": SubResource("Animation_jcq55")
+&"Roll": SubResource("Animation_jcq55")
 }
 
 [node name="Struct_Lava_Asteroid_1" type="Node2D"]
 script = ExtResource("2")
 class_text = "ASTEROID"
+max_armor = 25.0
 special = "ROCK"
 
 [node name="Hull" type="Sprite2D" parent="."]
@@ -71,7 +72,7 @@ vframes = 8
 
 [node name="Asteroid_Animator" parent="Hull" instance=ExtResource("7")]
 libraries = {
-"": SubResource("AnimationLibrary_tgto3")
+&"": SubResource("AnimationLibrary_tgto3")
 }
 
 [node name="HitBox" parent="." instance=ExtResource("6")]

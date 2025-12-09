@@ -193,8 +193,8 @@ extends Node
 enum spawn_objs {
 
 	####### Asteroids #######
-	ICE_ASTEROID,
-	BIG_ICE_ASTEROID,
+	ICE_ASTEROID = -2,
+	BIG_ICE_ASTEROID = 1,
 	LAVA_ASTEROID,
 	BIG_LAVA_ASTEROID,
 	METAL_ASTEROID,

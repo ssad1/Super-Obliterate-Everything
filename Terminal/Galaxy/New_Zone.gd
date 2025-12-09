@@ -15,17 +15,10 @@ var conquest_zone_id = 0
 func _ready():
 	EVENTS.connect("zone_click", Callable(self, "_on_zone_click"))
 
-func _process(delta):
-	if(visible == true):
-		if(alpha < 1):
-			alpha = alpha + 3 * delta
-			if(alpha > 1):
-				alpha = 1
-			modulate = Color(1,1,1,alpha)
-
 func _ignite():
-	alpha = 0
-	modulate = Color(1,1,1,alpha)
+
+	modulate = Color(1,1,1,0)
+	get_tree().create_tween().tween_property(self, "modulate:a", 1.0, 0.3)
 	show()
 
 func _cancel():

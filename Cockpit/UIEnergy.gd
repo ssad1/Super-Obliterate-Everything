@@ -11,11 +11,11 @@ func _ready():
 		EVENTS.connect("ui_supply", Callable(self, "_ui_supply"))
 
 func _ui_energy(n):
-	text = str(floor(n))
+	text = str(int(floor(n)))
 
 func _ui_metal(n):
-	text = str(floor(n))
+	text = str(int(floor(n)))
 
 func _ui_supply(n):
-	text = str(floor(n))
+	text = str(int(floor(n)))
 

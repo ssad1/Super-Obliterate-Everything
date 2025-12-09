@@ -691,6 +691,7 @@ func _set_lights():
 			s = 1
 			a = CALC._randint() % 2 + 40
 			d = 0
+
 			match a:
 				40:
 					light = Color(.35,.5,1,1)
@@ -700,6 +701,7 @@ func _set_lights():
 					light = Color(.5,.5,.8,1)
 			EVENTS.emit_signal("duston",0)
 			EVENTS.emit_signal("froston")
+
 		"COLD":
 			fade = 255
 			bright = .9

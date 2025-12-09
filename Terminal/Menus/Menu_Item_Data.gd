@@ -39,13 +39,13 @@ func _on_show_menu_item_stats(p,o):
 			$VBox/UIClass.show()
 		else:
 			$VBox/UIClass.hide()
-		$VBox/UIArmor.text = "ARMOR: " + str(o.max_armor)
+		$VBox/UIArmor.text = "ARMOR: " + str(int(o.max_armor))
 		if(o.max_shields > 0):
-			$VBox/UIShield.text = "SHIELDS: " + str(o.max_shields)
+			$VBox/UIShield.text = "SHIELDS: " + str(int(o.max_shields))
 			$VBox/UIShield.show()
 		else:
 			$VBox/UIShield.hide()
-		$VBox/UICredits.text = "SELL: " + str(ceil(GLOBAL.sell_rate * o.credit_cost))
+		$VBox/UICredits.text = "SELL: " + str(int(ceil(GLOBAL.sell_rate * o.credit_cost)))
 		
 		VBox.set_size(Vector2(1,1))
 		size = VBox.size
@@ -60,10 +60,6 @@ func _on_show_menu_item_stats(p,o):
 			global_position = p
 			global_position.y = 155
 			position.x = position.x - size.x - 4
-		#if(position.x < 0):
-			#position.x = 0
-		#if(position.x + size.x > 410): #684
-			#position.x = 410 - size.x
 		
 		fade_out = false
 		fade_alpha = 1

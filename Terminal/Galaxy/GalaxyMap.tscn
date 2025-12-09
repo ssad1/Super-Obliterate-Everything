@@ -24,9 +24,8 @@ zone_desc = "FACTIONS FROM OE3"
 visible = false
 offset_top = 16.0
 offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Zone_Label" parent="." instance=ExtResource("6")]
+visible = false
 grow_horizontal = 2
 grow_vertical = 2

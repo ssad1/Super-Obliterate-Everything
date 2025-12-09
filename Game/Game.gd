@@ -233,12 +233,6 @@ func _do_tick() -> void:
 	_collide()
 	_collide_explosions()
 	_collide_shields()
-	'''_do_thing(structs)
-	_do_thing(ships)
-	_do_thing(missiles)
-	_do_thing(shots)
-	_do_thing(lasers)
-	_do_thing(explosions)'''
 	SFX._do_tick()
 
 	for player in players:
@@ -270,7 +264,7 @@ func _do_radar() -> void:
 
 		for xx in struct.build_size.x:
 			for yy in struct.build_size.y:
-				radar[pos.x + xx][pos.y + yy] = 1
+				radar[(pos.x + xx)][pos.y + yy] = 1
 
 		if struct.special == "ROCK":
 			rocks.append(struct)
