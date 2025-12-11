@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=3 uid="uid://c1hd22vvfdy7r"]
+
+[ext_resource type="Script" uid="uid://bjump45wwa6a5" path="res://Turrets/Turret_General.gd" id="1_nk16a"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_6sjl4"]
+[ext_resource type="Texture2D" uid="uid://ci6e4i63s6xxv" path="res://Turrets/Graphics/Backup/Turret_VoidLance_C.png" id="3_ufyha"]
+[ext_resource type="Texture2D" uid="uid://rvbtb13yqxf" path="res://Turrets/Graphics/Backup/Turret_VoidLance_L.png" id="4_pwad8"]
+[ext_resource type="Texture2D" uid="uid://bgqhwfwlja326" path="res://Turrets/Graphics/Backup/Turret_VoidLance_D.png" id="5_imble"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="7_qdikj"]
+[ext_resource type="PackedScene" uid="uid://dtud28wlroesr" path="res://Shots/Shot_Singularity.tscn" id="8_ye78w"]
+[ext_resource type="PackedScene" uid="uid://coxjddpqipkgg" path="res://Effects/E_MuzzleJ.tscn" id="9_fdxkq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_imble"]
+resource_local_to_scene = true
+shader = ExtResource("2_6sjl4")
+shader_parameter/flag_mask = ExtResource("3_ufyha")
+shader_parameter/lighting = ExtResource("4_pwad8")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_qdikj"]
+diffuse_texture = ExtResource("5_imble")
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_nk16a")
+tier = 2.0
+build_speed = 3.0
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_imble")
+texture = SubResource("CanvasTexture_qdikj")
+hframes = 16
+vframes = 8
+
+[node name="Gun_General2" parent="." instance=ExtResource("7_qdikj")]
+position = Vector2(17, -9)
+fire_sound = 42
+gun_heat = 85
+gun_range = 900
+gun_angle = 0.1
+gun_v = 50.0
+gun_scale = 0.7
+shot_lifespan = 100.0
+
+[node name="ShotSingularity" parent="Gun_General2" instance=ExtResource("8_ye78w")]
+visible = false
+
+[node name="E_MuzzleJ" parent="Gun_General2" instance=ExtResource("9_fdxkq")]
+visible = false
+
+[node name="Gun_General" parent="." instance=ExtResource("7_qdikj")]
+position = Vector2(-17, -9)
+fire_sound = 42
+gun_heat = 85
+gun_range = 900
+gun_angle = 0.1
+gun_v = 50.0
+gun_scale = 0.7
+shot_lifespan = 100.0
+
+[node name="ShotSingularity" parent="Gun_General" instance=ExtResource("8_ye78w")]
+visible = false
+
+[node name="E_MuzzleJ" parent="Gun_General" instance=ExtResource("9_fdxkq")]
+visible = false

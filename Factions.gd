@@ -105,8 +105,8 @@ func _faction_items(s,v):
 				item_bag.append([SPAWNER.spawn_objs.BOSS_STATION]) #Boss Station
 			item_bag.append([SPAWNER.spawn_objs.REACTOR])
 			item_bag.append([SPAWNER.spawn_objs.EXTRACTOR])
-			item_bag.append([SPAWNER.spawn_objs.BLASTER_TURRET]) #Turret 1
-			item_bag.append([SPAWNER.spawn_objs.DOUBLE_BLASTER]) #Turret 2
+			item_bag.append([SPAWNER.spawn_objs.EDGESLASHER]) #Turret 1
+			item_bag.append([SPAWNER.spawn_objs.AUTOCASTER]) #Turret 2
 			item_bag.append([SPAWNER.spawn_objs.PLASMACASTER]) #Turret 3
 			item_bag.append([SPAWNER.spawn_objs.FURY]) #Ship 1
 			item_bag.append([SPAWNER.spawn_objs.SCORPION]) #Ship 2

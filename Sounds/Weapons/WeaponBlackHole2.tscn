@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crm7spqbsrgl6"]
+
+[ext_resource type="AudioStream" uid="uid://dmgdfulg7wnb0" path="res://Sounds/Weapons/WeaponBlackHole2.wav" id="1_bnt3g"]
+
+[node name="Node2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_bnt3g")

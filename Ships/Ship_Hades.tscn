@@ -49,7 +49,7 @@ blend_mode = 1
 
 [node name="Ship_Hades" type="Node2D"]
 script = ExtResource("1_wpkus")
-thrust = 0.2
+thrust = 0.15
 factory = 19
 name_text = "HADES"
 class_text = "DESTROYER"
@@ -58,9 +58,9 @@ metal_cost = 250
 supply_cost = 4
 credit_cost = 1800
 inertia = 0.2
-max_velocity = 3.0
+max_velocity = 3.2
 max_rotate_velocity = 0.2
-max_armor = 40.0
+max_armor = 35.0
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_annps")
@@ -88,8 +88,8 @@ grow_vertical = 2
 
 [node name="Gun_General" parent="." instance=ExtResource("7_m6irg")]
 position = Vector2(0, -16)
-fire_sound = 22
-gun_heat = 85
+fire_sound = 42
+gun_heat = 90
 gun_range = 800
 gun_v = 40.0
 gun_scale = 0.7

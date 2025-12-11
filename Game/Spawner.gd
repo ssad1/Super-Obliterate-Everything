@@ -144,6 +144,8 @@ extends Node
 @onready var Struct_Edgeslasher_Turret := load("res://Structures/Struct_Edgeslasher_Turret.tscn")
 @onready var Struct_Microlaser_Turret := load("res://Structures/Struct_Microlaser_Turret.tscn")
 
+@onready var Struct_VoidLance_Turret := load("res://Structures/Struct_VoidLance_Turret.tscn")
+
 @onready var Ship_Piranha := load("res://Ships/Ship_Piranha.tscn")
 @onready var Ship_Rapier := load("res://Ships/Ship_Rapier.tscn")
 @onready var Ship_Saber := load("res://Ships/Ship_Saber.tscn")
@@ -315,7 +317,8 @@ enum spawn_objs {
 	MICROLASER_TURRET,
 	SLOOP,
 	HADES,
-	TREMOR
+	TREMOR,
+	VOIDLANCE_TURRET
 }
 
 var next_spawn_id:int = 1
@@ -715,6 +718,8 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 			obj = Ship_Hades.instantiate()
 		spawn_objs.TREMOR:
 			obj = Ship_Tremor.instantiate()
+		spawn_objs.VOIDLANCE_TURRET:
+			obj = Struct_VoidLance_Turret.instantiate()
 
 	obj.s = s
 

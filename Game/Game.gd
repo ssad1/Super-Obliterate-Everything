@@ -178,13 +178,19 @@ func _collide_shields_c(sa,sb) -> void:
 func _clear_game() -> void:
 	print("Clear Game")
 	me = null
-	players = []
-	structs = []
-	missiles = []
-	shots = []
-	ships = []
-	lasers = []
-	explosions = []
+
+	var everything_array = players + structs + missiles + shots + ships + lasers + explosions
+
+	for i in everything_array:
+		i.queue_free()
+
+	players.clear()
+	structs.clear()
+	missiles.clear()
+	shots.clear()
+	ships.clear()
+	lasers.clear()
+	explosions.clear()
 
 	if has_node("Sunshine"):
 		get_node("Sunshine").queue_free()

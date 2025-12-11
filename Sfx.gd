@@ -66,6 +66,9 @@ var newlist:Array = []
 @onready var WeaponMissile3 := load("res://Sounds/Weapons/WeaponMissile3.tscn")
 @onready var WeaponMissile4 := load("res://Sounds/Weapons/WeaponMissile4.tscn")
 @onready var WeaponMissile5 := load("res://Sounds/Weapons/WeaponMissile5.tscn")
+@onready var WeaponBlackHole1 := load("res://Sounds/Weapons/WeaponBlackHole1.tscn")
+@onready var WeaponBlackHole2 := load("res://Sounds/Weapons/WeaponBlackHole2.tscn")
+@onready var WeaponBlackHole3 := load("res://Sounds/Weapons/WeaponBlackHole3.tscn")
 
 @onready var GetMetal := load("res://Sounds/Interface/GetMetal.tscn")
 @onready var ButtonBuild := load("res://Sounds/Interface/ButtonBuild.tscn")
@@ -126,6 +129,8 @@ enum sound {
 	CAMPAIGN,
 	BUTTON_MENU,
 	BUTTON_START,
+
+	WEAPON_BLACK_HOLE
 }
 
 func _play(s) -> void:
@@ -371,6 +376,17 @@ func _play(s) -> void:
 			sfx = ButtonMenu.instantiate()
 		sound.BUTTON_START:
 			sfx = ButtonStart.instantiate()
+		sound.WEAPON_BLACK_HOLE:
+			dice = randi() % 3
+			match dice:
+				0:
+					sfx = WeaponBlackHole1.instantiate()
+				1:
+					sfx = WeaponBlackHole2.instantiate()
+				2:
+					sfx = WeaponBlackHole3.instantiate()
+	
+
 	sfx.volume_db = sfx.volume_db - 20 * (1 - GLOBAL.sound_volume / 100)
 	add_child(sfx)
 	sfx.set_position(Vector2(960,540))
