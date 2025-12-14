@@ -76,6 +76,7 @@ func _add_payload(e,m,s) -> void:
 			module.deliver_supply = s
 
 func _init_ship() -> void:
+	inactive = false
 	armor = max_armor
 	is_type = UNIT_STATE.type.SHIP
 	_do_range()
@@ -135,6 +136,8 @@ func _process(delta:float) -> void:
 	set_position(blend_pos)
 	_do_anim(delta)
 	_do_selection(delta)
+
+	if inactive: return
 
 	tick_clock += delta
 	if tick_clock > 0.1:

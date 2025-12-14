@@ -293,8 +293,9 @@ func _spawn_obj(s) -> void:
 		if hotkey != null: 
 			hotkey.hide()
 
-	if "range_radius" in obj:
+	if "range_radius" in obj || pb == "Prize_Slot":
 		_remove_obj_from_grid(obj)
+
 	t = ICONS._get_icon(obj.name_text)
 	if t != null:
 		$Sprite2D.texture = t
@@ -307,7 +308,10 @@ func _spawn_obj(s) -> void:
 
 func _remove_obj_from_grid(obj:Thing) -> void:
 
-	if is_instance_valid(obj.hitbox):
+	if pb == "Prize_Slot":
+		obj.queue_free()
+		
+	elif is_instance_valid(obj.hitbox):
 		obj.has_hitbox = false
 		obj.hitbox.queue_free()
 		obj.has_tcpu = false
@@ -315,7 +319,6 @@ func _remove_obj_from_grid(obj:Thing) -> void:
 		obj.tcpu.queue_free()
 
 		if "modules" in obj:
-
 			for module in obj.modules:
 				module.queue_free()
 

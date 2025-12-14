@@ -12,7 +12,7 @@ var item_bag = []
 var item_max = 100
 var equip_bags = []
 var current_equip = 0
-var credits = 500
+var credits:int = 500
 
 func _ready():
 	EVENTS.connect("set_results", Callable(self, "_set_results"))

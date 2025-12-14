@@ -53,8 +53,8 @@ thrust = 0.15
 factory = 19
 name_text = "HADES"
 class_text = "DESTROYER"
-energy_cost = 400
-metal_cost = 250
+energy_cost = 300
+metal_cost = 300
 supply_cost = 4
 credit_cost = 1800
 inertia = 0.2
@@ -89,6 +89,9 @@ grow_vertical = 2
 [node name="Gun_General" parent="." instance=ExtResource("7_m6irg")]
 position = Vector2(0, -16)
 fire_sound = 42
+gun_heat = 90
+gun_range = 800
+gun_v = 40.0
 gun_scale = 0.7
 shot_lifespan = 100.0
 

@@ -1,20 +1,22 @@
 [gd_scene load_steps=15 format=3 uid="uid://bvll4vuhiotxn"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
 [ext_resource type="Texture2D" uid="uid://crqoi8kfvm6me" path="res://Turrets/Graphics/Backup/Turret_Mjolnir_C.PNG" id="3_83gd3"]
 [ext_resource type="Texture2D" uid="uid://cq4yprsvswfqr" path="res://Turrets/Graphics/Backup/Turret_Mjolnir_L.PNG" id="4_4pf6a"]
-[ext_resource type="Script" path="res://Turrets/Turret_General.gd" id="5"]
+[ext_resource type="Script" uid="uid://bjump45wwa6a5" path="res://Turrets/Turret_General.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://cjh374045paka" path="res://Turrets/Graphics/Backup/Turret_Mjolnir_D.PNG" id="5_s8h56"]
 [ext_resource type="Texture2D" uid="uid://4oat6bgn65rv" path="res://Effects/Gradients/Gradient_Artillery.tres" id="6"]
 [ext_resource type="Texture2D" uid="uid://bsvd7te2tmcff" path="res://Turrets/Graphics/Backup/Turret_Mjolnir_N.PNG" id="6_osqsf"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://d32aggrenhtof" path="res://Shots/Shot_Artillery.tscn" id="8"]
-[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="9"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="9"]
 [ext_resource type="PackedScene" path="res://Effects/E_MuzzleB.tscn" id="11"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("3_83gd3")
+shader_parameter/lighting = ExtResource("4_4pf6a")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -36,8 +38,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("3_83gd3")
-shader_parameter/lighting = ExtResource("4_4pf6a")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_sirqm"]
 diffuse_texture = ExtResource("5_s8h56")
@@ -65,7 +65,7 @@ vframes = 8
 
 [node name="Gun_General" parent="." instance=ExtResource("7")]
 position = Vector2(0, -32)
-fire_sound = 25
+fire_sound = 26
 gun_heat = 100
 gun_burst_max = 3
 gun_burst_heat = 3

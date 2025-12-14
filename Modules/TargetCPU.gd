@@ -209,7 +209,7 @@ func _do_scan():
 		return
 
 	var stuff
-	targets = []
+	targets.clear()
 
 	if scan_structs:
 		stuff = SPAWNER.game.structs

@@ -33,6 +33,7 @@ var gun_burst_cool:int = 0
 @export var gun_circle:bool = false
 @export var gun_scale:float = 1
 @export var velocity_align:bool = true
+@export var fixed_lifespan:bool = false
 @export var shot_lifespan:float = 20
 
 var offset_pos:Vector2 = Vector2(0,0)
@@ -227,9 +228,8 @@ func _fire() -> void:
 					obj.shot_scale = gun_scale * (1.0 - gun_scale_noise * randf())
 					obj.scale = obj.shot_scale * Vector2(1,1)
 
-				
 				if treated_lifespan:
-					if mod_gun_v != 0:
+					if mod_gun_v != 0 && !fixed_lifespan:
 						obj.lifespan = ceil(gun_range / mod_gun_v)
 						obj.lifespan = obj.lifespan * (1.0 - gun_life_noise * randf())
 					else:

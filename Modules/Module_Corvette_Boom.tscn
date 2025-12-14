@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cogsf3ad1ldu8" path="res://Shots/Shot_Debris.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://Modules/Spawn_Effect.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="3"]
-[ext_resource type="Script" path="res://Modules/Module_Trigger.gd" id="4"]
+[ext_resource type="Script" uid="uid://0xqol00okbpv" path="res://Modules/Module_Trigger.gd" id="4"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Death_SFX.tscn" id="5"]
 
 [node name="Module_Corvette_Boom_Large" type="Node2D"]
@@ -29,7 +29,8 @@ scale_effect_size = 0.5
 visible = false
 fire_sound = 17
 gun_range = 600
-gun_v_noise = 1.0
+gun_v = 1.0
+gun_v_noise = 50.0
 gun_r_noise = 1.0
 gun_life_noise = 0.9
 gun_scale_noise = 0.75

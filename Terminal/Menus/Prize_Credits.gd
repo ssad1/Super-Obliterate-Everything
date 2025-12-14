@@ -9,4 +9,4 @@ func _ready():
 #	pass
 
 func _setup(s):
-	$HBoxContainer/Credits.text = str(s)
+	$HBoxContainer/Credits.text = str(int(s))

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bfcgd0exobv5d"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://m4l7y1jj6fxs" path="res://Structures/struct_turret_base_large.tscn" id="2_bc5s5"]
 [ext_resource type="Texture2D" uid="uid://buwlpl23tej3c" path="res://Structures/Graphics/Struct_Large_Turretbase_C.png" id="3_vsxcl"]
 [ext_resource type="Texture2D" uid="uid://d3x3mktw83cka" path="res://Structures/Graphics/Struct_Large_Turretbase_L.png" id="4_43y1x"]
@@ -12,6 +12,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_irja2"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("3_vsxcl")
+shader_parameter/lighting = ExtResource("4_43y1x")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -33,8 +35,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("3_vsxcl")
-shader_parameter/lighting = ExtResource("4_43y1x")
 
 [node name="Struct_Mjolnir_Turret" type="Node2D"]
 script = ExtResource("2")

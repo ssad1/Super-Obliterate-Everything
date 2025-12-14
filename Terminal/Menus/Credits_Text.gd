@@ -1,6 +1,6 @@
 extends Control
 
-var credits = 0
+var credits:int = 0
 var credit_clock = 0.0
 var bright = .8
 @onready var credits_label = $Credits_Label
@@ -34,7 +34,7 @@ func _process(delta):
 		bright = bright - 4 * delta
 	if(bright < 0.8):
 		bright = 0.8
-	credits_label.text = "CREDITS:    " + str(credits)
+	credits_label.text = "CREDITS:    " + str(int(credits))
 	credits_label.modulate = Color(1,1,1,bright)
 	#scale = Vector2(bright + .2, bright + .2)
 

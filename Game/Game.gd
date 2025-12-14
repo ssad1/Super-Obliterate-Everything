@@ -179,18 +179,18 @@ func _clear_game() -> void:
 	print("Clear Game")
 	me = null
 
-	var everything_array = players + structs + missiles + shots + ships + lasers + explosions
+	var everything_array = structs + missiles + shots + ships + lasers + explosions + players
 
 	for i in everything_array:
 		i.queue_free()
 
-	players.clear()
 	structs.clear()
 	missiles.clear()
 	shots.clear()
 	ships.clear()
 	lasers.clear()
 	explosions.clear()
+	players.clear()
 
 	if has_node("Sunshine"):
 		get_node("Sunshine").queue_free()
@@ -252,16 +252,16 @@ func _do_radar() -> void:
 	var build_obj
 	var data
 
-	radar = []
+	radar.clear()
 	for xx in LEVELS.grid.size():
 		radar.append([])
 
-		radar[xx] = []
+		radar[xx].clear()
 		for yy in LEVELS.grid[0].size():
 			radar[xx].append([])
 			radar[xx][yy] = 0
 
-	rocks = []
+	rocks.clear()
 
 	for struct in structs:
 		pos = struct.position
@@ -456,7 +456,7 @@ func _start_game() -> void:
 		rx_moves.append([])
 		tx_moves.append([])
 
-	ACCOUNT.mission_prizes = []
+	ACCOUNT.mission_prizes.clear()
 
 	if LEVELS.level_mission == "BOSS":
 		bonus = 20 * mission_difficulty

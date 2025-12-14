@@ -35,11 +35,13 @@ func _process(delta):
 		modulate = Color(1,fade,fade,fade)
 
 func _setup(s,id):
-	$Item_Button._equip_item(s)
+
 	$Item_Button.pb = "Prize_Slot"
+	$Item_Button._equip_item(s)
+
 	button_id = id
 	price = ceil(GLOBAL.sell_rate * $Item_Button.obj.credit_cost)
-	$Label.text = str(price)
+	$Label.text = str(int(price))
 	$Label.position.x = 280 - 2 * $Label.size.x
 	$Credit.position.x = $Label.position.x - 16
 	

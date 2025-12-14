@@ -54,11 +54,13 @@ vframes = 8
 position = Vector2(17, -9)
 fire_sound = 42
 gun_heat = 85
-gun_range = 900
+gun_range = 800
 gun_angle = 0.1
 gun_v = 50.0
+gun_v_noise = 0.0
 gun_scale = 0.7
-shot_lifespan = 100.0
+fixed_lifespan = true
+shot_lifespan = 60.0
 
 [node name="ShotSingularity" parent="Gun_General2" instance=ExtResource("8_ye78w")]
 visible = false
@@ -70,11 +72,13 @@ visible = false
 position = Vector2(-17, -9)
 fire_sound = 42
 gun_heat = 85
-gun_range = 900
+gun_range = 800
 gun_angle = 0.1
 gun_v = 50.0
+gun_v_noise = 0.0
 gun_scale = 0.7
-shot_lifespan = 100.0
+fixed_lifespan = true
+shot_lifespan = 60.0
 
 [node name="ShotSingularity" parent="Gun_General" instance=ExtResource("8_ye78w")]
 visible = false

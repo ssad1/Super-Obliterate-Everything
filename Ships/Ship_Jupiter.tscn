@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://xebbejjpnaxt"]
+[gd_scene load_steps=24 format=3 uid="uid://xebbejjpnaxt"]
 
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_6ms3s"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1_7te60"]
@@ -62,6 +62,15 @@ shader_parameter/frames = 8.0
 shader_parameter/phase = 0.0
 shader_parameter/colors = ExtResource("14_t7tws")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qpbky"]
+resource_local_to_scene = true
+shader = ExtResource("13_wo2ay")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.05
+shader_parameter/frames = 8.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("14_t7tws")
+
 [node name="Ship Jupiter" type="Node2D"]
 script = ExtResource("1_6ms3s")
 thrust = 0.2
@@ -69,7 +78,7 @@ factory = 20
 name_text = "JUPITER"
 class_text = "CRUISER"
 energy_cost = 600
-metal_cost = 600
+metal_cost = 500
 supply_cost = 5
 credit_cost = 3000
 inertia = 0.2
@@ -170,7 +179,7 @@ gun_scale = 0.35
 
 [node name="Shot_Boomerang" parent="Gun_General4" instance=ExtResource("12_qpbky")]
 visible = false
-material = SubResource("ShaderMaterial_ntean")
+material = SubResource("ShaderMaterial_qpbky")
 position = Vector2(0, 16)
 base_damage = 1.1
 

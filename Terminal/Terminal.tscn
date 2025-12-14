@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://cctvpmji1qnwv"]
 
 [ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="1"]
-[ext_resource type="Script" path="res://Terminal/Terminal.gd" id="2"]
+[ext_resource type="Script" uid="uid://bo05jl2ea22q7" path="res://Terminal/Terminal.gd" id="2"]
 [ext_resource type="PackedScene" path="res://Terminal/Menu_Exit_Menu.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://b7gx81jebjtya" path="res://Terminal/Menu_Equip.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://deerkygggjnh2" path="res://Background/MenuBackN.png" id="4_ko62t"]
@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://sq82wqcpvbce" path="res://Terminal/Menus/Main_Menu_Options.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://nmbqa1dtprsx" path="res://Terminal/Map/Mission Block/Mission_Block.tscn" id="11"]
 [ext_resource type="Texture2D" uid="uid://b40ehicl5okoo" path="res://Effects/Lights/L_BigGlow.png" id="13"]
-[ext_resource type="Script" path="res://Terminal/Menu_Low_Light.gd" id="14"]
+[ext_resource type="Script" uid="uid://bne4uvdppgr6a" path="res://Terminal/Menu_Low_Light.gd" id="14"]
 [ext_resource type="Texture2D" uid="uid://cxllpqt68cwi5" path="res://Effects/Particles/Static/Glows/Flare2.png" id="15"]
 [ext_resource type="PackedScene" uid="uid://cicakp0jtxngu" path="res://Terminal/Menus/Menu_EquipSelect.tscn" id="16"]
 [ext_resource type="PackedScene" uid="uid://ckhvntt8kuoof" path="res://Terminal/Menus/Menu_View.tscn" id="17"]
@@ -71,12 +71,12 @@ material = SubResource("1")
 position = Vector2(450, 800)
 emitting = false
 amount = 30
-process_material = SubResource("4")
 texture = ExtResource("15")
 lifetime = 1.5
 one_shot = true
 explosiveness = 0.82
 randomness = 0.28
+process_material = SubResource("4")
 
 [node name="MenuBack" type="Sprite2D" parent="."]
 light_mask = 4
@@ -288,6 +288,7 @@ texture_scale = 3.48
 script = ExtResource("14")
 
 [node name="Credits_Text" parent="." instance=ExtResource("19")]
+layout_mode = 0
 offset_left = 510.152
 offset_top = 123.0
 offset_right = 510.152
@@ -302,7 +303,7 @@ offset_right = 1432.15
 offset_bottom = 170.0
 theme = ExtResource("1")
 text = "DEMO by cwwallis
-Version 0.02"
+Version 0.025"
 
 [editable path="Control/Menu_EquipSelect"]
 [editable path="Control/Menu_EquipSelect/Menu_Items"]

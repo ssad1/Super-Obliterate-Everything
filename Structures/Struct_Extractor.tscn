@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://djwcs64okq8x4"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Structures/Struct_Extractor.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://clc4cc8k2ggbl" path="res://Structures/Struct_Extractor.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://bq5u0worar52k" path="res://Structures/Graphics/Struct_Extractor_C.PNG" id="3_8jb7e"]
 [ext_resource type="Texture2D" uid="uid://cv3vvi64nmmrb" path="res://Structures/Graphics/Struct_Extractor_L.PNG" id="4_aam7p"]
@@ -15,6 +15,8 @@
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("3_8jb7e")
+shader_parameter/lighting = ExtResource("4_aam7p")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -36,8 +38,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("3_8jb7e")
-shader_parameter/lighting = ExtResource("4_aam7p")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_18i2e"]
 diffuse_texture = ExtResource("5_xw051")
@@ -60,7 +60,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dwyu2"]
 _data = {
-"Spin": SubResource("2")
+&"Spin": SubResource("2")
 }
 
 [node name="Struct_Extractor" type="Node2D"]
@@ -83,7 +83,7 @@ vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
 libraries = {
-"": SubResource("AnimationLibrary_dwyu2")
+&"": SubResource("AnimationLibrary_dwyu2")
 }
 autoplay = "Spin"
 
@@ -104,3 +104,4 @@ ship_id = Array[int]([41])
 visible = false
 
 [node name="Module_SFX" parent="." instance=ExtResource("8")]
+build_sfx = -1

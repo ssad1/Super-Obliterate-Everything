@@ -1,3 +1,4 @@
+class_name Gun_Laser
 extends Node2D
 
 var gun_cool = 0

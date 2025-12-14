@@ -93,8 +93,7 @@ func _on_unit_approached(area:Area2D) -> void:
 
 	if target.parent_unit == up: return
 
-	if tcpu.targets.has(target.parent_unit):
-		#print("Passou o teste")
+	if tcpu.check_target(target.parent_unit):
 		units_being_atracted.append(target.parent_unit)
 
 func _on_unit_got_away(area:Area2D) -> void:

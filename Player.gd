@@ -588,9 +588,9 @@ func _do_tick() -> void:
 func _find_stuff() -> void:
 
 	var structs = SPAWNER.game.structs
-	my_structs = []
-	my_stations = []
-	my_extractors = []
+	my_structs.clear()
+	my_stations.clear()
+	my_extractors.clear()
 	ai_reactor_score = 0
 	ai_economy_score = 0
 	ai_defense_score = 0

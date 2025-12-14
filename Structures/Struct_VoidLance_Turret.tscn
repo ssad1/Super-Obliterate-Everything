@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="1_wbdg7"]
 [ext_resource type="PackedScene" uid="uid://vgvkpcxrl2ur" path="res://Structures/struct_turret_base_huge.tscn" id="2_6r8nd"]
-[ext_resource type="PackedScene" uid="uid://2rc1lcifjq2j" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="4_6r8nd"]
+[ext_resource type="PackedScene" uid="uid://dbo4trprw6esp" path="res://Modules/Module_Large_Struct_Boom.tscn" id="5_6r8nd"]
 [ext_resource type="PackedScene" uid="uid://c1hd22vvfdy7r" path="res://Turrets/Turret_VoidLance.tscn" id="5_qx30x"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="7_6gnqb"]
 
@@ -22,7 +22,7 @@ build_speed = 3.0
 
 [node name="Turret_VoidLance" parent="." instance=ExtResource("5_qx30x")]
 
-[node name="Module_Medium_Struct_Boom_Large" parent="." instance=ExtResource("4_6r8nd")]
-
 [node name="Module_SFX" parent="." instance=ExtResource("7_6gnqb")]
 build_sfx = 10
+
+[node name="Module_Large_Struct_Boom_Large" parent="." instance=ExtResource("5_6r8nd")]

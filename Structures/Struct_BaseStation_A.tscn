@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dhnr680v83upi"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://ul6jsu8w4724" path="res://Structures/Graphics/newAssets/Struct_BaseStation_A_C.png" id="4_0kgdj"]
 [ext_resource type="Texture2D" uid="uid://cyte3ec0vmcv2" path="res://Structures/Graphics/newAssets/Struct_BaseStation_A_L.png" id="5_r0tew"]
@@ -13,6 +13,8 @@
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("4_0kgdj")
+shader_parameter/lighting = ExtResource("5_r0tew")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -34,8 +36,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("4_0kgdj")
-shader_parameter/lighting = ExtResource("5_r0tew")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_k753o"]
 diffuse_texture = ExtResource("6")
@@ -58,7 +58,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_goo8f"]
 _data = {
-"Spin": SubResource("2")
+&"Spin": SubResource("2")
 }
 
 [node name="Struct_BaseStation_A" type="Node2D"]
@@ -83,7 +83,7 @@ vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
 libraries = {
-"": SubResource("AnimationLibrary_goo8f")
+&"": SubResource("AnimationLibrary_goo8f")
 }
 autoplay = "Spin"
 
