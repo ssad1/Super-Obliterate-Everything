@@ -7,13 +7,11 @@ func _ready():
 	saves_on = false
 	value = GLOBAL.music_volume
 	saves_on = true
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+	GLOBAL.music_sliders.append(self)
 
 func _on_Slider_Music_value_changed(value):
 	GLOBAL.music_volume = value
-	if(saves_on == true):
+	if saves_on:
 		GLOBAL._save_settings()
+	
+	EVENTS.music_slide.emit(value)

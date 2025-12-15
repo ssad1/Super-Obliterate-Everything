@@ -27,8 +27,16 @@ var nextscreen = 0
 var gamemode = 0
 var heatbright = 0
 
+#so that settings carry over all instances of the menu_settings
 var sound_volume = 70
 var music_volume = 70
+var sound_sliders = []
+var music_sliders = []
+var fullscreens = []
+var windows = []
+var resolutions = []
+var qualities = []
+var shakes = []
 
 var graphics_quality = 3
 var graphics_shake = 1

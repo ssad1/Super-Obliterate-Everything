@@ -7,6 +7,7 @@ func _ready():
 		text = "ON"
 	elif(GLOBAL.graphics_maximized == false):
 		text = "OFF"
+	GLOBAL.fullscreens.append(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -21,3 +22,4 @@ func _pressed():
 		GLOBAL._set_maximized()
 		text = "ON"
 	GLOBAL._save_settings()
+	EVENTS.fullscreen.emit(text)

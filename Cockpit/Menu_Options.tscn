@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://b8wqc2un5b5xp"]
 
 [ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="1"]
-[ext_resource type="Script" path="res://Cockpit/Menu_Options.gd" id="2"]
+[ext_resource type="Script" uid="uid://bx6v6h735tgxb" path="res://Cockpit/Menu_Options.gd" id="2"]
 [ext_resource type="PackedScene" path="res://Terminal/Menu_Exit_Game.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://bim03saxdbk6y" path="res://Cockpit/UIIOptionsScreen.png" id="4"]
 [ext_resource type="PackedScene" path="res://Terminal/Menu_Controls.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://Terminal/Menus/Menu_Settings.tscn" id="7"]
-[ext_resource type="Script" path="res://Terminal/Menus/Menu_Container.gd" id="8"]
-[ext_resource type="PackedScene" path="res://Terminal/Menu_Button.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bxmv0pe168se1" path="res://Terminal/Menus/Menu_Settings.tscn" id="7"]
+[ext_resource type="Script" uid="uid://c8pdd4736q3oy" path="res://Terminal/Menus/Menu_Container.gd" id="8"]
+[ext_resource type="PackedScene" uid="uid://bn7dr4vti35ee" path="res://Terminal/Menu_Button.tscn" id="9"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -16,6 +16,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(295, 300)
 theme = ExtResource("1")
 script = ExtResource("2")
@@ -74,7 +76,7 @@ layout_mode = 2
 
 [node name="Menu_Settings" parent="VBoxContainer/Control" instance=ExtResource("7")]
 visible = false
-anchors_preset = 0
+layout_mode = 0
 
 [node name="Menu_Exit_Game" parent="VBoxContainer/Control" instance=ExtResource("3")]
 anchors_preset = 0

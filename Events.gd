@@ -39,6 +39,13 @@ signal dragging(sprite_texture, button_id, item_id)
 signal drag_swap(button_id, s)
 signal drag_swap_b(button_id, current_id)
 
+signal music_slide(value)
+signal sound_slide(value)
+signal fullscreen(text)
+signal resolution(text)
+signal quality_change(text)
+signal cam_shake(text)
+
 signal clear_build_layer()
 signal show_item_stats(p,n,e,m,s)
 signal hide_item_stats()

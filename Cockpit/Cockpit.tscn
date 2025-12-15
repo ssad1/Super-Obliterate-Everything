@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://bmgxnoyw1wc3y"]
 
-[ext_resource type="Script" path="res://Cockpit/Cockpit.gd" id="1"]
-[ext_resource type="Script" path="res://Cockpit/CockpitGrid.gd" id="2"]
+[ext_resource type="Script" uid="uid://ds5304lurugvl" path="res://Cockpit/Cockpit.gd" id="1"]
+[ext_resource type="Script" uid="uid://cw85pot4xg7fb" path="res://Cockpit/CockpitGrid.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dkaicgotf278s" path="res://Terminal/Item_Button.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://vj7cstlbketo" path="res://Cockpit/Cockpit_Item_Data.tscn" id="4"]
 [ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="5"]
@@ -10,14 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://dhs7ch6m6f5nd" path="res://Cockpit/UISupplySmall.png" id="8"]
 [ext_resource type="PackedScene" uid="uid://b8wqc2un5b5xp" path="res://Cockpit/Menu_Options.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://bn7dr4vti35ee" path="res://Terminal/Menu_Button.tscn" id="10"]
-[ext_resource type="Script" path="res://Cockpit/Cockpit_Button_Menu.gd" id="11"]
+[ext_resource type="Script" uid="uid://bbqqcdsdentpu" path="res://Cockpit/Cockpit_Button_Menu.gd" id="11"]
 [ext_resource type="Texture2D" uid="uid://bxdasdbtjbi84" path="res://Cockpit/UIItemScreen.png" id="12"]
-[ext_resource type="Script" path="res://Cockpit/UIEnergy.gd" id="13"]
-[ext_resource type="Shader" path="res://Cockpit/UIBar.gdshader" id="14"]
+[ext_resource type="Script" uid="uid://bb1tlpd55kelc" path="res://Cockpit/UIEnergy.gd" id="13"]
+[ext_resource type="Shader" uid="uid://ds0kxoycabyh0" path="res://Cockpit/UIBar.gdshader" id="14"]
 [ext_resource type="PackedScene" path="res://Cockpit/UIEnergyBar.tscn" id="16"]
 [ext_resource type="Texture2D" uid="uid://b8pe7nuq6djaf" path="res://Cockpit/UIResourceScreen.png" id="18"]
 [ext_resource type="PackedScene" path="res://Cockpit/Button_Cancel.tscn" id="21"]
-[ext_resource type="Script" path="res://Cockpit/Building_Screen.gd" id="22"]
+[ext_resource type="Script" uid="uid://cve2b6anf63b7" path="res://Cockpit/Building_Screen.gd" id="22"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -79,6 +79,7 @@ anchors_preset = 0
 script = ExtResource("1")
 
 [node name="Menu_Options" parent="." instance=ExtResource("9")]
+layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -244,7 +245,6 @@ size_flags_stretch_ratio = 0.0
 color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Control" parent="Resources/ResourcesScreen"]
-layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

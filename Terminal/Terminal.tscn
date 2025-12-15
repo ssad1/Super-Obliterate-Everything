@@ -202,8 +202,6 @@ offset_left = -344.892
 offset_top = -320.576
 offset_right = -344.892
 offset_bottom = -320.576
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Menu_Prizes" parent="Control" instance=ExtResource("20")]
 visible = false

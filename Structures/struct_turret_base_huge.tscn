@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b6kwrqijgya1a" path="res://Structures/Graphics/struct_turret_base_huge_N.png" id="5_m2f8m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sjjae"]
+resource_local_to_scene = true
 shader = ExtResource("1_c6jhf")
 shader_parameter/flag_mask = ExtResource("2_xob4o")
 shader_parameter/lighting = ExtResource("3_3uyjp")

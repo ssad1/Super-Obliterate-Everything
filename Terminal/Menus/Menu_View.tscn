@@ -1,20 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckhvntt8kuoof"]
+[gd_scene load_steps=5 format=3 uid="uid://ckhvntt8kuoof"]
 
 [ext_resource type="PackedScene" uid="uid://d277mqsoyvw0x" path="res://Terminal/Menus/Menu_Items.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://elferpjtn4s7" path="res://Terminal/Terminal_Theme_Big.tres" id="2"]
-[ext_resource type="Script" path="res://Terminal/Menus/Menu_Container.gd" id="3"]
+[ext_resource type="Script" uid="uid://c8pdd4736q3oy" path="res://Terminal/Menus/Menu_Container.gd" id="3"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_cgl33"]
 
 [node name="Menu_View" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("3")
 
 [node name="Menu_Items" parent="." instance=ExtResource("1")]
+layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="ItemGrid" parent="Menu_Items" index="1"]
 layout_mode = 1
@@ -26,6 +33,30 @@ offset_bottom = 740.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="Button_X" parent="Menu_Items" index="2"]
+visible = false
+offset_left = 709.808
+offset_right = 724.808
+
+[node name="HBoxContainer" parent="Menu_Items" index="3"]
+offset_left = 546.0
+offset_right = 687.0
+
+[node name="Button_Page" parent="Menu_Items/HBoxContainer" index="0"]
+button_group = SubResource("ButtonGroup_cgl33")
+
+[node name="Button_Page2" parent="Menu_Items/HBoxContainer" index="1"]
+button_group = SubResource("ButtonGroup_cgl33")
+
+[node name="Button_Page3" parent="Menu_Items/HBoxContainer" index="2"]
+button_group = SubResource("ButtonGroup_cgl33")
+
+[node name="Button_Page4" parent="Menu_Items/HBoxContainer" index="3"]
+button_group = SubResource("ButtonGroup_cgl33")
+
+[node name="Button_Page5" parent="Menu_Items/HBoxContainer" index="4"]
+button_group = SubResource("ButtonGroup_cgl33")
+
 [node name="Label" type="Label" parent="."]
 light_mask = 0
 layout_mode = 0
@@ -36,5 +67,7 @@ offset_bottom = 35.0
 scale = Vector2(1.5, 1.5)
 theme = ExtResource("2")
 text = "VIEW EQUIPMENT"
+
+[connection signal="pressed" from="Menu_Items/Button_X" to="Menu_Items/Button_X" method="_pressed"]
 
 [editable path="Menu_Items"]

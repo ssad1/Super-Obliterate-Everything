@@ -1,3 +1,4 @@
+class_name Menu_Container
 extends Control
 
 var alpha = 0

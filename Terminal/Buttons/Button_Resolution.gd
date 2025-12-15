@@ -2,6 +2,7 @@ extends Button
 
 func _ready():
 	text = str(str(GLOBAL.windowx) + "X" + str(GLOBAL.windowy))
+	GLOBAL.resolutions.append(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -22,3 +23,4 @@ func _restext():
 	if(GLOBAL.graphics_maximized == false):
 		GLOBAL._set_window()
 	GLOBAL._save_settings()
+	EVENTS.resolution.emit(text)

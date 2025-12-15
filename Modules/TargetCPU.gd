@@ -198,8 +198,7 @@ func _do_profile() -> void:
 			scan_ships = true
 			scan_structs = true
 			scan_enemy = true
-			scan_rocks = true
-			scan_special = "ROCK"
+			scan_special = "DEBRIS"
 
 #to immediately search for something else and attack it
 
@@ -235,7 +234,7 @@ func _do_scan():
 			if !check_target(targ): continue
 			targets.append(targ)
 
-	if scan_shots:
+	if scan_shots || scan_special == "DEBRIS":
 		stuff = SPAWNER.game.shots
 		for i in stuff.size():
 

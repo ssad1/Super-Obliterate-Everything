@@ -14,5 +14,5 @@ func _ready():
 
 func _pressed():
 	var a = get_parent()
-	if(a.name == "Menu_Items"):
+	if a.name == "Menu_Items":
 		EVENTS.emit_signal("show_menu_armory")

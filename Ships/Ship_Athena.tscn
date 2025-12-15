@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://bh5xp6mtn32sp"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://jvhg8ffay531" path="res://Ships/Graphics/Athena_C.PNG" id="3_nji2l"]
 [ext_resource type="PackedScene" uid="uid://cfxhjbmt2lidm" path="res://Shots/Missile_B1.tscn" id="4"]
@@ -11,11 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://cfs4bqda500w6" path="res://Ships/Graphics/Athena_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
-[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="13"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("3_nji2l")
+shader_parameter/lighting = ExtResource("4_ddkfi")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -37,8 +39,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("3_nji2l")
-shader_parameter/lighting = ExtResource("4_ddkfi")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_7y66n"]
 diffuse_texture = ExtResource("6")
@@ -50,7 +50,6 @@ blend_mode = 1
 [node name="Ship_Athena" type="Node2D"]
 script = ExtResource("2")
 thrust = 0.2
-aistandoff = 150
 factory = 18
 name_text = "ATHENA"
 class_text = "FRIGATE"
@@ -59,7 +58,7 @@ metal_cost = 100
 supply_cost = 3
 credit_cost = 500
 inertia = 0.6
-max_velocity = 7.0
+max_velocity = 6.0
 max_rotate_velocity = 0.1
 max_armor = 15
 target_profile = 1
@@ -91,8 +90,8 @@ grow_vertical = 2
 [node name="Gun_General" parent="." instance=ExtResource("11")]
 position = Vector2(0, -20)
 fire_sound = 23
-gun_heat = 25
-gun_range = 300
+gun_heat = 40
+gun_range = 200
 gun_v = 20
 gun_arc = 1.6
 gun_arc_rounds = 5

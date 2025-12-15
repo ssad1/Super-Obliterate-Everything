@@ -8,6 +8,8 @@ func _ready():
 		text = "HIGH"
 	elif(GLOBAL.graphics_quality == 1):
 		text = "LOW"
+	
+	GLOBAL.qualities.append(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -25,3 +27,4 @@ func _pressed():
 		GLOBAL.graphics_quality = 1
 		text = "LOW"
 	GLOBAL._save_settings()
+	EVENTS.quality_change.emit(text)

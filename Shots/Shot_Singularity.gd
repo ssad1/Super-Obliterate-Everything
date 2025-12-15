@@ -86,12 +86,12 @@ func _hit(s) -> void:
 func _on_unit_approached(area:Area2D) -> void:
 	#cull all the non-valid options
 	if not area is unit_hitbox: return
-
 	#hit logic
 
 	var target := area as unit_hitbox
 
 	if target.parent_unit == up: return
+	if target.parent_unit is Shot_General: return
 
 	if tcpu.check_target(target.parent_unit):
 		units_being_atracted.append(target.parent_unit)

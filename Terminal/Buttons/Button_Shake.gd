@@ -6,10 +6,8 @@ func _ready():
 		text = "OFF"
 	elif(GLOBAL.graphics_shake == 1):
 		text = "ON"
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	
+	GLOBAL.shakes.append(self)
 
 func _pressed():
 	SFX._play_new([SFX.sound.BUTTON_ITEM])
@@ -20,3 +18,4 @@ func _pressed():
 		GLOBAL.graphics_shake = 0
 		text = "OFF"
 	GLOBAL._save_settings()
+	EVENTS.cam_shake.emit(text)

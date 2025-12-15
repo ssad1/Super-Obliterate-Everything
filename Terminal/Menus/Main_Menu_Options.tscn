@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bn7dr4vti35ee" path="res://Terminal/Menu_Button.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://elferpjtn4s7" path="res://Terminal/Terminal_Theme_Big.tres" id="2"]
-[ext_resource type="Script" path="res://Terminal/Menus/Main_Menu_Options.gd" id="3"]
-[ext_resource type="Script" path="res://Terminal/Menus/Submenu.gd" id="4"]
+[ext_resource type="Script" uid="uid://c15l8vgwwa3rd" path="res://Terminal/Menus/Main_Menu_Options.gd" id="3"]
+[ext_resource type="Script" uid="uid://dqk6fpphaa0ot" path="res://Terminal/Menus/Submenu.gd" id="4"]
 [ext_resource type="Theme" uid="uid://18o43qaay3t1" path="res://Terminal/Terminal_Theme_Small.tres" id="5"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_kylvv"]
@@ -37,7 +37,6 @@ script = ExtResource("3")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
-button_pressed = true
 text = " MISSIONS"
 
 [node name="Button_Multiplayer" parent="VBoxContainer/Main_Menu_Options" instance=ExtResource("1")]
