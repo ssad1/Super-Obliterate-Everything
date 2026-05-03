@@ -50,11 +50,11 @@ var set_target_profile:profile = target_profile:
 		cull_check = (up.is_type == UNIT_STATE.type.STRUCT || up.is_type == UNIT_STATE.type.SINGULARITY || up.is_type == UNIT_STATE.type.SHOT || up.is_type == UNIT_STATE.type.LASER) && target_profile != profile.REPAIR
 		_do_profile()
 
-func _ready():
+func _ready() -> void:
 	up = get_parent()
 	up.tcpu = self
 
-func _clean_target(s) -> void:
+func _clean_target(s:int) -> void:
 
 	var i := targets.size() - 1
 
@@ -80,48 +80,48 @@ func _clean_targets() -> void:
 			targets.remove_at(i)
 			continue
 
+'''
+####extensivelly optimized function####
+-every single check has been benchmarked to order by the amount that each is called
+-this means that the order they are checked and immediatelly returned is not random
+-the most called(other than the initial checks) are checked first then returned immediatelly
+'''
+
 func check_target(target) -> bool:
 
-	if target == null || !is_instance_valid(target) || !("armor" in target && "cloaked" in target && "player" in target):
-		return false
+	#initial checks to see if we are checking a valid node
+	if target == null: return false
+	if !is_instance_valid(target): return false
+	if !("armor" in target): return false
+	if !("cloaked" in target): return false
+	if !("player" in target): return false
 
 	target_pos = target.pos
-
-	var dist:float = up.pos.distance_to(target.pos)
-	var scan_d := scan_range * scan_range
-
-	if "scan_only_in_range" in up:
-		if up.scan_only_in_range && dist > up.range_radius: 
-			return false
-	elif dist > scan_d: 
-		return false
-
-	if (
-	target.spawn_id == up.spawn_id || 
-	target.armor <= 0 || 
-	target.cloaked ||
-	!target.visible):
-		return false
 
 	#check which faction we are in
 
 	if target.player != null && up.player != null: #initial check to not crash the whole thing
 
-		var diplo = DIPLOMACY.grid[target.player.id][up.player.id]
+		var diplo:int = DIPLOMACY.grid[target.player.id][up.player.id]
 
-		if (
-		!scan_enemy && diplo == 0 || 
-		!scan_neutral && diplo == 1 || 
-		!scan_ally && diplo == 2):
-			return false
+		if !scan_neutral && diplo == 1: return false
+		if !scan_ally && diplo == 2: return false
+		if !scan_enemy && diplo == 0: return false
+
+	if !target.visible: return false
 
 	#miners, metalporters, etc
 
-	if (
-	(scan_special_only && target.special != scan_special) ||
-	(!scan_rocks && target.special == "ROCK") ||
-	(scan_injured && target.armor >= target.max_armor)):
-		return false
+	if scan_special_only && target.special != scan_special: return false
+	if scan_injured && target.armor >= target.max_armor: return false
+
+	if target.armor <= 0: return false
+	if target.spawn_id == up.spawn_id: return false
+	#if target.cloaked: return false
+
+	if "scan_only_in_range" in up:
+		var dist:float = up.pos.distance_to(target.pos)
+		if up.scan_only_in_range && dist > up.range_radius: return false
 
 	#avoid units not detecting stuff that was already there before
 
@@ -202,7 +202,7 @@ func _do_profile() -> void:
 
 #to immediately search for something else and attack it
 
-func _do_scan():
+func _do_scan() -> void:
 	
 	if found_victim && !is_repair:
 		return
@@ -288,7 +288,7 @@ func _do_FOV_entered(obj: Area2D) -> void:
 		found_victim = true
 		if is_repair: up.target_hot == true
 
-func _do_FOV_exited(obj: Area2D):
+func _do_FOV_exited(obj: Area2D) -> void:
 	#make sure we got a valid object in our FOV
 
 	if not obj is unit_hitbox: pass

@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://chumbt55n10wq"]
 
-[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="1"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="1"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="4"]
 [ext_resource type="Texture2D" uid="uid://d23jwugnjtj67" path="res://Shots/Graphics/Blaster.png" id="5"]
-[ext_resource type="Script" path="res://Shots/Shot_General.gd" id="6"]
+[ext_resource type="Script" uid="uid://dsqgtn7taxhb2" path="res://Shots/Shot_General.gd" id="6"]
 [ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="7"]
 
 [sub_resource type="ShaderMaterial" id="1"]

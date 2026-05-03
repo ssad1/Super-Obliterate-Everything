@@ -10,13 +10,11 @@ uniform sampler2D colors : hint_default_black;
 vec4 color_gradient(vec4 input, float t)
 {
 	vec4 return_color;
-	vec4 grad;
-	float color_shift = 0.0;
 	float color_level = input.r;
 
 	color_level = clamp(color_level - 0.1 + 0.1 * sin(20.0 * t + phase), 0.0, 0.6 + 0.4 * sin(15.0 * t + phase));
 
-	grad = texture(colors, vec2(color_level,0.0));
+	vec4 grad = texture(colors, vec2(color_level,0.0));
 
 	return_color.r = grad.r;
 	return_color.g = grad.g;
@@ -27,7 +25,7 @@ vec4 color_gradient(vec4 input, float t)
 
 vec2 pulse(vec2 puv, float t)
 {
-	float p_strength = (1.0 - (0.5 * pulse_strength) * sin(20.0 * t) - 0.5 * (0.5 * pulse_strength));
+	float p_strength = 1.0 - (0.5 * pulse_strength) * sin(20.0 * t) - 0.5 * (0.5 * pulse_strength);
 	float half_frame = 0.5 / frames;
 	float f1 = 1.0 / frames;
 
@@ -40,17 +38,18 @@ vec2 pulse(vec2 puv, float t)
 	{
 		puv.x = f1;
 	}
-	if(puv.y > f1)
-	{
-		puv.y = f1;
-	}
 	if(puv.x < 0.0)
 	{
 		puv.x = 0.0;
 	}
+
 	if(puv.y < 0.0)
 	{
 		puv.y = 0.0;
+	}
+	if(puv.y > f1)
+	{
+		puv.y = f1;
 	}
 	return puv;
 }
@@ -58,7 +57,6 @@ vec2 pulse(vec2 puv, float t)
 void fragment()
 {
 	vec4 current_texture;
-	vec3 grad;
 	vec2 outp;
 	vec2 noiseuv = UV;
 	vec2 moduv = vec2(0,0);

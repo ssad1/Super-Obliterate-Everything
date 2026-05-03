@@ -1,4 +1,17 @@
 shader_type canvas_item;
+
+#define simplex_scale 0.5
+#define OCTAVES 5
+
+#define MOD289 0.00346020761 // equivalent to 1.0/289.0
+
+#define NOISECX 0.211324865405187  // (3.0-sqrt(3.0))/6.0
+#define NOISECY 0.366025403784439  // 0.5*(sqrt(3.0)-1.0)
+#define NOISECZ -0.577350269189626 // -1.0 + 2.0 * C.x
+#define NOISECW 0.024390243902439  // 1.0 / 41.0
+
+#define SHOCK_WIDTH 0.175
+
 uniform sampler2D burn : hint_default_black;
 uniform sampler2D flag_mask : hint_default_black;
 uniform sampler2D lighting : hint_default_black;
@@ -14,6 +27,7 @@ uniform vec2 frames = vec2(8.0,8.0);
 uniform float cloak_strength = 0.0;
 
 //Freeze
+
 const vec4 freeze_color = vec4(0.16, 0.19, 0.21, 1.0);
 uniform float freeze_strength = 0.0;
 
@@ -32,7 +46,7 @@ uniform float burnt_strength = 0.0;
 const vec4 dissolve_a = vec4(1.0, 0.0, 0.0, 1.0);
 const vec4 dissolve_b = vec4(1.0, 0.3, 0.19, 1.0);
 const vec4 dissolve_c = vec4(0.35, 0.0, 0.0, 1.0);
-const int OCTAVES = 5;
+
 uniform float dissolve_strength = 0.0;
 
 //Fire
@@ -63,23 +77,18 @@ uniform float swirl_strength = 0.0;
 
 //Noise
 uniform vec2 offset;
-const float simplex_scale = 0.5;
+//const float simplex_scale = 0.5;
 
 //Selected
 const vec4 select_color = vec4(1,1,1,1);
 uniform float select_strength = 0.0;
 
-float rand(vec2 coord){
-	return fract(sin(dot(coord, vec2(12.9898, 78.233)))* 43758.5453123);
-	//return fract(sin(dot(coord, vec2(56.0934483, 78.3674596)) * 1000.0) * 1000.0);
-}
-
 vec3 mod289_3(vec3 x) {
-    return x - floor(x * (1.0 / 289.0)) * 289.0;
+    return x - floor(x * MOD289) * 289.0;
 }
 
 vec2 mod289_2(vec2 x) {
-    return x - floor(x * (1.0 / 289.0)) * 289.0;
+    return x - floor(x * MOD289) * 289.0;
 }
 
 vec3 permute(vec3 x) {
@@ -87,33 +96,26 @@ vec3 permute(vec3 x) {
 }
 
 float snoise(vec2 v) {
-    vec4 C = vec4(0.211324865405187,  // (3.0-sqrt(3.0))/6.0
-                  0.366025403784439,  // 0.5*(sqrt(3.0)-1.0)
-                 -0.577350269189626,  // -1.0 + 2.0 * C.x
-                  0.024390243902439); // 1.0 / 41.0
+    vec4 C = vec4(NOISECX, NOISECY, NOISECZ, NOISECW);
+	
     // First corner
-    vec2 i  = floor(v + dot(v, C.yy) );
-    vec2 x0 = v -   i + dot(i, C.xx);
+    vec2 i  = floor(v + dot(v, C.yy));
+    vec2 x0 = v - i + dot(i, C.xx);
 
     // Other corners
-    vec2 i1;
-    //i1.x = step( x0.y, x0.x ); // x0.x > x0.y ? 1.0 : 0.0
-    //i1.y = 1.0 - i1.x;
-    i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-    // x0 = x0 - 0.0 + 0.0 * C.xx ;
-    // x1 = x0 - i1 + 1.0 * C.xx ;
-    // x2 = x0 - 1.0 + 2.0 * C.xx ;
+    vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+	
     vec4 x12 = vec4(x0.xy, x0.xy) + C.xxzz;
     x12.xy -= i1;
 
     // Permutations
     i = mod289_2(i); // Avoid truncation effects in permutation
-    vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
+    vec3 p = permute(permute( i.y + vec3(0.0, i1.y, 1.0 ))
     	+ i.x + vec3(0.0, i1.x, 1.0 ));
 
     vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), vec3(0.0));
-    m = m*m ;
-    m = m*m ;
+    m = m*m;
+    m = m*m;
 
     // Gradients: 41 points uniformly over a line, mapped onto a diamond.
     // The ring size 17*17 = 289 is close to a multiple of 41 (41*7 = 287)
@@ -129,7 +131,7 @@ float snoise(vec2 v) {
 
     // Compute final noise value at P
     vec3 g;
-    g.x  = a0.x  * x0.x  + h.x  * x0.y;
+    g.x = a0.x * x0.x + h.x * x0.y;
     g.yz = a0.yz * x12.xz + h.yz * x12.yw;
     return 130.0 * dot(m, g);
 }
@@ -165,17 +167,17 @@ vec4 freeze(vec4 original, vec2 uv, vec2 noiseuv)
 vec4 damage(vec4 original, vec2 uv, vec2 noiseuv)
 {
 	vec4 new_col;
-	vec4 damage_color_a = vec4(1.0,1.0,1.0,1.0);//vec4(1.0,0.0,0.0,1.0);
-	vec4 damage_color_b = vec4(1.0,1.0,1.0,1.0);//vec4(1.0,0.4,0.2,1.0);
-	vec4 damage_color_c = vec4(1.0,1.0,1.0,1.0);//vec4(1.0,0.6,0.3,1.0);
-	vec4 damage_color_d = vec4(1.0,1.0,1.0,1.0);//vec4(1.0,1.0,1.0,1.0);
+	vec4 damage_color_a = vec4(1.0);//vec4(1.0,0.0,0.0,1.0);
+	vec4 damage_color_b = vec4(1.0);//vec4(1.0,0.4,0.2,1.0);
+	vec4 damage_color_c = vec4(1.0);//vec4(1.0,0.6,0.3,1.0);
+	vec4 damage_color_d = vec4(1.0);//vec4(1.0,1.0,1.0,1.0);
 	vec4 damage_mix;
 	vec4 damage_mix_b;
 	vec2 outp;
 	vec2 center = modf(noiseuv * frames,outp) - 0.45;
 	float dist = distance(noiseuv, center) * 2.0;
 	damage_mix = mix(damage_color_a,damage_color_b, 1.0 - dist);
-	new_col = mix(original, damage_mix, (dist) * damage_strength);
+	new_col = mix(original, damage_mix, dist * damage_strength);
 	if(damage_strength > 0.75)
 	{
 		damage_mix_b = mix(damage_color_c,damage_color_d, (damage_strength - 0.75) * 4.0);
@@ -186,7 +188,6 @@ vec4 damage(vec4 original, vec2 uv, vec2 noiseuv)
 }
 
 vec4 dissolve(vec4 original, vec2 uv, vec2 noiseuv) {
-
 	vec4 new_col = original; // value that will be returned
 	float noise = 0.0;
 
@@ -195,19 +196,19 @@ vec4 dissolve(vec4 original, vec2 uv, vec2 noiseuv) {
 	vec4 fire_grad;
 
 	noise = fbm(noiseuv * 6.0);
-	//noise = snoise(noiseuv * simplex_scale);
-	//noise = 0.5 + 0.5 * sin(noise);
-
-	if(dissolve_strength > noise && dissolve_strength <= noise + thickness * 0.5)
+	
+	float thick = noise + thickness * 0.5;
+	
+	if(dissolve_strength > noise && dissolve_strength <= thick)
 	{
-		grad = clamp(2.0 * (dissolve_strength - noise) / (thickness),0.0,1.0);
+		grad = clamp(2.0 * (dissolve_strength - noise) / thickness,0.0,1.0);
 		fire_grad = mix(dissolve_a, dissolve_b, grad);
 		fire_grad = mix(new_col, fire_grad, grad);
 		new_col = fire_grad;
 	}
-	if(dissolve_strength > noise + 0.5 * thickness && dissolve_strength < noise + thickness)
+	if(dissolve_strength > thick && dissolve_strength < noise + thickness)
 	{
-		grad = clamp(2.0 * ((dissolve_strength - noise) / (thickness) - 0.5),0.0,1.0);
+		grad = clamp(2.0 * ((dissolve_strength - noise) / thickness - 0.5),0.0,1.0);
 		fire_grad = mix(dissolve_b, dissolve_c, grad);
 		fire_grad = mix(fire_grad, vec4(0.0), grad);
 		new_col = fire_grad;
@@ -248,25 +249,27 @@ vec4 shock(vec4 original, vec2 uv, vec2 noiseuv, float time)
 {
 	vec2 coord = noiseuv * 8.0;
 	vec4 new_col = original;
-
-	float noise1 = fbm(coord + vec2(time * -0.3, time * 0.3));
-	float noise2 = fbm(coord + vec2(0, time * -0.6));
+	
+	float t = time * 0.3;
+	
+	float noise1 = fbm(coord + vec2(-t, t));
+	float noise2 = fbm(coord + vec2(0, -t * 2.0));
 	float combined = (noise1 + noise2) / 2.0;
-	float shock_width = 0.175;
 	float shock_input = shock_strength * 0.9 + 0.1;
+	
 	combined = pow(combined, shock_input);
 	new_col = vec4(vec3(combined), 1.0);
 
-	if (combined > 0.5 - shock_width && combined < 0.5 + shock_width) {
+	if (combined > 0.5 - SHOCK_WIDTH && combined < 0.5 + SHOCK_WIDTH) {
 		if(combined < 0.5)
 		{
-			new_col = mix(shock_white, shock_color, (0.5 - combined) / shock_width);
-			new_col = mix(new_col, original, (0.5 - combined) / shock_width);
+			new_col = mix(shock_white, shock_color, (0.5 - combined) / SHOCK_WIDTH);
+			new_col = mix(new_col, original, (0.5 - combined) / SHOCK_WIDTH);
 		}
 		if(combined > 0.5)
 		{
-			new_col = mix(shock_color, shock_white, 1.0 - (combined - 0.5) / shock_width);
-			new_col = mix(original, new_col, 1.0 - (combined - 0.5) / shock_width);
+			new_col = mix(shock_color, shock_white, 1.0 - (combined - 0.5) / SHOCK_WIDTH);
+			new_col = mix(original, new_col, 1.0 - (combined - 0.5) / SHOCK_WIDTH);
 		}
 	} else {
 		new_col = original;
@@ -279,10 +282,13 @@ vec4 fire(vec4 original, vec2 uv, vec2 noiseuv, float time)
 {
 	vec2 coord = noiseuv * 10.0;
 	vec4 new_col = original;
-
-	float noise1 = fbm(coord + vec2(time * 0.3, time * -0.3));
-	float noise2 = fbm(coord + vec2(0, time * 0.6));
+	
+	float t = time * 0.3;
+	
+	float noise1 = fbm(coord + vec2(t, -t));
+	float noise2 = fbm(coord + vec2(0, t * 2.0));
 	float combined = (noise1 + noise2) / 2.0;
+	
 	new_col = vec4(vec3(combined), 1.0);
 
 	if (combined < fire_strength) {
@@ -380,17 +386,19 @@ vec4 build(vec4 original, vec2 uv, vec2 noiseuv, vec2 texture_pixel_size, sample
 	{
 		linea = 0.5;
 	}
-
-	if(noiseuv.x * frames.x > 0.5 * build_strength && noiseuv.x * frames.x < 1.0 - 0.5 * build_strength)
+	
+	float half_bs = 0.5 * build_strength;
+	
+	if(noiseuv.x * frames.x > half_bs && noiseuv.x * frames.x < 1.0 - half_bs)
 	{
-		if(noiseuv.x * frames.x < 0.5 * build_strength + 0.1)
+		if(noiseuv.x * frames.x < half_bs + 0.1)
 		{
-			new_col = mix(build_color, original,10.0 * (noiseuv.x * frames.x - build_strength * 0.5));
+			new_col = mix(build_color, original,10.0 * (noiseuv.x * frames.x - half_bs));
 			new_col.a = new_col.a * original.a;
 		}
-		else if(noiseuv.x * frames.x > 1.0 - 0.5 * build_strength - 0.1)
+		else if(noiseuv.x * frames.x > 1.0 - half_bs - 0.1)
 		{
-			new_col = mix(original, build_color, 10.0 * (noiseuv.x * frames.x + build_strength * 0.5 - 0.9));
+			new_col = mix(original, build_color, 10.0 * (noiseuv.x * frames.x + half_bs - 0.9));
 			new_col.a = new_col.a * original.a;
 		}
 		else
@@ -403,10 +411,6 @@ vec4 build(vec4 original, vec2 uv, vec2 noiseuv, vec2 texture_pixel_size, sample
 		new_col.a = 0.0;
 		outlined_result = mix(vec4(0.0,0.0,0.0,0.0), build_color, outline + inline);
 		new_col = mix(vec4(0.0,0.0,0.0,0.0), outlined_result, outlined_result.a * linea);
-		/*if(outline + inline > 0.5)
-		{
-			new_col = vec4(1.0,0.0,0.0,1.0);
-		}*/
 	}
 	return new_col;
 }
@@ -417,12 +421,10 @@ vec2 swirl(vec2 uv, float t)
 
 	vec2 position = uv;
 	vec2 center = vec2(0.5 / frames.x,0.5 / frames.y);
-    float pi = 3.14;
     float distance_to_center = distance(position, center);
-    float rotation_index = 60.0 * distance_to_center * pi * sin(swirl_strength/1.0) + 6.0 * swirl_strength;
+    float rotation_index = 60.0 * distance_to_center * PI * sin(swirl_strength/1.0) + 6.0 * swirl_strength;
 
     // move to (0.5, 0.5)
-    //position -= vec2(0.5, 0.5);
 	position -= vec2(0.5 / frames.x, 0.5 / frames.y);
 
     // apply rotation transformation
@@ -463,7 +465,7 @@ vec4 burnt(vec4 original, float strength, float time)
 	if(strength >= 0.75)
 	{
 		time_shift = 5.0 * (strength - 0.75) + 0.5;
-		burn_factor = 0.5 * (0.2 * sin(time * 2.0 * 3.141592 * time_shift) + 0.1 * (4.0 * (strength - 0.75)) - 0.1);
+		burn_factor = 0.5 * (0.2 * sin(time * 2.0 * PI * time_shift) + 0.1 * (4.0 * (strength - 0.75)) - 0.1);
 		if(burn_factor < 0.0)
 		{
 			burn_factor = 0.0;

@@ -60,7 +60,6 @@ func _process(delta:float) -> void:
 		wint = 0
 		wint_on = false
 
-
 func _cam_offset() -> Vector2:
 	var pos := position
 	return Vector2(GLOBAL.resx / 2 - (pos.x + .5 * mapsize.x), GLOBAL.resy / 2 - (pos.y + .5 * mapsize.y))
