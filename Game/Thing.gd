@@ -283,7 +283,7 @@ func _do_damage() -> void:
 
 	UNIT_STATE.do_unit_damage(self)
 
-func _hit(s) -> void:
+func hit(s) -> void:
 
 	if s.is_type == UNIT_STATE.type.SINGULARITY:
 		UNIT_STATE.do_black_hole_death(self)

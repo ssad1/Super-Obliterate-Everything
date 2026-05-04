@@ -120,7 +120,7 @@ func _fire() -> void:
 
 		obj.show()
 		obj._calc_damage()
-		up.tcpu.targets[up.tcpu.target_i]._hit(obj)
+		up.tcpu.targets[up.tcpu.target_i].hit(obj)
 
 		if mining_laser:
 			top._mine_rock()

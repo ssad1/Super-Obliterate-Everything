@@ -99,7 +99,7 @@ func _init_builder() -> void:
 	target_pos = Vector2(32 * build_mission[3],32 * build_mission[4])
 
 	var obj = player.item_bag_objs[build_mission[2]]
-
+	
 	if "build_size" in obj:
 		target_pos = target_pos + 16 * player.item_bag_objs[build_mission[2]].build_size
 	if "factory" in obj:

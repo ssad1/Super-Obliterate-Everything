@@ -80,7 +80,7 @@ func _process(delta:float) -> void:
 
 		unit.velocity -= terminal_velocity
 
-func _hit(s) -> void:
+func hit(s) -> void:
 	pass
 
 func _on_unit_approached(area:Area2D) -> void:

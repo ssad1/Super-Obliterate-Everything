@@ -724,7 +724,7 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 	obj.s = s
 
 	if up == 0:
-		game._super_add_child(obj)
+		game.super_add_child(obj)
 		obj.spawn_id = next_spawn_id
 		next_spawn_id = next_spawn_id + 1
 		obj.pos = position
@@ -764,7 +764,7 @@ func _spawn_dupe(s, p, position:Vector2, velocity:Vector2, rotation:float, up, i
 	obj.inactive = false
 
 	if up == 0:
-		game._super_add_child(obj)
+		game.super_add_child(obj)
 		obj.spawn_id = next_spawn_id
 		next_spawn_id = next_spawn_id + 1
 
@@ -790,7 +790,7 @@ func _spawn_dupe(s, p, position:Vector2, velocity:Vector2, rotation:float, up, i
 
 func _spawn_laser(s, p, pa, pb) -> Node2D:
 	var obj = s.duplicate()
-	game._super_add_child(obj)
+	game.super_add_child(obj)
 	obj.spawn_id = next_spawn_id
 	next_spawn_id = next_spawn_id + 1
 	obj._ignite(pa,pb)
@@ -838,5 +838,5 @@ func _spawn_player(faction,variant) -> void:
 
 func _spawn_stats() -> Node2D:
 	var obj = Stats.instantiate()
-	game._super_add_child(obj)
+	game.super_add_child(obj)
 	return obj

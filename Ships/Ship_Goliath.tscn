@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" path="res://Guns/Gun_Laser.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://ctpcewov8ruq7" path="res://Effects/E_MuzzleF.tscn" id="10"]
-[ext_resource type="PackedScene" path="res://Shots/Laser_Spartan.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://ee8is1xnq10k" path="res://Shots/Laser_Spartan.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://b7uoppkeik13" path="res://Turrets/Turret_Laser.tscn" id="13"]
 
 [sub_resource type="ShaderMaterial" id="1"]
