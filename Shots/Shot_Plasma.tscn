@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://chsnqngu671vk" path="res://Modules/Spawn_Explosion.tscn" id="5"]
-[ext_resource type="Script" path="res://Shots/Shot_General.gd" id="6"]
+[ext_resource type="Script" uid="uid://dsqgtn7taxhb2" path="res://Shots/Shot_General.gd" id="6"]
 [ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="7"]
 [ext_resource type="PackedScene" uid="uid://bpx3w6rav7hni" path="res://Shots/Explode_Plasma.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Death_SFX.tscn" id="9"]
@@ -32,7 +32,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lh8br"]
 _data = {
-"Shot": SubResource("3")
+&"Shot": SubResource("3")
 }
 
 [sub_resource type="Animation" id="4"]
@@ -79,13 +79,13 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_37o1k"]
 _data = {
-"New Anim": SubResource("4"),
-"RESET": SubResource("Animation_4tct6")
+&"New Anim": SubResource("4"),
+&"RESET": SubResource("Animation_4tct6")
 }
 
 [node name="Shot_Plasma" type="Node2D"]
 script = ExtResource("6")
-base_damage = 50.0
+base_damage = 40.0
 damage_type = ""
 name_text = "Plasma"
 inertia = 1.0
@@ -109,13 +109,13 @@ texture = ExtResource("7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_lh8br")
+&"": SubResource("AnimationLibrary_lh8br")
 }
 autoplay = "Shot"
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_37o1k")
+&"": SubResource("AnimationLibrary_37o1k")
 }
 autoplay = "New Anim"
 

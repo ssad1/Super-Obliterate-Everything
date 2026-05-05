@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=3 uid="uid://d32aggrenhtof"]
 
-[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="1"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="1"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://4oat6bgn65rv" path="res://Effects/Gradients/Gradient_Artillery.tres" id="4"]
 [ext_resource type="Texture2D" uid="uid://h6dcr4gjheq8" path="res://Shots/Graphics/Artillery_Shell_D.PNG" id="5"]
-[ext_resource type="Script" path="res://Shots/Shot_General.gd" id="6"]
+[ext_resource type="Script" uid="uid://dsqgtn7taxhb2" path="res://Shots/Shot_General.gd" id="6"]
 [ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="7"]
-[ext_resource type="PackedScene" path="res://Shots/Explode_Basic.tscn" id="9"]
-[ext_resource type="PackedScene" path="res://Modules/Spawn_Explosion.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://d7lxvfirg4je" path="res://Shots/Explode_Basic.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://chsnqngu671vk" path="res://Modules/Spawn_Explosion.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Death_SFX.tscn" id="11"]
 
 [sub_resource type="ShaderMaterial" id="3"]
@@ -43,10 +43,10 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("7")
 
 [node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -38.0
-offset_top = -38.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_left = -39.0
+offset_top = -39.0
+offset_right = -9.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -58,6 +58,8 @@ scale_effect = true
 scale_effect_size = 2.0
 
 [node name="Explode_Basic" parent="Module_Trigger/Spawn_Explosion" instance=ExtResource("9")]
+damage = 11.5
+boom_scale = 1.1
 
 [node name="Module_Death_SFX" parent="Module_Trigger" instance=ExtResource("11")]
 fire_sound = 17

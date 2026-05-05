@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://bn3j1d6pcgy0u"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://dqjey34i83121" path="res://Ships/Graphics/Hammerhead_D.PNG" id="4"]
 [ext_resource type="Texture2D" uid="uid://bgnsltdl1fqcw" path="res://Ships/Graphics/Hammerhead_B.PNG" id="6"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dcnfma53johtd" path="res://Ships/Graphics/Hammerhead_L.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://daywdrylfwv8p" path="res://Ships/Graphics/Hammerhead_C.PNG" id="8"]
 [ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
-[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="10"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
 [ext_resource type="Texture2D" uid="uid://4oat6bgn65rv" path="res://Effects/Gradients/Gradient_Artillery.tres" id="12"]
 [ext_resource type="PackedScene" uid="uid://d32aggrenhtof" path="res://Shots/Shot_Artillery.tscn" id="13"]
@@ -19,6 +19,8 @@
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("8")
+shader_parameter/lighting = ExtResource("7")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -40,8 +42,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("8")
-shader_parameter/lighting = ExtResource("7")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_mj42s"]
 diffuse_texture = ExtResource("4")
@@ -123,6 +123,7 @@ gun_scale = 0.3
 [node name="Shot_Artillery" parent="Gun_General" instance=ExtResource("13")]
 visible = false
 material = SubResource("3")
+base_damage = 12.5
 
 [node name="E_MuzzleB" parent="Gun_General" instance=ExtResource("14")]
 visible = false
@@ -141,6 +142,7 @@ gun_scale = 0.3
 [node name="Shot_Artillery" parent="Gun_General2" instance=ExtResource("13")]
 visible = false
 material = SubResource("4")
+base_damage = 12.5
 
 [node name="E_MuzzleB" parent="Gun_General2" instance=ExtResource("14")]
 visible = false

@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://cpglbktmh7upv" path="res://Shots/Graphics/Missile_M1_L.PNG" id="1"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
-[ext_resource type="Shader" path="res://Shaders/Missile_Shader.gdshader" id="4"]
+[ext_resource type="Shader" uid="uid://by3yesvcyq36a" path="res://Shaders/Missile_Shader.gdshader" id="4"]
 [ext_resource type="Texture2D" uid="uid://dnmmcnvu7of0x" path="res://Shots/Graphics/Missile_M1_D.PNG" id="5"]
-[ext_resource type="Script" path="res://Ships/Ship_Missile.gd" id="6"]
+[ext_resource type="Script" uid="uid://4ou1j8r6el0q" path="res://Ships/Ship_Missile.gd" id="6"]
 [ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="7"]
 [ext_resource type="PackedScene" uid="uid://d7lxvfirg4je" path="res://Shots/Explode_Basic.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://chsnqngu671vk" path="res://Modules/Spawn_Explosion.tscn" id="10"]
@@ -15,10 +15,10 @@
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("4")
+shader_parameter/lighting = ExtResource("1")
 shader_parameter/light_color = Color(1, 0.52549, 0.180392, 1)
 shader_parameter/light_bright = 1.0
 shader_parameter/frames = Vector2(8, 8)
-shader_parameter/lighting = ExtResource("1")
 
 [sub_resource type="CanvasItemMaterial" id="2"]
 blend_mode = 1
@@ -62,10 +62,10 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("7")
 
 [node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -7.0
+offset_left = -8.0
 offset_top = -8.0
-offset_right = 7.0
-offset_bottom = 6.0
+offset_right = 8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -76,6 +76,8 @@ death_activate = true
 scale_effect = true
 
 [node name="Explode_Basic" parent="Module_Trigger/Spawn_Explosion" instance=ExtResource("9")]
+damage = 12.5
+boom_scale = 1.1
 
 [node name="Module_Death_SFX" parent="Module_Trigger" instance=ExtResource("12")]
 fire_sound = 20

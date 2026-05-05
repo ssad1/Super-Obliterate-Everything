@@ -90,21 +90,6 @@ func _camera_edges() -> void:
 	if position.y + mapsize.y < GLOBAL.resy:
 		position.y = -1 * mapsize.y + GLOBAL.resy
 
-func _collide_explosions() -> void:
-	for explosion in explosions:
-		explosion.tcpu._clean_targets()
-
-		for target in explosion.tcpu.targets:
-
-			if target.hitbox == null: continue
-
-			var d2:float = target.hitbox.size.x
-			if target.hitbox.size.y > d2:
-				d2 = target.hitbox.size.y
-
-			if explosion.pos.distance_to(target.pos) < explosion.boom_radius + d2:
-				target.hit(explosion)
-
 func _collide_shields() -> void:
 	for struct in structs:
 		for module in struct.modules:
@@ -167,9 +152,7 @@ func _do_event_list() -> void:
 
 func _do_move(p,type,s,posx,posy) -> void:
 	tx_moves[p] = [p,type,s,posx,posy]
-	_do_rx_moves()
 
-func _do_rx_moves() -> void:
 	if GLOBAL.gamemode == 2:
 		rx_moves = tx_moves
 
@@ -185,13 +168,11 @@ func _do_rx_moves() -> void:
 
 func _do_tick() -> void:
 	var start_clock = Time.get_ticks_usec()
-	var end_clock
+	#var end_clock
 	mission_clock = mission_clock + 1
 	_do_event_list()
 	_do_radar()
-	#_do_rx_moves()
 
-	_collide_explosions()
 	_collide_shields()
 	
 	SFX._do_tick()
@@ -200,7 +181,7 @@ func _do_tick() -> void:
 		player._do_tick()
 	_do_victory()
 	GLOBAL.heatbright = GLOBAL.heatbright * .9 - 1
-	end_clock = Time.get_ticks_usec()
+	#end_clock = Time.get_ticks_usec()
 	
 func _do_radar() -> void:
 	var pos:Vector2
