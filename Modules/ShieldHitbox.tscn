@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://djfh0qd7d666l"]
+
+[ext_resource type="Script" uid="uid://cs60d6xvo1ddq" path="res://Modules/shield_HitBox.gd" id="1_51l71"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7kyxb"]
+resource_local_to_scene = true
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_51l71"]
+resource_local_to_scene = true
+
+[node name="ShieldHitbox" type="Node2D"]
+script = ExtResource("1_51l71")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_7kyxb")
+debug_color = Color(0, 0.5294118, 0.98039216, 0.5372549)
+
+[node name="DeadZone" type="Area2D" parent="."]
+collision_priority = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeadZone"]
+shape = SubResource("CircleShape2D_51l71")
+debug_color = Color(0.9647059, 0, 0, 0.41960785)

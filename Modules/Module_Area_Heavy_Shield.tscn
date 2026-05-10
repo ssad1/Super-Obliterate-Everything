@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctp4jh83ii4c3"]
+[gd_scene load_steps=9 format=3 uid="uid://ctp4jh83ii4c3"]
 
-[ext_resource type="Script" path="res://Modules/Module_Area_Shield.gd" id="1"]
-[ext_resource type="PackedScene" path="res://Effects/ShieldGlow.tscn" id="2"]
+[ext_resource type="Script" uid="uid://b403ohwyow2bm" path="res://Modules/Module_Area_Shield.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://d4lclt4ihdiw8" path="res://Effects/ShieldGlow.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://hroxvtx8wr3x" path="res://Effects/LargeShieldGlowBlank.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://djfh0qd7d666l" path="res://Modules/ShieldHitbox.tscn" id="4_he3r0"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 blend_mode = 1
@@ -269,12 +270,12 @@ shader = SubResource("3")
 shader_parameter/shield_radius = 160.0
 shader_parameter/shield_width = 32.0
 shader_parameter/hit_angle = 0.0
-shader_parameter/hit_fade = 1.0
+shader_parameter/hit_fade = 0.0
 shader_parameter/shock_strength = 1.0
 shader_parameter/shield_strength = 0.0
 shader_parameter/shield_charging = 0.0
 shader_parameter/shield_damage_strength = 0.0
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 
 [node name="Module_Area_Shield" type="ColorRect"]
 anchors_preset = 8
@@ -284,11 +285,10 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 color = Color(1, 1, 1, 0)
 script = ExtResource("1")
-shield = 300
-max_shield = 300
+shield = 45.0
+max_shield = 45.0
 shield_radius = 160
-shield_width = 48
-shield_charge = 2
+shield_width = 112
 
 [node name="Shield_Line" type="Line2D" parent="."]
 visible = false
@@ -302,3 +302,5 @@ material = SubResource("4")
 position = Vector2(0, 0)
 texture = ExtResource("3")
 script = null
+
+[node name="ShieldHitbox" parent="." instance=ExtResource("4_he3r0")]

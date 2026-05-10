@@ -90,28 +90,6 @@ func _camera_edges() -> void:
 	if position.y + mapsize.y < GLOBAL.resy:
 		position.y = -1 * mapsize.y + GLOBAL.resy
 
-func _collide_shields() -> void:
-	for struct in structs:
-		for module in struct.modules:
-
-			if module.is_type == UNIT_STATE.type.SHIELD && module.shield > 0:
-				_collide_shields_b(struct.player.id, module)
-
-func _collide_shields_b(f,s) -> void:
-	for shot in shots:
-		if shot.is_type != UNIT_STATE.type.LASER && DIPLOMACY.grid[shot.player.id][f] == 0:
-			_collide_shields_c(shot,s)
-			
-	for missile in missiles:
-		if DIPLOMACY.grid[missile.player.id][f] == 0:
-			_collide_shields_c(missile,s)
-
-func _collide_shields_c(sa,sb) -> void:
-	var d = sa.pos.distance_to(sb.pos)
-	if d < sb.shield_radius + 0.5 * sb.shield_width && d > sb.shield_radius - 0.5 * sb.shield_width:
-		sa.armor = 0
-		SPAWNER._spawn_hit("SHIELD", sa.damage, sa.pos, Vector2(0,0), sa.rotate + PI)
-		sb._hit_shield(sa.damage,sa.pos)
 
 func _clear_game() -> void:
 	print("Clear Game")
@@ -172,8 +150,6 @@ func _do_tick() -> void:
 	mission_clock = mission_clock + 1
 	_do_event_list()
 	_do_radar()
-
-	_collide_shields()
 	
 	SFX._do_tick()
 
