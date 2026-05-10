@@ -1,13 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://b27jpx18nuq18"]
+[gd_scene load_steps=16 format=3 uid="uid://b27jpx18nuq18"]
 
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
 [ext_resource type="Script" uid="uid://bxfowhqy7cgkl" path="res://Structures/Struct_Shield.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://cyetwarnb2wve" path="res://Structures/Graphics/Struct_Heavy_Shield_D.PNG" id="3_rretx"]
 [ext_resource type="Texture2D" uid="uid://pov00ntnkncm" path="res://Structures/Graphics/Struct_Heavy_Shield_N.PNG" id="4_84hin"]
 [ext_resource type="Texture2D" uid="uid://d3fvog4dxbaeq" path="res://Structures/Graphics/newAssets/Struct_Heavy_Shield_Glow.PNG" id="8"]
 [ext_resource type="PackedScene" uid="uid://2rc1lcifjq2j" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://ctp4jh83ii4c3" path="res://Modules/Module_Area_Heavy_Shield.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="10_j68np"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="11"]
 
 [sub_resource type="ShaderMaterial" id="1"]
@@ -74,6 +74,10 @@ _data = {
 &"Spin": SubResource("3")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hos86"]
+resource_local_to_scene = true
+radius = 22.0
+
 [node name="Struct_Heavy_Shield" type="Node2D"]
 script = ExtResource("2")
 build_size = Vector2(2, 2)
@@ -107,16 +111,15 @@ autoplay = "Spin"
 
 [node name="Module_Area_Shield" parent="." instance=ExtResource("10")]
 
-[node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Module_Medium_Struct_Boom_Large" parent="." instance=ExtResource("9")]
 visible = false
 
 [node name="Module_SFX" parent="." instance=ExtResource("11")]
 build_sfx = 12
+
+[node name="detection_hitbox" parent="." instance=ExtResource("10_j68np")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_hos86")
+
+[editable path="detection_hitbox"]

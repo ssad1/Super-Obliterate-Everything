@@ -1,17 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://cogsf3ad1ldu8"]
+[gd_scene load_steps=11 format=3 uid="uid://cogsf3ad1ldu8"]
 
 [ext_resource type="Texture2D" uid="uid://xff7hhi2l1gq" path="res://Shots/Graphics/Debris_D.PNG" id="2_0xpla"]
 [ext_resource type="Material" uid="uid://ctaucx5mrok7p" path="res://Shaders/Unit_Shader.tres" id="2_xtd4e"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://c4uibxhqn6xm1" path="res://Shots/Graphics/Debris_N.PNG" id="3_amiyf"]
 [ext_resource type="Script" uid="uid://6p7lira56jyx" path="res://Shots/Shot_Debris.gd" id="4"]
 [ext_resource type="Script" uid="uid://dsqgtn7taxhb2" path="res://Shots/Shot_General.gd" id="5"]
 [ext_resource type="PackedScene" path="res://Modules/Spawn_Effect.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="9_efvok"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_bksi6"]
 diffuse_texture = ExtResource("2_0xpla")
 normal_texture = ExtResource("3_amiyf")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yetyy"]
+resource_local_to_scene = true
+radius = 11.0
 
 [node name="Shot_Debris" type="Node2D"]
 script = ExtResource("5")
@@ -26,15 +30,6 @@ hframes = 24
 vframes = 9
 script = ExtResource("4")
 
-[node name="HitBox" parent="." instance=ExtResource("3")]
-visible = false
-offset_left = -11.0
-offset_top = -10.0
-offset_right = 9.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Module_Trigger" parent="." instance=ExtResource("7")]
 death_activate = true
 
@@ -42,3 +37,10 @@ death_activate = true
 spawn_id = 81
 scale_effect = true
 scale_effect_size = 0.4
+
+[node name="detection_hitbox" parent="." instance=ExtResource("9_efvok")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_yetyy")
+
+[editable path="detection_hitbox"]

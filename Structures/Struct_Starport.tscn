@@ -1,19 +1,21 @@
-[gd_scene load_steps=15 format=3 uid="uid://18qriq2eesk3"]
+[gd_scene load_steps=16 format=3 uid="uid://18qriq2eesk3"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
 [ext_resource type="Texture2D" uid="uid://6aqsn8y6c6p" path="res://Structures/Graphics/Struct_Starport_L.PNG" id="3_4qc7p"]
 [ext_resource type="Texture2D" uid="uid://d0sv62necukx2" path="res://Structures/Graphics/Struct_Starport_C.PNG" id="3_v7md7"]
 [ext_resource type="Texture2D" uid="uid://bh3s5epravih6" path="res://Structures/Graphics/Struct_Starport_D.PNG" id="3_wis2g"]
-[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="6_af5up"]
+[ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="6_af5up"]
 [ext_resource type="Texture2D" uid="uid://rywv8877jx5b" path="res://Structures/Graphics/Struct_Starport_N.PNG" id="6_cuocq"]
 [ext_resource type="PackedScene" uid="uid://cu6eeduu5dbxa" path="res://Hangars/Hangar_Factory.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://dbo4trprw6esp" path="res://Modules/Module_Large_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="11_ttpgb"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("3_v7md7")
+shader_parameter/lighting = ExtResource("3_4qc7p")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -35,8 +37,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("3_v7md7")
-shader_parameter/lighting = ExtResource("3_4qc7p")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_dswfg"]
 diffuse_texture = ExtResource("3_wis2g")
@@ -60,8 +60,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_exgac"]
 _data = {
-"Spin": SubResource("2")
+&"Spin": SubResource("2")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ljt3"]
+resource_local_to_scene = true
+radius = 38.0
 
 [node name="Struct_Starport" type="Node2D"]
 script = ExtResource("6_af5up")
@@ -80,17 +84,9 @@ vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
 libraries = {
-"": SubResource("AnimationLibrary_exgac")
+&"": SubResource("AnimationLibrary_exgac")
 }
 autoplay = "Spin"
-
-[node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -30.0
-offset_top = -29.0
-offset_right = 30.0
-offset_bottom = 31.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Hangar_Factory" parent="." instance=ExtResource("8")]
 ship_id = Array[int]([59])
@@ -101,3 +97,11 @@ ship_max = 2
 
 [node name="Module_SFX" parent="." instance=ExtResource("10")]
 build_sfx = 6
+
+[node name="detection_hitbox" parent="." instance=ExtResource("11_ttpgb")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+position = Vector2(0, 4.5)
+shape = SubResource("CircleShape2D_3ljt3")
+
+[editable path="detection_hitbox"]

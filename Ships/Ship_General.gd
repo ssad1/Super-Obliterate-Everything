@@ -152,8 +152,6 @@ func _process(delta:float) -> void:
 
 		if is_not_struct: _do_physics()
 
-		if has_hitbox: hitbox.pos = pos + position
-
 	if physics_clock > 0.2:
 		physics_clock = 0.2
 

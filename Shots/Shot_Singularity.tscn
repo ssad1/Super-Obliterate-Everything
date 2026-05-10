@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dtud28wlroesr"]
+[gd_scene load_steps=13 format=3 uid="uid://dtud28wlroesr"]
 
 [ext_resource type="Script" uid="uid://bv2aabl588j1u" path="res://Shots/Shot_Singularity.gd" id="1_28i65"]
 [ext_resource type="Shader" uid="uid://jtywu81hlmql" path="res://Shaders/Singularity_effects.gdshader" id="2_ycwa3"]
 [ext_resource type="Texture2D" uid="uid://cvxjha7j78ofh" path="res://Shots/Graphics/Singularity.png" id="3_0d0ix"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3_yysjj"]
 [ext_resource type="Texture2D" uid="uid://vcul7cayynvp" path="res://Effects/E_MuzzleJ.png" id="5_dqd46"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="6_nkqvw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5vx8k"]
 shader = ExtResource("2_ycwa3")
@@ -47,6 +47,18 @@ tracks/2/path = NodePath("Light:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("detection_hitbox:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -95,14 +107,14 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HitBox:scale")
+tracks/3/path = NodePath("detection_hitbox:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.366667, 0.66666675),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.6666667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.15, 1.15), Vector2(0, 0)]
+"values": [Vector2(1, 1), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_v7u1j"]
@@ -126,6 +138,10 @@ _data = {
 &"evaporate": SubResource("Animation_f27gc"),
 &"grow": SubResource("Animation_v7u1j")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6bfif"]
+resource_local_to_scene = true
+radius = 20.7
 
 [node name="ShotSingularity" type="Node2D"]
 script = ExtResource("1_28i65")
@@ -154,16 +170,6 @@ texture = ExtResource("3_0d0ix")
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("5_dqd46")
 
-[node name="HitBox" parent="." instance=ExtResource("3_yysjj")]
-offset_left = -18.0
-offset_top = -18.0
-offset_right = 18.0
-offset_bottom = 18.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1e-05, 1e-05)
-pivot_offset = Vector2(18, 18)
-
 [node name="AttractionArea" type="Area2D" parent="."]
 editor_description = "The area were it starts attracting units."
 visible = false
@@ -176,3 +182,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_6jj7u")
 }
 speed_scale = 3.0
+
+[node name="detection_hitbox" parent="." instance=ExtResource("6_nkqvw")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_6bfif")
+
+[editable path="detection_hitbox"]

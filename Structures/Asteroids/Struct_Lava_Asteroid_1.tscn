@@ -1,12 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://cfj4gchgsrc2g"]
+[gd_scene load_steps=13 format=3 uid="uid://cfj4gchgsrc2g"]
 
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
 [ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://cy6v3cwkrm1cx" path="res://Structures/Graphics/Backup/Struct_Lava_Asteroid_1_D.PNG" id="3_j0r7m"]
-[ext_resource type="Texture2D" uid="uid://bi5qd8puctppr" path="res://Structures/Graphics/Backup/Struct_Lava_Asteroid_1_N.PNG" id="4_hb1rm"]
+[ext_resource type="Texture2D" uid="uid://cy6v3cwkrm1cx" path="res://Structures/Backup/Struct_Lava_Asteroid_1_D.PNG" id="3_j0r7m"]
+[ext_resource type="Texture2D" uid="uid://bi5qd8puctppr" path="res://Structures/Backup/Struct_Lava_Asteroid_1_N.PNG" id="4_hb1rm"]
 [ext_resource type="PackedScene" uid="uid://rop0ns3hf55s" path="res://Modules/Module_Asteroid_Boom_Small.tscn" id="5"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://Structures/Asteroid_Animator.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_a7fol"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -58,6 +58,10 @@ _data = {
 &"Roll": SubResource("Animation_jcq55")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_v14y6"]
+resource_local_to_scene = true
+radius = 11.0
+
 [node name="Struct_Lava_Asteroid_1" type="Node2D"]
 script = ExtResource("2")
 class_text = "ASTEROID"
@@ -75,13 +79,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_tgto3")
 }
 
-[node name="HitBox" parent="." instance=ExtResource("6")]
-offset_left = -9.0
-offset_top = -10.0
-offset_right = 11.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Module_Asteroid_Boom_Small" parent="." instance=ExtResource("5")]
 visible = false
+
+[node name="detection_hitbox" parent="." instance=ExtResource("7_a7fol")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_v14y6")
+
+[editable path="detection_hitbox"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://bvr5uvp3er2o6"]
+[gd_scene load_steps=17 format=3 uid="uid://bvr5uvp3er2o6"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://crlv8oww80mif" path="res://Ships/Graphics/Cataclysm_C.PNG" id="3_obmbs"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://diaktlslyieij" path="res://Ships/Graphics/Cataclysm_L.PNG" id="4_bl7v7"]
@@ -12,10 +11,13 @@
 [ext_resource type="Texture2D" uid="uid://co2lkwh6t74fc" path="res://Ships/Graphics/Cataclysm_D.PNG" id="8"]
 [ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://21fssbturhmf" path="res://Ships/Graphics/Cataclysm_B.PNG" id="12"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="12_bnu63"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("3_obmbs")
+shader_parameter/lighting = ExtResource("4_bl7v7")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -37,8 +39,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("3_obmbs")
-shader_parameter/lighting = ExtResource("4_bl7v7")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_xjdky"]
 diffuse_texture = ExtResource("8")
@@ -46,6 +46,10 @@ normal_texture = ExtResource("6_0qevq")
 
 [sub_resource type="CanvasItemMaterial" id="2"]
 blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8dr2u"]
+resource_local_to_scene = true
+radius = 30.0
 
 [node name="Ship_Cataclysm" type="Node2D"]
 script = ExtResource("2")
@@ -70,8 +74,7 @@ hframes = 16
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("2")
 texture = ExtResource("12")
@@ -99,14 +102,12 @@ visible = false
 visible = false
 scale = Vector2(0.7, 0.7)
 
-[node name="HitBox" parent="." instance=ExtResource("3")]
-visible = false
-offset_left = -25.0
-offset_top = -25.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("9")]
 visible = false
+
+[node name="detection_hitbox" parent="." instance=ExtResource("12_bnu63")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_8dr2u")
+
+[editable path="detection_hitbox"]

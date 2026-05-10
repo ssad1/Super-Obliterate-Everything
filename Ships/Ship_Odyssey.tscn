@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cu4th8iytd2t8"]
+[gd_scene load_steps=22 format=3 uid="uid://cu4th8iytd2t8"]
 
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_c0pl7"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_aic6i"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bfu8kjsy3ucgm" path="res://Ships/Graphics/Odyssey_N.png" id="4_3nxfv"]
 [ext_resource type="Texture2D" uid="uid://bck603of3om2i" path="res://Ships/Graphics/Odyssey_L.png" id="4_ot61r"]
 [ext_resource type="Texture2D" uid="uid://cwfcrjkm1gptl" path="res://Ships/Graphics/Odyssey_B.png" id="5_yt85j"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="6_tbw3t"]
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="7_lflsw"]
 [ext_resource type="PackedScene" uid="uid://dqsn1ygjynlmr" path="res://Hangars/Carrier_Hangar.tscn" id="8_6t64d"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="9_4k61k"]
@@ -15,6 +14,7 @@
 [ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="11_e8gjm"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="12_umel6"]
 [ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="13_yj7nt"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="16_ot61r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8oag3"]
 resource_local_to_scene = true
@@ -68,6 +68,10 @@ shader_parameter/frames = 1.0
 shader_parameter/phase = 0.0
 shader_parameter/colors = ExtResource("12_umel6")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rmigj"]
+resource_local_to_scene = true
+radius = 20.0
+
 [node name="Ship_Odyssey" type="Node2D"]
 script = ExtResource("1_c0pl7")
 thrust = 0.2
@@ -90,22 +94,12 @@ hframes = 8
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_5240m")
 texture = ExtResource("5_yt85j")
 hframes = 8
 vframes = 8
-
-[node name="HitBox" parent="." instance=ExtResource("6_tbw3t")]
-visible = false
-offset_left = -15.0
-offset_top = -15.0
-offset_right = 15.0
-offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="CarrierHangar" parent="." instance=ExtResource("8_6t64d")]
 position = Vector2(0, -20)
@@ -158,3 +152,10 @@ visible = false
 scale = Vector2(0.5, 0.5)
 
 [node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("7_lflsw")]
+
+[node name="detection_hitbox" parent="." instance=ExtResource("16_ot61r")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_rmigj")
+
+[editable path="detection_hitbox"]

@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://qvc0lxdot1wy"]
+[gd_scene load_steps=13 format=3 uid="uid://qvc0lxdot1wy"]
 
 [ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="1_mcddi"]
 [ext_resource type="Texture2D" uid="uid://bpp2w41d5wbtl" path="res://Effects/Gradients/Gradient_Edgeslasher.tres" id="2_ftegx"]
 [ext_resource type="Texture2D" uid="uid://cxk66tlaciat2" path="res://Shots/Graphics/Boomerang.png" id="3_kwmbc"]
 [ext_resource type="Script" uid="uid://drplyvvdv1mvo" path="res://Shots/Shot_Boomerang.gd" id="4_bmdex"]
 [ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="5_3agxq"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="6_2upu2"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_a1x5x"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pep6i"]
 resource_local_to_scene = true
@@ -56,6 +56,10 @@ _data = {
 &"Spin": SubResource("Animation_sjry5")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mpxpu"]
+resource_local_to_scene = true
+radius = 15.0
+
 [node name="Shot_Boomerang" type="Sprite2D"]
 material = SubResource("ShaderMaterial_pep6i")
 texture = ExtResource("3_kwmbc")
@@ -72,18 +76,15 @@ material = SubResource("CanvasItemMaterial_0345i")
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("5_3agxq")
 
-[node name="HitBox" parent="." instance=ExtResource("6_2upu2")]
-visible = false
-offset_left = -39.0
-offset_top = -39.0
-offset_right = -24.0
-offset_bottom = -24.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_7m0qb")
 }
 speed_scale = 4.0
+
+[node name="detection_hitbox" parent="." instance=ExtResource("7_a1x5x")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_mpxpu")
+
+[editable path="detection_hitbox"]

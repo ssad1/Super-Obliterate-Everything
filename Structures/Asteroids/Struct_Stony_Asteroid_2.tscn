@@ -1,12 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1tt67q657svw"]
+[gd_scene load_steps=13 format=3 uid="uid://d1tt67q657svw"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://rop0ns3hf55s" path="res://Modules/Module_Asteroid_Boom_Small.tscn" id="3"]
-[ext_resource type="Texture2D" uid="uid://cfvhhpb0b5pc7" path="res://Structures/Graphics/Backup/Struct_Stony_Asteroid_2_D.PNG" id="3_8w55r"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="4"]
-[ext_resource type="Texture2D" uid="uid://4l6uqy8nama6" path="res://Structures/Graphics/Backup/Struct_Stony_Asteroid_2_N.PNG" id="4_l2sua"]
+[ext_resource type="Texture2D" uid="uid://cfvhhpb0b5pc7" path="res://Structures/Backup/Struct_Stony_Asteroid_2_D.PNG" id="3_8w55r"]
+[ext_resource type="Texture2D" uid="uid://4l6uqy8nama6" path="res://Structures/Backup/Struct_Stony_Asteroid_2_N.PNG" id="4_l2sua"]
 [ext_resource type="PackedScene" path="res://Structures/Asteroid_Animator.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_botcm"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -30,7 +30,7 @@ shader_parameter/shield_charging = 0.0
 shader_parameter/shield_damage_strength = 0.0
 shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/select_strength = 0.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_v6tvg"]
@@ -55,8 +55,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kww3h"]
 _data = {
-"Roll": SubResource("Animation_lu0bk")
+&"Roll": SubResource("Animation_lu0bk")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3x5ws"]
+resource_local_to_scene = true
+radius = 11.0
 
 [node name="Struct_Stony_Asteroid_2" type="Node2D"]
 script = ExtResource("2")
@@ -72,16 +76,15 @@ vframes = 8
 
 [node name="Asteroid_Animator" parent="Hull" instance=ExtResource("5")]
 libraries = {
-"": SubResource("AnimationLibrary_kww3h")
+&"": SubResource("AnimationLibrary_kww3h")
 }
-
-[node name="HitBox" parent="." instance=ExtResource("4")]
-offset_left = -9.0
-offset_top = -10.0
-offset_right = 11.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Module_Asteroid_Boom_Small" parent="." instance=ExtResource("3")]
 visible = false
+
+[node name="detection_hitbox" parent="." instance=ExtResource("7_botcm")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_3x5ws")
+
+[editable path="detection_hitbox"]

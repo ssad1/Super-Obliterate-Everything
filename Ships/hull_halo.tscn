@@ -1,15 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://ck12b11wu20ji"]
+[gd_scene load_steps=12 format=3 uid="uid://ck12b11wu20ji"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1_0qw8f"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1_0qw8f"]
 [ext_resource type="Texture2D" uid="uid://ccwls1vlpievb" path="res://Ships/Graphics/Halo_C.PNG" id="2_ocxtk"]
 [ext_resource type="Texture2D" uid="uid://c864jwhquyfbj" path="res://Ships/Graphics/Halo_L.PNG" id="3_36uvg"]
 [ext_resource type="Texture2D" uid="uid://d18r6rk1vbjqe" path="res://Ships/Graphics/Halo_D.PNG" id="4_73yfo"]
 [ext_resource type="Texture2D" uid="uid://k7clu3p4ivt2" path="res://Ships/Graphics/Halo_N.PNG" id="5_itdch"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="6_fwub8"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="6_3nbce"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1_0qw8f")
+shader_parameter/flag_mask = ExtResource("2_ocxtk")
+shader_parameter/lighting = ExtResource("3_36uvg")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -31,8 +33,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("2_ocxtk")
-shader_parameter/lighting = ExtResource("3_36uvg")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_w7mvp"]
 diffuse_texture = ExtResource("4_73yfo")
@@ -56,8 +56,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_74dj7"]
 _data = {
-"Spin": SubResource("2")
+&"Spin": SubResource("2")
 }
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qkx8h"]
+radius = 29.0
+height = 82.0
 
 [node name="Hull" type="Sprite2D"]
 material = SubResource("1")
@@ -67,15 +71,16 @@ vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_74dj7")
+&"": SubResource("AnimationLibrary_74dj7")
 }
 autoplay = "Spin"
 
-[node name="HitBox" parent="." instance=ExtResource("6_fwub8")]
-offset_left = -76.0
-offset_top = -74.0
-offset_right = -20.0
-offset_bottom = -18.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="detection_hitbox" parent="." instance=ExtResource("6_3nbce")]
 parent_type = "SECONDARY"
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+position = Vector2(0, 3)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_qkx8h")
+
+[editable path="detection_hitbox"]

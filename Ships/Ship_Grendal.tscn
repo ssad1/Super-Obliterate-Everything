@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://dkl4mx05dw2tl"]
+[gd_scene load_steps=21 format=3 uid="uid://dkl4mx05dw2tl"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
-[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="4"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="4"]
 [ext_resource type="Texture2D" uid="uid://bc8n75b7ps01f" path="res://Ships/Graphics/Grendal_D.PNG" id="5"]
 [ext_resource type="Texture2D" uid="uid://c6uu6e6vl3k11" path="res://Ships/Graphics/Grendal_N.PNG" id="6_eh6jh"]
 [ext_resource type="Texture2D" uid="uid://brpr2bqlw3hgm" path="res://Ships/Graphics/Grendal_C.PNG" id="7"]
@@ -15,10 +14,13 @@
 [ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="13"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="14"]
 [ext_resource type="PackedScene" uid="uid://dn6ub42eu2b6i" path="res://Turrets/Turret_Phalanx.tscn" id="15"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="16_xatmx"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("7")
+shader_parameter/lighting = ExtResource("8")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -40,8 +42,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("7")
-shader_parameter/lighting = ExtResource("8")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ogsi2"]
 diffuse_texture = ExtResource("5")
@@ -58,6 +58,10 @@ shader_parameter/pulse_strength = 0.2
 shader_parameter/frames = 1.0
 shader_parameter/phase = 0.0
 shader_parameter/colors = ExtResource("14")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qjmi6"]
+resource_local_to_scene = true
+radius = 20.0
 
 [node name="Ship_Grendal" type="Node2D"]
 script = ExtResource("2")
@@ -82,22 +86,12 @@ hframes = 8
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("2")
 texture = ExtResource("10")
 hframes = 8
 vframes = 8
-
-[node name="HitBox" parent="." instance=ExtResource("3")]
-light_mask = 0
-offset_left = -15.0
-offset_top = -19.0
-offset_right = 15.0
-offset_bottom = 11.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Gun_General" parent="." instance=ExtResource("11")]
 position = Vector2(0, -20)
@@ -121,3 +115,10 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(0, -7)
 
 [node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("9")]
+
+[node name="detection_hitbox" parent="." instance=ExtResource("16_xatmx")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_qjmi6")
+
+[editable path="detection_hitbox"]

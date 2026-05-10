@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfh5i7h3v2qob"]
+[gd_scene load_steps=12 format=3 uid="uid://dfh5i7h3v2qob"]
 
 [ext_resource type="Texture2D" uid="uid://bmyfbkw4vo6j0" path="res://Shots/Graphics/Asteroid_Tiny_D.PNG" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
-[ext_resource type="Script" path="res://Shots/Shot_Asteroid.gd" id="4"]
-[ext_resource type="Script" path="res://Structures/Asteroid_Animator.gd" id="5"]
+[ext_resource type="Script" uid="uid://pffe7vbng800" path="res://Shots/Shot_Asteroid.gd" id="4"]
+[ext_resource type="Script" uid="uid://cpkpaiprlkpt1" path="res://Structures/Asteroid_Animator.gd" id="5"]
 [ext_resource type="PackedScene" path="res://Modules/Spawn_Effect.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="6_4x738"]
 [ext_resource type="Texture2D" uid="uid://dkf7b5m23hesu" path="res://Shots/Graphics/Asteroid_Tiny_N.PNG" id="6_5frth"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="7"]
 
@@ -31,8 +31,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_msea5"]
 _data = {
-"Roll": SubResource("1")
+&"Roll": SubResource("1")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iyyen"]
+resource_local_to_scene = true
+radius = 11.0
 
 [node name="Shot_Asteroid" type="Node2D"]
 light_mask = 3
@@ -48,18 +52,15 @@ vframes = 8
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_msea5")
+&"": SubResource("AnimationLibrary_msea5")
 }
 autoplay = "Roll"
 script = ExtResource("5")
 
-[node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -11.0
-offset_top = -11.0
-offset_right = 11.0
-offset_bottom = 11.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="detection_hitbox" parent="." instance=ExtResource("6_4x738")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_iyyen")
 
 [node name="Module_Trigger" parent="." instance=ExtResource("7")]
 visible = false
@@ -68,3 +69,5 @@ death_activate = true
 [node name="Spawn_Effect" parent="Module_Trigger" instance=ExtResource("6")]
 spawn_id = 76
 scale_effect = true
+
+[editable path="detection_hitbox"]

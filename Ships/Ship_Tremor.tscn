@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bhcll4jhhqfij"]
+[gd_scene load_steps=22 format=3 uid="uid://bhcll4jhhqfij"]
 
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_o7fyo"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_f57qt"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dia4oochvnf80" path="res://Ships/Graphics/Tremor_D.PNG" id="5_mey8u"]
 [ext_resource type="Texture2D" uid="uid://pj52j2y7ncrv" path="res://Ships/Graphics/Tremor_N.PNG" id="6_0gexl"]
 [ext_resource type="Texture2D" uid="uid://4op0fs6tt63l" path="res://Ships/Graphics/Tremor_B.PNG" id="7_l60qs"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="8_5rdsd"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_0ufum"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="9_diqvk"]
 [ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="10_1bktn"]
 [ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="11_rc7sh"]
@@ -52,6 +52,10 @@ normal_texture = ExtResource("6_0gexl")
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o4b04"]
 blend_mode = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_f2ils"]
+resource_local_to_scene = true
+radius = 12.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_glnt5"]
 resource_local_to_scene = true
 shader = ExtResource("11_rc7sh")
@@ -83,23 +87,17 @@ hframes = 8
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_o4b04")
 texture = ExtResource("7_l60qs")
 hframes = 8
 vframes = 8
 
-[node name="HitBox" parent="." instance=ExtResource("8_5rdsd")]
-visible = false
-light_mask = 0
-offset_left = -15.0
-offset_top = -19.0
-offset_right = 15.0
-offset_bottom = 11.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="detection_hitbox" parent="." instance=ExtResource("8_0ufum")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_f2ils")
 
 [node name="Gun_General" parent="." instance=ExtResource("9_diqvk")]
 position = Vector2(0, -19)
@@ -147,3 +145,5 @@ launch_velocity = 5.0
 [node name="Mine_Stationary" parent="Mine_Hangar2" instance=ExtResource("16_n28v3")]
 visible = false
 position = Vector2(4, 0)
+
+[editable path="detection_hitbox"]

@@ -49,8 +49,6 @@ func _process(delta:float) -> void:
 
 		_do_physics()
 
-		if has_hitbox: hitbox.pos = pos + position
-
 	if physics_clock > 0.2:
 		physics_clock = 0.2
 

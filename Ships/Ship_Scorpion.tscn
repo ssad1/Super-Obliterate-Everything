@@ -1,21 +1,23 @@
-[gd_scene load_steps=16 format=3 uid="uid://7xhh2uflff4f"]
+[gd_scene load_steps=17 format=3 uid="uid://7xhh2uflff4f"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://b7nu2uc31cdmf" path="res://Shots/Missile_R1.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://bie44b4axu56" path="res://Ships/Graphics/Scorpion_D.PNG" id="5"]
 [ext_resource type="Texture2D" uid="uid://dji7d28mc4vkt" path="res://Ships/Graphics/Scorpion_N.PNG" id="6_7pqa7"]
 [ext_resource type="Texture2D" uid="uid://dma0qh0qd7iob" path="res://Ships/Graphics/Scorpion_B.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://28sit8iq01kw" path="res://Ships/Graphics/Scorpion_L.PNG" id="8"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_wc8lp"]
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://mb4i0uby25ey" path="res://Ships/Graphics/Scorpion_C.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]
-[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="13"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("10")
+shader_parameter/lighting = ExtResource("8")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -37,8 +39,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("10")
-shader_parameter/lighting = ExtResource("8")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_j8a6j"]
 diffuse_texture = ExtResource("5")
@@ -46,6 +46,10 @@ normal_texture = ExtResource("6_7pqa7")
 
 [sub_resource type="CanvasItemMaterial" id="2"]
 blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1yppe"]
+resource_local_to_scene = true
+radius = 19.0
 
 [node name="Ship_Scorpion" type="Node2D"]
 script = ExtResource("2")
@@ -70,22 +74,17 @@ hframes = 8
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("2")
 texture = ExtResource("7")
 hframes = 8
 vframes = 8
 
-[node name="HitBox" parent="." instance=ExtResource("3")]
-light_mask = 0
-offset_left = -16.0
-offset_top = -17.0
-offset_right = 16.0
-offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="detection_hitbox" parent="." instance=ExtResource("8_wc8lp")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_1yppe")
 
 [node name="Gun_General" parent="." instance=ExtResource("11")]
 position = Vector2(-20, -15)
@@ -124,3 +123,5 @@ visible = false
 scale = Vector2(0.5, 0.5)
 
 [node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("9")]
+
+[editable path="detection_hitbox"]

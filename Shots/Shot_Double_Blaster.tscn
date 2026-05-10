@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cfgpyvrafgdu7"]
+[gd_scene load_steps=12 format=3 uid="uid://cfgpyvrafgdu7"]
 
 [ext_resource type="Texture2D" uid="uid://de42p3w231krs" path="res://Shots/Graphics/Double Blaster.PNG" id="1"]
-[ext_resource type="Script" path="res://Shots/Shot_General.gd" id="2"]
+[ext_resource type="Script" uid="uid://dsqgtn7taxhb2" path="res://Shots/Shot_General.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cm0qnwdnnf8x1" path="res://Terminal/Map/StarGlow.png" id="3"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="5"]
-[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="6"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="6"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="7"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_wa0br"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -38,8 +38,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bu7h2"]
 _data = {
-"Roll": SubResource("3")
+&"Roll": SubResource("3")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_17vi3"]
+resource_local_to_scene = true
+radius = 11.0
 
 [node name="Shot_Double_Blaster" type="Sprite2D"]
 light_mask = 0
@@ -47,7 +51,6 @@ material = SubResource("1")
 texture = ExtResource("1")
 hframes = 6
 vframes = 6
-frame = 26
 script = ExtResource("2")
 name_text = "Double blaster shot"
 max_velocity = 100.0
@@ -59,16 +62,16 @@ material = SubResource("2")
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3")
 
-[node name="HitBox" parent="." instance=ExtResource("5")]
-offset_left = -42.0
-offset_top = -50.0
-offset_right = -22.0
-offset_bottom = -30.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_bu7h2")
+&"": SubResource("AnimationLibrary_bu7h2")
 }
 autoplay = "Roll"
+
+[node name="detection_hitbox" parent="." instance=ExtResource("7_wa0br")]
+position = Vector2(0, -7.5)
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_17vi3")
+
+[editable path="detection_hitbox"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://crhyrohqwq431"]
+[gd_scene load_steps=16 format=3 uid="uid://crhyrohqwq431"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cofwsxvypwon" path="res://Structures/Graphics/Struct_Corvette_Bay_C.PNG" id="3_8urbo"]
 [ext_resource type="Texture2D" uid="uid://chs65u7q7ea7b" path="res://Structures/Graphics/Struct_Corvette_Bay_D.PNG" id="3_fe007"]
 [ext_resource type="Texture2D" uid="uid://dsxmyg1wg54b2" path="res://Structures/Graphics/Struct_Corvette_Bay_L.PNG" id="3_qheog"]
@@ -10,10 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://cu6eeduu5dbxa" path="res://Hangars/Hangar_Factory.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://cr3uqos0286u2" path="res://Modules/Module_Small_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="10_s6c4m"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("3_8urbo")
+shader_parameter/lighting = ExtResource("3_qheog")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -35,8 +37,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("3_8urbo")
-shader_parameter/lighting = ExtResource("3_qheog")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ysg2f"]
 diffuse_texture = ExtResource("3_fe007")
@@ -60,8 +60,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5f5y3"]
 _data = {
-"Spin": SubResource("2")
+&"Spin": SubResource("2")
 }
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vpkha"]
+radius = 13.0
+height = 52.0
 
 [node name="Struct_Corvette_Bay" type="Node2D"]
 script = ExtResource("2")
@@ -80,17 +84,9 @@ frame = 56
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
 libraries = {
-"": SubResource("AnimationLibrary_5f5y3")
+&"": SubResource("AnimationLibrary_5f5y3")
 }
 autoplay = "Spin"
-
-[node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -15.0
-offset_top = -16.0
-offset_right = 15.0
-offset_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Hangar_Factory" parent="." instance=ExtResource("8")]
 visible = false
@@ -100,3 +96,11 @@ ship_id = Array[int]([47])
 
 [node name="Module_SFX" parent="." instance=ExtResource("10")]
 build_sfx = 3
+
+[node name="detection_hitbox" parent="." instance=ExtResource("10_s6c4m")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_vpkha")
+
+[editable path="detection_hitbox"]

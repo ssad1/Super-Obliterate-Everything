@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://5fvfvah3hsps"]
+[gd_scene load_steps=20 format=3 uid="uid://5fvfvah3hsps"]
 
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_s2hco"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_kw7vu"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b0ydxy0npmhx6" path="res://Ships/Graphics/Sapphire_D.png" id="5_gaqnx"]
 [ext_resource type="Texture2D" uid="uid://bqlo840vvp53m" path="res://Ships/Graphics/Sapphire_N.png" id="6_gaqnx"]
 [ext_resource type="Texture2D" uid="uid://clv7drrp41nr1" path="res://Ships/Graphics/Sapphire_B.png" id="7_gaqnx"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="8_slf35"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_gaqnx"]
 [ext_resource type="PackedScene" uid="uid://qvc0lxdot1wy" path="res://Shots/Shot_Boomerang.tscn" id="10_e4j2b"]
 [ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="11_23twp"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="12_a0jkg"]
@@ -49,6 +49,9 @@ normal_texture = ExtResource("6_gaqnx")
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ho0um"]
 blend_mode = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jvxh8"]
+resource_local_to_scene = true
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_44q20"]
 resource_local_to_scene = true
 shader = ExtResource("11_23twp")
@@ -81,23 +84,17 @@ hframes = 8
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_ho0um")
 texture = ExtResource("7_gaqnx")
 hframes = 8
 vframes = 8
 
-[node name="HitBox" parent="." instance=ExtResource("8_slf35")]
-visible = false
-light_mask = 0
-offset_left = -10.0
-offset_top = -11.0
-offset_right = 10.0
-offset_bottom = 9.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="detection_hitbox" parent="." instance=ExtResource("8_gaqnx")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_jvxh8")
 
 [node name="Gun_General" parent="." instance=ExtResource("12_a0jkg")]
 position = Vector2(0, -12)
@@ -120,3 +117,5 @@ visible = false
 scale = Vector2(0.5, 0.5)
 
 [node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("15_dvhgo")]
+
+[editable path="detection_hitbox"]

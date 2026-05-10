@@ -2,13 +2,13 @@
 
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
 [ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://ul6jsu8w4724" path="res://Structures/Graphics/newAssets/Struct_BaseStation_A_C.png" id="4_0kgdj"]
 [ext_resource type="Texture2D" uid="uid://cyte3ec0vmcv2" path="res://Structures/Graphics/newAssets/Struct_BaseStation_A_L.png" id="5_r0tew"]
 [ext_resource type="Texture2D" uid="uid://de42ev6wmhaxu" path="res://Structures/Graphics/newAssets/Struct_BaseStation_A_D.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://ca0s5dahwap8a" path="res://Structures/Graphics/newAssets/Struct_BaseStation_A_N.png" id="7_y4cg2"]
 [ext_resource type="PackedScene" path="res://Modules/Generator.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://kkbj2t5fjxjp" path="res://Modules/Module_Station_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="10_2jevg"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -87,12 +87,6 @@ libraries = {
 }
 autoplay = "Spin"
 
-[node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Module_Station_Boom_Large" parent="." instance=ExtResource("9")]
+
+[node name="detection_hitbox" parent="." instance=ExtResource("10_2jevg")]

@@ -1,11 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://dcnvq3lb8g0pq"]
+[gd_scene load_steps=17 format=3 uid="uid://dcnvq3lb8g0pq"]
 
 [ext_resource type="Script" uid="uid://bxrpq3wqjp8v2" path="res://Shots/Mine_Stationary.gd" id="1_2txew"]
 [ext_resource type="Texture2D" uid="uid://b40330dus2fma" path="res://Shots/Graphics/Mine_D.png" id="1_5bt0y"]
 [ext_resource type="Texture2D" uid="uid://bx6cy0um4qpye" path="res://Shots/Graphics/Mine_N.png" id="2_p0akl"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_wqdcy"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="5_n05oj"]
 [ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="6_op4ay"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_8haug"]
 [ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="8_ybeel"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2jihc"]
@@ -130,6 +130,10 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_7i3mg"]
 radius = 100.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hpyst"]
+resource_local_to_scene = true
+radius = 20.0
+
 [node name="Mine_Stationary" type="Node2D"]
 script = ExtResource("1_2txew")
 blow_time = 300
@@ -158,15 +162,6 @@ libraries = {
 }
 speed_scale = 0.7
 
-[node name="HitBox" parent="." instance=ExtResource("5_n05oj")]
-visible = false
-offset_left = -15.0
-offset_top = -15.0
-offset_right = 15.0
-offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Module_Fighter_Boom" parent="." instance=ExtResource("6_op4ay")]
 position = Vector2(0, -16)
 
@@ -183,4 +178,10 @@ visible = false
 shape = SubResource("CircleShape2D_7i3mg")
 debug_color = Color(0.72606, 0.475685, 0.0201204, 0.42)
 
+[node name="detection_hitbox" parent="." instance=ExtResource("8_8haug")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_hpyst")
+
 [editable path="Detonator"]
+[editable path="detection_hitbox"]

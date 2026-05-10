@@ -1,15 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://dv3qabcu5bdu"]
+[gd_scene load_steps=15 format=3 uid="uid://dv3qabcu5bdu"]
 
 [ext_resource type="Texture2D" uid="uid://brw0e2plrrd0f" path="res://Shots/Graphics/Missile_LM1_D.PNG" id="1"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
-[ext_resource type="Shader" path="res://Shaders/Missile_Shader.gdshader" id="4"]
-[ext_resource type="Script" path="res://Ships/Ship_Missile.gd" id="6"]
+[ext_resource type="Shader" uid="uid://by3yesvcyq36a" path="res://Shaders/Missile_Shader.gdshader" id="4"]
+[ext_resource type="Script" uid="uid://4ou1j8r6el0q" path="res://Ships/Ship_Missile.gd" id="6"]
 [ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://ojwkfodf3wg1" path="res://Shots/Graphics/Missile_LM1_B.PNG" id="8"]
 [ext_resource type="PackedScene" uid="uid://dkaeqtpygrur6" path="res://Shots/Explode_Rocket.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://chsnqngu671vk" path="res://Modules/Spawn_Explosion.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Death_SFX.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="11_8xdae"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -23,6 +23,10 @@ blend_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="3"]
 blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_si5yc"]
+resource_local_to_scene = true
+radius = 12.0
 
 [node name="Missile_LM1" type="Node2D"]
 script = ExtResource("6")
@@ -43,8 +47,7 @@ hframes = 8
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0, 0, 1)
+modulate = Color(1, 0, 0, 0)
 light_mask = 0
 material = SubResource("2")
 texture = ExtResource("8")
@@ -58,14 +61,6 @@ material = SubResource("3")
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("7")
 
-[node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -8.0
-offset_top = -7.0
-offset_right = 8.0
-offset_bottom = 9.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Module_Trigger" parent="." instance=ExtResource("2")]
 death_activate = true
 
@@ -76,3 +71,10 @@ scale_effect = true
 
 [node name="Module_Death_SFX" parent="Module_Trigger" instance=ExtResource("11")]
 fire_sound = 20
+
+[node name="detection_hitbox" parent="." instance=ExtResource("11_8xdae")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_si5yc")
+
+[editable path="detection_hitbox"]

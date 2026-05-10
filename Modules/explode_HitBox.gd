@@ -4,14 +4,17 @@ var explosion
 var inside_explosion:Array[Thing]
 
 func _ready() -> void:
+
+	#avoid areas not detecting already-inside hitboxes immediatelly after instantiation
+	_treat_immediate_areas()
+	area_entered.connect(_on_area_entered)
+	area_exited.connect(_on_area_exited)
+
 	explosion = get_parent()
 	var collisionShape = get_node("CollisionShape2D")
 	var fullsize = collisionShape.shape.radius * explosion.boom_scale * 6.5
 
 	collisionShape.shape.radius = 0
-
-	area_entered.connect(_on_area_entered)
-	area_exited.connect(_on_area_exited)
 
 	var tween = get_tree().create_tween()
 	tween.tween_property(collisionShape.shape, "radius", fullsize, 0.5)
@@ -36,15 +39,9 @@ func _process(delta: float) -> void:
 func _on_area_entered(area:Area2D) -> void:
 	if not area is unit_hitbox: return
 
-	#hit logic
+	var target_unit = (area as unit_hitbox).parent_unit
 
-	var target := area as unit_hitbox
-
-	if not "is_type" in target: return
-
-	var target_unit = target.parent_unit
-
-	if explosion.tcpu.targets.has(target_unit):
+	if explosion.tcpu.check_target(target_unit):
 		inside_explosion.append(target_unit)
 
 func _on_area_exited(area:Area2D) -> void:
@@ -53,11 +50,16 @@ func _on_area_exited(area:Area2D) -> void:
 
 	#hit logic
 
-	var target := area as unit_hitbox
-
-	if not "is_type" in target: return
-
-	var target_unit := target.parent_unit
+	var target_unit := (area as unit_hitbox).parent_unit
 
 	if inside_explosion.has(target_unit):
 		inside_explosion.erase(target_unit)
+
+func _treat_immediate_areas() -> void:
+
+	await get_tree().physics_frame
+
+	var overlaps := get_overlapping_areas()
+	for area in overlaps:
+		_on_area_entered(area)
+	

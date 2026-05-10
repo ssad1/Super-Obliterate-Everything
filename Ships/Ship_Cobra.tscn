@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://b0pw0vo1e188s"]
+[gd_scene load_steps=20 format=3 uid="uid://b0pw0vo1e188s"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
-[ext_resource type="Shader" path="res://Shaders/Shot_Effects.gdshader" id="4"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="4"]
 [ext_resource type="Texture2D" uid="uid://c26wwjgvgtjdl" path="res://Ships/Graphics/Cobra_D.PNG" id="5"]
 [ext_resource type="Texture2D" uid="uid://c6t1f6hcuwe8x" path="res://Ships/Graphics/Cobra_N.PNG" id="6_qk8wf"]
 [ext_resource type="Texture2D" uid="uid://msdlm6ymcrae" path="res://Ships/Graphics/Cobra_C.PNG" id="7"]
@@ -14,10 +13,13 @@
 [ext_resource type="PackedScene" uid="uid://d32aggrenhtof" path="res://Shots/Shot_Artillery.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://Effects/E_MuzzleB.tscn" id="13"]
 [ext_resource type="Texture2D" uid="uid://4oat6bgn65rv" path="res://Effects/Gradients/Gradient_Artillery.tres" id="14"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="14_hf4iy"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("7")
+shader_parameter/lighting = ExtResource("8")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -39,8 +41,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("7")
-shader_parameter/lighting = ExtResource("8")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_0g38o"]
 diffuse_texture = ExtResource("5")
@@ -57,6 +57,10 @@ shader_parameter/pulse_strength = 0.0
 shader_parameter/frames = 1.0
 shader_parameter/phase = 0.0
 shader_parameter/colors = ExtResource("14")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_83qdu"]
+resource_local_to_scene = true
+radius = 19.0
 
 [node name="Ship_Cobra" type="Node2D"]
 script = ExtResource("2")
@@ -81,22 +85,12 @@ hframes = 8
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("2")
 texture = ExtResource("10")
 hframes = 8
 vframes = 8
-
-[node name="HitBox" parent="." instance=ExtResource("3")]
-light_mask = 0
-offset_left = -16.0
-offset_top = -18.0
-offset_right = 15.0
-offset_bottom = 13.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Gun_General" parent="." instance=ExtResource("11")]
 position = Vector2(0, -20)
@@ -118,3 +112,10 @@ material = SubResource("3")
 visible = false
 
 [node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("9")]
+
+[node name="detection_hitbox" parent="." instance=ExtResource("14_hf4iy")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_83qdu")
+
+[editable path="detection_hitbox"]

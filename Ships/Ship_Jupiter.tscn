@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://xebbejjpnaxt"]
+[gd_scene load_steps=25 format=3 uid="uid://xebbejjpnaxt"]
 
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_6ms3s"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1_7te60"]
@@ -11,13 +11,13 @@
 [ext_resource type="Texture2D" uid="uid://d2csvrnydit8m" path="res://Ships/Graphics/Jupiter_B.png" id="7_qpbky"]
 [ext_resource type="PackedScene" uid="uid://c3ngw8s22lms" path="res://Shots/Shot_Plasma.tscn" id="8_kpxlf"]
 [ext_resource type="PackedScene" path="res://Effects/E_PlasmaMuzzle.tscn" id="9_7blsj"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="10_k601h"]
 [ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="11_meqcg"]
 [ext_resource type="PackedScene" uid="uid://b15u4mldmk5k1" path="res://Turrets/Turret_Edgeslasher.tscn" id="12_jwe4h"]
 [ext_resource type="PackedScene" uid="uid://qvc0lxdot1wy" path="res://Shots/Shot_Boomerang.tscn" id="12_qpbky"]
 [ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="13_wo2ay"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="14_t7tws"]
 [ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="15_dasaa"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="18_qpbky"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8yrua"]
 resource_local_to_scene = true
@@ -71,6 +71,10 @@ shader_parameter/frames = 8.0
 shader_parameter/phase = 0.0
 shader_parameter/colors = ExtResource("14_t7tws")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wo2ay"]
+resource_local_to_scene = true
+radius = 26.0
+
 [node name="Ship Jupiter" type="Node2D"]
 script = ExtResource("1_6ms3s")
 thrust = 0.2
@@ -93,7 +97,7 @@ hframes = 16
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_gujy2")
 texture = ExtResource("7_qpbky")
@@ -190,13 +194,11 @@ scale = Vector2(0.5, 0.5)
 [node name="Turret_Edgeslasher" parent="." instance=ExtResource("12_jwe4h")]
 position = Vector2(0, -5)
 
-[node name="HitBox" parent="." instance=ExtResource("10_k601h")]
-visible = false
-offset_left = -25.0
-offset_top = -25.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("11_meqcg")]
+
+[node name="detection_hitbox" parent="." instance=ExtResource("18_qpbky")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_wo2ay")
+
+[editable path="detection_hitbox"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://dh6t1vkfernj"]
+[gd_scene load_steps=18 format=3 uid="uid://dh6t1vkfernj"]
 
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://bfgppodp7y54t" path="res://Ships/Graphics/Goliath_C.PNG" id="4"]
 [ext_resource type="Texture2D" uid="uid://bhip48d5uhoxh" path="res://Ships/Graphics/Goliath_L.PNG" id="5"]
 [ext_resource type="Texture2D" uid="uid://ba2ak66da3ubr" path="res://Ships/Graphics/Goliath_B.PNG" id="6"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ctpcewov8ruq7" path="res://Effects/E_MuzzleF.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://ee8is1xnq10k" path="res://Shots/Laser_Spartan.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://b7uoppkeik13" path="res://Turrets/Turret_Laser.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="13_cjso0"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -48,6 +48,10 @@ normal_texture = ExtResource("6_8v30s")
 [sub_resource type="CanvasItemMaterial" id="2"]
 blend_mode = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ivsif"]
+resource_local_to_scene = true
+radius = 24.0
+
 [node name="Ship_Goliath" type="Node2D"]
 script = ExtResource("2")
 thrust = 0.15
@@ -70,21 +74,12 @@ hframes = 16
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("2")
 texture = ExtResource("6")
 hframes = 16
 vframes = 8
-
-[node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -23.0
-offset_top = -20.0
-offset_right = 23.0
-offset_bottom = 26.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Turret_Laser" parent="." instance=ExtResource("13")]
 position = Vector2(0, -9)
@@ -118,3 +113,10 @@ visible = false
 scale = Vector2(2.5, 2.5)
 
 [node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("9")]
+
+[node name="detection_hitbox" parent="." instance=ExtResource("13_cjso0")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_ivsif")
+
+[editable path="detection_hitbox"]

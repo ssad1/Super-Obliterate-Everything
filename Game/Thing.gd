@@ -60,7 +60,6 @@ var offset:Vector2 = Vector2(randi() % 1000 + 10,randi() % 1000 + 10)
 var player
 var tcpu:TargetCPU 
 var tFOV
-var hitbox
 var phys
 var stats
 
@@ -99,7 +98,6 @@ var tick_speed:float = 1:
 @onready var has_modules:bool = modules.size() > 0
 @onready var has_tcpu:bool = tcpu != null
 @onready var is_not_struct:bool = is_type != UNIT_STATE.type.STRUCT
-@onready var has_hitbox:bool = hitbox != null
 var inactive:bool = true
 
 func _ready() -> void:
@@ -107,8 +105,6 @@ func _ready() -> void:
 	_do_range()
 	if !visible:
 		show()
-
-	#hitbox.tree_exited.connect(func(): has_hitbox = false)
 
 func _process(delta:float) -> void:
 
@@ -138,8 +134,6 @@ func _process(delta:float) -> void:
 		physics_clock -= 0.1
 
 		if is_not_struct: _do_physics()
-
-		if has_hitbox: hitbox.pos = pos + position
 
 	if physics_clock > 0.2:
 		physics_clock = 0.2

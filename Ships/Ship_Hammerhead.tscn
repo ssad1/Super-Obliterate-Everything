@@ -1,8 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://bn3j1d6pcgy0u"]
+[gd_scene load_steps=22 format=3 uid="uid://bn3j1d6pcgy0u"]
 
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://dqjey34i83121" path="res://Ships/Graphics/Hammerhead_D.PNG" id="4"]
 [ext_resource type="Texture2D" uid="uid://bgnsltdl1fqcw" path="res://Ships/Graphics/Hammerhead_B.PNG" id="6"]
 [ext_resource type="Texture2D" uid="uid://cpnqvtfu4n488" path="res://Ships/Graphics/Hammerhead_N.PNG" id="6_6tyrm"]
@@ -15,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://d32aggrenhtof" path="res://Shots/Shot_Artillery.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://Effects/E_MuzzleB.tscn" id="14"]
 [ext_resource type="PackedScene" uid="uid://dsmpb7fkxj0b4" path="res://Turrets/Turret_Autogun.tscn" id="15"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="15_rpcx5"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -68,6 +68,10 @@ shader_parameter/frames = 1.0
 shader_parameter/phase = 0.0
 shader_parameter/colors = ExtResource("12")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_k5v0b"]
+resource_local_to_scene = true
+radius = 30.0
+
 [node name="Ship_Hammerhead" type="Node2D"]
 script = ExtResource("2")
 thrust = 0.2
@@ -91,21 +95,12 @@ hframes = 16
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("2")
 texture = ExtResource("6")
 hframes = 16
 vframes = 8
-
-[node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -23.0
-offset_top = -21.0
-offset_right = 23.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Gun_General" parent="." instance=ExtResource("11")]
 light_mask = 0
@@ -151,3 +146,10 @@ visible = false
 position = Vector2(0, -12)
 
 [node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("9")]
+
+[node name="detection_hitbox" parent="." instance=ExtResource("15_rpcx5")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_k5v0b")
+
+[editable path="detection_hitbox"]

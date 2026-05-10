@@ -20,8 +20,7 @@ func _init_struct() -> void:
 		UNIT_STATE.do_unit_faction(self)
 		UNIT_STATE.do_unit_frames(self)
 		UNIT_STATE.do_unit_light_bright(self)
-	
-	#hitbox.tree_exited.connect(func(): has_hitbox = false)
+
 	inactive = false
 
 func _build_fix() -> void:
@@ -29,8 +28,6 @@ func _build_fix() -> void:
 	pos.x = pos.x + 32 * build_size.x / 2
 	pos.y = pos.y + 32 * build_size.y / 2
 	position = pos
-	if hitbox != null:
-		hitbox.pos = pos + position
 
 func _get_ship() -> int:
 	var s:int

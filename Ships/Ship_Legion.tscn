@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bq8racpjchq4l"]
+[gd_scene load_steps=22 format=3 uid="uid://bq8racpjchq4l"]
 
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_vcaka"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_5bptc"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://hg0643wlqft8" path="res://Ships/Graphics/Legion_D.png" id="4_hii8q"]
 [ext_resource type="Texture2D" uid="uid://bcbgf72ugvg1f" path="res://Ships/Graphics/Legion_N.png" id="5_yslh1"]
 [ext_resource type="Texture2D" uid="uid://5mc5tljyr5kd" path="res://Ships/Graphics/Legion_B.png" id="6_gdbhv"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="8_cigix"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_hii8q"]
 [ext_resource type="PackedScene" uid="uid://dsmpb7fkxj0b4" path="res://Turrets/Turret_Autogun.tscn" id="9_d8ngd"]
 [ext_resource type="PackedScene" uid="uid://dqsn1ygjynlmr" path="res://Hangars/Carrier_Hangar.tscn" id="10_syl7d"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="10_um4q6"]
@@ -51,6 +51,10 @@ normal_texture = ExtResource("5_yslh1")
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_887ny"]
 blend_mode = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yslh1"]
+resource_local_to_scene = true
+radius = 22.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l5vvb"]
 resource_local_to_scene = true
 shader = ExtResource("12_3xhdf")
@@ -83,22 +87,17 @@ hframes = 16
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_887ny")
 texture = ExtResource("6_gdbhv")
 hframes = 16
 vframes = 8
 
-[node name="HitBox" parent="." instance=ExtResource("8_cigix")]
-visible = false
-offset_left = -20.0
-offset_top = -26.0
-offset_right = 20.0
-offset_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="detection_hitbox" parent="." instance=ExtResource("8_hii8q")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_yslh1")
 
 [node name="Turret_Autogun" parent="." instance=ExtResource("9_d8ngd")]
 position = Vector2(0, -9)
@@ -142,3 +141,5 @@ base_damage = 1.1
 [node name="E_MuzzleA" parent="Gun_Main" instance=ExtResource("14_fsaj3")]
 visible = false
 scale = Vector2(0.75, 0.75)
+
+[editable path="detection_hitbox"]

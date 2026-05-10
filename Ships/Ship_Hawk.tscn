@@ -1,21 +1,23 @@
-[gd_scene load_steps=16 format=3 uid="uid://cmq6mqxwybt3h"]
+[gd_scene load_steps=17 format=3 uid="uid://cmq6mqxwybt3h"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Ships/Ship_General.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://caubbm878f1sc" path="res://Ships/Graphics/Hawk_D.PNG" id="4"]
 [ext_resource type="Texture2D" uid="uid://cjeuw1hm54l7n" path="res://Ships/Graphics/Piranha_C.PNG" id="6"]
 [ext_resource type="Texture2D" uid="uid://b2ubd8xlx50kb" path="res://Ships/Graphics/Hawk_N.PNG" id="6_3xhkp"]
 [ext_resource type="Texture2D" uid="uid://cdp0eeabh1o7w" path="res://Ships/Graphics/Piranha_L.PNG" id="7"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_gg7j2"]
 [ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://b7nu2uc31cdmf" path="res://Shots/Missile_R1.tscn" id="10"]
 [ext_resource type="Texture2D" uid="uid://cw8r3sye86d6d" path="res://Ships/Graphics/Hawk_B.PNG" id="11"]
-[ext_resource type="PackedScene" path="res://Effects/E_MuzzleA.tscn" id="14"]
+[ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="14"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("6")
+shader_parameter/lighting = ExtResource("7")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -37,8 +39,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("6")
-shader_parameter/lighting = ExtResource("7")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_x7nyw"]
 diffuse_texture = ExtResource("4")
@@ -46,6 +46,9 @@ normal_texture = ExtResource("6_3xhkp")
 
 [sub_resource type="CanvasItemMaterial" id="2"]
 blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tan4f"]
+resource_local_to_scene = true
 
 [node name="Ship_Hawk" type="Node2D"]
 script = ExtResource("2")
@@ -69,21 +72,17 @@ hframes = 8
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("2")
 texture = ExtResource("11")
 hframes = 8
 vframes = 8
 
-[node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="detection_hitbox" parent="." instance=ExtResource("8_gg7j2")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_tan4f")
 
 [node name="Gun_General" parent="." instance=ExtResource("8")]
 position = Vector2(0, -16)
@@ -108,3 +107,5 @@ scale = Vector2(0.5, 0.5)
 [node name="Module_Fighter_Boom" parent="." instance=ExtResource("9")]
 visible = false
 position = Vector2(0, -16)
+
+[editable path="detection_hitbox"]

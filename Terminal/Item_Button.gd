@@ -310,22 +310,21 @@ func _remove_obj_from_grid(obj:Thing) -> void:
 
 	if pb == "Prize_Slot":
 		obj.queue_free()
+		obj.hide()
+		return
 		
-	elif is_instance_valid(obj.hitbox):
-		obj.has_hitbox = false
-		obj.hitbox.queue_free()
-		obj.has_tcpu = false
-		obj.tick_speed = 0
-		obj.tcpu.queue_free()
+	obj.has_tcpu = false
+	obj.tick_speed = 0
+	obj.tcpu.queue_free()
 
-		if "modules" in obj:
-			for module in obj.modules:
-				module.queue_free()
+	if "modules" in obj:
+		for module in obj.modules:
+			module.queue_free()
 
-		obj.hull.queue_free()
+	obj.hull.queue_free()
 
-		if "has_hull" in obj:
-			obj.has_hull = false
+	if "has_hull" in obj:
+		obj.has_hull = false
 
 	obj.hide()
 

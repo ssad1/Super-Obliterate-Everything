@@ -1,21 +1,23 @@
-[gd_scene load_steps=18 format=3 uid="uid://chnsvj34dake0"]
+[gd_scene load_steps=19 format=3 uid="uid://chnsvj34dake0"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://ckmqg1fganhgl" path="res://Structures/Graphics/newAssets/Struct_BossStation_D.PNG" id="4"]
 [ext_resource type="Texture2D" uid="uid://7cwmv33wkp0f" path="res://Structures/Graphics/newAssets/Struct_BossStation_C.PNG" id="4_fohy7"]
 [ext_resource type="Texture2D" uid="uid://xcj7i4plhkuk" path="res://Structures/Graphics/newAssets/Struct_BossStation_N.PNG" id="5_3wvj0"]
 [ext_resource type="Texture2D" uid="uid://8hse4ex8g51j" path="res://Structures/Graphics/newAssets/Struct_BossStation_L.PNG" id="5_hre34"]
 [ext_resource type="PackedScene" path="res://Modules/Generator.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://Modules/Module_BossStation_Boom.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://cyn2l15w0tic6" path="res://Modules/Module_BossStation_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://bl2mxtnhn4slr" path="res://Turrets/Turret_Double_Blaster.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://dn6ub42eu2b6i" path="res://Turrets/Turret_Phalanx.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://ctp4jh83ii4c3" path="res://Modules/Module_Area_Heavy_Shield.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="12_gbbm4"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("4_fohy7")
+shader_parameter/lighting = ExtResource("5_hre34")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -37,8 +39,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("4_fohy7")
-shader_parameter/lighting = ExtResource("5_hre34")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_pt4q0"]
 diffuse_texture = ExtResource("4")
@@ -65,9 +65,13 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vyb20"]
 _data = {
-"RESET": SubResource("Animation_yp22h"),
-"Spin": SubResource("2")
+&"RESET": SubResource("Animation_yp22h"),
+&"Spin": SubResource("2")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_02l2u"]
+resource_local_to_scene = true
+radius = 55.0
 
 [node name="Struct_BossStation_A" type="Node2D"]
 script = ExtResource("2")
@@ -91,18 +95,11 @@ vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
 libraries = {
-"": SubResource("AnimationLibrary_vyb20")
+&"": SubResource("AnimationLibrary_vyb20")
 }
 autoplay = "Spin"
 
 [node name="Module_Area_Shield" parent="." instance=ExtResource("12")]
-
-[node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -40.0
-offset_top = -44.0
-offset_bottom = 36.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Turret_Double_Blaster" parent="." instance=ExtResource("10")]
 position = Vector2(-45, -30)
@@ -120,3 +117,11 @@ position = Vector2(-45, 10)
 
 [node name="Turret_Phalanx" parent="." instance=ExtResource("11")]
 position = Vector2(0, -40)
+
+[node name="detection_hitbox" parent="." instance=ExtResource("12_gbbm4")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_02l2u")
+
+[editable path="detection_hitbox"]

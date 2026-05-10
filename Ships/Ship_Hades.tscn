@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cr47g32ojqjqb"]
+[gd_scene load_steps=17 format=3 uid="uid://cr47g32ojqjqb"]
 
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_wpkus"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_2igwy"]
@@ -6,11 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://tv0vgs1ldmr8" path="res://Ships/Graphics/Hades_L.png" id="4_c1cer"]
 [ext_resource type="Texture2D" uid="uid://cwlerml0p8wih" path="res://Ships/Graphics/Hades_D.png" id="5_ljnal"]
 [ext_resource type="Texture2D" uid="uid://b1ouulb3rwu7m" path="res://Ships/Graphics/Hades_N.png" id="6_iashb"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="6_vnqy2"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="7_m6irg"]
 [ext_resource type="Texture2D" uid="uid://co7vsvianca8v" path="res://Ships/Graphics/Hades_B.png" id="7_wlryh"]
 [ext_resource type="PackedScene" uid="uid://dtud28wlroesr" path="res://Shots/Shot_Singularity.tscn" id="8_roivg"]
 [ext_resource type="PackedScene" uid="uid://coxjddpqipkgg" path="res://Effects/E_MuzzleJ.tscn" id="9_1codc"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="9_c1cer"]
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="10_q0c83"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_annps"]
@@ -47,6 +47,10 @@ normal_texture = ExtResource("6_iashb")
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5s4lu"]
 blend_mode = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ljnal"]
+resource_local_to_scene = true
+radius = 20.0
+
 [node name="Ship_Hades" type="Node2D"]
 script = ExtResource("1_wpkus")
 thrust = 0.15
@@ -69,22 +73,17 @@ hframes = 8
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_5s4lu")
 texture = ExtResource("7_wlryh")
 hframes = 8
 vframes = 8
 
-[node name="HitBox" parent="." instance=ExtResource("6_vnqy2")]
-visible = false
-offset_left = -15.0
-offset_top = -15.0
-offset_right = 15.0
-offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="detection_hitbox" parent="." instance=ExtResource("9_c1cer")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_ljnal")
 
 [node name="Gun_General" parent="." instance=ExtResource("7_m6irg")]
 position = Vector2(0, -16)
@@ -102,3 +101,5 @@ visible = false
 visible = false
 
 [node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("10_q0c83")]
+
+[editable path="detection_hitbox"]

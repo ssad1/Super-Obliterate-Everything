@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://vgvkpcxrl2ur"]
+[gd_scene load_steps=10 format=3 uid="uid://vgvkpcxrl2ur"]
 
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1_c6jhf"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="1_uktky"]
 [ext_resource type="Texture2D" uid="uid://x7xd8jss1bgy" path="res://Structures/Graphics/struct_turret_base_huge_C.png" id="2_xob4o"]
 [ext_resource type="Texture2D" uid="uid://7m5i5prf5t8v" path="res://Structures/Graphics/struct_turret_base_huge_L.png" id="3_3uyjp"]
 [ext_resource type="Texture2D" uid="uid://ce2ukugoahuqr" path="res://Structures/Graphics/struct_turret_base_huge_D.png" id="4_67yn3"]
 [ext_resource type="Texture2D" uid="uid://b6kwrqijgya1a" path="res://Structures/Graphics/struct_turret_base_huge_N.png" id="5_m2f8m"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="6_c6jhf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sjjae"]
 resource_local_to_scene = true
@@ -38,15 +38,19 @@ shader_parameter/select_strength = 0.0
 diffuse_texture = ExtResource("4_67yn3")
 normal_texture = ExtResource("5_m2f8m")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_c6jhf"]
+resource_local_to_scene = true
+radius = 35.0
+
 [node name="Hull" type="Sprite2D"]
 material = SubResource("ShaderMaterial_sjjae")
 texture = SubResource("CanvasTexture_wai0b")
 
-[node name="HitBox" parent="." instance=ExtResource("1_uktky")]
-offset_left = -73.5
-offset_top = -60.75
-offset_right = -22.5
-offset_bottom = -9.75
-grow_horizontal = 2
-grow_vertical = 2
+[node name="detection_hitbox" parent="." instance=ExtResource("6_c6jhf")]
+position = Vector2(0, 9)
 parent_type = "SECONDARY"
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_c6jhf")
+
+[editable path="detection_hitbox"]

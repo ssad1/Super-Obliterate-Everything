@@ -1,12 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://4hc75k74q7tk"]
+[gd_scene load_steps=13 format=3 uid="uid://4hc75k74q7tk"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://rop0ns3hf55s" path="res://Modules/Module_Asteroid_Boom_Small.tscn" id="3"]
-[ext_resource type="Texture2D" uid="uid://udfr5460qbjw" path="res://Structures/Graphics/Backup/Struct_Metal_Asteroid_4_D.PNG" id="3_x0y1d"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="4"]
-[ext_resource type="Texture2D" uid="uid://8fsv34xlbp41" path="res://Structures/Graphics/Backup/Struct_Metal_Asteroid_4_N.PNG" id="4_y4adk"]
+[ext_resource type="Texture2D" uid="uid://udfr5460qbjw" path="res://Structures/Backup/Struct_Metal_Asteroid_4_D.PNG" id="3_x0y1d"]
+[ext_resource type="Texture2D" uid="uid://8fsv34xlbp41" path="res://Structures/Backup/Struct_Metal_Asteroid_4_N.PNG" id="4_y4adk"]
 [ext_resource type="PackedScene" path="res://Structures/Asteroid_Animator.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_w2si7"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -30,7 +30,7 @@ shader_parameter/shield_charging = 0.0
 shader_parameter/shield_damage_strength = 0.0
 shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
-shader_parameter/offset = null
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/select_strength = 0.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_dtg8e"]
@@ -55,8 +55,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_431si"]
 _data = {
-"Roll": SubResource("Animation_m51gs")
+&"Roll": SubResource("Animation_m51gs")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hif11"]
+resource_local_to_scene = true
+radius = 11.0
 
 [node name="Struct_Metal_Asteroid_3" type="Node2D"]
 script = ExtResource("2")
@@ -72,16 +76,15 @@ vframes = 8
 
 [node name="Asteroid_Animator" parent="Hull" instance=ExtResource("5")]
 libraries = {
-"": SubResource("AnimationLibrary_431si")
+&"": SubResource("AnimationLibrary_431si")
 }
-
-[node name="HitBox" parent="." instance=ExtResource("4")]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Module_Asteroid_Boom_Small" parent="." instance=ExtResource("3")]
 visible = false
+
+[node name="detection_hitbox" parent="." instance=ExtResource("7_w2si7")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_hif11")
+
+[editable path="detection_hitbox"]

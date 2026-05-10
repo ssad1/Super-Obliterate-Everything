@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://ngnwp3vcnat1"]
+[gd_scene load_steps=16 format=3 uid="uid://ngnwp3vcnat1"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://clqceerl26y0j" path="res://Structures/Graphics/newAssets/Struct_Destroyer_Dock_D.PNG" id="4"]
 [ext_resource type="Texture2D" uid="uid://cghuqkir5e7ch" path="res://Structures/Graphics/newAssets/Struct_Destroyer_Dock_C.PNG" id="6"]
 [ext_resource type="Texture2D" uid="uid://cnxmc7w4suerh" path="res://Structures/Graphics/newAssets/Struct_Destroyer_Dock_N.PNG" id="6_tn7k5"]
@@ -10,10 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://2rc1lcifjq2j" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://cu6eeduu5dbxa" path="res://Hangars/Hangar_Factory.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="11_rqr66"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("6")
+shader_parameter/lighting = ExtResource("7")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -35,8 +37,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("6")
-shader_parameter/lighting = ExtResource("7")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_q6n38"]
 diffuse_texture = ExtResource("4")
@@ -60,8 +60,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aj6tf"]
 _data = {
-"Spin": SubResource("2")
+&"Spin": SubResource("2")
 }
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rqr66"]
+radius = 21.0
+height = 78.0
 
 [node name="Struct_Stardock" type="Node2D"]
 script = ExtResource("2")
@@ -80,17 +84,9 @@ vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
 libraries = {
-"": SubResource("AnimationLibrary_aj6tf")
+&"": SubResource("AnimationLibrary_aj6tf")
 }
 autoplay = "Spin"
-
-[node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -20.0
-offset_top = -34.0
-offset_right = 20.0
-offset_bottom = 36.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Hangar_Factory" parent="." instance=ExtResource("9")]
 ship_id = Array[int]([54])
@@ -100,3 +96,11 @@ build_max = 120
 
 [node name="Module_SFX" parent="." instance=ExtResource("10")]
 build_sfx = 5
+
+[node name="detection_hitbox" parent="." instance=ExtResource("11_rqr66")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_rqr66")
+
+[editable path="detection_hitbox"]

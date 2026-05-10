@@ -7,11 +7,13 @@ var is_type:UNIT_STATE.type = UNIT_STATE.type.MODULE
 @export var parent_type := "DIRECT"
 
 func _ready():
-	'''
+
+	#for ships and structs, ships(other than halos) are direct, turret structs are secondaries, basing the hitbox on their base instead
+
 	if parent_type == "DIRECT":
 		parent_unit = get_parent()
 	elif parent_type == "SECONDARY":
-		parent_unit = get_parent().get_parent()'''
+		parent_unit = get_parent().get_parent()
 	area_entered.connect(_on_area_entered)
 
 func _on_area_entered(area:Area2D) -> void:

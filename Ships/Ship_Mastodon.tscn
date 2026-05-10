@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://mnk1cwys1ysh"]
+[gd_scene load_steps=19 format=3 uid="uid://mnk1cwys1ysh"]
 
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_lfxra"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_1lwau"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cys72cgee5ok7" path="res://Ships/Graphics/Mastodon_D.png" id="5_g86ad"]
 [ext_resource type="Texture2D" uid="uid://co2yqdnebpbni" path="res://Ships/Graphics/Mastodon_N.png" id="6_e1mua"]
 [ext_resource type="Texture2D" uid="uid://obxdaohi1ebx" path="res://Ships/Graphics/Mastodon_B.png" id="7_t5106"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="8_vpkwu"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_dsct0"]
 [ext_resource type="PackedScene" uid="uid://dqsn1ygjynlmr" path="res://Hangars/Carrier_Hangar.tscn" id="9_ka4tl"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="10_aqtbk"]
 [ext_resource type="PackedScene" uid="uid://dv3qabcu5bdu" path="res://Shots/Missile_LM1.tscn" id="11_h3286"]
@@ -49,6 +49,10 @@ normal_texture = ExtResource("6_e1mua")
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6yqec"]
 blend_mode = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ucwm"]
+resource_local_to_scene = true
+radius = 22.0
+
 [node name="Ship_Mastodon" type="Node2D"]
 script = ExtResource("1_lfxra")
 thrust = 0.2
@@ -72,22 +76,17 @@ hframes = 8
 vframes = 8
 
 [node name="Burn" type="Sprite2D" parent="."]
-modulate = Color(1, 0.054902, 0.054902, 1)
+modulate = Color(1, 0.05490196, 0.05490196, 0)
 light_mask = 0
 material = SubResource("CanvasItemMaterial_6yqec")
 texture = ExtResource("7_t5106")
 hframes = 8
 vframes = 8
 
-[node name="HitBox" parent="." instance=ExtResource("8_vpkwu")]
-visible = false
-light_mask = 0
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="detection_hitbox" parent="." instance=ExtResource("8_dsct0")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_0ucwm")
 
 [node name="CarrierHangar" parent="." instance=ExtResource("9_ka4tl")]
 position = Vector2(-10, -18)
@@ -145,3 +144,5 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(0, -7)
 
 [node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("14_gqnv0")]
+
+[editable path="detection_hitbox"]
