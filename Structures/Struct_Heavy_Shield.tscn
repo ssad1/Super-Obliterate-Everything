@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://b27jpx18nuq18"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Structures/Struct_Shield.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://bxfowhqy7cgkl" path="res://Structures/Struct_Shield.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://cyetwarnb2wve" path="res://Structures/Graphics/Struct_Heavy_Shield_D.PNG" id="3_rretx"]
 [ext_resource type="Texture2D" uid="uid://pov00ntnkncm" path="res://Structures/Graphics/Struct_Heavy_Shield_N.PNG" id="4_84hin"]
@@ -71,7 +71,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_21hqg"]
 _data = {
-"Spin": SubResource("3")
+&"Spin": SubResource("3")
 }
 
 [node name="Struct_Heavy_Shield" type="Node2D"]
@@ -101,7 +101,7 @@ vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
 libraries = {
-"": SubResource("AnimationLibrary_21hqg")
+&"": SubResource("AnimationLibrary_21hqg")
 }
 autoplay = "Spin"
 

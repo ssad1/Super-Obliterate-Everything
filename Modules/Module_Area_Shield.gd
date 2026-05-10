@@ -23,22 +23,21 @@ func _ready() -> void:
 	up = get_parent()
 	up.modules.append(self)
 
-	#hide()
-
 	_gen_circle(shield_radius)
-	_do_shader()
 	show()
 
 func _process(delta:float) -> void:
 	if shield_power > 0:
 
 		shield_power = shield_power - 3 * delta
-		_do_shader()
 
 	if shield_power < 0:
 
 		shield_power = 0
-		_do_shader()
+	
+	glow.set_shader_parameter("hit_angle", shield_theta)
+	glow.set_shader_parameter("hit_fade", shield_power)
+	glow.set_shader_parameter("shield_radius", shield_radius)
 
 func _do_tick() -> void:
 	pos = parent.pos + position + 0.5 * size
@@ -68,7 +67,7 @@ func _gen_circle(r:float) -> void:
 		shield_line.add_point(p)
 		theta = theta + TAU / samples
 
-func _hit_shield(d:float, hitp:Vector2) -> void:
+func Hit_shield(d:float, hitp:Vector2) -> void:
 	shield = shield - d
 	if shield <= 0:
 		shield_mode = 0
@@ -76,9 +75,3 @@ func _hit_shield(d:float, hitp:Vector2) -> void:
 	charge_t = max_charge
 	shield_power = 1.5 * shield / max_shield + .5
 	shield_theta = atan2(hitp.y - pos.y, hitp.x - pos.x)
-
-func _do_shader() -> void:
-	glow.set_shader_parameter("hit_angle", shield_theta)
-	glow.set_shader_parameter("hit_fade", shield_power)
-	glow.set_shader_parameter("shield_radius", shield_radius)
-	#print("shield: " + str(shield_power))

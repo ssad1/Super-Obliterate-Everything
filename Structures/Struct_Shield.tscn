@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://bojdta407vuuk"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Structures/Struct_Shield.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://bxfowhqy7cgkl" path="res://Structures/Struct_Shield.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://kggbk24miq5v" path="res://Structures/Graphics/Struct_Shield_C.PNG" id="3_f0enj"]
 [ext_resource type="Texture2D" uid="uid://bxgb1c44l6uwo" path="res://Structures/Graphics/Struct_Shield_D.PNG" id="3_jit8x"]
@@ -15,6 +15,8 @@
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("3_f0enj")
+shader_parameter/lighting = ExtResource("4_8vagn")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -36,8 +38,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("3_f0enj")
-shader_parameter/lighting = ExtResource("4_8vagn")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_im5mk"]
 diffuse_texture = ExtResource("3_jit8x")
@@ -75,7 +75,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b8ri4"]
 _data = {
-"Spin": SubResource("3")
+&"Spin": SubResource("3")
 }
 
 [node name="Struct_Shield" type="Node2D"]
@@ -95,7 +95,6 @@ vframes = 8
 frame = 16
 
 [node name="Struct_Shield_Glow" type="Sprite2D" parent="Hull"]
-visible = false
 modulate = Color(0.772549, 0.894118, 1, 1)
 light_mask = 0
 material = SubResource("2")
@@ -106,7 +105,7 @@ frame = 16
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
 libraries = {
-"": SubResource("AnimationLibrary_b8ri4")
+&"": SubResource("AnimationLibrary_b8ri4")
 }
 autoplay = "Spin"
 

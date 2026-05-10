@@ -16,17 +16,9 @@ func _ready():
 
 func _on_area_entered(area:Area2D) -> void:
 
-	#cull all the non-valid options
 	if not area is unit_hitbox: return
-	if not "is_type" in parent_unit: return
 
-	#hit logic
-
-	var target := area as unit_hitbox
-
-	if not "is_type" in target: return
-
-	var target_unit = target.parent_unit
+	var target_unit := (area as unit_hitbox).parent_unit
 
 	if ((SPAWNER.game.shots.has(target_unit) || 
 		SPAWNER.game.missiles.has(target_unit)) &&

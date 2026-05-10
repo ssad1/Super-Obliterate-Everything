@@ -26,7 +26,7 @@ func _ready() -> void:
 
 	shape.shape.radius = size.y/1.5
 
-	hide()
+	#hide()
 
 func _process(delta:float) -> void:
 	var mp := get_global_mouse_position()
