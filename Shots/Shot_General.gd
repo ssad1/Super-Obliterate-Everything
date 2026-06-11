@@ -4,13 +4,12 @@ extends Thing
 @export var base_damage:float = 1
 @export var force:float = 1
 @export var damage_type:String = "KINETIC"
+@export var shot_scale:float = 1
+@export var spin_mode:int = 0
 
 var clock:int = 0
 var damage:float = 0
 var lifespan:int = 20
-
-@export var shot_scale:float = 1
-@export var spin_mode:int = 0
 
 func _ready() -> void:
 	_init_shot()

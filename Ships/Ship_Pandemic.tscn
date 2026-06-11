@@ -1,0 +1,112 @@
+[gd_scene load_steps=18 format=3 uid="uid://6eoh4qpq8m7j"]
+
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_efchl"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_ycsfy"]
+[ext_resource type="Texture2D" uid="uid://d38dt8x4iksyu" path="res://Ships/Graphics/Pandemic_C.png" id="3_efchl"]
+[ext_resource type="Texture2D" uid="uid://d1wi8vmkqyq17" path="res://Ships/Graphics/Pandemic_L.png" id="4_ycsfy"]
+[ext_resource type="Texture2D" uid="uid://cphd77bkm3lyw" path="res://Ships/Graphics/Pandemic_D.png" id="5_5c1tk"]
+[ext_resource type="Texture2D" uid="uid://car3rcl2f8d8s" path="res://Ships/Graphics/Pandemic_N.png" id="6_55dp1"]
+[ext_resource type="Texture2D" uid="uid://dvg3mqvr7046h" path="res://Ships/Graphics/Pandemic_B.png" id="7_gnqvx"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_o4d8m"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="9_x4p56"]
+[ext_resource type="PackedScene" uid="uid://7pg3lcgaqwwt" path="res://Shots/Missile_ER1.tscn" id="10_ycsfy"]
+[ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="11_ycsfy"]
+[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="12_4firr"]
+[ext_resource type="PackedScene" uid="uid://bl2mxtnhn4slr" path="res://Turrets/Turret_Double_Blaster.tscn" id="13_ycsfy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_annps"]
+resource_local_to_scene = true
+shader = ExtResource("2_ycsfy")
+shader_parameter/flag_mask = ExtResource("3_efchl")
+shader_parameter/lighting = ExtResource("4_ycsfy")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_j6ia1"]
+diffuse_texture = ExtResource("5_5c1tk")
+normal_texture = ExtResource("6_55dp1")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5s4lu"]
+blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ljnal"]
+resource_local_to_scene = true
+radius = 20.0
+
+[node name="Ship_Hades" type="Node2D"]
+script = ExtResource("1_efchl")
+thrust = 0.3
+aistandoff = 300
+factory = 19
+name_text = "PANDEMIC"
+class_text = "DESTROYER"
+energy_cost = 200
+metal_cost = 275
+supply_cost = 4
+credit_cost = 1600
+inertia = 0.2
+max_velocity = 4.0
+max_rotate_velocity = 0.2
+max_armor = 40.0
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_annps")
+texture = SubResource("CanvasTexture_j6ia1")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_5s4lu")
+texture = ExtResource("7_gnqvx")
+hframes = 8
+vframes = 8
+
+[node name="detection_hitbox" parent="." instance=ExtResource("8_o4d8m")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+visible = false
+shape = SubResource("CircleShape2D_ljnal")
+
+[node name="Gun_General" parent="." instance=ExtResource("9_x4p56")]
+position = Vector2(0, -30)
+fire_sound = 23
+gun_heat = 50
+gun_angle = 0.4
+gun_v = 20
+gun_scale = 0.8
+velocity_align = false
+
+[node name="Missile_ER1" parent="Gun_General" instance=ExtResource("10_ycsfy")]
+visible = false
+
+[node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("11_ycsfy")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("12_4firr")]
+
+[node name="Turret_Double_Blaster" parent="." instance=ExtResource("13_ycsfy")]
+position = Vector2(0, -8)
+
+[editable path="detection_hitbox"]

@@ -83,6 +83,7 @@ func _default_items():
 	item_bag.append([SPAWNER.spawn_objs.SLOOP])
 	item_bag.append([SPAWNER.spawn_objs.HADES])
 	item_bag.append([SPAWNER.spawn_objs.VOIDLANCE_TURRET])
+	item_bag.append([SPAWNER.spawn_objs.PANDEMIC])
 
 func _draft_buy(price, item):
 	var buy = true

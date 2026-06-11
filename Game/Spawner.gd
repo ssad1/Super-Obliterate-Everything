@@ -176,6 +176,7 @@ extends Node
 @onready var Ship_Myrmidon := load("res://Ships/Ship_Myrmidon.tscn")
 @onready var Ship_Mastodon := load("res://Ships/Ship_Mastodon.tscn")
 @onready var Ship_Hades := load("res://Ships/Ship_Hades.tscn")
+@onready var Ship_Pandemic := load("res://Ships/Ship_Pandemic.tscn")
 
 @onready var Ship_Trident := load("res://Ships/Ship_Trident.tscn")
 @onready var Ship_Goliath := load("res://Ships/Ship_Goliath.tscn")
@@ -318,7 +319,8 @@ enum spawn_objs {
 	SLOOP,
 	HADES,
 	TREMOR,
-	VOIDLANCE_TURRET
+	VOIDLANCE_TURRET,
+	PANDEMIC
 }
 
 var next_spawn_id:int = 1
@@ -720,6 +722,8 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 			obj = Ship_Tremor.instantiate()
 		spawn_objs.VOIDLANCE_TURRET:
 			obj = Struct_VoidLance_Turret.instantiate()
+		spawn_objs.PANDEMIC:
+			obj = Ship_Pandemic.instantiate()
 
 	obj.s = s
 

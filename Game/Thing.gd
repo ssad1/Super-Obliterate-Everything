@@ -1,30 +1,28 @@
 class_name Thing
 extends Node2D
 
-@onready var tcpu_node = preload("res://Modules/TargetCPU.tscn")
-@onready var FOV_node = preload("res://Modules/Target_FOV.tscn")
-@onready var hull:Sprite2D = $Hull
-@onready var mat:Material = $Hull.get_material()
-
-var s
 @export var name_text:String = "" 
 @export var class_text:String = ""
 @export var energy_cost:int = 0
 @export var metal_cost:int = 0
 @export var supply_cost:int = 0
 @export var credit_cost:int = 1
-
 @export var inertia:float = 0
 @export var max_velocity:float = 0
 @export var max_rotate_velocity:float = 0
 @export var drag:float = 0
+@export var max_armor:float = 5
+@export var max_shields:float = 0
+@export var target_profile:TargetCPU.profile = TargetCPU.profile.NORMAL
+@export var scan_only_in_range:bool = false
+@export var special:String = ""
+@export var build_speed:float = 1
+
 var pos:Vector2 = Vector2(0.0,0.0)
 var velocity:Vector2 = Vector2(0.0,0.0)
 var rotate:float = 0
 var rotate_velocity:float = 0
-
-@export var max_armor:float = 5
-@export var max_shields:float = 0
+var s
 var armor:float = 5
 var shields:float = 0
 var area_shield:float = 0
@@ -32,12 +30,7 @@ var max_area_shield:float = 0
 var cloaked:bool = false
 var range_radius:int = 100
 var shield_radius:float = 0 #display only, set in area shield module
-
-@export var target_profile:TargetCPU.profile = TargetCPU.profile.NORMAL
-@export var scan_only_in_range:bool = false
-@export var special:String = ""
 var guns_safety:bool = false
-
 
 var burn_color = Color(1,0,0,1)
 var light_bright:float = 1
@@ -52,40 +45,22 @@ var shield_damage:float = 0
 var build_strength:float = 0
 var swirl_strength:float = 0
 
-
 var spaghettified:bool = false
 var select_strength:float = 0
 var offset:Vector2 = Vector2(randi() % 1000 + 10,randi() % 1000 + 10)
-
 var player
 var tcpu:TargetCPU 
-var tFOV
-var phys
 var stats
-
-var ai_box = null
 var modules = []
 var spawn_id:int = 0
-
-var death:bool = false
-var dead:bool = death:
-	set(value):
-		_do_death(value)
-
-		death = value
-	get:
-		return death
-
 var vanish:bool = false
 var is_type:UNIT_STATE.type = UNIT_STATE.type.THING
-
-@export var build_speed:float = 1
-
-var _selection:bool
 var is_selected:bool = false
-
+var inactive:bool = true #will try to remove later
 var tick_clock:float = 0
 var physics_clock:float = 0
+var has_no_modules:bool = false
+
 var tick_speed:float = 1:
 	set(value):
 		if value < 0:
@@ -94,11 +69,22 @@ var tick_speed:float = 1:
 		tick_speed = value
 	get:
 		return tick_speed
+var _death:bool = false
+var dead:bool = _death:
+	set(value):
+		_do_death(value)
 
+		_death = value
+	get:
+		return _death
+
+@onready var tcpu_node = preload("res://Modules/TargetCPU.tscn")
+@onready var FOV_node = preload("res://Modules/Target_FOV.tscn")
+@onready var hull:Sprite2D = $Hull
+@onready var mat:Material = $Hull.get_material()
 @onready var has_modules:bool = modules.size() > 0
 @onready var has_tcpu:bool = tcpu != null
 @onready var is_not_struct:bool = is_type != UNIT_STATE.type.STRUCT
-var inactive:bool = true
 
 func _ready() -> void:
 	hide()
@@ -201,8 +187,6 @@ func _do_physics() -> void:
 	if rotate < 0:
 		rotate = rotate + TAU
 
-var has_no_modules:bool = false
-
 func _do_modules() -> void:
 
 	if has_no_modules: return
@@ -230,7 +214,7 @@ func _do_range() -> void:
 		if "range_radius" in module && module.range_radius > range_radius:
 			range_radius = module.range_radius
 	
-	tFOV = FOV_node.instantiate()
+	var tFOV = FOV_node.instantiate()
 	add_child(tFOV)
 
 	tFOV._initialize_FOV_area(range_radius)
