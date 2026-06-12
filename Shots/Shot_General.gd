@@ -7,6 +7,8 @@ extends Thing
 @export var shot_scale:float = 1
 @export var spin_mode:int = 0
 
+@export var shot_effects:Array[UNIT_STATE.effect_enum] = []
+
 var clock:int = 0
 var damage:float = 0
 var lifespan:int = 20

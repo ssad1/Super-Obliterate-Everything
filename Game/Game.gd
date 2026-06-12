@@ -2,6 +2,7 @@ class_name Game
 extends Node2D
 
 var planet_system
+
 var radar:Array = []
 var players:Array = []
 var ships:Array[Ship_General] = []
@@ -12,6 +13,8 @@ var shots:Array[Thing] = []
 var explosions:Array = []
 var rocks:Array = []
 var event_list:Array = []
+var unit_effects:Array[unit_effect] = []
+
 var mapsize:Vector2 = Vector2(32*128,32*128)
 var wint:float = 0
 var wint_on:bool = false

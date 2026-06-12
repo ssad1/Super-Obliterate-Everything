@@ -1,7 +1,7 @@
 '''
 THE NODE THAT TAKES CARE OF ALL THE SHADER STUFF REGARDING UNITS, FACTION COLORS, DAMAGE, ETC.
 HAS ALL THE NECESSARY FUNCTIONS FOR ONLY THE NECESSARY SHADER PARAMETERS.
-NOW IT ALSO TAKES CARE OF THE UNIT'S TYPE FOR PERFORMANCE REASONS
+ALSO TAKES CARE OF THE UNIT'S TYPE FOR PERFORMANCE REASONS
 '''
 
 extends Node
@@ -24,6 +24,16 @@ enum type
 	HANGAR,
 	MODULE,
 	SINGULARITY,
+}
+
+enum effect_enum
+{
+	ACID
+}
+
+#contains references for the effect classes
+var effect: Dictionary[effect_enum, Script] = {
+	effect_enum.ACID: acid_effect
 }
 
 func do_unit_build(unit, duration:float) -> void:

@@ -69,6 +69,7 @@ var tick_speed:float = 1:
 		tick_speed = value
 	get:
 		return tick_speed
+
 var _death:bool = false
 var dead:bool = _death:
 	set(value):
@@ -257,24 +258,37 @@ func _get_turret_score() -> int:
 
 	return score
 
-func _do_damage() -> void:
-
-	UNIT_STATE.do_unit_damage(self)
-
-func hit(s) -> void:
-
-	if s.is_type == UNIT_STATE.type.SINGULARITY:
-		UNIT_STATE.do_black_hole_death(self)
-		return
-
-	armor = armor - s.damage
+func do_damage(amount:float) -> void:
+	armor = armor - amount
 
 	if armor > max_armor:
 		armor = max_armor
 
 	UNIT_STATE.do_unit_damage_strength(self)
-	_do_damage()
+	UNIT_STATE.do_unit_damage(self)
 	
+func hit(s) -> void:
+
+	if s.is_type == UNIT_STATE.type.SINGULARITY:
+		UNIT_STATE.do_black_hole_death(self)
+		return
+	
+	do_damage(s.damage)
+
+	#apply effects(Acid, freeze, shock, etc)
+
+	if "shot_effects" in s:
+		if s.shot_effects.size() == 0: return
+
+		for effect in s.shot_effects:
+
+			var instance:unit_effect = UNIT_STATE.effect[effect].new()
+
+			SPAWNER.game.add_child(instance)
+			SPAWNER.game.unit_effects.append(instance)
+
+			instance.apply_effect(self)
+
 	if s.is_type == UNIT_STATE.type.SHOT:
 		s.armor = 0
 		_apply_force(s.force, s.velocity)
