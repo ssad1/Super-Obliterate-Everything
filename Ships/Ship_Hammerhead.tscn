@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://bn3j1d6pcgy0u"]
+[gd_scene load_steps=23 format=3 uid="uid://bn3j1d6pcgy0u"]
 
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="2_k5v0b"]
 [ext_resource type="Texture2D" uid="uid://dqjey34i83121" path="res://Ships/Graphics/Hammerhead_D.PNG" id="4"]
 [ext_resource type="Texture2D" uid="uid://bgnsltdl1fqcw" path="res://Ships/Graphics/Hammerhead_B.PNG" id="6"]
 [ext_resource type="Texture2D" uid="uid://cpnqvtfu4n488" path="res://Ships/Graphics/Hammerhead_N.PNG" id="6_6tyrm"]
@@ -86,7 +87,14 @@ credit_cost = 2300
 inertia = 0.2
 max_velocity = 3.5
 max_rotate_velocity = 0.06
-max_armor = 80
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(64, -19)
+energy = 6.59
+texture = ExtResource("2_k5v0b")
+texture_scale = 50.0
+height = 60.0
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")

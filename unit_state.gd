@@ -100,7 +100,7 @@ func do_black_hole_death(unit) -> void:
 		_set_swirl_strength.bind(unit.mat),
 		0.0,
 		0.5,
-		1.5
+		3
 	)
 	get_tree().create_tween().tween_property(unit, "scale", Vector2(0,0), 1.5).finished.connect(
 		_kill_unit.bind(unit)
@@ -126,3 +126,36 @@ func _set_stat_modulate(val:float, stat:Stats) -> void:
 	stat.modulate.a = val
 	stat.range_line.scale = Vector2(.5 + .5 * val,.5 + .5 * val)
 	stat.shield_line.scale = Vector2(1.2 - .2 * val,1.2 - .2 * val)
+
+func do_unit_acid(unit, amount:float) -> void:
+
+	if unit.mat == null: return
+
+	var current = unit.mat.get_shader_parameter("acid_strength")
+
+	get_tree().create_tween().tween_method(
+		_set_acid.bind(unit.mat),
+		current,
+		current + amount,
+		1
+	)
+
+func _set_acid(val:float, mat:Material) -> void:
+	mat.set_shader_parameter("acid_strength", val)
+
+func do_unit_dissolve(unit, duration:float) -> void:
+
+	if unit.mat == null: return
+
+	await get_tree().create_tween().tween_method(
+		_set_corrode.bind(unit.mat),
+		0.0,
+		1.5,
+		duration
+	).finished
+
+	if not is_instance_valid(unit): return
+	unit.armor = 0
+
+func _set_corrode(val:float, mat:Material) -> void:
+	mat.set_shader_parameter("dissolve_strength", val)

@@ -264,7 +264,6 @@ func do_damage(amount:float) -> void:
 	if armor > max_armor:
 		armor = max_armor
 
-	UNIT_STATE.do_unit_damage_strength(self)
 	UNIT_STATE.do_unit_damage(self)
 	
 func hit(s) -> void:
@@ -274,6 +273,7 @@ func hit(s) -> void:
 		return
 	
 	do_damage(s.damage)
+	UNIT_STATE.do_unit_damage_strength(self)
 
 	#apply effects(Acid, freeze, shock, etc)
 
@@ -283,6 +283,8 @@ func hit(s) -> void:
 		for effect in s.shot_effects:
 
 			var instance:unit_effect = UNIT_STATE.effect[effect].new()
+
+			instance.current_shot = s
 
 			SPAWNER.game.add_child(instance)
 			SPAWNER.game.unit_effects.append(instance)

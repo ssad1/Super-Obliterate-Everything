@@ -39,6 +39,7 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("7")
 
 [node name="detection_hitbox" parent="." instance=ExtResource("6_n1fdb")]
+visible = false
 position = Vector2(0, -7.5)
 
 [node name="CollisionShape2D" parent="detection_hitbox" index="0"]
