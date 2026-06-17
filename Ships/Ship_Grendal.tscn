@@ -77,7 +77,6 @@ credit_cost = 600
 inertia = 0.6
 max_velocity = 7.0
 max_rotate_velocity = 0.2
-max_armor = 25
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")
@@ -106,6 +105,7 @@ gun_scale = 0.6
 [node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("12")]
 visible = false
 material = SubResource("3")
+shot_effects = Array[int]([1])
 
 [node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("13")]
 visible = false

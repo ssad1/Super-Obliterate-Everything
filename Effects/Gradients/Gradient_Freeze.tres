@@ -1,6 +1,9 @@
-[gd_resource type="Gradient" format=3 uid="uid://d3tyjyn770370"]
+[gd_resource type="GradientTexture1D" load_steps=2 format=3 uid="uid://d3tyjyn770370"]
+
+[sub_resource type="Gradient" id="Gradient_ex884"]
+offsets = PackedFloat32Array(0, 0.2647059, 0.5764706, 0.84117645)
+colors = PackedColorArray(0.16078432, 0.16078432, 0.16078432, 0, 0, 0.47058824, 0.6627451, 0.6117647, 0, 0.67058825, 1, 1, 0.7675111, 0.99999994, 0.9956437, 1)
 
 [resource]
 resource_local_to_scene = true
-offsets = PackedFloat32Array(0, 0.51123595, 1)
-colors = PackedColorArray(0.16206557, 0.1620656, 0.16206557, 0.5686275, 0.1882353, 0.5882353, 0.9882353, 1, 0.85394305, 0.9141248, 1, 1)
+gradient = SubResource("Gradient_ex884")

@@ -11,7 +11,7 @@ var current_unit: Thing = null
 var current_shot = null
 
 var _disabled = false
-var disabled:bool = _disabled:
+var has_no_tick:bool = _disabled:
 	set(value):
 		_disabled = value
 		set_process(!value)
@@ -25,9 +25,6 @@ func _on_effect_end() -> void:
 	pass
 
 func _do_tick() -> void:
-	pass
-
-func _do_shot_graphics(shot) -> void:
 	pass
 
 func apply_effect(unit:Thing) -> void:
@@ -44,10 +41,10 @@ func apply_effect(unit:Thing) -> void:
 
 	current_unit = unit
 	_on_effect() 
-	_start_countdown()
 
-func _start_countdown() -> void:
-	await get_tree().create_timer(duration).timeout
+func _finish_effect() -> void:
+
+	has_no_tick = true
 	_on_effect_end()
 	queue_free()
 
@@ -55,7 +52,17 @@ func _process(delta:float) -> void:
 
 	if current_unit == null: return
 
+	if duration <= 0:
+		_finish_effect()
+		return
+
+	duration -= delta
+
 	_current_tick += delta
 	if _current_tick > tick_duration:
 		_current_tick = 0
 		_do_tick()
+	
+
+static func do_shot_graphics(shot) -> void:
+	pass

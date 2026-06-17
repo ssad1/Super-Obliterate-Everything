@@ -28,12 +28,14 @@ enum type
 
 enum effect_enum
 {
-	ACID
+	ACID,
+	FREEZE
 }
 
 #contains references for the effect classes
 var effect: Dictionary[effect_enum, Script] = {
-	effect_enum.ACID: acid_effect
+	effect_enum.ACID: acid_effect,
+	effect_enum.FREEZE: freeze_effect
 }
 
 func do_unit_build(unit, duration:float) -> void:
@@ -159,3 +161,19 @@ func do_unit_dissolve(unit, duration:float) -> void:
 
 func _set_corrode(val:float, mat:Material) -> void:
 	mat.set_shader_parameter("dissolve_strength", val)
+
+func do_unit_freeze(unit, amount:float) -> void:
+
+	if unit.mat == null: return
+
+	var current = unit.mat.get_shader_parameter("freeze_strength")
+
+	get_tree().create_tween().tween_method(
+		_set_freeze.bind(unit.mat),
+		current,
+		amount,
+		1
+	)
+
+func _set_freeze(val:float, mat:Material) -> void:
+	mat.set_shader_parameter("freeze_strength", val)

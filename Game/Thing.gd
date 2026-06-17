@@ -61,12 +61,9 @@ var tick_clock:float = 0
 var physics_clock:float = 0
 var has_no_modules:bool = false
 
-var tick_speed:float = 1:
+var tick_speed:float = 1.0:
 	set(value):
-		if value < 0:
-			value = 0
-		
-		tick_speed = value
+		tick_speed = clampf(value, 0.0, 1.0)
 	get:
 		return tick_speed
 
@@ -109,12 +106,12 @@ func _process(delta:float) -> void:
 	
 	if inactive: return
 
-	tick_clock += delta
+	tick_clock += delta# * tick_speed
 	if tick_clock > 0.1:
 		tick_clock -= 0.1
 		_do_tick()
-	if tick_clock > 0.2 / tick_speed:
-		tick_clock = 0.2 / tick_speed
+	if tick_clock > 0.2:
+		tick_clock = 0.2
 	
 	physics_clock += delta
 	if physics_clock > 0.1:
@@ -243,11 +240,11 @@ func _do_tick() -> void:
 
 	if has_modules:
 		_do_modules()
-
-	_set_stats()
-
+		
 	if armor <= 0:
 		_die()
+
+	_set_stats()
 
 func _get_turret_score() -> int:
 	var score := 0

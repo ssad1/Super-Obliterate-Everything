@@ -128,7 +128,6 @@ func _die() -> void:
 
 func _do_tick() -> void:
 	super._do_tick()
-	#_do_damage()
 	_do_ai()
 	
 func _process(delta:float) -> void:
@@ -139,12 +138,12 @@ func _process(delta:float) -> void:
 
 	if inactive: return
 
-	tick_clock += delta
+	tick_clock += delta# * tick_speed
 	if tick_clock > 0.1:
 		tick_clock -= 0.1
 		_do_tick()
-	if tick_clock > 0.2 / tick_speed:
-		tick_clock = 0.2 / tick_speed
+	if tick_clock > 0.2:
+		tick_clock = 0.2
 	
 	physics_clock += delta
 	if physics_clock > 0.1:

@@ -28,7 +28,6 @@ light_mask = 0
 material = SubResource("1")
 texture = ExtResource("5")
 script = ExtResource("6")
-shot_effects = Array[int]([0])
 max_velocity = 100.0
 
 [node name="Hull" type="Sprite2D" parent="."]
