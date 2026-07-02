@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b2ubd8xlx50kb" path="res://Ships/Graphics/Hawk_N.PNG" id="6_3xhkp"]
 [ext_resource type="Texture2D" uid="uid://cdp0eeabh1o7w" path="res://Ships/Graphics/Piranha_L.PNG" id="7"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="8"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_gg7j2"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="8_gg7j2"]
 [ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://b7nu2uc31cdmf" path="res://Shots/Missile_R1.tscn" id="10"]
 [ext_resource type="Texture2D" uid="uid://cw8r3sye86d6d" path="res://Ships/Graphics/Hawk_B.PNG" id="11"]

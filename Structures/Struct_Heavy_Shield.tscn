@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d3fvog4dxbaeq" path="res://Structures/Graphics/newAssets/Struct_Heavy_Shield_Glow.PNG" id="8"]
 [ext_resource type="PackedScene" uid="uid://2rc1lcifjq2j" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://ctp4jh83ii4c3" path="res://Modules/Module_Area_Heavy_Shield.tscn" id="10"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="10_j68np"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="10_j68np"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="11"]
 
 [sub_resource type="ShaderMaterial" id="1"]

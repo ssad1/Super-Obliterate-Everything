@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bpep6q5na0nx5" path="res://Structures/Backup/Struct_Chondrite_Asteroid_2_D.PNG" id="3_qa4j8"]
 [ext_resource type="Texture2D" uid="uid://blhyn8m70hgik" path="res://Structures/Backup/Struct_Chondrite_Asteroid_2_N.PNG" id="4_dujfr"]
 [ext_resource type="PackedScene" path="res://Structures/Asteroid_Animator.tscn" id="5"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_pikhc"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="7_pikhc"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

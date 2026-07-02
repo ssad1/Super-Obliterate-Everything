@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://du2i5e3fujtfj" path="res://Ships/Graphics/Sloop_B.png" id="7_4qid3"]
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="7_127qr"]
 [ext_resource type="PackedScene" uid="uid://dqsn1ygjynlmr" path="res://Hangars/Carrier_Hangar.tscn" id="8_dc80c"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_qv674"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="8_qv674"]
 [ext_resource type="PackedScene" uid="uid://qvc0lxdot1wy" path="res://Shots/Shot_Boomerang.tscn" id="9_hvlur"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="9_s1evb"]
 [ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="11_4qiwh"]

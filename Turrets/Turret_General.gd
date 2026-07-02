@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var tcpu_node = preload("res://Modules/TargetCPU.tscn")
-@onready var FOV_node = preload("res://Modules/Target_FOV.tscn")
+@onready var tcpu_node = preload("res://Game/Unit Life/TargetCPU.tscn")
+@onready var FOV_node = preload("res://Game/Unit Life/Target_FOV.tscn")
 @onready var hull:Sprite2D = $Hull
 @onready var mat:Material = $Hull.get_material()
 

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b0ydxy0npmhx6" path="res://Ships/Graphics/Sapphire_D.png" id="5_gaqnx"]
 [ext_resource type="Texture2D" uid="uid://bqlo840vvp53m" path="res://Ships/Graphics/Sapphire_N.png" id="6_gaqnx"]
 [ext_resource type="Texture2D" uid="uid://clv7drrp41nr1" path="res://Ships/Graphics/Sapphire_B.png" id="7_gaqnx"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_gaqnx"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="8_gaqnx"]
 [ext_resource type="PackedScene" uid="uid://qvc0lxdot1wy" path="res://Shots/Shot_Boomerang.tscn" id="10_e4j2b"]
 [ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="11_23twp"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="12_a0jkg"]

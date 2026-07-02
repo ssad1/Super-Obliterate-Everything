@@ -10,7 +10,12 @@ var missile_clock:int = 0
 @export var smoke_trail:SPAWNER.spawn_objs = 0
 
 func _ready() -> void:
-	_init_missile()
+	scale = shot_scale * Vector2(1,1)
+	armor = max_armor
+	is_type = UNIT_STATE.type.MISSILE
+	_do_range()
+	has_tcpu = tcpu != null
+	ai = AI_Behavior.new(self)
 
 func _process(delta:float) -> void:
 	var blend_pos := position + (pos - position) * 0.1 + 0.2 * velocity
@@ -36,13 +41,6 @@ func _process(delta:float) -> void:
 	if physics_clock > 0.2:
 		physics_clock = 0.2
 
-func _init_missile() -> void:
-	scale = shot_scale * Vector2(1,1)
-	armor = max_armor
-	is_type = UNIT_STATE.type.MISSILE
-	_do_range()
-	has_tcpu = tcpu != null
-
 func _do_tick() -> void:
 	missile_clock = missile_clock + 1
 	if missile_clock >= lifespan:
@@ -59,6 +57,7 @@ func _do_smoke() -> void:
 		obj = SPAWNER._spawn([smoke_trail], null, position + offset, Vector2(0,0),0,0,0)
 		obj.scale = Vector2(0.6, 0.6) * shot_scale
 
+'''
 func _ai_high() -> void:
 
 	if armor <= 0:
@@ -133,4 +132,4 @@ func _ai_mid() -> void:
 
 			else:
 				ailow = ai_low.NONE
-		
+		'''

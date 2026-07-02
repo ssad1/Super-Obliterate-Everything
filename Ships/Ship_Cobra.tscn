@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://d32aggrenhtof" path="res://Shots/Shot_Artillery.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://Effects/E_MuzzleB.tscn" id="13"]
 [ext_resource type="Texture2D" uid="uid://4oat6bgn65rv" path="res://Effects/Gradients/Gradient_Artillery.tres" id="14"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="14_hf4iy"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="14_hf4iy"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

@@ -19,7 +19,7 @@ func _ready() -> void:
 	#do the design of the rounds
 	for effect in shot_effects:
 		UNIT_STATE.effect[effect].do_shot_graphics(self)
-
+		
 func _init_shot():
 	scale = Vector2(shot_scale, shot_scale)
 	mat = get_material()

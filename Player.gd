@@ -117,7 +117,7 @@ func _build(moves:Array) -> void:
 		obj = SPAWNER._spawn([SPAWNER.spawn_objs.BUILDER], id, build_station.pos, Vector2(0,0), 0, 0, 1)
 		obj.is_type = UNIT_STATE.type.SHIP
 		obj.build_mission = moves
-		obj._init_builder()
+		obj.ai.init_builder()
 		obj._add_payload(s.energy_cost,s.metal_cost,s.supply_cost)
 		EVENTS.emit_signal("build_line",obj,obj.target_pos)
 		EVENTS.emit_signal("build_spot_ghost",obj)

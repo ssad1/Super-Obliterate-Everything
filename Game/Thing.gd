@@ -76,8 +76,8 @@ var dead:bool = _death:
 	get:
 		return _death
 
-@onready var tcpu_node = preload("res://Modules/TargetCPU.tscn")
-@onready var FOV_node = preload("res://Modules/Target_FOV.tscn")
+@onready var tcpu_node = preload("res://Game/Unit Life/TargetCPU.tscn")
+@onready var FOV_node = preload("res://Game/Unit Life/Target_FOV.tscn")
 @onready var hull:Sprite2D = $Hull
 @onready var mat:Material = $Hull.get_material()
 @onready var has_modules:bool = modules.size() > 0

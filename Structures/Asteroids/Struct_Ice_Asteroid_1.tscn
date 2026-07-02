@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://brlmx1watgn4k" path="res://Structures/Backup/Struct_Ice_Asteroid_1_N.PNG" id="4_v10c3"]
 [ext_resource type="PackedScene" path="res://Structures/Asteroid_Animator.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://rop0ns3hf55s" path="res://Modules/Module_Asteroid_Boom_Small.tscn" id="7"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_ujoxt"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="7_ujoxt"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

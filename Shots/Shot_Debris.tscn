@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dsqgtn7taxhb2" path="res://Shots/Shot_General.gd" id="5"]
 [ext_resource type="PackedScene" path="res://Modules/Spawn_Effect.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="7"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="9_efvok"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="9_efvok"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_bksi6"]
 diffuse_texture = ExtResource("2_0xpla")

@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="13"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="14"]
 [ext_resource type="PackedScene" uid="uid://dn6ub42eu2b6i" path="res://Turrets/Turret_Phalanx.tscn" id="15"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="15_xv0d6"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="15_xv0d6"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

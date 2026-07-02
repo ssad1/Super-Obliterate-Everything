@@ -32,7 +32,7 @@ ICONS="*res://Icon_Library.tscn"
 FACTIONS="*res://Factions.gd"
 DRAFT="*res://Draft.gd"
 SFX="*res://Sfx.gd"
-UNIT_STATE="*res://unit_state.gd"
+UNIT_STATE="*res://Game/Unit Life/unit_state.gd"
 
 [debug]
 

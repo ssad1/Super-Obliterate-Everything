@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://di4v3c5qn5hvs" path="res://Ships/Graphics/Miner_C.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://bf1ni2svaq3bo" path="res://Ships/Graphics/Miner_L.PNG" id="8"]
 [ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="9_h8sw0"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="9_h8sw0"]
 [ext_resource type="Texture2D" uid="uid://ny1gpgmldn51" path="res://Ships/Graphics/Miner_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Shots/Laser_Mining.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://dddaclj1hb48m" path="res://Effects/E_MuzzleH.tscn" id="12"]

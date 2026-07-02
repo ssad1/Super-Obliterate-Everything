@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://jtywu81hlmql" path="res://Shaders/Singularity_effects.gdshader" id="2_ycwa3"]
 [ext_resource type="Texture2D" uid="uid://cvxjha7j78ofh" path="res://Shots/Graphics/Singularity.png" id="3_0d0ix"]
 [ext_resource type="Texture2D" uid="uid://vcul7cayynvp" path="res://Effects/E_MuzzleJ.png" id="5_dqd46"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="6_nkqvw"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="6_nkqvw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5vx8k"]
 shader = ExtResource("2_ycwa3")

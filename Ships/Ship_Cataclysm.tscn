@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://co2lkwh6t74fc" path="res://Ships/Graphics/Cataclysm_D.PNG" id="8"]
 [ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://21fssbturhmf" path="res://Ships/Graphics/Cataclysm_B.PNG" id="12"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="12_bnu63"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="12_bnu63"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://crnw8nvep8815" path="res://Structures/Backup/Struct_Rocky_Asteroid_4_D.PNG" id="3_d8yf2"]
 [ext_resource type="Texture2D" uid="uid://b5mm38tcn5glx" path="res://Structures/Backup/Struct_Rocky_Asteroid_4_N.PNG" id="4_gd2s7"]
 [ext_resource type="PackedScene" path="res://Structures/Asteroid_Animator.tscn" id="5"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_wtn3s"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="7_wtn3s"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

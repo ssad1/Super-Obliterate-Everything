@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cm0qnwdnnf8x1" path="res://Terminal/Map/StarGlow.png" id="3"]
 [ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="6"]
 [ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="7"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_wa0br"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="7_wa0br"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

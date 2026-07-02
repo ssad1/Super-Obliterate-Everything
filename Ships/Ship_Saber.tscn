@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dm3fr46h3uqtd" path="res://Ships/Graphics/Saber_N.PNG" id="6_2yo07"]
 [ext_resource type="Texture2D" uid="uid://daot5ismboukf" path="res://Ships/Graphics/Saber_C.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://ce110pbhh2d34" path="res://Ships/Graphics/Saber_L.PNG" id="8"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_t3o3b"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="8_t3o3b"]
 [ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://bpqps0y1ta3kj" path="res://Ships/Graphics/Saber_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Shots/Laser_General.tscn" id="11"]

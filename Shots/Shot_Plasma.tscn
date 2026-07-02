@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b17ihyoouab8p" path="res://Effects/Lights/L_SmallGlow.png" id="7"]
 [ext_resource type="PackedScene" uid="uid://bpx3w6rav7hni" path="res://Shots/Explode_Plasma.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Death_SFX.tscn" id="9"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="9_xwv1y"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="9_xwv1y"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 blend_mode = 1

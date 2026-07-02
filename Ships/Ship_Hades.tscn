@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://co7vsvianca8v" path="res://Ships/Graphics/Hades_B.png" id="7_wlryh"]
 [ext_resource type="PackedScene" uid="uid://dtud28wlroesr" path="res://Shots/Shot_Singularity.tscn" id="8_roivg"]
 [ext_resource type="PackedScene" uid="uid://coxjddpqipkgg" path="res://Effects/E_MuzzleJ.tscn" id="9_1codc"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="9_c1cer"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="9_c1cer"]
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="10_q0c83"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_annps"]

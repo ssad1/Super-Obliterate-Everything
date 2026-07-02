@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c2amvbovsgp6h" path="res://Structures/Backup/Struct_Big_Lava_Asteroid_1_N.PNG" id="4_8mdw4"]
 [ext_resource type="PackedScene" uid="uid://6xbfrdmcjebv" path="res://Modules/Module_Asteroid_Boom_Large.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://Structures/Asteroid_Animator.tscn" id="7"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_o7xis"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="7_o7xis"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bx6cy0um4qpye" path="res://Shots/Graphics/Mine_N.png" id="2_p0akl"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_wqdcy"]
 [ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="6_op4ay"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_8haug"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="8_8haug"]
 [ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="8_ybeel"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2jihc"]

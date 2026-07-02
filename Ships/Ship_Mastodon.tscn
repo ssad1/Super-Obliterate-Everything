@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cys72cgee5ok7" path="res://Ships/Graphics/Mastodon_D.png" id="5_g86ad"]
 [ext_resource type="Texture2D" uid="uid://co2yqdnebpbni" path="res://Ships/Graphics/Mastodon_N.png" id="6_e1mua"]
 [ext_resource type="Texture2D" uid="uid://obxdaohi1ebx" path="res://Ships/Graphics/Mastodon_B.png" id="7_t5106"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_dsct0"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="8_dsct0"]
 [ext_resource type="PackedScene" uid="uid://dqsn1ygjynlmr" path="res://Hangars/Carrier_Hangar.tscn" id="9_ka4tl"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="10_aqtbk"]
 [ext_resource type="PackedScene" uid="uid://dv3qabcu5bdu" path="res://Shots/Missile_LM1.tscn" id="11_h3286"]

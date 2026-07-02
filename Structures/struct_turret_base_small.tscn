@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://f1x41ecwblna" path="res://Structures/Graphics/Struct_Turret_Base_Small_L.png" id="3_7flfu"]
 [ext_resource type="Texture2D" uid="uid://dr8xukcc34xdp" path="res://Structures/Graphics/Struct_Turret_Base_Small_D.png" id="4_ao7pu"]
 [ext_resource type="Texture2D" uid="uid://duu23cpuaixh0" path="res://Structures/Graphics/Struct_Turret_Base_Small_N.png" id="5_1f7tj"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_kisb6"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="7_kisb6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8rcdj"]
 resource_local_to_scene = true

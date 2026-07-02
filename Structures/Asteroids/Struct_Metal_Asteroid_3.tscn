@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bqclcs3gqjp2t" path="res://Structures/Backup/Struct_Metal_Asteroid_3_D.PNG" id="3_xcysy"]
 [ext_resource type="Texture2D" uid="uid://by86igt0sp6we" path="res://Structures/Backup/Struct_Metal_Asteroid_3_N.PNG" id="4_dlrt8"]
 [ext_resource type="PackedScene" path="res://Structures/Asteroid_Animator.tscn" id="5"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_3k2xh"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="7_3k2xh"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

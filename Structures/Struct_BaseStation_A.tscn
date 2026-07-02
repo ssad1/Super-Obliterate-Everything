@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ca0s5dahwap8a" path="res://Structures/Graphics/newAssets/Struct_BaseStation_A_N.png" id="7_y4cg2"]
 [ext_resource type="PackedScene" path="res://Modules/Generator.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://kkbj2t5fjxjp" path="res://Modules/Module_Station_Boom.tscn" id="9"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="10_2jevg"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="10_2jevg"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

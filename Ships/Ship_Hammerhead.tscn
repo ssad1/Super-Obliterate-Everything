@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://d32aggrenhtof" path="res://Shots/Shot_Artillery.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://Effects/E_MuzzleB.tscn" id="14"]
 [ext_resource type="PackedScene" uid="uid://dsmpb7fkxj0b4" path="res://Turrets/Turret_Autogun.tscn" id="15"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="15_rpcx5"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="15_rpcx5"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://pffe7vbng800" path="res://Shots/Shot_Asteroid.gd" id="4"]
 [ext_resource type="Script" uid="uid://cpkpaiprlkpt1" path="res://Structures/Asteroid_Animator.gd" id="5"]
 [ext_resource type="PackedScene" path="res://Modules/Spawn_Effect.tscn" id="6"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="6_4x738"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="6_4x738"]
 [ext_resource type="Texture2D" uid="uid://dkf7b5m23hesu" path="res://Shots/Graphics/Asteroid_Tiny_N.PNG" id="6_5frth"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Trigger.tscn" id="7"]
 

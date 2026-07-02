@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cphd77bkm3lyw" path="res://Ships/Graphics/Pandemic_D.png" id="5_5c1tk"]
 [ext_resource type="Texture2D" uid="uid://car3rcl2f8d8s" path="res://Ships/Graphics/Pandemic_N.png" id="6_55dp1"]
 [ext_resource type="Texture2D" uid="uid://dvg3mqvr7046h" path="res://Ships/Graphics/Pandemic_B.png" id="7_gnqvx"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_o4d8m"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="8_o4d8m"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="9_x4p56"]
 [ext_resource type="PackedScene" uid="uid://7pg3lcgaqwwt" path="res://Shots/Missile_ER1.tscn" id="10_ycsfy"]
 [ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="11_ycsfy"]

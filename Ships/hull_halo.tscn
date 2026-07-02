@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c864jwhquyfbj" path="res://Ships/Graphics/Halo_L.PNG" id="3_36uvg"]
 [ext_resource type="Texture2D" uid="uid://d18r6rk1vbjqe" path="res://Ships/Graphics/Halo_D.PNG" id="4_73yfo"]
 [ext_resource type="Texture2D" uid="uid://k7clu3p4ivt2" path="res://Ships/Graphics/Halo_N.PNG" id="5_itdch"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="6_3nbce"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="6_3nbce"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

@@ -1,81 +1,29 @@
 class_name Ship_General
 extends Thing
 
-enum ai_high {
-	NONE,
-	STANDART,
-	HALO,
-	BUILDER,
-	MINER,
-	METALPORTER,
-	KAMIZAZE,
-	B1,
-	M1,
-	R1
-}
-enum ai_flag {
-	NONE,
-	RETURN
-}
-enum ai_mid {
-	NONE,
-	COMBAT,
-	HALO_COMBAT,
-	INTERCEPT,
-	KAMIKAZE,
-	ROCKET,
-	BOMB,
-	BUILDER
-}
-enum ai_low {
-	NONE,
-	POINT,
-	CHASE,
-	FLOAT,
-	HALO_CHASE,
-	STATIC_COLLISION,
-	CHARGE
-}
-enum commands {
-	NONE,
-	THRUST,
-	LEFT,
-	RIGHT
-}
-
 @export var thrust:float = 0
-@export var aihigh:ai_high = ai_high.STANDART
+@export var aihigh:AI_Behavior.ai_high = AI_Behavior.ai_high.STANDART
 @export var aistandoff:int = 100
 @export var factory:SPAWNER.spawn_objs
 
-var aiclock:int = 0
-var aiflag:ai_flag = ai_flag.NONE
-var aimid:ai_mid = ai_mid.NONE
-var ailow:ai_low = ai_low.NONE
 var target_hot:bool = false
 var target_pos:Vector2 = Vector2(0,0)
-var target_velocity:Vector2 = Vector2(0,0)
 var base = null
 var engine_burn:float = 0
-var miner_rock:bool = false
 var build_mission
 
-@onready var is_halo:bool = aihigh == ai_high.HALO
+@onready var is_halo:bool = aihigh == AI_Behavior.ai_high.HALO
 @onready var has_burn:bool = has_node("Burn")
 @onready var has_hull:bool = hull != null
+
+var _ai_high:Callable
+var _ai_mid:Callable
+var _ai_low:Callable
+
 var burn:Sprite2D
+var ai:AI_Behavior
 
 func _ready() -> void:
-	_init_ship()
-
-func _add_payload(e,m,s) -> void:
-	for module in modules:
-		if module.name == "Module_Delivery":
-			module.deliver_energy = e
-			module.deliver_metal = m
-			module.deliver_supply = s
-
-func _init_ship() -> void:
 	inactive = false
 	armor = max_armor
 	is_type = UNIT_STATE.type.SHIP
@@ -92,20 +40,14 @@ func _init_ship() -> void:
 			burn.show()
 	
 	has_tcpu = tcpu != null
+	ai = AI_Behavior.new(self)
 
-func _init_builder() -> void:
-	if build_mission == null: return
-
-	target_pos = Vector2(32 * build_mission[3],32 * build_mission[4])
-
-	var obj = player.item_bag_objs[build_mission[2]]
-	
-	if "build_size" in obj:
-		target_pos = target_pos + 16 * player.item_bag_objs[build_mission[2]].build_size
-	if "factory" in obj:
-		target_pos = target_pos + 16 * player.item_bag_factory_objs[build_mission[2]].build_size
-
-	rotate = atan2(pos.y - target_pos.y,pos.x - target_pos.x) - CALC.half_PI
+func _add_payload(e,m,s) -> void:
+	for module in modules:
+		if module.name == "Module_Delivery":
+			module.deliver_energy = e
+			module.deliver_metal = m
+			module.deliver_supply = s
 
 func _init_center() -> void:
 	target_pos = 0.5 * SPAWNER.game.mapsize
@@ -176,288 +118,39 @@ func _do_anim(delta:float) -> void:
 		burn.frame = f
 		burn.modulate = Color(1,0,0,engine_burn)
 
-func _do_build() -> void:
-
-	var success:bool = player._build_struct(build_mission,false)
-
-	if success:
-		build_mission = null
-		vanish = true
-		armor = -100
-		if stats != null:
-			#print("Kill Stats")
-			stats.hide()
-			stats.queue_free()
-			stats = null
-	else:
-		aiflag = ai_flag.RETURN
-
-func _do_command(c:int) -> void:
-	match c:
-		commands.LEFT:
-			rotate = rotate - max_rotate_velocity
-		commands.RIGHT:
-			rotate = rotate + max_rotate_velocity
-		commands.THRUST:
-			velocity.x = velocity.x + thrust * sin(rotate)
-			velocity.y = velocity.y - thrust * cos(rotate)
-			engine_burn = engine_burn + .2
-			engine_burn = clamp(engine_burn,0.0,1.0)
-
 func _do_ai() -> void:
-	if has_tcpu && !spaghettified:
-		_ai_high()
-		_ai_mid()
-		_ai_low()
-
-func _ai_high() -> void:
+	if !has_tcpu: return
+	if !is_instance_valid(self): return
+	if spaghettified: return
 
 	if armor <= 0:
-		aihigh = ai_high.NONE
-		aimid = ai_mid.NONE
-		ailow = ai_low.NONE
-	target_hot = false
-	match aihigh:
-		ai_high.STANDART:
-			aimid = ai_mid.COMBAT
-		ai_high.HALO:
-			rotate = 0
-			aimid = ai_mid.HALO_COMBAT
-		ai_high.MINER:
-			if !miner_rock:
-				tcpu.set_target_profile = tcpu.profile.MINER_MINE
-				aimid = ai_mid.COMBAT
-				guns_safety = false
-				tcpu.found_victim = false
-				if player != null:
-					if player.ai_no_rocks:
-						tcpu.set_target_profile = tcpu.profile.MINER_RETURN
-						aimid = ai_mid.INTERCEPT
-						guns_safety = true
-						tcpu.found_victim = false
-			if miner_rock:
-				tcpu.set_target_profile = tcpu.profile.MINER_RETURN
-				aimid = ai_mid.INTERCEPT
-				guns_safety = true
-				_mine_drop()
-		ai_high.METALPORTER:
-			tcpu.set_target_profile = tcpu.profile.STATION
-			aimid = ai_mid.INTERCEPT
-		ai_high.BUILDER:
-			if aiflag == ai_flag.NONE:
-				aimid = ai_mid.BUILDER
-			if aiflag == ai_flag.RETURN:
-				build_mission = null
-				tcpu.set_target_profile = tcpu.profile.STATION
-				aimid = ai_mid.INTERCEPT
-		ai_high.KAMIZAZE:
-			aimid = ai_mid.KAMIKAZE
+		ai.aihigh = ai.ai_high.NONE
+		ai.aimid = ai.ai_mid.NONE
+		ai.ailow = ai.ai_low.NONE
 		
+	target_hot = false
 
-func _ai_mid() -> void:
-	var d := 0.0
-	var check_return := false
-	var center:Vector2 = SPAWNER.game.mapsize / 2
+	_ai_high.call()
 
-	match aimid:
-		ai_mid.COMBAT:
-			if tcpu._target_closest(pos) != -1:
-				target_pos = tcpu.target_pos
-				target_velocity = tcpu.target_velocity
-				target_hot = true
-				d = pos.distance_to(target_pos)
-				if d < aistandoff:
-					ailow = ai_low.POINT
-				else:
-					ailow = ai_low.CHASE
-			else:
-				target_hot = false
-				target_velocity = Vector2(0,0)
-				d = pos.distance_to(target_pos)
-				if d < aistandoff:
-					ailow = ai_low.POINT
-					target_pos = SPAWNER.game.mapsize * CALC._rand()
-					ailow = ai_low.CHASE
+	ai.d = 0.0
+	ai.check_return = false
 
-			check_return = true
-		ai_mid.KAMIKAZE:
+	_ai_mid.call()
 
-			if tcpu._target_closest(pos) != -1:
-				target_pos = tcpu.target_pos
-				target_velocity = tcpu.target_velocity
-				target_hot = true
-			else:
-				target_pos = center
-				target_velocity = Vector2(0,0)
+	if ai.check_return && pos.x < -100 || \
+	pos.x > SPAWNER.game.mapsize.x + 100 || \
+	pos.y < -100 || \
+	pos.x > SPAWNER.game.mapsize.y + 100:
+		target_pos = ai.center
+		ai.target_velocity = Vector2(0,0)
+		ai.ailow = ai.ai_low.CHASE
 
-			d = pos.distance_to(target_pos)
+	ai.facing_rotate = 0.0
+	ai.target_rotate = 0.0
+	ai.pos1 = Vector2(0,0)
+	ai.theta = 0.0
 
-			if d < aistandoff:
-				armor = -100
-			else:
-				ailow = ai_low.CHASE
+	ai.thrust_dir = abs(CALC._rotate_direction(rotate,ai.theta))
+	ai.thrust_vel = sqrt(pow(velocity.x,2) + pow(velocity.y,2))
 
-			check_return = true
-		ai_mid.HALO_COMBAT:
-
-			if tcpu._target_closest(pos) != -1:
-				target_pos = tcpu.target_pos
-				target_velocity = tcpu.target_velocity
-				target_hot = true
-			else:
-				target_pos = center
-				target_velocity = Vector2(0,0)
-
-			d = pos.distance_to(target_pos)
-
-			if d < aistandoff:
-				ailow = ai_low.FLOAT
-			else:
-				ailow = ai_low.HALO_CHASE
-
-			check_return = false
-			if pos.x < -100 || pos.x > SPAWNER.game.mapsize.x + 100 || pos.y < -100 || pos.x > SPAWNER.game.mapsize.y + 100:
-
-				target_pos = center
-				target_velocity = Vector2(0,0)
-				ailow = ai_low.HALO_CHASE
-		ai_mid.INTERCEPT:
-			#TODO: Implement Lead Collision
-			if tcpu._target_closest(pos) != -1:
-				target_pos = tcpu.target_pos
-				target_velocity = tcpu.target_velocity
-				target_hot = true
-			else:
-				target_pos = center
-				target_velocity = Vector2(0,0)
-			ailow = ai_low.STATIC_COLLISION
-		ai_mid.BUILDER:
-			if build_mission != null:
-
-				var build2 = build_mission[2]
-
-				target_pos = Vector2(32 * build_mission[3], 32 * build_mission[4])
-				
-				if "build_size" in player.item_bag_objs[build2]:
-					target_pos = target_pos + 16 * player.item_bag_objs[build2].build_size
-				if "factory" in player.item_bag_objs[build2]:
-					target_pos = target_pos + 16 * player.item_bag_factory_objs[build2].build_size
-
-				target_velocity = Vector2(0,0)
-				ailow = ai_low.STATIC_COLLISION
-
-			if pos.distance_to(target_pos) < 12:
-				_do_build()
-
-			check_return = true
-
-	if (
-		check_return && pos.x < -100 || 
-		pos.x > SPAWNER.game.mapsize.x + 100 || 
-		pos.y < -100 || 
-		pos.x > SPAWNER.game.mapsize.y + 100
-	   ):
-			target_pos = center
-			target_velocity = Vector2(0,0)
-			ailow = ai_low.CHASE
-
-@onready var vel_off = max_velocity * 0.9
-
-var PIsum:float = CALC.half_PI + PI
-func _ai_low() -> void:
-	var r := 0.0
-	var theta := 0.0
-	var target_rotate := 0.0
-	var p1 := Vector2(0,0)
-	var p2 := Vector2(0,0)
-	var p3 := Vector2(0,0)
-
-	var thrust_dir := abs(CALC._rotate_direction(rotate,theta))
-	var thrust_vel := sqrt(pow(velocity.x,2) + pow(velocity.y,2))
-
-	match ailow:
-		ai_low.FLOAT:
-			pass
-		ai_low.POINT:
-			_ai_basic(ai_low.POINT)
-		ai_low.CHASE:
-			r = _ai_basic(ai_low.POINT)
-			if abs(r) < 0.05:
-				theta = atan2(velocity.y,velocity.x) - PIsum
-				if thrust_dir > 0.2 || thrust_vel < vel_off:
-					_do_command(commands.THRUST)
-		ai_low.CHARGE:
-			_ai_basic(ai_low.POINT)
-			_do_command(commands.THRUST)
-		ai_low.HALO_CHASE:
-			target_rotate = atan2(pos.y - target_pos.y,pos.x - target_pos.x) - CALC.half_PI
-			velocity.x = velocity.x + thrust * sin(target_rotate)
-			velocity.y = velocity.y - thrust * cos(target_rotate)
-		ai_low.STATIC_COLLISION:
-			p1 = target_pos - 3 * velocity
-			target_pos = p1
-			r = _ai_basic(ai_low.POINT)
-			if abs(r) < 0.05:
-				theta = atan2(velocity.y,velocity.x) - PIsum
-				if thrust_dir > 0.2 || thrust_vel < vel_off:
-					_do_command(commands.THRUST)
-			
-func _ai_basic(s:int) -> float:
-
-	var rotate_d := 0.0
-	var target_rotate := 0.0
-	var r := 0.0
-
-	match s:
-		ai_low.POINT:
-			target_rotate = atan2(pos.y - target_pos.y,pos.x - target_pos.x) - CALC.half_PI
-			rotate_d = CALC._rotate_direction(rotate,target_rotate)
-			if abs(rotate_d) < max_rotate_velocity:
-				rotate_d = 0
-				rotate = target_rotate
-			if rotate_d < -0.01:
-				_do_command(commands.LEFT)
-			if rotate_d > 0.01:
-				_do_command(commands.RIGHT)
-			r = rotate_d
-			
-	return r
-
-func _mine_rock() -> void:
-	miner_rock = true
-	for module in modules:
-		if module.name == "Module_Rock":
-			module._fire()
-
-func _mine_drop() -> void:
-	var tp := Vector2(0,0)
-	var dropped := false
-	var obj
-
-	#make it search the entire map for a valid extractor
-
-	tcpu.found_victim = false
-	tcpu._do_scan()
-
-	for target in tcpu.targets:
-		if(
-		target.special == "EXTRACTOR" &&
-		pos.x > target.pos.x - 24 && 
-		pos.x < target.pos.x + 24 && 
-		pos.y > target.pos.y - 24 && 
-		pos.y < target.pos.y + 24):
-			miner_rock = false
-			tp = target.position
-			dropped = true
-			target._add_rock()
-			for module in modules:
-				if module.name == "Module_Rock":
-					module.hide()
-				if "gun_cool" in module:
-					module.gun_cool = module.gun_heat
-	if dropped:
-		tcpu.targets = []
-		SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_ASTEROID_BOOM_SMALL], null, tp, Vector2(0,0), 0, 0, 0)
-		SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_MINER_FLASH], null, tp, Vector2(0,0), 0, 0, 0)
-		obj = SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_SPARKS_MEDIUM], null, tp, Vector2(0,0), 0, 0, 0)
-		obj.scale = Vector2(.65,.65)
+	_ai_low.call()

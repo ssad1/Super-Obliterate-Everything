@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://2rc1lcifjq2j" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://cu6eeduu5dbxa" path="res://Hangars/Hangar_Factory.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://b8fddygc2a8ui" path="res://Hangars/Hangar_Metalporter.tscn" id="11"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="12_vwq5o"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="12_vwq5o"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

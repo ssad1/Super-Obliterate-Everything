@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dvpe17dten5cx" path="res://Ships/Graphics/Knight_N.PNG" id="6_wl2eg"]
 [ext_resource type="Texture2D" uid="uid://d4ky0h3y6xtiw" path="res://Ships/Graphics/Knight_B.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://dnupqwwjknrpi" path="res://Ships/Graphics/Knight_C.PNG" id="8"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_t8wj3"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="8_t8wj3"]
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://y3xxymjtn6ar" path="res://Ships/Graphics/Knight_L.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]

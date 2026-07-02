@@ -123,7 +123,7 @@ func _fire() -> void:
 		up.tcpu.targets[up.tcpu.target_i].hit(obj)
 
 		if mining_laser:
-			top._mine_rock()
+			top.ai.mine_rock()
 
 	if top.has_method("_apply_force"):
 

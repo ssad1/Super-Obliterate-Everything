@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d1wul40smfw6x" path="res://Structures/Graphics/newAssets/Struct_Barricade_D.PNG" id="4"]
 [ext_resource type="Texture2D" uid="uid://dbxi3xc2js4a" path="res://Structures/Graphics/newAssets/Struct_Barricade_N.PNG" id="4_ty4uq"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="6"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="7_ce1bw"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="7_ce1bw"]
 [ext_resource type="PackedScene" uid="uid://cr3uqos0286u2" path="res://Modules/Module_Small_Struct_Boom.tscn" id="9"]
 
 [sub_resource type="ShaderMaterial" id="1"]

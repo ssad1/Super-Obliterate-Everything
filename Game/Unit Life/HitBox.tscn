@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://72ut2dkcxn4k"]
 
-[ext_resource type="Script" uid="uid://bf0uyf7e2yxh3" path="res://Modules/UnitHitBox.gd" id="1_2rov6"]
+[ext_resource type="Script" uid="uid://bf0uyf7e2yxh3" path="res://Game/Unit Life/UnitHitBox.gd" id="1_2rov6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bumja"]
 resource_local_to_scene = true

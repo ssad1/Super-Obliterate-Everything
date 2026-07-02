@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dji7d28mc4vkt" path="res://Ships/Graphics/Scorpion_N.PNG" id="6_7pqa7"]
 [ext_resource type="Texture2D" uid="uid://dma0qh0qd7iob" path="res://Ships/Graphics/Scorpion_B.PNG" id="7"]
 [ext_resource type="Texture2D" uid="uid://28sit8iq01kw" path="res://Ships/Graphics/Scorpion_L.PNG" id="8"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="8_wc8lp"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="8_wc8lp"]
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://mb4i0uby25ey" path="res://Ships/Graphics/Scorpion_C.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="11"]

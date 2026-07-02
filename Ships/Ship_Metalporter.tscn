@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://cfp6p0t0vg0au" path="res://Ships/Graphics/Metalporter_B.PNG" id="10"]
 [ext_resource type="PackedScene" path="res://Modules/Spawn_Effect.tscn" id="11"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="12_0l4qf"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="12_0l4qf"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

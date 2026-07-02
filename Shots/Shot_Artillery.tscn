@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d7lxvfirg4je" path="res://Shots/Explode_Basic.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://chsnqngu671vk" path="res://Modules/Spawn_Explosion.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://Modules/Module_Death_SFX.tscn" id="11"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="11_8ll1s"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="11_8ll1s"]
 
 [sub_resource type="ShaderMaterial" id="3"]
 resource_local_to_scene = true

@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://digfsqadrruot" path="res://Ships/Graphics/Mosquito_C.PNG" id="7"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="9"]
-[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Modules/HitBox.tscn" id="9_m7221"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="9_m7221"]
 [ext_resource type="PackedScene" uid="uid://cfxhjbmt2lidm" path="res://Shots/Missile_B1.tscn" id="10"]
 [ext_resource type="Texture2D" uid="uid://5y1o6yhy548u" path="res://Ships/Graphics/Mosquito_B.PNG" id="13"]
 [ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="14"]
