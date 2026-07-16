@@ -52,6 +52,8 @@ func _do_tick() -> void:
 		shield = 0
 	if charge_t > 0:
 		charge_t = charge_t - 1
+	
+	if up.has_stats: up.stats.update_stats()
 
 func _gen_circle(r:float) -> void:
 	var theta := 0.0

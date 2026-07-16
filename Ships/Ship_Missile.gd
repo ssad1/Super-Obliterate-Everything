@@ -21,7 +21,6 @@ func _process(delta:float) -> void:
 	var blend_pos := position + (pos - position) * 0.1 + 0.2 * velocity
 	set_position(blend_pos)
 	_do_anim(delta)
-	_do_selection(delta)
 
 	if inactive: return
 
@@ -56,80 +55,4 @@ func _do_smoke() -> void:
 		offset.y = 16 * cos(rotate)
 		obj = SPAWNER._spawn([smoke_trail], null, position + offset, Vector2(0,0),0,0,0)
 		obj.scale = Vector2(0.6, 0.6) * shot_scale
-
-'''
-func _ai_high() -> void:
-
-	if armor <= 0:
-		aihigh = ai_high.NONE
-		aimid = ai_mid.NONE
-		ailow = ai_low.NONE
-
-	target_hot = false
-
-	match aihigh:
-		ai_high.R1:
-			aimid = ai_mid.ROCKET
-			ailow = ai_low.NONE
-		ai_high.B1:
-			aimid = ai_mid.BOMB
-			ailow = ai_low.NONE
-		ai_high.M1:
-			aimid = ai_mid.NONE
-			ailow = ai_low.NONE
-			if missile_clock > 5 && missile_clock < lifespan - 5:
-				aimid = ai_mid.INTERCEPT
-
-func _ai_mid() -> void:
-	var d := 0.0
-	match aimid:
-		ai_mid.ROCKET:
-
-			if tcpu._target_closest(pos) != -1:
-				target_pos = tcpu.target_pos
-				target_velocity = tcpu.target_velocity
-				target_hot = true
-				d = pos.distance_to(target_pos)
-
-				if d < detonate_range:
-					armor = -100
-
-			if missile_clock > 5:
-				_do_command(commands.THRUST)
-				_do_smoke()
-
-			ailow = ai_low.NONE
-		ai_mid.BOMB:
-
-			if tcpu._target_closest(pos) != -1:
-				target_pos = tcpu.target_pos
-				target_velocity = tcpu.target_velocity
-				target_hot = true
-				d = pos.distance_to(target_pos)
-
-				if d < detonate_range:
-					armor = -100
-
-			if missile_clock > 3 && missile_clock < 10:
-				_do_command(commands.THRUST)
-				_do_smoke()
-
-			ailow = ai_low.NONE
-		ai_mid.INTERCEPT:
-			#TODO: Implement Lead Collision
-			
-			if tcpu._target_closest(pos) != -1:
-				target_pos = tcpu.target_pos
-				target_velocity = tcpu.target_velocity
-				target_hot = true
-				d = pos.distance_to(target_pos)
-
-				if d < detonate_range:
-					armor = -100
-
-				ailow = ai_low.CHARGE
-				_do_smoke()
-
-			else:
-				ailow = ai_low.NONE
-		'''
+		obj.scale = Vector2(0.6, 0.6) * shot_scale

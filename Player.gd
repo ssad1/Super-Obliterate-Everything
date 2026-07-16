@@ -1,3 +1,4 @@
+class_name Player
 extends Node
 
 var id:int = 0
@@ -119,7 +120,7 @@ func _build(moves:Array) -> void:
 		obj.build_mission = moves
 		obj.ai.init_builder()
 		obj._add_payload(s.energy_cost,s.metal_cost,s.supply_cost)
-		EVENTS.emit_signal("build_line",obj,obj.target_pos)
+		EVENTS.emit_signal("build_line",obj,obj.tcpu.target_pos)
 		EVENTS.emit_signal("build_spot_ghost",obj)
 		
 	energy = energy - s.energy_cost

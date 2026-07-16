@@ -8,7 +8,7 @@ extends Thing
 
 var target_hot:bool = false
 var target_pos:Vector2 = Vector2(0,0)
-var base = null
+var base = null #the hangar where the ship came from
 var engine_burn:float = 0
 var build_mission
 
@@ -41,6 +41,11 @@ func _ready() -> void:
 	
 	has_tcpu = tcpu != null
 	ai = AI_Behavior.new(self)
+
+	stats = Stats.stat_node.instantiate()
+	add_child(stats)
+	stats.update_stats()
+	has_stats = stats != null
 
 func _add_payload(e,m,s) -> void:
 	for module in modules:
@@ -76,7 +81,6 @@ func _process(delta:float) -> void:
 	var blend_pos := position + (pos - position) * 0.1 + 0.2 * velocity
 	set_position(blend_pos)
 	_do_anim(delta)
-	_do_selection(delta)
 
 	if inactive: return
 

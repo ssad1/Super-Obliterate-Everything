@@ -118,9 +118,6 @@ func _do_tick() -> void:
 	if armor <= 0:
 		_die()
 
-func _do_selection(delta:float) -> void:
-	pass
-
 func _set_player(p) -> void:
 	if p != null:
 		player = p

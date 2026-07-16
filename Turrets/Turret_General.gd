@@ -114,9 +114,6 @@ func _do_range():
 	tFOV._initialize_FOV_area(range_radius)
 	tFOV._bind_tcpu(tcpu)
 
-func _do_selection():
-	pass
-
 func _do_tick():
 	spawn_id = up.spawn_id
 	player = up.player

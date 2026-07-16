@@ -268,7 +268,7 @@ void fragment()
 resource_local_to_scene = true
 shader = SubResource("3")
 shader_parameter/shield_radius = 160.0
-shader_parameter/shield_width = 32.0
+shader_parameter/shield_width = 60.0
 shader_parameter/hit_angle = 0.0
 shader_parameter/hit_fade = 0.0
 shader_parameter/shock_strength = 1.0
@@ -288,7 +288,7 @@ script = ExtResource("1")
 shield = 45.0
 max_shield = 45.0
 shield_radius = 160
-shield_width = 112
+shield_width = 100
 
 [node name="Shield_Line" type="Line2D" parent="."]
 visible = false

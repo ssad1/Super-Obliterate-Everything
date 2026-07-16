@@ -80,6 +80,7 @@ var low_behavior:Dictionary[ai_low, Callable] = {
 }
 
 var unit:Thing
+var tcpu:TargetCPU
 var target_velocity:Vector2 = Vector2(0,0)
 var miner_rock:bool = false
 var vel_off:float = 0.0
@@ -108,6 +109,7 @@ func _init(currentUnit) -> void:
 	unit._ai_mid = mid_behavior[ai_mid.NONE]
 	unit._ai_low = mid_behavior[ai_low.NONE]
 	vel_off = currentUnit.max_velocity * 0.9
+	tcpu = unit.tcpu
 
 func _do_build() -> void:
 
@@ -117,11 +119,6 @@ func _do_build() -> void:
 		unit.build_mission = null
 		unit.vanish = true
 		unit.armor = -100
-		if unit.stats != null:
-			#print("Kill Stats")
-			unit.stats.hide()
-			unit.stats.queue_free()
-			unit.stats = null
 	else:
 		aiflag = ai_flag.RETURN
 
@@ -150,24 +147,24 @@ func _high_halo() -> void:
 
 func _high_miner() -> void:
 	if !miner_rock:
-		unit.tcpu.set_target_profile = unit.tcpu.profile.MINER_MINE
+		tcpu.set_target_profile = tcpu.profile.MINER_MINE
 		aimid = ai_mid.COMBAT
 		unit.guns_safety = false
-		unit.tcpu.found_victim = false
+		tcpu.found_victim = false
 		if unit.player != null:
 			if unit.player.ai_no_rocks:
-				unit.tcpu.set_target_profile = unit.tcpu.profile.MINER_RETURN
+				tcpu.set_target_profile = tcpu.profile.MINER_RETURN
 				aimid = ai_mid.INTERCEPT
 				unit.guns_safety = true
-				unit.tcpu.found_victim = false
+				tcpu.found_victim = false
 	if miner_rock:
-		unit.tcpu.set_target_profile = unit.tcpu.profile.MINER_RETURN
+		tcpu.set_target_profile = tcpu.profile.MINER_RETURN
 		aimid = ai_mid.INTERCEPT
 		unit.guns_safety = true
 		_mine_drop()
 
 func _high_metalporter() -> void:
-	unit.tcpu.set_target_profile = unit.tcpu.profile.STATION
+	tcpu.set_target_profile = tcpu.profile.STATION
 	aimid = ai_mid.INTERCEPT
 
 func _high_builder() -> void:
@@ -175,7 +172,7 @@ func _high_builder() -> void:
 		aimid = ai_mid.BUILDER
 	if aiflag == ai_flag.RETURN:
 		unit.build_mission = null
-		unit.tcpu.set_target_profile = unit.tcpu.profile.STATION
+		tcpu.set_target_profile = tcpu.profile.STATION
 		aimid = ai_mid.INTERCEPT
 
 func _high_kamikaze() -> void:
@@ -202,11 +199,10 @@ var check_return := false
 var center:Vector2 = SPAWNER.game.mapsize / 2
 
 func _mid_combat() -> void:
-	if unit.tcpu._target_closest(unit.pos) != -1:
-		unit.target_pos = unit.tcpu.target_pos
-		target_velocity = unit.tcpu.target_velocity
+	if tcpu._target_closest(unit.pos) != -1:
+		target_velocity = tcpu.target_velocity
 		unit.target_hot = true
-		d = unit.pos.distance_to(unit.target_pos)
+		d = unit.pos.distance_to(tcpu.target_pos)
 		if d < unit.aistandoff:
 			ailow = ai_low.POINT
 		else:
@@ -214,24 +210,24 @@ func _mid_combat() -> void:
 	else:
 		unit.target_hot = false
 		target_velocity = Vector2(0,0)
-		d = unit.pos.distance_to(unit.target_pos)
+		d = unit.pos.distance_to(tcpu.target_pos)
 		if d < unit.aistandoff:
 			ailow = ai_low.POINT
-			unit.target_pos = SPAWNER.game.mapsize * CALC._rand()
+			tcpu.target_pos = SPAWNER.game.mapsize * CALC._rand()
 			ailow = ai_low.CHASE
 
 	check_return = true
 
 func _mid_kamikaze() -> void:
-	if unit.tcpu._target_closest(unit.pos) != -1:
-		unit.target_pos = unit.tcpu.target_pos
-		target_velocity = unit.tcpu.target_velocity
+	if tcpu._target_closest(unit.pos) != -1:
+		 
+		target_velocity = tcpu.target_velocity
 		unit.target_hot = true
 	else:
-		unit.target_pos = center
+		tcpu.target_pos = center
 		target_velocity = Vector2(0,0)
 
-	d = unit.pos.distance_to(unit.target_pos)
+	d = unit.pos.distance_to(tcpu.target_pos)
 
 	if d < unit.aistandoff:
 		unit.armor = -100
@@ -241,15 +237,15 @@ func _mid_kamikaze() -> void:
 	check_return = true
 
 func _mid_halo_combat() -> void:
-	if unit.tcpu._target_closest(unit.pos) != -1:
-		unit.target_pos = unit.tcpu.target_pos
-		target_velocity = unit.tcpu.target_velocity
+	if tcpu._target_closest(unit.pos) != -1:
+		 
+		target_velocity = tcpu.target_velocity
 		unit.target_hot = true
 	else:
-		unit.target_pos = center
+		tcpu.target_pos = center
 		target_velocity = Vector2(0,0)
 
-	d = unit.pos.distance_to(unit.target_pos)
+	d = unit.pos.distance_to(tcpu.target_pos)
 
 	if d < unit.aistandoff:
 		ailow = ai_low.FLOAT
@@ -259,18 +255,18 @@ func _mid_halo_combat() -> void:
 	check_return = false
 	if unit.pos.x < -100 || unit.pos.x > SPAWNER.game.mapsize.x + 100 || unit.pos.y < -100 || unit.pos.x > SPAWNER.game.mapsize.y + 100:
 
-		unit.target_pos = center
+		tcpu.target_pos = center
 		target_velocity = Vector2(0,0)
 		ailow = ai_low.HALO_CHASE
 
 #TODO: Implement Lead Collision
 func _mid_intercept() -> void:
-	if unit.tcpu._target_closest(unit.pos) != -1:
-		unit.target_pos = unit.tcpu.target_pos
-		target_velocity = unit.tcpu.target_velocity
+	if tcpu._target_closest(unit.pos) != -1:
+		 
+		target_velocity = tcpu.target_velocity
 		unit.target_hot = true
 	else:
-		unit.target_pos = center
+		tcpu.target_pos = center
 		target_velocity = Vector2(0,0)
 	ailow = ai_low.STATIC_COLLISION
 
@@ -279,27 +275,27 @@ func _mid_builder() -> void:
 
 		var build2 = unit.build_mission[2]
 
-		unit.target_pos = Vector2(32 * unit.build_mission[3], 32 * unit.build_mission[4])
+		tcpu.target_pos = Vector2(32 * unit.build_mission[3], 32 * unit.build_mission[4])
 		
 		if "build_size" in unit.player.item_bag_objs[build2]:
-			unit.target_pos = unit.target_pos + 16 * unit.player.item_bag_objs[build2].build_size
+			tcpu.target_pos = tcpu.target_pos + 16 * unit.player.item_bag_objs[build2].build_size
 		if "factory" in unit.player.item_bag_objs[build2]:
-			unit.target_pos = unit.target_pos + 16 * unit.player.item_bag_factory_objs[build2].build_size
+			tcpu.target_pos = tcpu.target_pos + 16 * unit.player.item_bag_factory_objs[build2].build_size
 
 		target_velocity = Vector2(0,0)
 		ailow = ai_low.STATIC_COLLISION
 
-	if unit.pos.distance_to(unit.target_pos) < 12:
+	if unit.pos.distance_to(tcpu.target_pos) < 12:
 		_do_build()
 
 	check_return = true
 
 func _mid_rocket() -> void:
-	if unit.tcpu._target_closest(unit.pos) != -1:
-		unit.target_pos = unit.tcpu.target_pos
-		target_velocity = unit.tcpu.target_velocity
+	if tcpu._target_closest(unit.pos) != -1:
+		 
+		target_velocity = tcpu.target_velocity
 		unit.target_hot = true
-		d = unit.pos.distance_to(unit.target_pos)
+		d = unit.pos.distance_to(tcpu.target_pos)
 
 		if d < unit.detonate_range:
 			unit.armor = -100
@@ -311,11 +307,11 @@ func _mid_rocket() -> void:
 	ailow = ai_low.NONE
 
 func _mid_bomb() -> void:
-	if unit.tcpu._target_closest(unit.pos) != -1:
-		unit.target_pos = unit.tcpu.target_pos
-		target_velocity = unit.tcpu.target_velocity
+	if tcpu._target_closest(unit.pos) != -1:
+		 
+		target_velocity = tcpu.target_velocity
 		unit.target_hot = true
-		d = unit.pos.distance_to(unit.target_pos)
+		d = unit.pos.distance_to(tcpu.target_pos)
 
 		if d < unit.detonate_range:
 			unit.armor = -100
@@ -328,11 +324,11 @@ func _mid_bomb() -> void:
 
 #TODO: Implement Lead Collision
 func _mid_missile_intercept() -> void:
-	if unit.tcpu._target_closest(unit.pos) != -1:
-		unit.target_pos = unit.tcpu.target_pos
-		target_velocity = unit.tcpu.target_velocity
+	if tcpu._target_closest(unit.pos) != -1:
+		 
+		target_velocity = tcpu.target_velocity
 		unit.target_hot = true
-		d = unit.pos.distance_to(unit.target_pos)
+		d = unit.pos.distance_to(tcpu.target_pos)
 
 		if d < unit.detonate_range:
 			unit.armor = -100
@@ -370,13 +366,13 @@ func _low_charge() -> void:
 	_do_command(commands.THRUST)
 
 func _low_halo_chase() -> void:
-	target_rotate = atan2(unit.pos.y - unit.target_pos.y, unit.pos.x - unit.target_pos.x) - CALC.half_PI
+	target_rotate = atan2(unit.pos.y - tcpu.target_pos.y, unit.pos.x - tcpu.target_pos.x) - CALC.half_PI
 	unit.velocity.x = unit.velocity.x + unit.thrust * sin(target_rotate)
 	unit.velocity.y = unit.velocity.y - unit.thrust * cos(target_rotate)
 
 func _low_static_collision() -> void:
-	pos1 = unit.target_pos - 3 * unit.velocity
-	unit.target_pos = pos1
+	pos1 = tcpu.target_pos - 3 * unit.velocity
+	tcpu.target_pos = pos1
 	facing_rotate = _ai_basic()
 	if abs(facing_rotate) < 0.05:
 		theta = atan2(unit.velocity.y, unit.velocity.x) - PIsum
@@ -389,7 +385,7 @@ func _ai_basic() -> float:
 	var target_rotate := 0.0
 	var r := 0.0
 	
-	target_rotate = atan2(unit.pos.y - unit.target_pos.y, unit.pos.x - unit.target_pos.x) - CALC.half_PI
+	target_rotate = atan2(unit.pos.y - tcpu.target_pos.y, unit.pos.x - tcpu.target_pos.x) - CALC.half_PI
 	rotate_d = CALC._rotate_direction(unit.rotate,target_rotate)
 	if abs(rotate_d) < unit.max_rotate_velocity:
 		rotate_d = 0
@@ -417,10 +413,10 @@ func _mine_drop() -> void:
 
 	#make it search the entire map for a valid extractor
 
-	unit.tcpu.found_victim = false
-	unit.tcpu._do_scan()
+	tcpu.found_victim = false
+	tcpu._do_scan()
 
-	for target in unit.tcpu.targets:
+	for target in tcpu.targets:
 		if(
 		target.special == "EXTRACTOR" &&
 		unit.pos.x > target.pos.x - 24 && 
@@ -437,7 +433,7 @@ func _mine_drop() -> void:
 				if "gun_cool" in module:
 					module.gun_cool = module.gun_heat
 	if dropped:
-		unit.tcpu.targets = []
+		tcpu.targets = []
 		SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_ASTEROID_BOOM_SMALL], null, tp, Vector2(0,0), 0, 0, 0)
 		SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_MINER_FLASH], null, tp, Vector2(0,0), 0, 0, 0)
 		obj = SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_SPARKS_MEDIUM], null, tp, Vector2(0,0), 0, 0, 0)
@@ -448,13 +444,13 @@ func _mine_drop() -> void:
 func init_builder() -> void:
 	if unit.build_mission == null: return
 
-	unit.target_pos = Vector2(32 * unit.build_mission[3],32 * unit.build_mission[4])
+	tcpu.target_pos = Vector2(32 * unit.build_mission[3],32 * unit.build_mission[4])
 
 	var obj = unit.player.item_bag_objs[unit.build_mission[2]]
 	
 	if "build_size" in obj:
-		unit.target_pos = unit.target_pos + 16 * unit.player.item_bag_objs[unit.build_mission[2]].build_size
+		tcpu.target_pos = tcpu.target_pos + 16 * unit.player.item_bag_objs[unit.build_mission[2]].build_size
 	if "factory" in obj:
-		unit.target_pos = unit.target_pos + 16 * unit.player.item_bag_factory_objs[unit.build_mission[2]].build_size
+		tcpu.target_pos = tcpu.target_pos + 16 * unit.player.item_bag_factory_objs[unit.build_mission[2]].build_size
 
-	unit.rotate = atan2(unit.pos.y - unit.target_pos.y, unit.pos.x - unit.target_pos.x) - CALC.half_PI
+	unit.rotate = atan2(unit.pos.y - tcpu.target_pos.y, unit.pos.x - tcpu.target_pos.x) - CALC.half_PI

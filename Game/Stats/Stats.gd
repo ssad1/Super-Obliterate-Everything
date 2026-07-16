@@ -10,44 +10,89 @@ var is_type:UNIT_STATE.type = UNIT_STATE.type.STATS
 @onready var shieldback:Sprite2D = $ShieldBack
 @onready var areashield:Sprite2D = $AreaShield
 
-var _faded:bool = true
-var fade_in:bool = _faded
-''':
-	get:
-		return _faded
-	set(value):
-		if value:
-			UNIT_STATE.fade_stats(self, 0, 1)
-		else:
-			UNIT_STATE.fade_stats(self, 1, 0)
-		
-		_faded = value'''
+var parent_unit
+var draw_ranges:bool = false
 
-var fade_alpha:float = 0
+static var stat_node = preload("res://Game/Stats/Stats.tscn")
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	modulate = Color(1,1,1,0)
 	range_line.scale = Vector2(.5,.5)
-	shield_line.scale = Vector2(1.2,1.2)
+	shield_line.scale = Vector2(.5,.5)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta:float) -> void:
+	parent_unit = get_parent()
+	#update_stats()
 
-	if fade_in:
-		fade_alpha = fade_alpha + 5 * delta
-		if fade_alpha >= 1:
-			fade_alpha = 1
-			fade_in = false
+func do_fade(into: bool) -> void:
+	var goal := into if 1.0 else 0.0
+	get_tree().create_tween().tween_property(self, "modulate", Color(1,1,1,goal), 0.25)
 
-	modulate = Color(1,1,1,fade_alpha)
-	range_line.scale = Vector2(.5 + .5 * fade_alpha,.5 + .5 * fade_alpha)
-	shield_line.scale = Vector2(1.2 - .2 * fade_alpha,1.2 - .2 * fade_alpha)
+	if !draw_ranges: return
 
-func _do_tick() -> void:
-	pass
+	get_tree().create_tween().tween_property(range_line, "scale", Vector2(goal, goal), 0.25)
+	get_tree().create_tween().tween_property(shield_line, "scale", Vector2(goal, goal), 0.25)
 
-func _gen_circle(l:Line2D, r:float) -> void:
+func _set_stats(armorValue:float, shieldValue:float, shieldBack:float, radius:float, shieldRadius:float) -> void:
+
+	if draw_ranges:
+		if radius > 0:
+			_gen_circle(range_line,radius)
+		else:
+			range_line.clear_points()
+
+		if shieldRadius > 0:
+			_gen_circle(shield_line,shieldRadius)
+		else:
+			shield_line.clear_points()
+
+	armor.scale = Vector2(armorValue,1)
+	shield.scale = Vector2(shieldValue,1)
+	areashield.scale = Vector2(shieldBack,1)
+	armor.modulate = Color(1,0,0,1)
+
+	if armorValue >= 0.33:
+		armor.modulate = Color(1,.8,.4,1)
+
+	if armorValue >= 0.66:
+		armor.modulate = Color(1,1,1,1)
+
+	shield.visible     = shieldValue  != 0
+	areashield.visible = shieldBack != 0
+	shieldback.visible = shieldValue != 0 || shieldBack != 0
+	armor.visible      = armorValue != 0
+	armorback.visible  = armorValue != 0
+
+func update_stats() -> void:
+
+	var max_armor:float       = parent_unit.max_armor
+	var armor:float           = parent_unit.armor
+	var max_shields:float     = parent_unit.max_shields
+	var shields:float         = parent_unit.shields
+	var max_area_shield:float = parent_unit.max_area_shield
+	var area_shield:float     = parent_unit.area_shield
+	
+	var a := 0.0
+	var s := 0.0
+	var sb := 0.0
+
+	if armor == 0: return
+
+	if max_armor > 0:
+		a = armor/max_armor
+	else:
+		a = 0
+	if max_shields > 0:
+		s = shields/max_shields
+	else:
+		s = 0
+	if max_area_shield > 0:
+		sb = area_shield/max_area_shield
+	else:
+		sb = 0
+
+	_set_stats(a, s, sb, parent_unit.range_radius, parent_unit.shield_radius)
+
+static func _gen_circle(l:Line2D, r:float) -> void:
 	var theta := 0.0
 	var samples := 0
 	var p:Vector2
@@ -59,47 +104,29 @@ func _gen_circle(l:Line2D, r:float) -> void:
 		l.add_point(p)
 		theta = theta + TAU / samples
 
-func _set_stats(a:float, s:float, sb:float, r:float, sr:float) -> void:
+static func do_build_range(stat:Stats, radius:float, shieldRadius:float) -> void:
 
-	if r > 0:
-		_gen_circle(range_line,r)
+	var range_line = stat.get_node("Range_Line")
+	var shield_line = stat.get_node("Shield_Line")
+
+	range_line.scale = Vector2.ZERO
+	shield_line.scale = Vector2.ZERO
+
+	for i in stat.get_children():
+		if i != range_line and i != shield_line:
+			i.hide()
+
+	if radius > 0:
+		_gen_circle(range_line, radius)
 	else:
 		range_line.clear_points()
 
-	if sr > 0:
-		_gen_circle(shield_line,sr)
+	print(shieldRadius)
+
+	if shieldRadius > 0:
+		_gen_circle(shield_line, shieldRadius)
 	else:
 		shield_line.clear_points()
 
-	armor.scale = Vector2(a,1)
-	shield.scale = Vector2(s,1)
-	areashield.scale = Vector2(sb,1)
-	armor.modulate = Color(1,0,0,1)
-
-	if a >= 0.33:
-		armor.modulate = Color(1,.8,.4,1)
-
-	if a >= 0.66:
-		armor.modulate = Color(1,1,1,1)
-
-	if s == 0:
-		shield.hide()
-	else:
-		shield.show()
-
-	if sb == 0:
-		areashield.hide()
-	else:
-		areashield.show()
-
-	if s == 0 && sb == 0:
-		shieldback.hide()
-	else:
-		shieldback.show()
-
-	if a == 0:
-		armor.hide()
-		armorback.hide()
-	else:
-		armor.show()
-		armorback.show()
+	stat.get_tree().create_tween().tween_property(range_line, "scale", Vector2(1, 1), 0.25)
+	stat.get_tree().create_tween().tween_property(shield_line, "scale", Vector2(1, 1), 0.25)

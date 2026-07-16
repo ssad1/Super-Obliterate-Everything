@@ -89,7 +89,6 @@ class_text = "AUXILIARY"
 energy_cost = 100
 supply_cost = 1
 credit_cost = 500
-max_armor = 50
 
 [node name="Hull" type="Sprite2D" parent="."]
 material = SubResource("1")

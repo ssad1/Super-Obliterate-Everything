@@ -35,28 +35,18 @@ var guns_safety:bool = false
 var burn_color = Color(1,0,0,1)
 var light_bright:float = 1
 var burn_bright:float = 0
-var cloak_strength:float = 0
-var freeze_strength:float = 0
-var acid_strength:float = 0
-var dissolve_strength:float = 0
-var shock_strength:float = 0
-var shield_strength:float = 0
-var shield_damage:float = 0
-var build_strength:float = 0
-var swirl_strength:float = 0
 
 var spaghettified:bool = false
 var select_strength:float = 0
-var offset:Vector2 = Vector2(randi() % 1000 + 10,randi() % 1000 + 10)
-var player
+var player:Player
 var tcpu:TargetCPU 
-var stats
+var stats:Stats
 var modules = []
 var spawn_id:int = 0
 var vanish:bool = false
 var is_type:UNIT_STATE.type = UNIT_STATE.type.THING
 var is_selected:bool = false
-var inactive:bool = true #will try to remove later
+var inactive:bool = true 
 var tick_clock:float = 0
 var physics_clock:float = 0
 var has_no_modules:bool = false
@@ -76,33 +66,17 @@ var dead:bool = _death:
 	get:
 		return _death
 
-@onready var tcpu_node = preload("res://Game/Unit Life/TargetCPU.tscn")
-@onready var FOV_node = preload("res://Game/Unit Life/Target_FOV.tscn")
 @onready var hull:Sprite2D = $Hull
 @onready var mat:Material = $Hull.get_material()
 @onready var has_modules:bool = modules.size() > 0
 @onready var has_tcpu:bool = tcpu != null
+@onready var has_stats:bool = stats != null
 @onready var is_not_struct:bool = is_type != UNIT_STATE.type.STRUCT
 
 func _ready() -> void:
-	hide()
 	_do_range()
-	if !visible:
-		show()
 
 func _process(delta:float) -> void:
-
-	if stats == null && is_selected:
-		stats = SPAWNER._spawn_stats()
-		stats.set_position(position)
-		_set_stats()
-
-	if stats != null:
-		if is_instance_valid(stats):
-			stats.set_position(position)
-		if is_selected == false:
-			stats.queue_free()
-			stats = null
 	
 	if inactive: return
 
@@ -123,7 +97,7 @@ func _process(delta:float) -> void:
 		physics_clock = 0.2
 
 func _add_tcpu() -> void:
-	tcpu = tcpu_node.instantiate()
+	tcpu = TargetCPU.tcpu_node.instantiate()
 	tcpu.up = self
 	tcpu.set_target_profile = target_profile
 
@@ -133,26 +107,7 @@ func _apply_force(f:float, dir:Vector2) -> void:
 	delta_v = inertia * f * dir
 	velocity = velocity + delta_v
 
-func _station_distance() -> float:
-	var d := 10000.0
-	var old_d := 10000.0
-
-	for struct in player.my_structs:
-
-		if struct.special == "STATION": continue
-
-		d = pos.distance_to(struct.pos)
-
-		if d < old_d:
-			old_d = d
-
-	return old_d
-
 func _die() -> void:
-	if stats != null:
-		stats.hide()
-		stats.queue_free()
-		stats = null
 	if vanish == false:
 		for module in modules:
 			if module.has_method("_on_death"):
@@ -195,13 +150,13 @@ func _do_modules() -> void:
 		if !is_instance_valid(module):
 			has_no_modules = true
 			return
-
-		module._do_tick()
 		
 		if "shield_radius" in module && module.shield_radius - module.shield_width / 2 > shield_radius:
 			shield_radius = module.shield_radius - module.shield_width / 2
 			area_shield = module.shield
 			max_area_shield = module.max_shield
+		
+		module._do_tick()
 
 func _do_range() -> void:
 	_add_tcpu()
@@ -212,26 +167,11 @@ func _do_range() -> void:
 		if "range_radius" in module && module.range_radius > range_radius:
 			range_radius = module.range_radius
 	
-	var tFOV = FOV_node.instantiate()
+	var tFOV = Target_FOV.FOV_node.instantiate()
 	add_child(tFOV)
 
 	tFOV._initialize_FOV_area(range_radius)
 	tFOV._bind_tcpu(tcpu)
-
-func _do_select(s:bool) -> void:
-	is_selected = s
-	if player != SPAWNER.game.me:
-		is_selected = false
-
-func _do_selection(delta:float) -> void:
-	
-	if is_selected:
-		select_strength = 1
-	elif select_strength > 0:
-		select_strength = select_strength - 3 * delta
-		select_strength = clamp(select_strength,0,1)
-
-	mat.set_shader_parameter("select_strength",select_strength)
 
 func _do_tick() -> void:
 
@@ -243,8 +183,6 @@ func _do_tick() -> void:
 		
 	if armor <= 0:
 		_die()
-
-	_set_stats()
 
 func _get_turret_score() -> int:
 	var score := 0
@@ -262,6 +200,8 @@ func do_damage(amount:float) -> void:
 		armor = max_armor
 
 	UNIT_STATE.do_unit_damage(self)
+	if stats != null: 
+		stats.update_stats()
 	
 func hit(s) -> void:
 
@@ -316,29 +256,3 @@ func _set_player(p) -> void:
 		var mat := hull.get_material()
 		mat.set_shader_parameter("flag_color",player.flag_color)
 		mat.set_shader_parameter("light_color",player.light_color)
-
-func _set_stats() -> void:
-	var a := 0.0
-	var s := 0.0
-	var sb := 0.0
-
-	if !is_instance_valid(stats): return
-
-	if armor > 0:
-		if max_armor > 0:
-			a = armor/max_armor
-		else:
-			a = 0
-		if max_shields > 0:
-			s = shields/max_shields
-		else:
-			s = 0
-		if max_area_shield > 0:
-			sb = area_shield/max_area_shield
-		else:
-			sb = 0
-		stats._set_stats(a,s,sb,range_radius,shield_radius)
-	else:
-		stats.hide()
-		stats.queue_free()
-		stats = null

@@ -208,6 +208,8 @@ func _pressed_sell() -> void:
 
 func _pressed_cockpit() -> void:
 	var r = 0
+	var sr = 0
+
 	SFX._play_new([SFX.sound.BUTTON_ITEM])
 	button_pressed = true
 	sprite.scale = Vector2(1,1)
@@ -216,6 +218,7 @@ func _pressed_cockpit() -> void:
 
 		if "range_radius" in obj:
 			r = obj.range_radius
+		
 		if "factory" in obj:
 			#Ship
 
@@ -308,6 +311,8 @@ func _spawn_obj(s) -> void:
 
 func _remove_obj_from_grid(obj:Thing) -> void:
 
+	obj.set_process(false)
+
 	if pb == "Prize_Slot":
 		obj.queue_free()
 		obj.hide()
@@ -318,6 +323,8 @@ func _remove_obj_from_grid(obj:Thing) -> void:
 	obj.tcpu.queue_free()
 
 	if "modules" in obj:
+		if "shield_module" in obj:
+			obj.shield_radius = obj.shield_module.shield_radius
 		for module in obj.modules:
 			module.queue_free()
 

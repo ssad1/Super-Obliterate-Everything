@@ -23,6 +23,12 @@ func _init_struct() -> void:
 
 	inactive = false
 
+	stats = Stats.stat_node.instantiate()
+	stats.draw_ranges = true
+	add_child(stats)
+	has_stats = true
+	stats.update_stats()
+
 func _build_fix() -> void:
 	pos = position
 	pos.x = pos.x + 32 * build_size.x / 2

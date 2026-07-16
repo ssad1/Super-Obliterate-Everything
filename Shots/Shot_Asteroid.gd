@@ -13,6 +13,7 @@ func _ready():
 	_do_range()
 
 func _process(delta):
+
 	var blend_pos
 	blend_pos = position + (pos - position) * .1 + .2 * velocity
 	set_position(blend_pos)
@@ -42,9 +43,6 @@ func _do_tick():
 	if clock >= lifespan:
 		armor = 0
 	super._do_tick()
-
-func _do_selection(delta:float) -> void:
-	pass
 
 func _set_player(p):
 	var mat

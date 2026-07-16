@@ -133,7 +133,7 @@ func do_unit_acid(unit, amount:float) -> void:
 
 	if unit.mat == null: return
 
-	var current = unit.mat.get_shader_parameter("acid_strength")
+	var current:float = unit.mat.get_shader_parameter("acid_strength")
 
 	get_tree().create_tween().tween_method(
 		_set_acid.bind(unit.mat),
@@ -166,7 +166,7 @@ func do_unit_freeze(unit, amount:float) -> void:
 
 	if unit.mat == null: return
 
-	var current = unit.mat.get_shader_parameter("freeze_strength")
+	var current:float = unit.mat.get_shader_parameter("freeze_strength")
 
 	get_tree().create_tween().tween_method(
 		_set_freeze.bind(unit.mat),
@@ -177,3 +177,20 @@ func do_unit_freeze(unit, amount:float) -> void:
 
 func _set_freeze(val:float, mat:Material) -> void:
 	mat.set_shader_parameter("freeze_strength", val)
+
+func do_unit_select(unit, selected:bool) -> void:
+
+	if unit.mat == null: return
+
+	var current:float = unit.mat.get_shader_parameter("select_strength")
+	var goal:int = selected if 1 else 0
+
+	get_tree().create_tween().tween_method(
+		_set_select.bind(unit.mat),
+		current,
+		goal,
+		0.5
+	)
+
+func _set_select(val:float, mat:Material) -> void:
+	mat.set_shader_parameter("select_strength", val)

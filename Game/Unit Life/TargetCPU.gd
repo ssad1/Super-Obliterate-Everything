@@ -50,6 +50,8 @@ var set_target_profile:profile = target_profile:
 		cull_check = (up.is_type == UNIT_STATE.type.STRUCT || up.is_type == UNIT_STATE.type.SINGULARITY || up.is_type == UNIT_STATE.type.SHOT || up.is_type == UNIT_STATE.type.LASER) && target_profile != profile.REPAIR
 		_do_profile()
 
+static var tcpu_node = preload("res://Game/Unit Life/TargetCPU.tscn")
+
 func _ready() -> void:
 	up = get_parent()
 	up.tcpu = self

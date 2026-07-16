@@ -12,17 +12,11 @@ var metal_cost:float = 0
 var supply_cost:int = 0
 var range_radius:int = 0
 var shield_radius:int = 0
-var stats:Stats
 var build_alert:String = ""
 var old_build_alert:String = ""
 
 var has_stats:bool = false
-var are_stats_valid:bool = false
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	has_stats = stats != null
-	are_stats_valid = is_instance_valid(stats)
+@onready var dummy_stat:Stats
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta:float) -> void:
@@ -30,8 +24,8 @@ func _process(delta:float) -> void:
 	_color_squares()
 	_check_mouse()
 
-	if has_stats && are_stats_valid:
-		stats.set_position(position + center)
+	if has_stats and is_instance_valid(dummy_stat):
+		dummy_stat.position = position + center
 	if old_build_alert != build_alert:
 		EVENTS.emit_signal("build_alert", build_alert)
 		old_build_alert = build_alert
@@ -88,10 +82,17 @@ func _ignite(id:int, v:Vector2, price:Array, r:float, sr:float) -> void:
 
 	center = dimensions * 16
 
-	if has_stats:
-		stats = SPAWNER._spawn_stats()
-		stats.set_position(position + center)
-		_set_stats()
+	_init_dummy_stat()
+
+func _init_dummy_stat() -> void:
+	dummy_stat = Stats.stat_node.instantiate()
+	SPAWNER.game.super_add_child(dummy_stat)
+	dummy_stat.position = position + center
+	dummy_stat.modulate = Color(1,1,1,1)
+	has_stats = true
+
+	Stats.do_build_range(dummy_stat, range_radius, shield_radius)
+
 
 func _color_squares() -> void:
 	#var xx = 0
@@ -107,7 +108,7 @@ func _color_squares() -> void:
 		pos = (squares[i].position + self.position) / 32
 		if (
 		int(pos.x) >= 0 && 
-	    int(pos.x) < SPAWNER.game.radar.size() && 
+		int(pos.x) < SPAWNER.game.radar.size() && 
 		int(pos.y) >= 0 && 
 		int(pos.y) < SPAWNER.game.radar.size()
 		):
@@ -144,10 +145,9 @@ func _color_squares() -> void:
 	buildability = building
 
 func _die() -> void:
-	if are_stats_valid:
-		stats.hide()
-		stats.queue_free()
-		stats = null
+	dummy_stat.hide()
+	dummy_stat.queue_free()
+	dummy_stat = null
 
 func _build() -> void:
 	var obj
@@ -165,7 +165,3 @@ func _build() -> void:
 		if !Input.is_key_pressed(KEY_SHIFT):
 			EVENTS.emit_signal("cancel_build")
 		SFX._play_new([SFX.sound.BUILD_ERROR])
-
-func _set_stats():
-	if has_stats && are_stats_valid:
-		stats._set_stats(0,0,0,range_radius,shield_radius)
