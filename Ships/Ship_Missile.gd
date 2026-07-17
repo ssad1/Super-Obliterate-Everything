@@ -20,7 +20,6 @@ func _ready() -> void:
 func _process(delta:float) -> void:
 	var blend_pos := position + (pos - position) * 0.1 + 0.2 * velocity
 	set_position(blend_pos)
-	_do_anim(delta)
 
 	if inactive: return
 

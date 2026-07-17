@@ -66,6 +66,13 @@ func spawn_row() -> void:
 
 
 func _remove_ship(removeid:int) -> void:
+	'''
+	var i := mines.size() - 1
+
+	for o in i:
+		if mines[o].spawn_id == removeid:
+			mines.remove_at(-o-1) #access properties backward to avoid losing potential units upon deletion
+	'''
 	var i
 	i = mines.size() - 1
 	while(i > -1):

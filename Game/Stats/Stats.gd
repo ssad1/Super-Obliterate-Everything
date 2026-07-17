@@ -121,8 +121,6 @@ static func do_build_range(stat:Stats, radius:float, shieldRadius:float) -> void
 	else:
 		range_line.clear_points()
 
-	print(shieldRadius)
-
 	if shieldRadius > 0:
 		_gen_circle(shield_line, shieldRadius)
 	else:

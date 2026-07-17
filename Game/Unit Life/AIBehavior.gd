@@ -133,7 +133,8 @@ func _do_command(c:int) -> void:
 			unit.velocity.y = unit.velocity.y - unit.thrust * cos(unit.rotate)
 			unit.engine_burn = unit.engine_burn + .2
 			unit.engine_burn = clamp(unit.engine_burn,0.0,1.0)
-
+	unit._do_anim()
+	
 #Different behaviors encapsulated as functions
 
 ####----AI highs----####
@@ -190,7 +191,7 @@ func _high_M1() -> void:
 	aimid = ai_mid.NONE
 	ailow = ai_low.NONE
 	if unit.missile_clock > 5 && unit.missile_clock < unit.lifespan - 5:
-		aimid = ai_mid.INTERCEPT
+		aimid = ai_mid.MISSILE_INTERCEPT
 
 ####----AI mids----####
 

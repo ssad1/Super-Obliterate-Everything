@@ -1,10 +1,9 @@
 extends ColorRect
 
 @onready var shield_line = $Shield_Line
-@onready var parent = get_parent()
 @onready var glow = $ShieldGlow.get_material()
 
-var up
+@onready var up = get_parent()
 var pos:Vector2 = Vector2(0,0)
 var is_type:UNIT_STATE.type = UNIT_STATE.type.SHIELD
 var shield_power:float = 0
@@ -20,7 +19,6 @@ var charge_t:int = 0
 var max_charge:float = 20
 
 func _ready() -> void:
-	up = get_parent()
 	up.modules.append(self)
 
 	_gen_circle(shield_radius)
@@ -40,7 +38,7 @@ func _process(delta:float) -> void:
 	glow.set_shader_parameter("shield_radius", shield_radius)
 
 func _do_tick() -> void:
-	pos = parent.pos + position + 0.5 * size
+	pos = up.pos + position + 0.5 * size
 	if charge_t == 0 && shield < max_shield:
 		shield = shield + shield_charge
 		shield_mode = 2

@@ -80,7 +80,6 @@ func _do_tick() -> void:
 func _process(delta:float) -> void:
 	var blend_pos := position + (pos - position) * 0.1 + 0.2 * velocity
 	set_position(blend_pos)
-	_do_anim(delta)
 
 	if inactive: return
 
@@ -100,7 +99,7 @@ func _process(delta:float) -> void:
 	if physics_clock > 0.2:
 		physics_clock = 0.2
 
-func _do_anim(delta:float) -> void:
+func _do_anim() -> void:
 
 	if !has_hull: return
 
@@ -112,7 +111,7 @@ func _do_anim(delta:float) -> void:
 		hull.frame = f
 
 	if engine_burn > 0:
-		engine_burn = engine_burn - delta
+		engine_burn = engine_burn - get_process_delta_time()
 		engine_burn = clamp(engine_burn,0.0,1.0)
 
 	if has_burn:

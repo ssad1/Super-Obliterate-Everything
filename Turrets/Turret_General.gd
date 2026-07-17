@@ -1,7 +1,5 @@
 extends Node2D
 
-@onready var tcpu_node = preload("res://Game/Unit Life/TargetCPU.tscn")
-@onready var FOV_node = preload("res://Game/Unit Life/Target_FOV.tscn")
 @onready var hull:Sprite2D = $Hull
 @onready var mat:Material = $Hull.get_material()
 
@@ -31,15 +29,15 @@ var spaghettified:bool = false
 @export var build_speed:float = 1
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	up = get_parent()
 	offset_pos = position
 	offset_radius = sqrt(pow(offset_pos.x,2) + pow(offset_pos.y,2))
 	offset_rotate = atan2(offset_pos.y, offset_pos.x) - CALC.half_PI
 	up.modules.append(self)
-	tcpu = tcpu_node.instantiate()
+	tcpu = TargetCPU.tcpu_node.instantiate()
 
-	tFOV = FOV_node.instantiate()
+	tFOV = Target_FOV.FOV_node.instantiate()
 	add_child(tFOV)
 
 	tcpu.up = self
@@ -50,51 +48,48 @@ func _ready():
 	UNIT_STATE.do_unit_frames(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	_do_anim()
-	pass
 
-func _do_ai():
+func _do_ai() -> void:
 
 	if spaghettified: return
 
 	var target_rotate := 0.0
 	var rotate_d := 0.0
 	target_hot = false
-	match ai_mode:
-		1:
-			if tcpu._target_closest(pos) != -1:
-				target_hot = true
-				target_rotate = atan2(pos.y - tcpu.target_pos.y,pos.x - tcpu.target_pos.x) - CALC.half_PI
-			else:
-				target_rotate = last_rotate
-			rotate_d = CALC._rotate_direction(rotate,target_rotate)
-			if abs(rotate_d) < max_rotate_velocity:
-				rotate_d = 0
-				rotate = target_rotate
-			if rotate_d < -0.01:
-				_do_command("LEFT")
-			if rotate_d > 0.01:
-				_do_command("RIGHT")
-			last_rotate = rotate	
+	#match ai_mode:
+	#	1:
+	if tcpu._target_closest(pos) != -1:
+		target_hot = true
+		target_rotate = atan2(pos.y - tcpu.target_pos.y,pos.x - tcpu.target_pos.x) - CALC.half_PI
+	else:
+		target_rotate = last_rotate
+	rotate_d = CALC._rotate_direction(rotate,target_rotate)
+	if abs(rotate_d) < max_rotate_velocity:
+		rotate_d = 0
+		rotate = target_rotate
+	if rotate_d < -0.01:
+		_do_command(AI_Behavior.commands.LEFT)
+	if rotate_d > 0.01:
+		_do_command(AI_Behavior.commands.RIGHT)
+	last_rotate = rotate	
 
-func _do_anim():
-	var f:int
-	f = floor(rotate * hull.hframes * hull.vframes / TAU)
-	hull.frame = f
+func _do_anim() -> void:
+	hull.frame = floori(rotate * hull.hframes * hull.vframes / TAU)
 
-func _do_command(c):
+func _do_command(c:int) -> void:
 	match c:
-		"LEFT":
+		AI_Behavior.commands.LEFT:
 			rotate = rotate - max_rotate_velocity
-		"RIGHT":
+		AI_Behavior.commands.RIGHT:
 			rotate = rotate + max_rotate_velocity
 
-func _do_modules():
+func _do_modules() -> void:
 	for module in modules:
 		module._do_tick()
 
-func _do_physics():
+func _do_physics() -> void:
 	if abs(rotate_velocity) > max_rotate_velocity:
 		rotate_velocity = rotate_velocity * .95
 	rotate = rotate + rotate_velocity
@@ -103,7 +98,7 @@ func _do_physics():
 	if rotate < 0:
 		rotate = rotate + TAU
 
-func _do_range():
+func _do_range() -> void:
 	range_radius = 0
 	for module in modules:
 		if "gun_range" in module && module.gun_range > range_radius:
@@ -114,7 +109,7 @@ func _do_range():
 	tFOV._initialize_FOV_area(range_radius)
 	tFOV._bind_tcpu(tcpu)
 
-func _do_tick():
+func _do_tick() -> void:
 	spawn_id = up.spawn_id
 	player = up.player
 	pos = up.pos + offset_pos
@@ -124,6 +119,6 @@ func _do_tick():
 	_do_physics()
 	_do_modules()
 
-func _remove_ref(s):
+func _remove_ref(s:int) -> void:
 	if tcpu != null:
 		tcpu._clean_target(s)
