@@ -34,7 +34,7 @@ func _process(delta):
 
 func _new_build_spot(id,v,prices,r,e,sr):
 	if(is_instance_valid(build_spot) == true):
-		build_spot._die()
+		build_spot.die()
 		build_spot.queue_free()
 		build_spot = null
 	build_spot = Build_Spot.instantiate()
@@ -45,7 +45,7 @@ func _new_build_spot(id,v,prices,r,e,sr):
 
 func _cancel_build():
 	if(is_instance_valid(build_spot) == true):
-		build_spot._die()
+		build_spot.die()
 		build_spot.queue_free()
 		build_spot = null
 	hide()

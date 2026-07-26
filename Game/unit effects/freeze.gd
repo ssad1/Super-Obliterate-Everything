@@ -11,7 +11,7 @@ func _init() -> void:
 	has_no_tick = true
 
 func _on_effect() -> void:
-	freeze_strength = 1 #/ (current_unit.armor/2) * current_shot.damage
+	freeze_strength = 1 / (current_unit.armor/2) * current_shot.damage
 	duration = current_shot.damage * 3
 
 	for effect in SPAWNER.game.unit_effects:

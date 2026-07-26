@@ -105,7 +105,6 @@ gun_scale = 0.6
 [node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("12")]
 visible = false
 material = SubResource("3")
-shot_effects = Array[int]([1])
 
 [node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("13")]
 visible = false

@@ -7,17 +7,17 @@ static var primary_color = Color8(67,184,0,77)
 
 #override the default values
 func _init() -> void:
-	tick_duration = 0.25
+	tick_duration = 0.5
 
 var fraction
 func _on_effect() -> void:
 
-	damage_overtime = current_shot.damage / (current_unit.armor/4) + 1
+	damage_overtime = current_shot.damage / (current_unit.armor/4) + 0.5
 	duration = current_shot.damage * 5
 
 	#acid graphics
 
-	fraction = 6.0 / (damage_overtime * current_unit.armor)
+	fraction = 7.0 / (damage_overtime * current_unit.armor)
 
 	UNIT_STATE.do_unit_acid(current_unit, fraction)
 
@@ -28,6 +28,8 @@ func _on_effect_end() -> void:
 func _do_tick() -> void:
 
 	if current_unit.armor - damage_overtime <= 0:
+		current_unit.vanish = true
+		current_unit.burn_color = Color(0,0,0,0)
 		has_no_tick = true
 		UNIT_STATE.do_unit_dissolve(current_unit, 1.5)
 		queue_free()

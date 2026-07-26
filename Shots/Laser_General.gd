@@ -105,7 +105,7 @@ func _process(delta:float) -> void:
 func _calc_damage() -> void:
 	damage = round(base_damage * 1 * pow(1 + shot_scale,2) + 1)
 
-func _die() -> void:
+func die() -> void:
 	dead = true
 
 func _do_tick() -> void:
@@ -116,7 +116,7 @@ func _do_tick() -> void:
 	if clock >= lifespan:
 		armor = 0
 	if armor <= 0:
-		_die()
+		die()
 
 func _set_player(p) -> void:
 	if p != null:

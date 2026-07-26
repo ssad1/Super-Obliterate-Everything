@@ -21,6 +21,7 @@ func _do_tick() -> void:
 
 func _process(delta:float) -> void:
 
+	if inactive: return
 	if !is_instance_valid(shield_module): return
 
 	var bright:float = shield_module.shield / shield_module.max_shield
@@ -30,13 +31,8 @@ func _process(delta:float) -> void:
 
 	if inactive: return
 
-	tick_clock += delta# * tick_speed
-	if tick_clock > 0.1:
-		tick_clock -= 0.1
-		_do_tick()
-	if tick_clock > 0.2:
-		tick_clock = 0.2
-	
+	_do_tick_clock(delta)
+
 	physics_clock += delta
 	if physics_clock > 0.1:
 		physics_clock -= 0.1

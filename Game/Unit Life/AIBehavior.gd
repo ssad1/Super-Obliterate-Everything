@@ -4,7 +4,6 @@ enum ai_flag {
 	NONE,
 	RETURN
 }
-
 enum ai_high {
 	NONE,
 	STANDART,
@@ -133,7 +132,6 @@ func _do_command(c:int) -> void:
 			unit.velocity.y = unit.velocity.y - unit.thrust * cos(unit.rotate)
 			unit.engine_burn = unit.engine_burn + .2
 			unit.engine_burn = clamp(unit.engine_burn,0.0,1.0)
-	unit._do_anim()
 	
 #Different behaviors encapsulated as functions
 

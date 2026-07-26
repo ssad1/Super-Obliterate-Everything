@@ -87,5 +87,5 @@ func _color_squares():
 				squares[i].anim = "LIGHT RED"
 	buildability = building
 
-func _die():
+func die():
 	pass

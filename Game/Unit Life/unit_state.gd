@@ -38,6 +38,17 @@ var effect: Dictionary[effect_enum, Script] = {
 	effect_enum.FREEZE: freeze_effect
 }
 
+func _apply_to_modules(unit, callable:Callable, ...params) -> void:
+	if not "modules" in unit: return
+
+	var children = unit.get_children()
+	for child in children:
+
+		if not "mat" in child: continue
+		if child.mat == unit.mat: continue
+
+		callable.callv([child] + params)
+
 func do_unit_build(unit, duration:float) -> void:
 
 	if unit.mat == null: return
@@ -71,13 +82,18 @@ func do_unit_burn(unit) -> void:
 func do_unit_light_bright(unit) -> void:
 	unit.mat.set_shader_parameter("light_bright", unit.light_bright)
 
-func do_unit_damage(unit) -> void:
+func do_unit_damage(unit, value_override = -1) -> void:
 
-	if unit.armor >= unit.max_armor || unit.mat == null: return
-	var strength:float = 1.0 - (unit.armor / unit.max_armor)
+	var strength:float = value_override
+
+	if value_override == -1:
+		if unit.armor >= unit.max_armor || unit.mat == null: return
+		strength = 1.0 - (unit.armor / unit.max_armor)
 
 	unit.mat.set_shader_parameter("burnt_strength", strength)
 	unit.mat.set_shader_parameter("fire_strength", strength)
+
+	_apply_to_modules(unit, do_unit_damage, strength)
 
 func do_unit_damage_strength(unit) -> void:
 
@@ -89,6 +105,8 @@ func do_unit_damage_strength(unit) -> void:
 		0.0,
 		0.6
 	)
+
+	_apply_to_modules(unit, do_unit_damage_strength)
 
 func _set_damage_strength(val:float, mat:Material) -> void:
 	mat.set_shader_parameter("damage_strength", val)
@@ -107,11 +125,13 @@ func do_black_hole_death(unit) -> void:
 	get_tree().create_tween().tween_property(unit, "scale", Vector2(0,0), 1.5).finished.connect(
 		_kill_unit.bind(unit)
 	)
+	_apply_to_modules(unit, do_black_hole_death)
 
 func _kill_unit(unit) -> void:
 	if !is_instance_valid(unit): return
 	if unit == null: return
-	unit._die()
+	if not "die" in unit: return
+	unit.die()
 
 func _set_swirl_strength(val:float, mat:Material) -> void:
 	mat.set_shader_parameter("swirl_strength", val)
@@ -141,13 +161,26 @@ func do_unit_acid(unit, amount:float) -> void:
 		current + amount,
 		1
 	)
+	_apply_to_modules(unit, do_unit_acid, amount)
 
 func _set_acid(val:float, mat:Material) -> void:
 	mat.set_shader_parameter("acid_strength", val)
 
+func _do_async_module_dissolve(module, duration:float) -> void:
+	if module.mat == null: return
+
+	get_tree().create_tween().tween_method(
+		_set_corrode.bind(module.mat),
+		0.0,
+		1.5,
+		duration
+	)
+
 func do_unit_dissolve(unit, duration:float) -> void:
 
 	if unit.mat == null: return
+
+	_apply_to_modules(unit, _do_async_module_dissolve, duration)
 
 	await get_tree().create_tween().tween_method(
 		_set_corrode.bind(unit.mat),
@@ -174,6 +207,7 @@ func do_unit_freeze(unit, amount:float) -> void:
 		amount,
 		1
 	)
+	_apply_to_modules(unit, do_unit_freeze, amount)
 
 func _set_freeze(val:float, mat:Material) -> void:
 	mat.set_shader_parameter("freeze_strength", val)

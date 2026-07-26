@@ -9,4 +9,4 @@ func _ready():
 #	pass
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	_die()
+	die()

@@ -68,38 +68,35 @@ func _ship_fix() -> void:
 func _free_base() -> void:
 	base = null
 
-func _die() -> void:
+func die() -> void:
 	if base != null:
 		base._remove_ship(spawn_id)
-	super._die()
+	super.die()
 
 func _do_tick() -> void:
 	super._do_tick()
 	_do_ai()
 	
 func _process(delta:float) -> void:
+	if inactive: return
+	
 	var blend_pos := position + (pos - position) * 0.1 + 0.2 * velocity
 	set_position(blend_pos)
 
-	if inactive: return
+	_do_anim(delta)
 
-	tick_clock += delta# * tick_speed
-	if tick_clock > 0.1:
-		tick_clock -= 0.1
-		_do_tick()
-	if tick_clock > 0.2:
-		tick_clock = 0.2
-	
+	_do_tick_clock(delta)
+
 	physics_clock += delta
 	if physics_clock > 0.1:
 		physics_clock -= 0.1
 
-		if is_not_struct: _do_physics()
+		_do_physics()
 
 	if physics_clock > 0.2:
 		physics_clock = 0.2
 
-func _do_anim() -> void:
+func _do_anim(delta:float) -> void:
 
 	if !has_hull: return
 
@@ -111,7 +108,7 @@ func _do_anim() -> void:
 		hull.frame = f
 
 	if engine_burn > 0:
-		engine_burn = engine_burn - get_process_delta_time()
+		engine_burn = engine_burn - delta
 		engine_burn = clamp(engine_burn,0.0,1.0)
 
 	if has_burn:

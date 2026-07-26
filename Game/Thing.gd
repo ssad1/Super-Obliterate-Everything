@@ -80,13 +80,8 @@ func _process(delta:float) -> void:
 	
 	if inactive: return
 
-	tick_clock += delta# * tick_speed
-	if tick_clock > 0.1:
-		tick_clock -= 0.1
-		_do_tick()
-	if tick_clock > 0.2:
-		tick_clock = 0.2
-	
+	_do_tick_clock(delta)
+
 	physics_clock += delta
 	if physics_clock > 0.1:
 		physics_clock -= 0.1
@@ -95,6 +90,20 @@ func _process(delta:float) -> void:
 
 	if physics_clock > 0.2:
 		physics_clock = 0.2
+
+func _do_tick_clock(delta:float) -> void:
+
+	if armor <= 0:
+		die()
+
+	tick_clock += delta * tick_speed
+
+	if tick_clock > 0.1:
+		tick_clock -= 0.1
+		_do_tick()
+
+	if tick_clock > 0.2:
+		tick_clock = 0.2
 
 func _add_tcpu() -> void:
 	tcpu = TargetCPU.tcpu_node.instantiate()
@@ -107,7 +116,7 @@ func _apply_force(f:float, dir:Vector2) -> void:
 	delta_v = inertia * f * dir
 	velocity = velocity + delta_v
 
-func _die() -> void:
+func die() -> void:
 	if vanish == false:
 		for module in modules:
 			if module.has_method("_on_death"):
@@ -180,9 +189,6 @@ func _do_tick() -> void:
 
 	if has_modules:
 		_do_modules()
-		
-	if armor <= 0:
-		_die()
 
 func _get_turret_score() -> int:
 	var score := 0

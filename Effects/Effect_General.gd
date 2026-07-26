@@ -37,9 +37,9 @@ func _process(delta:float) -> void:
 	clock = clock + delta
 	_do_physics(delta)
 	if clock > lifespan:
-		_die()
+		die()
 
-func _die() -> void:
+func die() -> void:
 	hide()
 	queue_free()
 

@@ -144,7 +144,7 @@ func _color_squares() -> void:
 				squares[i].anim = "LIGHT RED"
 	buildability = building
 
-func _die() -> void:
+func die() -> void:
 	dummy_stat.hide()
 	dummy_stat.queue_free()
 	dummy_stat = null

@@ -8,6 +8,7 @@ var offset_rotate:float = 0
 var pos:Vector2 = Vector2(0.0,0.0)
 var rotate:float = 0
 var velocity:Vector2 = Vector2(0.0,0.0)
+var tick_clock:float = 0
 
 var modules:Array = []
 var is_type:UNIT_STATE.type = UNIT_STATE.type.TRIGGER
@@ -15,7 +16,6 @@ var is_type:UNIT_STATE.type = UNIT_STATE.type.TRIGGER
 @export var death_activate:bool = false
 var s:Sprite2D
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	up = get_parent()
 	offset_pos = position
@@ -26,9 +26,23 @@ func _ready() -> void:
 	if has_node("Sprite2D"): 
 		s = $Sprite2D
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta:float) -> void:
 	position = Vector2(-1 * offset_radius * sin(rotate + offset_rotate), offset_radius * cos(rotate + offset_rotate))
+
+	#avoid making effects that affect tick speed messing up trigger modules
+	if up.tick_speed < 1.0:
+		_do_tick_clock(delta)
+
+func _do_tick_clock(delta:float) -> void:
+
+	tick_clock += delta
+
+	if tick_clock > 0.1:
+		tick_clock -= 0.1
+		_do_tick()
+
+	if tick_clock > 0.2:
+		tick_clock = 0.2
 
 func _do_tick() -> void:
 	rotate = up.rotate

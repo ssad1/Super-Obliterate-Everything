@@ -32,6 +32,7 @@ func _init_shot():
 	_do_range()
 
 func _process(delta:float) -> void:
+	if inactive: return
 	var blend_pos:Vector2
 	var f:int
 	blend_pos = position + (pos - position) * .1 + .2 * velocity
@@ -43,14 +44,7 @@ func _process(delta:float) -> void:
 			rotation = 0
 			self.frame = f
 
-	if inactive: return
-
-	tick_clock += delta
-	if tick_clock > 0.1:
-		tick_clock -= 0.1
-		_do_tick()
-	if tick_clock > 0.2:
-		tick_clock = 0.2
+	_do_tick_clock(delta)
 	
 	physics_clock += delta
 	if physics_clock > 0.1:

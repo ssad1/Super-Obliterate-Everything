@@ -1,7 +1,5 @@
 extends Node2D
 
-@onready var tcpu_node := preload("res://Game/Unit Life/TargetCPU.tscn")
-
 var s
 @export var damage:float = 10
 @export var damage_type:String = "EXPLOSION"
@@ -59,7 +57,7 @@ func _process(delta:float) -> void:
 		tick_clock = 0.2
 
 func _add_tcpu() -> void:
-	tcpu = tcpu_node.instantiate()
+	tcpu = TargetCPU.tcpu_node.instantiate()
 	tcpu.up = self
 	tcpu.set_target_profile = tcpu.profile.EXPLOSION
 
