@@ -1,5 +1,7 @@
-class_name Explode_Basic
 extends Node2D
+
+@export var applied_effects:Array[UNIT_STATE.effect_enum] = []
+@export var effects_override:Array[Effect_Override]
 
 var s
 @export var damage:float = 10
@@ -8,7 +10,6 @@ var s
 @export var boom_radius:int = 0
 @export var boom_flash:int = SPAWNER.spawn_objs.EFFECT_FLASH_BOOM
 @export var boom_large_effect:int = SPAWNER.spawn_objs.EFFECT_BOOM
-@export var smoke_effect:int = SPAWNER.spawn_objs.EFFECT_SMOKE
 @export var boom_reverse:int = 0
 @export var boom_scale:float = 1
 @export var lifespan:int = 12
@@ -37,7 +38,7 @@ var rotate:float = 0
 var modules = []
 var tcpu:TargetCPU
 var player
-
+var debounce:bool = false
 var tick_clock:float = 0
 var inactive:bool = true
 
@@ -71,19 +72,11 @@ func _boom() -> void:
 
 	if clock == 1:
 		obj = SPAWNER._spawn([boom_flash],null,pos,Vector2(0,0),0,0,0)
-		obj.scale = Vector2(1.5 * boom_scale,1.5 * boom_scale)
+		obj.scale = Vector2(boom_scale/2,boom_scale/2)
 		obj.modulate = Color(1,1,1,.5 + 1 * boom_scale)
 	
-	if boom_scale > 1:
-		for i in round(boom_scale * 2):
-			theta = randf() * 2 * PI
-			r = randf() * boom_radius
-			pos_shift = Vector2(r * sin(theta),r * cos(theta))
-			obj = SPAWNER._spawn([boom_large_effect],null,pos + pos_shift,Vector2(0,0),0,0,0)
-			sc = (randf() * 0.7) + 0.2
-			obj.scale = Vector2(sc, sc)
-	
-	if clock <= lifespan - 5:
+	if clock <= lifespan - 5 and not debounce:
+		debounce = true
 		obj = SPAWNER._spawn([boom_large_effect],null,pos,Vector2(0,0),0,0,0)
 		obj.scale = Vector2(boom_scale, boom_scale)
 
@@ -100,9 +93,6 @@ func _do_tick() -> void:
 	if clock < lifespan - 5:
 		_boom()
 
-	if boom_scale > 0.5 && clock > 0.2 * lifespan && clock < lifespan:
-		_smoke()
-
 	if clock == lifespan:
 		dead = true
 
@@ -114,26 +104,6 @@ func _do_tick() -> void:
 	GLOBAL.heatbright = GLOBAL.heatbright + 2 * boom_scale
 	clock = clock + 1
 
-func _smoke() -> void:
-	var pos_shift := Vector2(0,0)
-	var r := 0
-	var theta := 0
-	var sc := 1
-	var obj
-	
-	if boom_scale > 1:
-		for i in round(boom_scale * 2):
-
-			theta = randf() * 2 * PI
-			r = randf() * boom_radius * 0.75
-
-			pos_shift = Vector2(r * sin(theta),r * cos(theta))
-			obj = SPAWNER._spawn([smoke_effect],null,pos + pos_shift,Vector2(0,0),0,0,0)
-
-			sc = (randf() * .7) + 1
-			obj.scale = Vector2(sc, sc)
-			obj.modulate = Color(0.5, 0, 0.25, 0.3)
-
 func _remove_ref(s) -> void:
 
 	if tcpu != null:
@@ -142,4 +112,3 @@ func _remove_ref(s) -> void:
 	for i in modules.size():
 		if "_remove_ref" in modules[i]:
 			modules[i]._remove_ref(s)
-

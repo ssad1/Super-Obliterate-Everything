@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dtud28wlroesr" path="res://Shots/Shot_Singularity.tscn" id="8_roivg"]
 [ext_resource type="PackedScene" uid="uid://coxjddpqipkgg" path="res://Effects/E_MuzzleJ.tscn" id="9_1codc"]
 [ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="9_c1cer"]
-[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="10_q0c83"]
+[ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="12_wg38p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_annps"]
 resource_local_to_scene = true
@@ -100,6 +100,6 @@ visible = false
 [node name="E_MuzzleJ" parent="Gun_General" instance=ExtResource("9_1codc")]
 visible = false
 
-[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("10_q0c83")]
+[node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("12_wg38p")]
 
 [editable path="detection_hitbox"]

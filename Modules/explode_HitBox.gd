@@ -1,7 +1,9 @@
+class_name Explode_Hitbox
 extends Area2D
 
 var explosion
 var inside_explosion:Array[Thing]
+var expasion_duration:float = 0.5
 
 func _ready() -> void:
 
@@ -17,7 +19,7 @@ func _ready() -> void:
 	collisionShape.shape.radius = 0
 
 	var tween = get_tree().create_tween()
-	tween.tween_property(collisionShape.shape, "radius", fullsize, 0.5)
+	tween.tween_property(collisionShape.shape, "radius", fullsize, expasion_duration)
 
 var tick_clock:float = 0
 func _process(delta: float) -> void:

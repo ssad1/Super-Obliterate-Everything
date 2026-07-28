@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="9_x4p56"]
 [ext_resource type="PackedScene" uid="uid://7pg3lcgaqwwt" path="res://Shots/Missile_ER1.tscn" id="10_ycsfy"]
 [ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="11_ycsfy"]
-[ext_resource type="PackedScene" uid="uid://dunqn73l0k5ww" path="res://Modules/Module_Corvette_Boom.tscn" id="12_4firr"]
+[ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="13_5c1tk"]
 [ext_resource type="PackedScene" uid="uid://bl2mxtnhn4slr" path="res://Turrets/Turret_Double_Blaster.tscn" id="13_ycsfy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_annps"]
@@ -52,7 +52,7 @@ blend_mode = 1
 resource_local_to_scene = true
 radius = 20.0
 
-[node name="Ship_Hades" type="Node2D"]
+[node name="Ship_Pandemic" type="Node2D"]
 script = ExtResource("1_efchl")
 thrust = 0.3
 aistandoff = 300
@@ -64,7 +64,7 @@ metal_cost = 275
 supply_cost = 4
 credit_cost = 1600
 inertia = 0.2
-max_velocity = 4.0
+max_velocity = 3.0
 max_rotate_velocity = 0.2
 max_armor = 40.0
 
@@ -85,16 +85,15 @@ vframes = 8
 [node name="detection_hitbox" parent="." instance=ExtResource("8_o4d8m")]
 
 [node name="CollisionShape2D" parent="detection_hitbox" index="0"]
-visible = false
 shape = SubResource("CircleShape2D_ljnal")
 
 [node name="Gun_General" parent="." instance=ExtResource("9_x4p56")]
 position = Vector2(0, -30)
 fire_sound = 23
-gun_heat = 50
+gun_heat = 100
 gun_angle = 0.4
 gun_v = 20
-gun_scale = 0.8
+gun_scale = 0.7
 velocity_align = false
 
 [node name="Missile_ER1" parent="Gun_General" instance=ExtResource("10_ycsfy")]
@@ -104,9 +103,9 @@ visible = false
 visible = false
 scale = Vector2(0.5, 0.5)
 
-[node name="Module_Corvette_Boom_Large" parent="." instance=ExtResource("12_4firr")]
-
 [node name="Turret_Double_Blaster" parent="." instance=ExtResource("13_ycsfy")]
 position = Vector2(0, -8)
+
+[node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("13_5c1tk")]
 
 [editable path="detection_hitbox"]

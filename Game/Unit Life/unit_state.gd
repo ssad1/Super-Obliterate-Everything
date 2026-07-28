@@ -152,8 +152,11 @@ func _set_stat_modulate(val:float, stat:Stats) -> void:
 func do_unit_acid(unit, amount:float) -> void:
 
 	if unit.mat == null: return
+	if not is_instance_valid(unit): return
 
-	var current:float = unit.mat.get_shader_parameter("acid_strength")
+	var current = unit.mat.get_shader_parameter("acid_strength")
+
+	if not current: return
 
 	get_tree().create_tween().tween_method(
 		_set_acid.bind(unit.mat),

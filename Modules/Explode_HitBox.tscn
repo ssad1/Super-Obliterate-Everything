@@ -6,6 +6,7 @@
 resource_local_to_scene = true
 
 [node name="ExplodeHitBox" type="Area2D"]
+input_pickable = false
 script = ExtResource("1_yl6d2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

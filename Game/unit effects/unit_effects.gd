@@ -27,17 +27,20 @@ func _on_effect_end() -> void:
 func _do_tick() -> void:
 	pass
 
+func do_unit_graphics(unit) -> void:
+	pass
+
 func apply_effect(unit:Thing) -> void:
 
 	for effect in SPAWNER.game.unit_effects:
 
 		#compare both effects to see if they are the same kind of effect, alongside their unit
 
-		if not is_instance_valid(effect): return
+		if not is_instance_valid(effect): continue
 
 		if (effect.get_script() == get_script() and effect.current_unit == unit) and !stackable:
 			queue_free()
-			return
+			continue
 
 	current_unit = unit
 	_on_effect() 
@@ -62,7 +65,6 @@ func _process(delta:float) -> void:
 	if _current_tick > tick_duration:
 		_current_tick = 0
 		_do_tick()
-	
 
 static func do_shot_graphics(shot) -> void:
 	pass

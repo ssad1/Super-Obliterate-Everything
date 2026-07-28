@@ -18,10 +18,10 @@ func _ready() -> void:
 	ai = AI_Behavior.new(self)
 
 func _process(delta:float) -> void:
+	if inactive: return
 	var blend_pos := position + (pos - position) * 0.1 + 0.2 * velocity
 	set_position(blend_pos)
-
-	if inactive: return
+	_do_anim(delta)
 	
 	_do_tick_clock(delta)
 

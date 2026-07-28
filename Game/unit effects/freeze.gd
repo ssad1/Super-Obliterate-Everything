@@ -10,7 +10,11 @@ static var primary_color := Color8(0,152,255,77)
 func _init() -> void:
 	has_no_tick = true
 
+func do_unit_graphics(unit) -> void:
+	UNIT_STATE.do_unit_freeze(unit, 1-unit.tick_speed)
+
 func _on_effect() -> void:
+	
 	freeze_strength = 1 / (current_unit.armor/2) * current_shot.damage
 	duration = current_shot.damage * 3
 
@@ -25,7 +29,7 @@ func _on_effect() -> void:
 			effect.duration = duration
 	
 	current_unit.tick_speed -= freeze_strength
-	UNIT_STATE.do_unit_freeze(current_unit, 1-current_unit.tick_speed)
+	do_unit_graphics(current_unit)
 
 func _on_effect_end() -> void:
 	if not is_instance_valid(current_unit): return
