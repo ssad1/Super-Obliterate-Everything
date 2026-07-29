@@ -50,6 +50,7 @@ var inactive:bool = true
 var tick_clock:float = 0
 var physics_clock:float = 0
 var has_no_modules:bool = false
+var invulnerable = false
 
 var tick_speed:float = 1.0:
 	set(value):
@@ -117,10 +118,10 @@ func _apply_force(f:float, dir:Vector2) -> void:
 	velocity = velocity + delta_v
 
 func die() -> void:
-	if vanish == false:
+	if not vanish:
 		for module in modules:
-			if module.has_method("_on_death"):
-				module._on_death()
+			if !module.has_method("_on_death"): continue
+			module._on_death()
 	dead = true
 
 func _do_death(value:bool) -> void:
@@ -200,6 +201,7 @@ func _get_turret_score() -> int:
 	return score
 
 func do_damage(amount:float) -> void:
+	if invulnerable: return
 	armor = armor - amount
 
 	if armor > max_armor:

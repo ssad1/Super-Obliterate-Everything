@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp8ri62gkj4um"]
+
+[ext_resource type="AudioStream" uid="uid://bii20plf2jff0" path="res://Sounds/Death/UnitDisintegrate1.wav" id="1_08cud"]
+[ext_resource type="Script" uid="uid://b7gsabxmhyvpb" path="res://Sounds/Sound_Pitch_General.gd" id="2_fbp4o"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_08cud")
+pitch_scale = 0.9
+script = ExtResource("2_fbp4o")
+pitch_interval = 0.1

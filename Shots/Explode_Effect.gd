@@ -8,8 +8,9 @@ var s
 @export var damage_type:String = "EXPLOSION"
 @export var force:float = 5
 @export var boom_radius:int = 0
-@export var boom_flash:int = SPAWNER.spawn_objs.EFFECT_FLASH_BOOM
-@export var boom_large_effect:int = SPAWNER.spawn_objs.EFFECT_BOOM
+@export var boom_flash:SPAWNER.spawn_objs = SPAWNER.spawn_objs.EFFECT_FLASH_BOOM
+@export var boom_large_effect:SPAWNER.spawn_objs = SPAWNER.spawn_objs.EFFECT_BOOM
+@export var effect_SFX:SFX.sound = SFX.sound.ACID_CLOUD_BUBBLING
 @export var boom_reverse:int = 0
 @export var boom_scale:float = 1
 @export var lifespan:int = 12
@@ -79,6 +80,7 @@ func _boom() -> void:
 		debounce = true
 		obj = SPAWNER._spawn([boom_large_effect],null,pos,Vector2(0,0),0,0,0)
 		obj.scale = Vector2(boom_scale, boom_scale)
+		SFX._play_new([effect_SFX])
 
 func _do_modules() -> void:
 	for i in modules.size():

@@ -43,7 +43,7 @@ func _on_area_entered(area:Area2D) -> void:
 
 	var target_unit = (area as unit_hitbox).parent_unit
 
-	if explosion.tcpu.check_target(target_unit):
+	if TargetCPU.is_target_eligible(explosion, target_unit.is_type):
 		inside_explosion.append(target_unit)
 
 func _on_area_exited(area:Area2D) -> void:

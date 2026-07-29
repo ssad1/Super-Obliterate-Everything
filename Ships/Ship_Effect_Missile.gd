@@ -16,3 +16,10 @@ func _ready() -> void:
 
 	glow.modulate = effect_color
 	mat.set_shader_parameter("light_color", effect_color)
+
+func die() -> void:
+	if not vanish:
+		for module in modules:
+			if !module.has_method("_on_death"): continue
+			module._on_death()
+	dead = true

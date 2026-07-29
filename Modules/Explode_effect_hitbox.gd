@@ -9,7 +9,8 @@ func _on_area_entered(area:Area2D) -> void:
 
 	var target_unit = (area as unit_hitbox).parent_unit
 
-	if not explosion.tcpu.check_target(target_unit): return
+	if not TargetCPU.is_target_eligible(explosion, target_unit.is_type): return
+
 	_apply_effects(target_unit)
 
 func _on_area_exited(area:Area2D) -> void:
@@ -37,7 +38,7 @@ func _apply_effects(unit) -> void:
 		_do_overrides(effect, instance)
 		instance.do_unit_graphics(unit)
 
-#make we be able to balance studd properly. be able to set any property we want in-editor
+#make we be able to balance stuff properly. be able to set any property we want in-editor
 func _do_overrides(effect_enum:UNIT_STATE.effect_enum, effect_instance:unit_effect) -> void:
 	for override in explosion.effects_override:
 		if override.overrided_effect != effect_enum: continue

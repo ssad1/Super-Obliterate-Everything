@@ -97,14 +97,14 @@ vec3 permute(vec3 x) {
 
 float snoise(vec2 v) {
     vec4 C = vec4(NOISECX, NOISECY, NOISECZ, NOISECW);
-	
+
     // First corner
     vec2 i  = floor(v + dot(v, C.yy));
     vec2 x0 = v - i + dot(i, C.xx);
 
     // Other corners
     vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-	
+
     vec4 x12 = vec4(x0.xy, x0.xy) + C.xxzz;
     x12.xy -= i1;
 
@@ -196,9 +196,9 @@ vec4 dissolve(vec4 original, vec2 uv, vec2 noiseuv) {
 	vec4 fire_grad;
 
 	noise = fbm(noiseuv * 6.0);
-	
+
 	float thick = noise + thickness * 0.5;
-	
+
 	if(dissolve_strength > noise && dissolve_strength <= thick)
 	{
 		grad = clamp(2.0 * (dissolve_strength - noise) / thickness,0.0,1.0);
@@ -249,14 +249,14 @@ vec4 shock(vec4 original, vec2 uv, vec2 noiseuv, float time)
 {
 	vec2 coord = noiseuv * 8.0;
 	vec4 new_col = original;
-	
+
 	float t = time * 0.3;
-	
+
 	float noise1 = fbm(coord + vec2(-t, t));
 	float noise2 = fbm(coord + vec2(0, -t * 2.0));
 	float combined = (noise1 + noise2) / 2.0;
 	float shock_input = shock_strength * 0.9 + 0.1;
-	
+
 	combined = pow(combined, shock_input);
 	new_col = vec4(vec3(combined), 1.0);
 
@@ -282,13 +282,13 @@ vec4 fire(vec4 original, vec2 uv, vec2 noiseuv, float time)
 {
 	vec2 coord = noiseuv * 10.0;
 	vec4 new_col = original;
-	
+
 	float t = time * 0.3;
-	
+
 	float noise1 = fbm(coord + vec2(t, -t));
 	float noise2 = fbm(coord + vec2(0, t * 2.0));
 	float combined = (noise1 + noise2) / 2.0;
-	
+
 	new_col = vec4(vec3(combined), 1.0);
 
 	if (combined < fire_strength) {
@@ -386,9 +386,9 @@ vec4 build(vec4 original, vec2 uv, vec2 noiseuv, vec2 texture_pixel_size, sample
 	{
 		linea = 0.5;
 	}
-	
+
 	float half_bs = 0.5 * build_strength;
-	
+
 	if(noiseuv.x * frames.x > half_bs && noiseuv.x * frames.x < 1.0 - half_bs)
 	{
 		if(noiseuv.x * frames.x < half_bs + 0.1)
@@ -555,6 +555,10 @@ void fragment()
 	{
 		COLOR = damage(COLOR, moduv, noiseuv);
 	}
+	if(select_strength > 0.0)
+	{
+		COLOR = selected(COLOR, TEXTURE_PIXEL_SIZE, moduv,TEXTURE);
+	}
 	if(acid_strength > 0.0)
 	{
 		COLOR = acid(COLOR, moduv, noiseuv, TIME);
@@ -574,10 +578,6 @@ void fragment()
 	if(build_strength > 0.0)
 	{
 		COLOR = build(COLOR, moduv, noiseuv, TEXTURE_PIXEL_SIZE, TEXTURE);
-	}
-	if(select_strength > 0.0)
-	{
-		COLOR = selected(COLOR, TEXTURE_PIXEL_SIZE, moduv,TEXTURE);
 	}
 	if(cloak_strength > 0.0)
 	{

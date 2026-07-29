@@ -331,3 +331,11 @@ func _target_closest(our_pos) -> int:
 		target_velocity = targets[target_i].velocity
 		ret = target_i
 	return ret
+
+static func is_target_eligible(unit, target_type:UNIT_STATE.type) -> bool:
+
+	var unit_tcpu = unit.tcpu
+	return unit_tcpu.scan_ships && target_type == UNIT_STATE.type.SHIP \
+		|| unit_tcpu.scan_structs && target_type == UNIT_STATE.type.STRUCT \
+		|| unit_tcpu.scan_shots && target_type == UNIT_STATE.type.SHOT \
+		|| unit_tcpu.scan_missiles && target_type == UNIT_STATE.type.MISSILE

@@ -11,7 +11,7 @@ func _init() -> void:
 	tick_duration = 0.5
 
 func do_unit_graphics(unit) -> void:
-	fraction = 7.0 / (damage_overtime * unit.armor)
+	fraction = clampf((duration / 3.0) / (damage_overtime * unit.armor), 0.0, 1.0)
 	UNIT_STATE.do_unit_acid(unit, fraction)
 
 func _on_effect() -> void:
@@ -27,13 +27,25 @@ func _on_effect_end() -> void:
 	if not is_instance_valid(current_unit): return
 	UNIT_STATE.do_unit_acid(current_unit, -fraction)
 
+func _do_dissolve(unit) -> void:
+	SFX._play_new([SFX.sound.DISINTEGRATE])
+	UNIT_STATE.do_unit_dissolve(current_unit, 1.5)
+
 func _do_tick() -> void:
 
 	if current_unit.armor - damage_overtime <= 0:
 		current_unit.vanish = true
 		current_unit.burn_color = Color(0,0,0,0)
-		has_no_tick = true
-		UNIT_STATE.do_unit_dissolve(current_unit, 1.5)
+		current_unit.has_stats = false
+
+		if current_unit.has_node("detection_hitbox"):
+			current_unit.get_node("detection_hitbox").monitoring = false
+			current_unit.get_node("detection_hitbox").monitorable = false
+
+		if "invulnerable" in current_unit: current_unit.invulnerable = true
+
+		_do_dissolve(current_unit)
+		set_process(false)
 		queue_free()
 		return
 

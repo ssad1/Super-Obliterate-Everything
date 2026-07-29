@@ -1,12 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqk21c3rncnb8"]
+[gd_scene load_steps=8 format=3 uid="uid://cqk21c3rncnb8"]
 
 [ext_resource type="Script" uid="uid://ddlo8b7uwj0bi" path="res://Terminal/Galaxy/GalaxyMap.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cdvk6gsr4bfko" path="res://Terminal/Galaxy/Final_Galaxy.png" id="2"]
+[ext_resource type="Shader" uid="uid://b6fagxq6dr4xq" path="res://Shaders/Galaxy.gdshader" id="2_vggvy"]
 [ext_resource type="PackedScene" path="res://Terminal/Galaxy/Zone.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://brrgpdkjh1xkn" path="res://Terminal/Galaxy/New_Zone.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://pl81kit1dw6n" path="res://Terminal/Galaxy/Zone_Label.tscn" id="6"]
 
 [sub_resource type="ShaderMaterial" id="1"]
+shader = ExtResource("2_vggvy")
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scroll = Vector2(0, 0)
 
 [node name="GalaxyMap" type="Node2D"]
 script = ExtResource("1")

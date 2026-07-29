@@ -74,6 +74,7 @@ func _ui_metal(n):
 "
 
 [node name="Cockpit" type="Control"]
+z_index = 2
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1")
@@ -89,6 +90,8 @@ offset_left = 524.0
 offset_top = 164.0
 offset_right = 1114.0
 offset_bottom = 764.0
+grow_horizontal = 1
+grow_vertical = 1
 scale = Vector2(0.95, 0.95)
 menu_exit_path = NodePath("../Menu_Options/VBoxContainer/Control/Menu_Exit_Game")
 menu_controls_path = NodePath("../Menu_Options/VBoxContainer/Control/Menu_Controls")

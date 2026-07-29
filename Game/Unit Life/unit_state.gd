@@ -156,7 +156,7 @@ func do_unit_acid(unit, amount:float) -> void:
 
 	var current = unit.mat.get_shader_parameter("acid_strength")
 
-	if not current: return
+	if current == null: return
 
 	get_tree().create_tween().tween_method(
 		_set_acid.bind(unit.mat),
