@@ -89,7 +89,7 @@ position = Vector2(0, 12)
 fire_sound = 23
 gun_kick = 1.0
 gun_heat = 30
-gun_range = 200
+gun_range = 100
 gun_angle = 0.1
 gun_v = 20.0
 gun_v_noise = 0.1
@@ -98,6 +98,7 @@ gun_scale = 0.4
 
 [node name="Missile_B1" parent="Gun_General" instance=ExtResource("10")]
 visible = false
+lifespan = 40
 
 [node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("14")]
 visible = false

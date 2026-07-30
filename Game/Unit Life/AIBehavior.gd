@@ -14,7 +14,8 @@ enum ai_high {
 	KAMIZAZE,
 	B1,
 	M1,
-	R1
+	R1,
+	HM
 }
 enum ai_mid {
 	NONE,
@@ -25,6 +26,7 @@ enum ai_mid {
 	KAMIKAZE,
 	ROCKET,
 	BOMB,
+	MINE_INTERCEPT,
 	BUILDER
 }
 enum ai_low {
@@ -54,6 +56,7 @@ var high_behavior:Dictionary[ai_high, Callable] = {
 	ai_high.B1: _high_B1,
 	ai_high.M1: _high_M1,
 	ai_high.R1: _high_R1,
+	ai_high.HM: _high_HM
 }
 
 var mid_behavior:Dictionary[ai_mid, Callable] = {
@@ -66,6 +69,7 @@ var mid_behavior:Dictionary[ai_mid, Callable] = {
 	ai_mid.BUILDER: _mid_builder,
 	ai_mid.ROCKET: _mid_rocket,
 	ai_mid.BOMB: _mid_bomb,
+	ai_mid.MINE_INTERCEPT: _mid_mine_intercept
 }
 
 var low_behavior:Dictionary[ai_low, Callable] = {
@@ -188,8 +192,15 @@ func _high_B1() -> void:
 func _high_M1() -> void:
 	aimid = ai_mid.NONE
 	ailow = ai_low.NONE
-	if unit.missile_clock > 5 && unit.missile_clock < unit.lifespan - 5:
+	if unit.life_clock > 5 && unit.life_clock < unit.lifespan - 5:
 		aimid = ai_mid.MISSILE_INTERCEPT
+
+func _high_HM() -> void:
+	aimid = ai_mid.NONE
+	ailow = ai_low.NONE
+
+	if unit.life_clock > 5 && unit.life_clock < unit.lifespan - 5:
+		aimid = ai_mid.MINE_INTERCEPT
 
 ####----AI mids----####
 
@@ -299,9 +310,9 @@ func _mid_rocket() -> void:
 		if d < unit.detonate_range:
 			unit.armor = -100
 
-	if unit.missile_clock > 5:
+	if unit.life_clock > 5:
 		_do_command(commands.THRUST)
-		unit._do_smoke()
+		unit.do_smoke()
 
 	ailow = ai_low.NONE
 
@@ -315,9 +326,10 @@ func _mid_bomb() -> void:
 		if d < unit.detonate_range:
 			unit.armor = -100
 
-	if unit.missile_clock > 3 && unit.missile_clock < 10:
+	if unit.life_clock > 3 && unit.life_clock < 10:
 		_do_command(commands.THRUST)
-		unit._do_smoke()
+		if "do_smoke" in unit: 
+			unit.do_smoke()
 
 	ailow = ai_low.NONE
 
@@ -333,7 +345,21 @@ func _mid_missile_intercept() -> void:
 			unit.armor = -100
 
 		ailow = ai_low.CHARGE
-		unit._do_smoke()
+		if "do_smoke" in unit: 
+			unit.do_smoke()
+
+	else:
+		ailow = ai_low.NONE
+
+#TODO: Implement Lead Collision
+func _mid_mine_intercept() -> void:
+	if tcpu._target_closest(unit.pos) != -1:
+		 
+		target_velocity = tcpu.target_velocity
+		unit.target_hot = true
+		d = unit.pos.distance_to(tcpu.target_pos)
+
+		ailow = ai_low.CHARGE
 
 	else:
 		ailow = ai_low.NONE

@@ -132,7 +132,6 @@ launch_velocity = 5.0
 
 [node name="Mine_Stationary" parent="Mine_Hangar" instance=ExtResource("16_n28v3")]
 visible = false
-position = Vector2(4, 0)
 
 [node name="Mine_Hangar2" parent="." instance=ExtResource("15_p6exu")]
 position = Vector2(-7, 6)

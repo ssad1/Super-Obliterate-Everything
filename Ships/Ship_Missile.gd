@@ -3,7 +3,7 @@ extends Ship_General
 
 @export var lifespan:int = 20
 @export var detonate_range:int = 16
-var missile_clock:int = 0
+var life_clock:int = 0
 @export var shot_scale:float = 1
 @export var damage:float = 1
 @export var force:float = 1
@@ -35,13 +35,13 @@ func _process(delta:float) -> void:
 		physics_clock = 0.2
 
 func _do_tick() -> void:
-	missile_clock = missile_clock + 1
-	if missile_clock >= lifespan:
+	life_clock = life_clock + 1
+	if life_clock >= lifespan:
 		armor = -100
 	
 	super._do_tick()
 
-func _do_smoke() -> void:
+func do_smoke() -> void:
 	var offset := Vector2(0,0)
 	var obj
 	if smoke_trail != 0:

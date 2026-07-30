@@ -188,6 +188,7 @@ extends Node
 @onready var Ship_Cataclysm := load("res://Ships/Ship_Cataclysm.tscn")
 @onready var Ship_Legion := load("res://Ships/Ship_Legion.tscn")
 @onready var Ship_Jupiter := load("res://Ships/Ship_Jupiter.tscn")
+@onready var Ship_Tyrant := load("res://Ships/Ship_Tyrant.tscn")
 
 @onready var Shot_Blaster = load("res://Shots/Shot_Blaster.tscn")
 @onready var Shot_Double_Blaster = load("res://Shots/Shot_Double_Blaster.tscn")
@@ -322,8 +323,8 @@ enum spawn_objs {
 	TREMOR,
 	VOIDLANCE_TURRET,
 	PANDEMIC,
-
-	EFFECT_ACID_CLOUD
+	EFFECT_ACID_CLOUD,
+	TYRANT,
 }
 
 var next_spawn_id:int = 1
@@ -729,6 +730,8 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 			obj = Struct_VoidLance_Turret.instantiate()
 		spawn_objs.PANDEMIC:
 			obj = Ship_Pandemic.instantiate()
+		spawn_objs.TYRANT:
+			obj = Ship_Tyrant.instantiate()
 
 	obj.s = s
 

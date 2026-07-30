@@ -1,0 +1,163 @@
+[gd_scene load_steps=24 format=3 uid="uid://bxt83jq824bps"]
+
+[ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_s0myy"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_6vvsk"]
+[ext_resource type="Texture2D" uid="uid://bijx54ltm0bva" path="res://Ships/Graphics/Tyrant_C.png" id="3_mh8fm"]
+[ext_resource type="Texture2D" uid="uid://ql4mttjajigy" path="res://Ships/Graphics/Tyrant_L.png" id="4_uqnxk"]
+[ext_resource type="Texture2D" uid="uid://drikt0gbmkngq" path="res://Ships/Graphics/Tyrant_D.png" id="5_trgd1"]
+[ext_resource type="Texture2D" uid="uid://dxwae6ebj1waa" path="res://Ships/Graphics/Tyrant_N.png" id="6_ks7y5"]
+[ext_resource type="Texture2D" uid="uid://dsfvku3cvi7me" path="res://Ships/Graphics/Tyrant_B.png" id="7_a01hx"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="8_3echm"]
+[ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="10_kxxhr"]
+[ext_resource type="PackedScene" uid="uid://cqknx4r47efus" path="res://Hangars/Mine_Hangar.tscn" id="11_trgd1"]
+[ext_resource type="PackedScene" uid="uid://dn6ub42eu2b6i" path="res://Turrets/Turret_Phalanx.tscn" id="11_uqnxk"]
+[ext_resource type="PackedScene" uid="uid://chumbt55n10wq" path="res://Shots/Shot_Blaster.tscn" id="11_ynoae"]
+[ext_resource type="PackedScene" uid="uid://o41145lskp7k" path="res://Shots/Mine_Homing.tscn" id="12_ks7y5"]
+[ext_resource type="Shader" uid="uid://dcrbufo6e7ouv" path="res://Shaders/Shot_Effects.gdshader" id="12_vqp47"]
+[ext_resource type="Texture2D" uid="uid://cj2x4k18c5s6e" path="res://Effects/Gradients/Gradient_Heat.tres" id="13_8ho1j"]
+[ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="14_ix03t"]
+[ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="15_ix4yk"]
+[ext_resource type="PackedScene" uid="uid://7pg3lcgaqwwt" path="res://Shots/Missile_ER1.tscn" id="18_fdhm7"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("2_6vvsk")
+shader_parameter/flag_mask = ExtResource("3_mh8fm")
+shader_parameter/lighting = ExtResource("4_uqnxk")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(16, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 0.0
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(6.5, 8)
+shader_parameter/select_strength = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ia1a6"]
+resource_local_to_scene = true
+diffuse_texture = ExtResource("5_trgd1")
+normal_texture = ExtResource("6_ks7y5")
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_21svs"]
+resource_local_to_scene = true
+radius = 28.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7be4d"]
+resource_local_to_scene = true
+shader = ExtResource("12_vqp47")
+shader_parameter/shimmer_strength = 0.2
+shader_parameter/pulse_strength = 0.2
+shader_parameter/frames = 1.0
+shader_parameter/phase = 0.0
+shader_parameter/colors = ExtResource("13_8ho1j")
+
+[node name="Ship_Trident" type="Node2D"]
+script = ExtResource("1_s0myy")
+thrust = 0.2
+factory = 20
+name_text = "TYRANT"
+class_text = "CRUISER"
+energy_cost = 450
+metal_cost = 550
+supply_cost = 5
+credit_cost = 2700
+inertia = 0.2
+max_velocity = 3.5
+max_rotate_velocity = 0.1
+max_armor = 90.0
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("1")
+texture = SubResource("CanvasTexture_ia1a6")
+hframes = 16
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+modulate = Color(1, 0.05490196, 0.05490196, 0)
+light_mask = 0
+material = SubResource("2")
+texture = ExtResource("7_a01hx")
+hframes = 16
+vframes = 8
+
+[node name="detection_hitbox" parent="." instance=ExtResource("8_3echm")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_21svs")
+
+[node name="Module_Cruiser_Boom_Large" parent="." instance=ExtResource("15_ix4yk")]
+
+[node name="Turret_Phalanx" parent="." instance=ExtResource("11_uqnxk")]
+position = Vector2(0, -9)
+
+[node name="Mine_Hangar" parent="." instance=ExtResource("11_trgd1")]
+position = Vector2(9.000001, -13.999999)
+rotation = -1.3962634
+release_interval = 180
+launch_velocity = 8.0
+mine_size = 0.35
+
+[node name="Mine_Homing" parent="Mine_Hangar" instance=ExtResource("12_ks7y5")]
+visible = false
+
+[node name="Mine_Hangar2" parent="." instance=ExtResource("11_trgd1")]
+position = Vector2(-9, -13.999999)
+rotation = -1.7453293
+release_interval = 180
+launch_velocity = 8.0
+mine_size = 0.35
+
+[node name="Mine_Homing" parent="Mine_Hangar2" instance=ExtResource("12_ks7y5")]
+visible = false
+
+[node name="Gun_General" parent="." instance=ExtResource("10_kxxhr")]
+position = Vector2(0, -22)
+fire_sound = 22
+gun_heat = 15
+gun_angle = 0.1
+gun_v = 20.0
+gun_arc = 0.75
+gun_arc_rounds = 5
+gun_scale = 0.6
+
+[node name="Shot_Blaster" parent="Gun_General" instance=ExtResource("11_ynoae")]
+visible = false
+material = SubResource("ShaderMaterial_7be4d")
+
+[node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("14_ix03t")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[node name="Gun_General2" parent="." instance=ExtResource("10_kxxhr")]
+position = Vector2(0, -21)
+fire_sound = 23
+gun_heat = 150
+gun_angle = 0.4
+gun_v = 20
+gun_scale = 0.7
+velocity_align = false
+
+[node name="Missile_ER1" parent="Gun_General2" instance=ExtResource("18_fdhm7")]
+visible = false
+
+[node name="E_MuzzleA" parent="Gun_General2" instance=ExtResource("14_ix03t")]
+visible = false
+scale = Vector2(0.5, 0.5)
+
+[editable path="detection_hitbox"]

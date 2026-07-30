@@ -51,19 +51,23 @@ func _launch_ship(rows:int) -> void:
 func spawn_row() -> void:
 
 	var obj := SPAWNER._spawn_dupe(
-        mine, 
-        up.player.id, 
-        (up.pos + position),
-        Vector2(cos(rotation), sin(rotation)) * launch_velocity + up.velocity,
-        0, 
-        0, 
-        1
-    )
-	obj.detect_area.scale *= Vector2(mine_size, mine_size)
+		mine, 
+		up.player.id, 
+		(up.pos + position),
+		Vector2(cos(rotation), sin(rotation)) * launch_velocity + up.velocity,
+		0, 
+		0, 
+		1
+	)
+
+	if "detect_area" in obj: 
+		obj.detect_area.scale *= Vector2(mine_size, mine_size)
+	
+	if "has_burn" in obj:
+		obj.burn.scale *= Vector2(mine_size, mine_size)
+
 	obj.hull.scale *= Vector2(mine_size, mine_size)
 	mines.append(obj)
-	UNIT_STATE.do_unit_build(obj, 1)
-
 
 func _remove_ship(removeid:int) -> void:
 	'''

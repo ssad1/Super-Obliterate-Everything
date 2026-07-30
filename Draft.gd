@@ -68,7 +68,8 @@ var cruisers = [
 	SPAWNER.spawn_objs.HAMMERHEAD,
 	SPAWNER.spawn_objs.CATACLYSM,
 	SPAWNER.spawn_objs.LEGION,
-	SPAWNER.spawn_objs.JUPITER
+	SPAWNER.spawn_objs.JUPITER,
+	SPAWNER.spawn_objs.TYRANT
 ]
 
 # Called when the node enters the scene tree for the first time.

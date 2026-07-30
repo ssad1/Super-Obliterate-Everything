@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx6cy0um4qpye"
-path="res://.godot/imported/Mine_N.png-54d77858537c9f59f2cd519cede45425.ctex"
+uid="uid://ql4mttjajigy"
+path="res://.godot/imported/Tyrant_L.png-ae01165bd59fed631a91b9d579718304.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shots/Graphics/Mine_N.png"
-dest_files=["res://.godot/imported/Mine_N.png-54d77858537c9f59f2cd519cede45425.ctex"]
+source_file="res://Ships/Graphics/Tyrant_L.png"
+dest_files=["res://.godot/imported/Tyrant_L.png-ae01165bd59fed631a91b9d579718304.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx6cy0um4qpye"
-path="res://.godot/imported/Mine_N.png-54d77858537c9f59f2cd519cede45425.ctex"
+uid="uid://cmoxfsnns7j4k"
+path="res://.godot/imported/Icon_Tyrant.png-14748c5740bb4351c5092c9d78d213b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shots/Graphics/Mine_N.png"
-dest_files=["res://.godot/imported/Mine_N.png-54d77858537c9f59f2cd519cede45425.ctex"]
+source_file="res://Icons/Icon_Tyrant.png"
+dest_files=["res://.godot/imported/Icon_Tyrant.png-14748c5740bb4351c5092c9d78d213b6.ctex"]
 
 [params]
 

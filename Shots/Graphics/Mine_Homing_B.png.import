@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx6cy0um4qpye"
-path="res://.godot/imported/Mine_N.png-54d77858537c9f59f2cd519cede45425.ctex"
+uid="uid://cukgutrgm0cbx"
+path="res://.godot/imported/Mine_Homing_B.png-b1da2a4ae0954c9aaec529c8c7d84e43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shots/Graphics/Mine_N.png"
-dest_files=["res://.godot/imported/Mine_N.png-54d77858537c9f59f2cd519cede45425.ctex"]
+source_file="res://Shots/Graphics/Mine_Homing_B.png"
+dest_files=["res://.godot/imported/Mine_Homing_B.png-b1da2a4ae0954c9aaec529c8c7d84e43.ctex"]
 
 [params]
 

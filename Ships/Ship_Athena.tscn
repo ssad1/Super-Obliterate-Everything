@@ -85,7 +85,7 @@ vframes = 8
 position = Vector2(0, -20)
 fire_sound = 23
 gun_heat = 40
-gun_range = 200
+gun_range = 100
 gun_v = 20
 gun_arc = 1.6
 gun_arc_rounds = 5
@@ -95,6 +95,7 @@ velocity_align = false
 
 [node name="Missile_B1" parent="Gun_General" instance=ExtResource("4")]
 visible = false
+lifespan = 40
 
 [node name="E_MuzzleA" parent="Gun_General" instance=ExtResource("13")]
 visible = false

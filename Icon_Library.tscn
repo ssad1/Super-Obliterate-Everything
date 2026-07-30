@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://sixtbslqbh8r"]
+[gd_scene load_steps=60 format=3 uid="uid://sixtbslqbh8r"]
 
 [ext_resource type="Texture2D" uid="uid://bqviofh0l2qjf" path="res://Icons/Icon_Artillery.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://dgvl73f5nxsjy" path="res://Icons/Icon_Autocannon.png" id="2"]
@@ -58,6 +58,7 @@
 [ext_resource type="Texture2D" uid="uid://di5e7pprxka5s" path="res://Icons/Icon_Sloop.png" id="56_fg2rr"]
 [ext_resource type="Texture2D" uid="uid://roiye3h7e6dh" path="res://Icons/Icon_VoidLance.png" id="57_brmmy"]
 [ext_resource type="Texture2D" uid="uid://cedyffta8qd53" path="res://Icons/Icon_Pandemic.png" id="58_shtvc"]
+[ext_resource type="Texture2D" uid="uid://cmoxfsnns7j4k" path="res://Icons/Icon_Tyrant.png" id="59_m83xb"]
 
 [node name="Icon_Library" type="Node2D"]
 script = ExtResource("19")
@@ -232,3 +233,6 @@ texture = ExtResource("57_brmmy")
 
 [node name="PANDEMIC" type="Sprite2D" parent="."]
 texture = ExtResource("58_shtvc")
+
+[node name="TYRANT" type="Sprite2D" parent="."]
+texture = ExtResource("59_m83xb")

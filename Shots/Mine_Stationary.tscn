@@ -137,7 +137,7 @@ radius = 20.0
 [node name="Mine_Stationary" type="Node2D"]
 script = ExtResource("1_2txew")
 blow_time = 300
-detection_range = 250
+detection_range = 200
 base_damage = 2.0
 force = 2.0
 name_text = "MINE"
@@ -163,13 +163,17 @@ libraries = {
 speed_scale = 0.7
 
 [node name="Module_Fighter_Boom" parent="." instance=ExtResource("6_op4ay")]
-position = Vector2(0, -16)
 
 [node name="Detonator" parent="." instance=ExtResource("8_ybeel")]
 death_activate = false
 
 [node name="Explode_Basic" parent="Detonator/Spawn_Explosion" index="0"]
 damage = 5.0
+boom_scale = 1.2
+
+[node name="Gun_General" parent="Detonator" index="1"]
+gun_arc_rounds = 0
+shot_lifespan = 0.0
 
 [node name="Detection_Area" type="Area2D" parent="."]
 visible = false
@@ -179,6 +183,7 @@ shape = SubResource("CircleShape2D_7i3mg")
 debug_color = Color(0.72606, 0.475685, 0.0201204, 0.42)
 
 [node name="detection_hitbox" parent="." instance=ExtResource("8_8haug")]
+visible = false
 
 [node name="CollisionShape2D" parent="detection_hitbox" index="0"]
 shape = SubResource("CircleShape2D_hpyst")

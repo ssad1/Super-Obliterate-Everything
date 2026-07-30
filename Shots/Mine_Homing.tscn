@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=3 uid="uid://o41145lskp7k"]
+
+[ext_resource type="Script" uid="uid://gbqnciibdwrk" path="res://Shots/Mine_Homing.gd" id="1_eo8ol"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_eo8ol"]
+[ext_resource type="Texture2D" uid="uid://ccowwwesobqht" path="res://Shots/Graphics/Mine_Homing_D.png" id="3_4l3td"]
+[ext_resource type="Texture2D" uid="uid://1k5drdgmqb12" path="res://Shots/Graphics/Mine_Homing_N.png" id="4_eo8ol"]
+[ext_resource type="PackedScene" uid="uid://bij6tn7mx8sjg" path="res://Modules/Module_Fighter_Boom.tscn" id="5_sfx5e"]
+[ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="6_j4u7w"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="7_274wh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4l3td"]
+resource_local_to_scene = true
+shader = ExtResource("2_eo8ol")
+shader_parameter/flag_color = Color(1, 1, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/burn_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+shader_parameter/cloak_strength = 0.0
+shader_parameter/freeze_strength = 0.0
+shader_parameter/acid_strength = 0.0
+shader_parameter/damage_strength = 5.21541e-06
+shader_parameter/burnt_strength = 0.0
+shader_parameter/dissolve_strength = 0.0
+shader_parameter/fire_strength = 0.0
+shader_parameter/shock_strength = 0.0
+shader_parameter/shield_strength = 0.0
+shader_parameter/shield_charging = 0.0
+shader_parameter/shield_damage_strength = 0.0
+shader_parameter/build_strength = 0.0
+shader_parameter/swirl_strength = 0.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/select_strength = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_eo8ol"]
+resource_local_to_scene = true
+diffuse_texture = ExtResource("3_4l3td")
+normal_texture = ExtResource("4_eo8ol")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4l3td"]
+resource_local_to_scene = true
+blend_mode = 1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eo8ol"]
+load_path = "res://.godot/imported/Mine_Homing_B.png-b1da2a4ae0954c9aaec529c8c7d84e43.ctex"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hpyst"]
+resource_local_to_scene = true
+radius = 20.0
+
+[node name="Mine_Homing" type="Node2D"]
+script = ExtResource("1_eo8ol")
+lifespan = 300
+detection_range = 250
+thrust = 3.0
+aihigh = 10
+aistandoff = 0
+inertia = 1.0
+max_velocity = 8.0
+max_rotate_velocity = 0.3
+drag = 0.05
+max_armor = 1.0
+scan_only_in_range = true
+
+[node name="Hull" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4l3td")
+scale = Vector2(1.2, 1.2)
+texture = SubResource("CanvasTexture_eo8ol")
+hframes = 8
+vframes = 8
+
+[node name="Burn" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 0)
+light_mask = 0
+material = SubResource("CanvasItemMaterial_4l3td")
+texture = SubResource("CompressedTexture2D_eo8ol")
+hframes = 8
+vframes = 8
+
+[node name="Module_Fighter_Boom" parent="." instance=ExtResource("5_sfx5e")]
+
+[node name="Detonator" parent="." instance=ExtResource("6_j4u7w")]
+death_activate = false
+
+[node name="Explode_Basic" parent="Detonator/Spawn_Explosion" index="0"]
+damage = 5.0
+boom_scale = 1.2
+
+[node name="Gun_General" parent="Detonator" index="1"]
+gun_arc_rounds = 0
+shot_lifespan = 0.0
+
+[node name="detection_hitbox" parent="." instance=ExtResource("7_274wh")]
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_hpyst")
+
+[editable path="Detonator"]
+[editable path="detection_hitbox"]
