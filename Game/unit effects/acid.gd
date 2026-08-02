@@ -1,7 +1,7 @@
 class_name acid_effect
 extends unit_effect
 
-var damage_overtime = 1.0
+var damage_overtime = null
 var fraction:float = 0.0
 static var gradient := preload("res://Effects/Gradients/Gradient_Acid.tres")
 static var primary_color := Color8(67,184,0,77)
@@ -16,8 +16,8 @@ func do_unit_graphics(unit) -> void:
 
 func _on_effect() -> void:
 
-	damage_overtime = current_shot.damage / (current_unit.armor/4) + 0.5
-	duration = current_shot.damage * 5
+	duration = current_shot.damage * 5 if damage_overtime != null else duration
+	damage_overtime = current_shot.damage / (current_unit.armor/4) + 0.5 if damage_overtime == null else damage_overtime
 
 	#acid graphics
 

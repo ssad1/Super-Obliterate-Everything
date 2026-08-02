@@ -76,6 +76,7 @@ var newlist:Array = []
 @onready var WeaponBlackHole3 := load("res://Sounds/Weapons/WeaponBlackHole3.tscn")
 
 @onready var AcidCloudBubbling := load("res://Sounds/Misc/AcidCloudBubbling.tscn")
+@onready var FreezeCloudLeaking := load("res://Sounds/Misc/FreezeCloudLeaking.tscn")
 
 @onready var GetMetal := load("res://Sounds/Interface/GetMetal.tscn")
 @onready var ButtonBuild := load("res://Sounds/Interface/ButtonBuild.tscn")
@@ -139,7 +140,8 @@ enum sound {
 
 	WEAPON_BLACK_HOLE,
 	DISINTEGRATE,
-	ACID_CLOUD_BUBBLING
+	ACID_CLOUD_BUBBLING,
+	FREEZE_CLOUD_LEAKING
 }
 
 func _play(s) -> void:
@@ -409,6 +411,9 @@ func _play(s) -> void:
 		sound.ACID_CLOUD_BUBBLING:
 			sfx = AcidCloudBubbling.instantiate()
 			sfx.volume_db = sfx.volume_db - 5
+		sound.FREEZE_CLOUD_LEAKING:
+			sfx = FreezeCloudLeaking.instantiate()
+			sfx.volume_db = sfx.volume_db - 6
 	
 	sfx.volume_db = sfx.volume_db - 20 * (1 - GLOBAL.sound_volume / 100)
 	add_child(sfx)

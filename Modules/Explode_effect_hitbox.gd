@@ -34,8 +34,9 @@ func _apply_effects(unit) -> void:
 		SPAWNER.game.add_child(instance)
 		SPAWNER.game.unit_effects.append(instance)
 
-		instance.apply_effect(unit)
 		_do_overrides(effect, instance)
+
+		instance.apply_effect(unit)
 		instance.do_unit_graphics(unit)
 
 #make we be able to balance stuff properly. be able to set any property we want in-editor

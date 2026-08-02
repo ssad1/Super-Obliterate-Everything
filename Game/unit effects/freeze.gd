@@ -1,7 +1,7 @@
 class_name freeze_effect
 extends unit_effect
 
-var freeze_strength = 0.0 #0-1, subtracts tick speed
+var freeze_strength = null#0-1, subtracts tick speed
 
 static var gradient := preload("res://Effects/Gradients/Gradient_Freeze.tres")
 static var primary_color := Color8(0,152,255,77)
@@ -15,8 +15,8 @@ func do_unit_graphics(unit) -> void:
 
 func _on_effect() -> void:
 	
-	freeze_strength = 1 / (current_unit.armor/2) * current_shot.damage
-	duration = current_shot.damage * 3
+	var total = 1 / (current_unit.armor/2) * current_shot.damage if freeze_strength == null else freeze_strength
+	duration = current_shot.damage * 3 if freeze_strength == null else duration
 
 	for effect in SPAWNER.game.unit_effects:
 
@@ -28,7 +28,7 @@ func _on_effect() -> void:
 			duration = max(duration, effect.duration)
 			effect.duration = duration
 	
-	current_unit.tick_speed -= freeze_strength
+	current_unit.tick_speed -= total
 	do_unit_graphics(current_unit)
 
 func _on_effect_end() -> void:

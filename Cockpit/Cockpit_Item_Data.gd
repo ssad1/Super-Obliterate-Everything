@@ -36,7 +36,6 @@ func _on_show_item_stats(p,n,e,m,s):
 	metal_cost = m
 	supply_cost = s
 	$VBox/UIName.text = n
-	$VBox/UIName/UIName2.text = n
 	$VBox/CostMenu/UIEnergy.text = str(energy_cost)
 	$VBox/CostMenu/UIMetal.text = str(metal_cost)
 	$VBox/CostMenu/UISupply.text = str(supply_cost)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bxt83jq824bps"]
+[gd_scene load_steps=31 format=3 uid="uid://bxt83jq824bps"]
 
 [ext_resource type="Script" uid="uid://dbvrdy1dxxtb5" path="res://Ships/Ship_General.gd" id="1_s0myy"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_6vvsk"]
@@ -18,6 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://dc47orf4sc36b" path="res://Effects/E_MuzzleA.tscn" id="14_ix03t"]
 [ext_resource type="PackedScene" uid="uid://bpqkpd5s0eyuw" path="res://Modules/Module_Cruiser_Boom.tscn" id="15_ix4yk"]
 [ext_resource type="PackedScene" uid="uid://7pg3lcgaqwwt" path="res://Shots/Missile_ER1.tscn" id="18_fdhm7"]
+[ext_resource type="Shader" uid="uid://by3yesvcyq36a" path="res://Shaders/Missile_Shader.gdshader" id="19_0e017"]
+[ext_resource type="Texture2D" uid="uid://bcvavlnassrga" path="res://Shots/Graphics/Missile_ER_L.png" id="20_q0uyb"]
+[ext_resource type="Script" uid="uid://bbcawjc6pgg1d" path="res://Game/unit effects/editor_effect_override.gd" id="21_q0uyb"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
@@ -67,6 +70,32 @@ shader_parameter/frames = 1.0
 shader_parameter/phase = 0.0
 shader_parameter/colors = ExtResource("13_8ho1j")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3echm"]
+resource_local_to_scene = true
+shader = ExtResource("19_0e017")
+shader_parameter/lighting = ExtResource("20_q0uyb")
+shader_parameter/light_color = Color(0, 0.5254902, 0.18039216, 1)
+shader_parameter/light_bright = 1.0
+shader_parameter/frames = Vector2(8, 8)
+
+[sub_resource type="Resource" id="Resource_3echm"]
+script = ExtResource("21_q0uyb")
+overrided_effect = 1
+property = "freeze_strength"
+value = 1.0
+metadata/_custom_type_script = "uid://bbcawjc6pgg1d"
+
+[sub_resource type="Resource" id="Resource_hy27p"]
+script = ExtResource("21_q0uyb")
+overrided_effect = 1
+property = "duration"
+value = 15.0
+metadata/_custom_type_script = "uid://bbcawjc6pgg1d"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hy27p"]
+resource_local_to_scene = true
+radius = 18.0
+
 [node name="Ship_Trident" type="Node2D"]
 script = ExtResource("1_s0myy")
 thrust = 0.2
@@ -109,7 +138,7 @@ position = Vector2(0, -9)
 [node name="Mine_Hangar" parent="." instance=ExtResource("11_trgd1")]
 position = Vector2(9.000001, -13.999999)
 rotation = -1.3962634
-release_interval = 180
+release_interval = 200
 launch_velocity = 8.0
 mine_size = 0.35
 
@@ -119,7 +148,7 @@ visible = false
 [node name="Mine_Hangar2" parent="." instance=ExtResource("11_trgd1")]
 position = Vector2(-9, -13.999999)
 rotation = -1.7453293
-release_interval = 180
+release_interval = 200
 launch_velocity = 8.0
 mine_size = 0.35
 
@@ -147,17 +176,32 @@ scale = Vector2(0.5, 0.5)
 [node name="Gun_General2" parent="." instance=ExtResource("10_kxxhr")]
 position = Vector2(0, -21)
 fire_sound = 23
-gun_heat = 150
+gun_heat = 100
 gun_angle = 0.4
-gun_v = 20
 gun_scale = 0.7
 velocity_align = false
 
 [node name="Missile_ER1" parent="Gun_General2" instance=ExtResource("18_fdhm7")]
 visible = false
 
+[node name="Hull" parent="Gun_General2/Missile_ER1" index="0"]
+material = SubResource("ShaderMaterial_3echm")
+
+[node name="Explode_Effect" parent="Gun_General2/Missile_ER1/Module_Trigger/Spawn_Explosion" index="0"]
+applied_effects = Array[int]([1])
+effects_override = Array[ExtResource("21_q0uyb")]([SubResource("Resource_3echm"), SubResource("Resource_hy27p")])
+boom_large_effect = 116
+effect_SFX = 45
+boom_scale = 3.0
+lifespan = 30
+
+[node name="CollisionShape2D" parent="Gun_General2/Missile_ER1/detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_hy27p")
+
 [node name="E_MuzzleA" parent="Gun_General2" instance=ExtResource("14_ix03t")]
 visible = false
 scale = Vector2(0.5, 0.5)
 
 [editable path="detection_hitbox"]
+[editable path="Gun_General2/Missile_ER1"]
+[editable path="Gun_General2/Missile_ER1/detection_hitbox"]

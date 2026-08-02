@@ -65,6 +65,7 @@ extends Node
 @onready var E_Fire := load("res://Effects/E_Fire.tscn")
 @onready var E_SmokeTrail := load("res://Effects/E_SmokeTrail.tscn")
 @onready var E_AcidCloud := load("res://Effects/Explosions/E_Acid_Cloud.tscn")
+@onready var E_FreezeCloud := load("res://Effects/Explosions/E_Freeze_Cloud.tscn")
 
 @onready var Struct_Ice_Asteroid_1 := load("res://Structures/Asteroids/Struct_Ice_Asteroid_1.tscn")
 @onready var Struct_Ice_Asteroid_2 := load("res://Structures/Asteroids/Struct_Ice_Asteroid_2.tscn")
@@ -325,6 +326,7 @@ enum spawn_objs {
 	PANDEMIC,
 	EFFECT_ACID_CLOUD,
 	TYRANT,
+	EFFECT_FREEZE_CLOUD
 }
 
 var next_spawn_id:int = 1
@@ -701,6 +703,8 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 			#obj.scale = Vector2(.3,.3)
 		spawn_objs.EFFECT_ACID_CLOUD:
 			obj = E_AcidCloud.instantiate()
+		spawn_objs.EFFECT_FREEZE_CLOUD:
+			obj = E_FreezeCloud.instantiate()
 
 		#New units:
 

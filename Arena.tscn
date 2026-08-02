@@ -7,8 +7,8 @@
 [node name="Arena" type="Node2D"]
 editor_description = "Test arena for new implemented ships."
 script = ExtResource("1_cgmb8")
-units_blue = Array[int]([59, 59, 59, 59])
-units_red = Array[int]([113, 113])
+units_blue = Array[int]([59])
+units_red = Array[int]([44])
 arena_size = Vector2(2000, 1000)
 
 [node name="Background" type="CanvasLayer" parent="."]

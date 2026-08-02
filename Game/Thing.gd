@@ -52,9 +52,21 @@ var physics_clock:float = 0
 var has_no_modules:bool = false
 var invulnerable = false
 
+@onready var hull:Sprite2D = $Hull
+@onready var mat:Material = $Hull.get_material()
+@onready var has_modules:bool = modules.size() > 0
+@onready var has_tcpu:bool = tcpu != null
+@onready var has_stats:bool = stats != null
+@onready var is_not_struct:bool = is_type != UNIT_STATE.type.STRUCT
+@onready var animator = hull.get_node("AnimationPlayer") if hull.has_node("AnimationPlayer") else null
+
 var tick_speed:float = 1.0:
 	set(value):
+		
 		tick_speed = clampf(value, 0.0, 1.0)
+		
+		if animator != null:
+			animator.speed_scale = tick_speed
 	get:
 		return tick_speed
 
@@ -66,13 +78,6 @@ var dead:bool = _death:
 		_death = value
 	get:
 		return _death
-
-@onready var hull:Sprite2D = $Hull
-@onready var mat:Material = $Hull.get_material()
-@onready var has_modules:bool = modules.size() > 0
-@onready var has_tcpu:bool = tcpu != null
-@onready var has_stats:bool = stats != null
-@onready var is_not_struct:bool = is_type != UNIT_STATE.type.STRUCT
 
 func _ready() -> void:
 	_do_range()
@@ -222,8 +227,7 @@ func hit(s) -> void:
 
 	#apply effects(Acid, freeze, shock, etc)
 
-	if "shot_effects" in s:
-		if s.shot_effects.size() == 0: return
+	if "shot_effects" in s && s.shot_effects.size() > 0: 
 
 		for effect in s.shot_effects:
 
@@ -237,7 +241,7 @@ func hit(s) -> void:
 			instance.apply_effect(self)
 
 	if s.is_type == UNIT_STATE.type.SHOT:
-		s.armor = 0
+		s.armor = -100
 		_apply_force(s.force, s.velocity)
 		SPAWNER._spawn_hit(s.damage_type, s.damage, s.pos, velocity, s.rotate)
 
@@ -248,7 +252,7 @@ func hit(s) -> void:
 		SPAWNER._spawn_hit(s.damage_type, s.damage, pos, velocity, s.rotate)
 
 	if s.is_type == UNIT_STATE.type.MISSILE:
-		s.armor = 0
+		s.armor = -100
 		_apply_force(s.force, s.velocity)
 
 func _remove_ref(s) -> void:

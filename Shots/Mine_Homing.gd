@@ -21,7 +21,6 @@ func _ready() -> void:
 		if !burn.visible: 
 			burn.show()
 	
-	UNIT_STATE.do_unit_build(self, 1.25)
 	hitbox.area_entered.connect(_on_hitbox_entered)
 	hitbox.area_exited.connect(_on_hitbox_entered)
 

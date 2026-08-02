@@ -10,11 +10,6 @@ func _ready() -> void:
 	up = get_parent()
 	up.modules.append(self)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func _do_tick() -> void:
 	if up.player != null:
 		up.player._add_resource(energy_gen / 10, metal_gen / 10, 0)
