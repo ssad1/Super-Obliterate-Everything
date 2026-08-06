@@ -71,6 +71,7 @@ func _default_items():
 	item_bag.append([SPAWNER.spawn_objs.MOSQUITO])
 	item_bag.append([SPAWNER.spawn_objs.PUMA])
 
+	'''
 	item_bag.append([SPAWNER.spawn_objs.TREMOR])
 	item_bag.append([SPAWNER.spawn_objs.LEGION])
 	item_bag.append([SPAWNER.spawn_objs.ODYSSEY])
@@ -80,7 +81,7 @@ func _default_items():
 	item_bag.append([SPAWNER.spawn_objs.SAPPHIRE])
 	item_bag.append([SPAWNER.spawn_objs.JUPITER])
 	item_bag.append([SPAWNER.spawn_objs.MICROLASER_TURRET])
-	item_bag.append([SPAWNER.spawn_objs.SLOOP])
+	item_bag.append([SPAWNER.spawn_objs.SLOOP])'''
 	item_bag.append([SPAWNER.spawn_objs.HADES])
 	item_bag.append([SPAWNER.spawn_objs.VOIDLANCE_TURRET])
 	item_bag.append([SPAWNER.spawn_objs.PANDEMIC])

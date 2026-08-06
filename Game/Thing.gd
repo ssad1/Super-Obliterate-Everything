@@ -220,6 +220,7 @@ func hit(s) -> void:
 
 	if s.is_type == UNIT_STATE.type.SINGULARITY:
 		UNIT_STATE.do_black_hole_death(self)
+		vanish = true
 		return
 	
 	do_damage(s.damage)

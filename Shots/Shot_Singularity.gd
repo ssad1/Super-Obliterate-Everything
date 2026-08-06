@@ -58,13 +58,13 @@ func _process(delta:float) -> void:
 	for i in units_being_atracted.size():
 
 		var unit = units_being_atracted[i]
-
-		if unit.spaghettified:
-			unit.velocity = velocity
-			continue
-
 		var dir:Vector2 = (unit.global_position - global_position).normalized() 
 		var dist:float = unit.global_position.distance_to(global_position) 
+
+		if unit.spaghettified:
+			unit.velocity *= dir
+			unit.global_position = global_position
+			continue
 
 		var terminal_velocity:Vector2 = dir * (dist * attraction_force) 
 		

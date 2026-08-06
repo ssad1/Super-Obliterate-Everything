@@ -42,6 +42,8 @@ vertical_alignment = 1
 light_mask = 0
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
+text = "OFF
+"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 light_mask = 0
