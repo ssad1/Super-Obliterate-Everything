@@ -16,7 +16,7 @@ func do_unit_graphics(unit) -> void:
 
 func _on_effect() -> void:
 
-	duration = current_shot.damage * 5 if damage_overtime != null else duration
+	duration = current_shot.damage * 5 if damage_overtime == null else duration
 	damage_overtime = current_shot.damage / (current_unit.armor/4) + 0.5 if damage_overtime == null else damage_overtime
 
 	#acid graphics

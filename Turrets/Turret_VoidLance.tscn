@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1hd22vvfdy7r"]
+[gd_scene load_steps=12 format=3 uid="uid://c1hd22vvfdy7r"]
 
 [ext_resource type="Script" uid="uid://bjump45wwa6a5" path="res://Turrets/Turret_General.gd" id="1_nk16a"]
 [ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="2_6sjl4"]
 [ext_resource type="Texture2D" uid="uid://ci6e4i63s6xxv" path="res://Turrets/Graphics/Backup/Turret_VoidLance_C.png" id="3_ufyha"]
 [ext_resource type="Texture2D" uid="uid://rvbtb13yqxf" path="res://Turrets/Graphics/Backup/Turret_VoidLance_L.png" id="4_pwad8"]
 [ext_resource type="Texture2D" uid="uid://bgqhwfwlja326" path="res://Turrets/Graphics/Backup/Turret_VoidLance_D.png" id="5_imble"]
+[ext_resource type="Texture2D" uid="uid://dflr8vgd582b5" path="res://Turrets/Graphics/Backup/Turret_VoidLance_N.png" id="6_qdikj"]
 [ext_resource type="PackedScene" path="res://Guns/Gun_General.tscn" id="7_qdikj"]
 [ext_resource type="PackedScene" uid="uid://dtud28wlroesr" path="res://Shots/Shot_Singularity.tscn" id="8_ye78w"]
 [ext_resource type="PackedScene" uid="uid://coxjddpqipkgg" path="res://Effects/E_MuzzleJ.tscn" id="9_fdxkq"]
@@ -38,6 +39,7 @@ shader_parameter/select_strength = 0.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_qdikj"]
 diffuse_texture = ExtResource("5_imble")
+normal_texture = ExtResource("6_qdikj")
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_nk16a")
