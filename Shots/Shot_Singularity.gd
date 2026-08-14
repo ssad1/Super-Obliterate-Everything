@@ -61,15 +61,16 @@ func _process(delta:float) -> void:
 		var dir:Vector2 = (unit.global_position - global_position).normalized() 
 		var dist:float = unit.global_position.distance_to(global_position) 
 
-		if unit.spaghettified:
-			unit.velocity *= dir
-			unit.global_position = global_position
-			continue
-
 		var terminal_velocity:Vector2 = dir * (dist * attraction_force) 
 		
 		var speed:float = clamp(terminal_velocity.length(), 0.0, unit.max_velocity)
 		terminal_velocity = terminal_velocity.normalized() * speed
+
+		if unit.spaghettified:
+			unit.velocity = Vector2.ZERO
+			unit.global_position = global_position
+			unit.z_index = z_index + 1
+			continue
 
 		unit.velocity -= terminal_velocity
 

@@ -141,7 +141,7 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6bfif"]
 resource_local_to_scene = true
-radius = 21.0
+radius = 23.0
 
 [node name="ShotSingularity" type="Node2D"]
 script = ExtResource("1_28i65")
@@ -158,14 +158,11 @@ rect = Rect2(-48, -48, 96, 96)
 
 [node name="Hull" type="Sprite2D" parent="."]
 light_mask = 0
-z_index = -1
 material = SubResource("ShaderMaterial_5vx8k")
 texture = ExtResource("3_0d0ix")
 
 [node name="Horizon" type="Sprite2D" parent="Hull"]
 light_mask = 0
-z_index = -1
-z_as_relative = false
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_0d0ix")
 
