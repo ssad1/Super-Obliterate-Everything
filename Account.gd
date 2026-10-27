@@ -28,7 +28,7 @@ func _ready():
 	#_load_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _count_spaces():

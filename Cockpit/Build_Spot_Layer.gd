@@ -16,7 +16,7 @@ func _ready():
 	EVENTS.connect("clear_build_layer", Callable(self, "_clear_all"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	var xx = 0
 	var yy = 0
 	var xshift = 0

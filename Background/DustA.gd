@@ -15,11 +15,11 @@ var drift_t = 0
 var rv = 0
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	EVENTS.connect("starmode", Callable(self,"_starmode"))
 	_ignite()
 
-func _ignite():
+func _ignite() -> void:
 	randomize()
 	phaseshift = randf() * TAU
 	starscale = pow(randf() * .6 + .3,3) + .1
@@ -33,7 +33,7 @@ func _ignite():
 	set_rotation(randf() * 2 * PI)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	var pos:Vector2
 	var center = Vector2(.5 * GLOBAL.resx, .5 * GLOBAL.resy)
 	clock = clock + delta

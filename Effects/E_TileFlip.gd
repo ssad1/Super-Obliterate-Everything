@@ -10,7 +10,7 @@ func _ready():
 	hide()
 	pass
 
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _set_delay(d):

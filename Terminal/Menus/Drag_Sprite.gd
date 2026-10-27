@@ -9,7 +9,7 @@ func _ready():
 	EVENTS.connect("dragging", Callable(self, "_dragging"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	pass
 
 func _dragging(sprite_texture, bid, s):

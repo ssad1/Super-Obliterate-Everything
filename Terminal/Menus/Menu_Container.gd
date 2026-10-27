@@ -8,7 +8,7 @@ func _ready():
 	hide()
 	EVENTS.connect("submenu_button_press",Callable(self,"_submenu_button_press"))
 
-func _process(delta):
+func _process(delta:float) -> void:
 	if visible == true && alpha < 1:
 		alpha = alpha + 3 * delta
 		if alpha > 1:

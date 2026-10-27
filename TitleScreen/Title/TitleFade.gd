@@ -7,7 +7,7 @@ func _ready():
 	fadet = 0
 
 
-func _process(delta):
+func _process(delta:float) -> void:
 	fadet = fadet + .5 * delta
 	fadet = clamp(fadet,0,1.5)
 	if(fadet > 0):

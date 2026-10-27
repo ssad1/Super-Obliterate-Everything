@@ -18,7 +18,7 @@ func _ready():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	clock = clock + delta
 	if(clock > .1):
 		clock = clock - .1

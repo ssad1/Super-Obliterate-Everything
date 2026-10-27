@@ -6,7 +6,7 @@ var dusts = []
 var fade = 255
 var fadeset = 255
 
-func _ready():
+func _ready() -> void:
 	var s
 	EVENTS.connect("flipload", Callable(self, "_flipload"))
 	EVENTS.connect("fadeset", Callable(self, "_fadeset"))
@@ -14,7 +14,7 @@ func _ready():
 	set_position(Vector2(0,0))	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	if(fade < fadeset):
 		fade = fade + 200 * delta
 	if(fade > fadeset):
@@ -28,7 +28,7 @@ func _process(delta):
 	modulate = Color8(255,255,255,int(fade))
 	pass
 
-func _flipload():
+func _flipload() -> void:
 	if(GLOBAL.nextscreen == 0):
 		_clear_dusts()
 	if(GLOBAL.nextscreen == 1):
@@ -37,7 +37,7 @@ func _flipload():
 		#_clear_dusts()
 		pass
 
-func _clear_dusts():
+func _clear_dusts() -> void:
 	var i
 	i = dusts.size() - 1
 	while i > -1:

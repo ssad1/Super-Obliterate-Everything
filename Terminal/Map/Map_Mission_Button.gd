@@ -19,7 +19,7 @@ func _ready():
 	pass
 
 #Uncomment to make missions be available at any given time
-func _process(delta):
+func _process(delta:float) -> void:
 	show()
 
 func _ignite(s):

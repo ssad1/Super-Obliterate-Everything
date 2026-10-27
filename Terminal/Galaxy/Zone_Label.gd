@@ -11,7 +11,7 @@ func _ready():
 	EVENTS.connect("zone_hover_out", Callable(self, "_zone_hover_out"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	label.size = Vector2(10,10)
 	back.size = label.size
 	

@@ -11,7 +11,7 @@ func _ready():
 	p = get_parent().name
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	var ilight = $Item_Light
 	if(item_light_on == true):
 		ilight.energy = 10

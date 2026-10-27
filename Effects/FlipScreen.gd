@@ -22,7 +22,7 @@ func _ready():
 	_set_delays()
 	hide()
 
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _flipin():

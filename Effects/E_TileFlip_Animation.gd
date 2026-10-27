@@ -11,7 +11,7 @@ func _ready():
 	EVENTS.connect("flipout", Callable(self, "_flipout"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	if(flipme == true):
 		if(delayclock > 0):
 			delayclock = delayclock - 1500 * delta

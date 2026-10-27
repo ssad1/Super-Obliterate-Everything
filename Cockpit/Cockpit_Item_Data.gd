@@ -12,7 +12,7 @@ func _ready():
 	EVENTS.connect("hide_item_stats", Callable(self, "_on_hide_item_stats"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	clock = clock + delta
 	if(visible == true):
 		_cost_colors()

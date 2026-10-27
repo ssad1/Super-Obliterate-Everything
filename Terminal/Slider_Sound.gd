@@ -9,7 +9,7 @@ func _ready():
 	GLOBAL.sound_sliders.append(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _on_Slider_Sound_value_changed(value):

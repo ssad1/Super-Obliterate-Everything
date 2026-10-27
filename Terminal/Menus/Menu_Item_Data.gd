@@ -14,7 +14,7 @@ func _ready():
 	EVENTS.connect("hide_menu_item_stats", Callable(self, "_on_hide_menu_item_stats"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	clock = clock + delta
 	modulate = Color(1,1,1,fade_alpha)
 	if(fade_out == true):

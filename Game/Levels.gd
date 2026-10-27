@@ -29,7 +29,7 @@ var big_rock = SPAWNER.spawn_objs.BIG_ROCKY_ASTEROID
 func _ready():
 	pass # Replace with function body.
 
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _add_start_spots():

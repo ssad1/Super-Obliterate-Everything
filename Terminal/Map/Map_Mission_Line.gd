@@ -10,7 +10,7 @@ var mission_b
 func _ready():
 	pass # Replace with function body.
 
-func _process(delta):
+func _process(delta:float) -> void:
 	var c = 0
 	clock = clock + delta
 	c = 255 * (clock - .1 * (distance_to_start - 1))

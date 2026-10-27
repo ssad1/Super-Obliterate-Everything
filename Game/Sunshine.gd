@@ -13,7 +13,7 @@ func _ready():
 	EVENTS.connect("envset", Callable(self,"_envset"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	var pos := Vector2(0,0)
 	var adjust := Vector2(0,0)
 	var anim := Vector2(0,0)

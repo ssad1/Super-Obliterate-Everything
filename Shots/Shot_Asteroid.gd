@@ -12,7 +12,7 @@ func _ready():
 	is_type = UNIT_STATE.type.SHOT
 	_do_range()
 
-func _process(delta):
+func _process(delta:float) -> void:
 
 	var blend_pos
 	blend_pos = position + (pos - position) * .1 + .2 * velocity

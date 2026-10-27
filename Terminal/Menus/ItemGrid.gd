@@ -12,7 +12,7 @@ func _ready():
 	_setup_buttons()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	if(reload_clock > 0):
 		reload_clock = reload_clock - delta
 		if(reload_clock <= 0):

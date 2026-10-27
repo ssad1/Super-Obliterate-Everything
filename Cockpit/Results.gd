@@ -18,7 +18,7 @@ func _ready():
 	timer.connect("timeout", Callable(self,"_timeout"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	var theta = 0
 	var r = 0
 	if backalpha < .75:

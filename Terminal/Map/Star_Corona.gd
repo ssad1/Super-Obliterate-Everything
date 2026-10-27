@@ -5,6 +5,6 @@ var speed = 0
 func _ready():
 	pass
 
-func _process(delta):
+func _process(delta:float) -> void:
 	speed = get_parent().speed
 	speed_scale = speed

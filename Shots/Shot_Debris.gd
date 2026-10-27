@@ -17,7 +17,7 @@ func _ready():
 	if(randf() > 0.5):
 		dir = -1 * dir
 
-func _process(delta):
+func _process(delta:float) -> void:
 	clock = clock + spin * delta
 	while(clock >= 1):
 		if(dir == 1):

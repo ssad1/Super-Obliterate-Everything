@@ -8,7 +8,7 @@ func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	clock = clock + delta
 	xx = 650 * sin(clock * .3)
 	yy = 200 * cos(clock * .3)

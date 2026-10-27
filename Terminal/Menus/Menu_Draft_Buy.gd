@@ -10,7 +10,7 @@ func _ready():
 	EVENTS.connect("submenu_button_press", Callable(self,"_close_menu_b"))
 	EVENTS.connect("draft_buy", Callable(self,"_close_menu_c"))
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _close_menu():

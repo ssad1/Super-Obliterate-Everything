@@ -104,5 +104,5 @@ func _remove_ref(s) -> void:
 			modules[i]._remove_ref(s)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass

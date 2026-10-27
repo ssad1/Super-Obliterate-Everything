@@ -9,7 +9,7 @@ var bright = .8
 func _ready():
 	anim.stop(true)
 
-func _process(delta):
+func _process(delta:float) -> void:
 	if(credits != ACCOUNT.credits):
 		credit_clock = credit_clock + delta
 	if(credit_clock > .05):

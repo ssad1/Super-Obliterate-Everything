@@ -7,7 +7,7 @@ var stars = []
 var fade = 255
 var fadeset = 255
 
-func _ready():
+func _ready() -> void:
 	var s
 	EVENTS.connect("flipload", Callable(self,"_flipload"))
 	EVENTS.connect("fadeset", Callable(self,"_fadeset"))
@@ -16,7 +16,7 @@ func _ready():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	if(fade < fadeset):
 		fade = fade + 200 * delta
 	if(fade > fadeset):
@@ -29,7 +29,7 @@ func _process(delta):
 		fade = 0
 	modulate = Color8(255,255,255,int(fade))
 
-func _flipload():
+func _flipload() -> void:
 	if(GLOBAL.nextscreen == 0):
 		_clear_stars()
 		_gen_stars()
@@ -40,7 +40,7 @@ func _flipload():
 		_clear_stars()
 		_gen_stars()
 
-func _clear_stars():
+func _clear_stars() -> void:
 	var i
 	i = stars.size() - 1
 	while i > -1:
@@ -48,7 +48,7 @@ func _clear_stars():
 		stars.remove_at(i)
 		i = i - 1
 
-func _gen_stars():
+func _gen_stars() -> void:
 	#$DeepStars._gen_stars()
 	var s
 	CALC.rseed = LEVELS.level_seed
@@ -63,7 +63,7 @@ func _gen_stars():
 	for i in 5:
 		_gen_cluster()
 
-func _gen_cluster():
+func _gen_cluster() -> void:
 	var s
 	var theta
 	var r
@@ -85,5 +85,5 @@ func _gen_cluster():
 		add_child(s)
 		s.start_position = spot + Vector2(r * cos(theta),r * sin(theta))
 
-func _fadeset(dim):
+func _fadeset(dim:float) -> void:
 	fadeset = dim

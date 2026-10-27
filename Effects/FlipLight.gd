@@ -5,7 +5,7 @@ var v = Vector2(0,0)
 func _ready():
 	pass
 
-func _process(delta):
+func _process(delta:float) -> void:
 	var pos:Vector2
 	pos = position
 	pos = pos + v * delta
