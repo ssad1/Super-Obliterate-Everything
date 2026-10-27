@@ -17,9 +17,10 @@ shader_parameter/shield_charging = 0.0
 shader_parameter/shield_damage_strength = 0.0
 shader_parameter/offset = Vector2(0, 0)
 
-[node name="ShieldGlow" type="Sprite2D"]
+[node name="ShieldGlow" type="TextureRect"]
 light_mask = 0
 material = SubResource("1")
-position = Vector2(128, 128)
+offset_right = 256.0
+offset_bottom = 256.0
 texture = ExtResource("3")
 script = ExtResource("2")

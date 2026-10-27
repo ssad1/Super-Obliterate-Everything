@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c8i1tyvmlxpy5"]
 
-[ext_resource type="Script" path="res://Main.gd" id="1"]
-[ext_resource type="Script" path="res://Label.gd" id="2"]
+[ext_resource type="Script" uid="uid://brq66gn1wm48l" path="res://Main.gd" id="1"]
+[ext_resource type="Script" uid="uid://4d7i0182m7h4" path="res://Label.gd" id="2"]
 
 [sub_resource type="Environment" id="1"]
 background_mode = 4

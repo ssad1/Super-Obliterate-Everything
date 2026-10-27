@@ -10,5 +10,7 @@ modulate = Color(1, 1, 1, 0)
 light_mask = 0
 material = SubResource("1")
 custom_minimum_size = Vector2(1600, 900)
+offset_right = 1600.0
+offset_bottom = 900.0
 mouse_filter = 2
 script = ExtResource("1")

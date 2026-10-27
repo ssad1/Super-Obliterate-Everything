@@ -1,4 +1,4 @@
-extends Sprite2D
+extends TextureRect
 
 @onready var Gradient_T_A := load("res://Effects/Gradients/Gradient_T_A.tres")
 @onready var Gradient_T_B := load("res://Effects/Gradients/Gradient_T_B.tres")

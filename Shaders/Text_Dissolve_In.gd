@@ -1,4 +1,4 @@
-extends Sprite2D
+extends TextureRect
 
 
 # Declare member variables here. Examples:
