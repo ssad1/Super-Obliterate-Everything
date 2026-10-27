@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://ckkjx4ui0ndas"]
+[gd_scene load_steps=16 format=3 uid="uid://ckkjx4ui0ndas"]
 
-[ext_resource type="Shader" path="res://Shaders/Unit_Shader.gdshader" id="1"]
-[ext_resource type="Script" path="res://Structures/Struct_General.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://d2iakrhbb3uws" path="res://Modules/HitBox.tscn" id="3"]
+[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1"]
+[ext_resource type="Script" uid="uid://bo26uuvh8mdyh" path="res://Structures/Struct_General.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://l3qad0i5p3en" path="res://Structures/Graphics/Struct_Reactor_C.PNG" id="4_2m0gc"]
 [ext_resource type="Texture2D" uid="uid://k22c5p27hb8n" path="res://Structures/Graphics/Struct_Reactor_L.PNG" id="5_bnmd4"]
 [ext_resource type="Texture2D" uid="uid://cmr5bkq0kgrx1" path="res://Structures/Graphics/Struct_Reactor_D.PNG" id="6_sqqnj"]
@@ -10,10 +9,13 @@
 [ext_resource type="PackedScene" path="res://Modules/Generator.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://2rc1lcifjq2j" path="res://Modules/Module_Medium_Struct_Boom.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://Modules/Module_SFX.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://72ut2dkcxn4k" path="res://Game/Unit Life/HitBox.tscn" id="11_ldfr4"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("1")
+shader_parameter/flag_mask = ExtResource("4_2m0gc")
+shader_parameter/lighting = ExtResource("5_bnmd4")
 shader_parameter/flag_color = Color(1, 1, 1, 1)
 shader_parameter/light_color = Color(1, 1, 1, 1)
 shader_parameter/burn_color = Color(1, 1, 1, 1)
@@ -35,8 +37,6 @@ shader_parameter/build_strength = 0.0
 shader_parameter/swirl_strength = 0.0
 shader_parameter/offset = Vector2(6.5, 8)
 shader_parameter/select_strength = 0.0
-shader_parameter/flag_mask = ExtResource("4_2m0gc")
-shader_parameter/lighting = ExtResource("5_bnmd4")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_i7yex"]
 diffuse_texture = ExtResource("6_sqqnj")
@@ -59,8 +59,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_340u0"]
 _data = {
-"Spin": SubResource("2")
+&"Spin": SubResource("2")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k3urh"]
+resource_local_to_scene = true
+radius = 12.0
 
 [node name="Struct_Reactor" type="Node2D"]
 script = ExtResource("2")
@@ -83,20 +87,20 @@ vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hull"]
 libraries = {
-"": SubResource("AnimationLibrary_340u0")
+&"": SubResource("AnimationLibrary_340u0")
 }
 autoplay = "Spin"
-
-[node name="HitBox" parent="." instance=ExtResource("3")]
-offset_left = -10.0
-offset_top = -14.0
-offset_right = 10.0
-offset_bottom = 6.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Module_Medium_Struct_Boom_Large" parent="." instance=ExtResource("9")]
 visible = false
 
 [node name="Module_SFX" parent="." instance=ExtResource("10")]
 build_sfx = 1
+
+[node name="detection_hitbox" parent="." instance=ExtResource("11_ldfr4")]
+position = Vector2(0, -2)
+
+[node name="CollisionShape2D" parent="detection_hitbox" index="0"]
+shape = SubResource("CircleShape2D_k3urh")
+
+[editable path="detection_hitbox"]

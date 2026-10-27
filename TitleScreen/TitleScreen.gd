@@ -7,7 +7,7 @@ func _ready():
 	EVENTS.emit_signal("lightset", title_color, 1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _flipload():

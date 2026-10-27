@@ -50,20 +50,26 @@ func _launch_ship(rows:int) -> void:
 func spawn_row() -> void:
 
 	var obj := SPAWNER._spawn(
-        ship_id, 
-        up.player.id, 
-        (up.pos + position),
-        Vector2(cos(rotation), sin(rotation)) * launch_velocity + up.velocity,
-        rotation_degrees, 
-        0, 
-        1
-    )
+		ship_id, 
+		up.player.id, 
+		(up.pos + position),
+		Vector2(cos(rotation), sin(rotation)) * launch_velocity + up.velocity,
+		rotation_degrees, 
+		0, 
+		1
+	)
 	my_ships.append(obj)
 	obj.base = self
 	obj._init_center()
 
-
 func _remove_ship(removeid:int) -> void:
+	'''
+	var i := my_ships.size() - 1
+
+	for o in i:
+		if my_ships[o].spawn_id == removeid:
+			my_ships.remove_at(-o-1) #access properties backward to avoid losing potential units upon deletion
+	'''
 	var i
 	i = my_ships.size() - 1
 	while(i > -1):

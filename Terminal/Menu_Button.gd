@@ -15,7 +15,7 @@ func _ready():
 	#light.set_position(size / 2)
 	light.energy = 0
 
-func _process(delta):
+func _process(delta:float) -> void:
 	#text_clock = text_clock + 40 * delta
 	#if(text != text_save):
 	#	text = text_save.left(floor(text_clock) - 2 * menu_id)

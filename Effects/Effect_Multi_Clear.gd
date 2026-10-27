@@ -5,8 +5,8 @@ func _ready():
 	rotate = rotation
 	show()
 
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	_die()
+	die()

@@ -14,7 +14,7 @@ func _ready():
 	EVENTS.connect("hide_menu_item_stats", Callable(self, "_on_hide_menu_item_stats"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	clock = clock + delta
 	modulate = Color(1,1,1,fade_alpha)
 	if(fade_out == true):
@@ -30,7 +30,6 @@ func _on_show_menu_item_stats(p,o):
 		#metal_cost = m
 		#supply_cost = s
 		$VBox/UIName.text = o.name_text
-		$VBox/UIName/UIName2.text = o.name_text
 		$VBox/CostMenu/UIEnergy.text = str(o.energy_cost)
 		$VBox/CostMenu/UIMetal.text = str(o.metal_cost)
 		$VBox/CostMenu/UISupply.text = str(o.supply_cost)

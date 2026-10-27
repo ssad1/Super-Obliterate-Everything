@@ -32,7 +32,7 @@ ICONS="*res://Icon_Library.tscn"
 FACTIONS="*res://Factions.gd"
 DRAFT="*res://Draft.gd"
 SFX="*res://Sfx.gd"
-UNIT_STATE="*res://unit_state.gd"
+UNIT_STATE="*res://Game/Unit Life/unit_state.gd"
 
 [debug]
 
@@ -42,11 +42,9 @@ gdscript/warnings/enable=false
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
-window/size/borderless=true
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
-window/size/width=1920
-window/size/height=1080
+window/size/width=1600
+window/size/height=900
 
 [dotnet]
 

@@ -7,12 +7,10 @@ var buildability = false
 var build_flag = 0
 var builder
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+ 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	var destroy = false
 	_color_squares()
 	if(weakref(builder).get_ref() == null):
@@ -87,5 +85,5 @@ func _color_squares():
 				squares[i].anim = "LIGHT RED"
 	buildability = building
 
-func _die():
+func die():
 	pass

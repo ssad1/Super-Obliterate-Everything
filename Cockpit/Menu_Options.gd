@@ -32,7 +32,7 @@ func _ready():
 	EVENTS.connect("show_menu_options", Callable(self, "on_show_menu_options"))
 	EVENTS.connect("hide_menu_options", Callable(self, "on_hide_menu_options"))
 
-func _process(delta):
+func _process(delta:float) -> void:
 	if Input.is_key_pressed(KEY_ESCAPE) and not esc_trigger:
 		if not visible:
 			EVENTS.emit_signal("cancel_build")

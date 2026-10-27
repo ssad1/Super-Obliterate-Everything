@@ -39,7 +39,7 @@ func _on_area_entered(area:Area2D) -> void:
 		parent_unit.is_type == \"MISSILE\" && 
 		parent_unit.tcpu.targets.has(target.parent_unit)
 	   ):
-			target.parent_unit._hit(parent_unit)
+			target.parent_unit.hit(parent_unit)
 "
 
 [node name="HitBox" type="ColorRect"]

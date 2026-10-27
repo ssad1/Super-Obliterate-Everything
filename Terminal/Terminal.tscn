@@ -78,9 +78,16 @@ explosiveness = 0.82
 randomness = 0.28
 process_material = SubResource("4")
 
-[node name="MenuBack" type="Sprite2D" parent="."]
+[node name="MenuBack" type="TextureRect" parent="."]
 light_mask = 4
-position = Vector2(960, 540)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = SubResource("CanvasTexture_c7fk8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -88,18 +95,17 @@ light_mask = 4
 position = Vector2(976.152, 540)
 texture = SubResource("CanvasTexture_do1w7")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
 custom_minimum_size = Vector2(938, 990)
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 507.152
-offset_top = 45.0
-offset_right = 1445.15
-offset_bottom = 1035.0
+offset_left = -1089.0009
+offset_top = -1035.0
+offset_right = -151.00089
+offset_bottom = -45.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)

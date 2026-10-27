@@ -10,7 +10,7 @@ func _ready():
 	dimensions = $ColorRect.size
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	if(alpha < 1):
 		alpha = alpha + 5 * delta
 	if(alpha > 1):

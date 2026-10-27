@@ -1,0 +1,225 @@
+[gd_scene load_steps=26 format=3 uid="uid://ciqocvv0scgq1"]
+
+[ext_resource type="Script" uid="uid://g81p30f547g0" path="res://Effects/Effect_Clear.gd" id="1_8n5s0"]
+[ext_resource type="Texture2D" uid="uid://dvffs5i8buesi" path="res://Effects/Particles/Static/Nature/Ice_Crystal_D.png" id="4_442as"]
+[ext_resource type="Texture2D" uid="uid://tv81k466pj7p" path="res://Effects/Particles/Static/Nature/Ice_Crystal_N.png" id="5_vtod6"]
+[ext_resource type="Script" uid="uid://dywrqi0gycq48" path="res://Effects/AnimationMultiRandom.gd" id="6_vtod6"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vfauk"]
+light_mode = 1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vfauk"]
+load_path = "res://.godot/imported/glow.png-4e43deb76995e2248be2d42125d48b71.ctex"
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_442as"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vtod6"]
+load_path = "res://.godot/imported/Snow1.png-93b2c68f1f8831a50c14ef8f7264c1a0.ctex"
+
+[sub_resource type="Gradient" id="Gradient_442as"]
+offsets = PackedFloat32Array(0, 0.7692308, 1)
+colors = PackedColorArray(0.827451, 1, 1, 1, 0.92202115, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vtod6"]
+gradient = SubResource("Gradient_442as")
+
+[sub_resource type="Curve" id="Curve_ckfhl"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 2.6966295), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3n5cp"]
+curve = SubResource("Curve_ckfhl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ckfhl"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 75.0
+gravity = Vector3(0, 0, 0)
+damping_min = 7.7370005
+damping_max = 51.785004
+damping_curve = SubResource("CurveTexture_3n5cp")
+scale_min = 0.03
+scale_max = 0.099999994
+color_ramp = SubResource("GradientTexture1D_vtod6")
+anim_offset_max = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vtod6"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 6
+particles_anim_loop = false
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ckfhl"]
+diffuse_texture = ExtResource("4_442as")
+normal_texture = ExtResource("5_vtod6")
+
+[sub_resource type="Curve" id="Curve_ve445"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7923077, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4328d"]
+curve = SubResource("Curve_ve445")
+
+[sub_resource type="Curve" id="Curve_xdq0v"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 5.9550567), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vr4o3"]
+curve = SubResource("Curve_xdq0v")
+
+[sub_resource type="Curve" id="Curve_ev8e6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2846154, 1), 0.0, 0.0, 0, 0, Vector2(0.90000004, 0.9887641), 0.0, 0.0, 0, 0, Vector2(1, 0.75280905), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_8r51v"]
+curve = SubResource("Curve_ev8e6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3n5cp"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 100.0
+spread = 180.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+damping_max = 12.500001
+damping_curve = SubResource("CurveTexture_vr4o3")
+scale_min = 0.01
+scale_max = 0.14999999
+scale_curve = SubResource("CurveTexture_8r51v")
+alpha_curve = SubResource("CurveTexture_4328d")
+anim_offset_max = 1.0
+
+[sub_resource type="Animation" id="Animation_442as"]
+resource_name = "FreezeExplosion"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloudAura:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 1, 5.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.133, 0.3, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.108333334, 5.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D2:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.108333334, 5.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_vtod6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloudAura:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.13333334]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D2:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vtod6"]
+_data = {
+&"FreezeExplosion": SubResource("Animation_442as"),
+&"RESET": SubResource("Animation_vtod6")
+}
+
+[node name="E_Freeze_Cloud" type="Node2D"]
+script = ExtResource("1_8n5s0")
+
+[node name="CloudAura" type="Sprite2D" parent="."]
+modulate = Color(0.105882354, 0.1764706, 1, 0.13333334)
+material = SubResource("CanvasItemMaterial_vfauk")
+scale = Vector2(0.9, 0.9)
+texture = SubResource("CompressedTexture2D_vfauk")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_442as")
+position = Vector2(1, 0)
+emitting = false
+amount = 64
+texture = SubResource("CompressedTexture2D_vtod6")
+lifetime = 6.0
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ckfhl")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+modulate = Color(0.3665946, 0.3665946, 0.36659458, 1)
+material = SubResource("CanvasItemMaterial_vtod6")
+position = Vector2(1, 0)
+emitting = false
+amount = 32
+texture = SubResource("CanvasTexture_ckfhl")
+lifetime = 6.0
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_3n5cp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vtod6")
+}
+script = ExtResource("6_vtod6")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

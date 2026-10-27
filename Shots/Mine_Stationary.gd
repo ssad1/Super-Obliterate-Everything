@@ -17,39 +17,30 @@ func _ready() -> void:
 	hull.frame = randi_range(0, 63)
 	range_radius = detection_range
 
-	UNIT_STATE.do_unit_build(self, 0.5)
-
 func _init_shot():
-	mat = get_material()
+
+	if has_node("Hull"):
+		mat = $Hull.get_material()
+		UNIT_STATE.do_unit_build(self, 1.25)
+
 	_calc_damage()
 	is_type = UNIT_STATE.type.SHOT
-	
-	if mat != null && "set_shader_parameter" in mat:
-		mat.set_shader_parameter("phase",randf() * 2 * PI)
 
 	_do_range()
-	UNIT_STATE.do_unit_build(self, 0.5)
 
 func _process(delta:float) -> void:
 	var blend_pos := position + (pos - position) * .1 + .2 * velocity
 	set_position(blend_pos)
 
 	if inactive: return
-
-	tick_clock += delta
-	if tick_clock > 0.1:
-		tick_clock -= 0.1
-		_do_tick()
-	if tick_clock > 0.2:
-		tick_clock = 0.2
 	
+	_do_tick_clock(delta)
+
 	physics_clock += delta
 	if physics_clock > 0.1:
 		physics_clock -= 0.1
 
 		_do_physics()
-
-		if has_hitbox: hitbox.pos = pos + position
 
 	if physics_clock > 0.2:
 		physics_clock = 0.2

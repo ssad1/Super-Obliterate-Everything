@@ -1,30 +1,28 @@
 class_name Thing
 extends Node2D
 
-@onready var tcpu_node = preload("res://Modules/TargetCPU.tscn")
-@onready var FOV_node = preload("res://Modules/Target_FOV.tscn")
-@onready var hull:Sprite2D = $Hull
-@onready var mat:Material = $Hull.get_material()
-
-var s
 @export var name_text:String = "" 
 @export var class_text:String = ""
 @export var energy_cost:int = 0
 @export var metal_cost:int = 0
 @export var supply_cost:int = 0
 @export var credit_cost:int = 1
-
 @export var inertia:float = 0
 @export var max_velocity:float = 0
 @export var max_rotate_velocity:float = 0
 @export var drag:float = 0
+@export var max_armor:float = 5
+@export var max_shields:float = 0
+@export var target_profile:TargetCPU.profile = TargetCPU.profile.NORMAL
+@export var scan_only_in_range:bool = false
+@export var special:String = ""
+@export var build_speed:float = 1
+
 var pos:Vector2 = Vector2(0.0,0.0)
 var velocity:Vector2 = Vector2(0.0,0.0)
 var rotate:float = 0
 var rotate_velocity:float = 0
-
-@export var max_armor:float = 5
-@export var max_shields:float = 0
+var s
 var armor:float = 5
 var shields:float = 0
 var area_shield:float = 0
@@ -32,120 +30,89 @@ var max_area_shield:float = 0
 var cloaked:bool = false
 var range_radius:int = 100
 var shield_radius:float = 0 #display only, set in area shield module
-
-@export var target_profile:TargetCPU.profile = TargetCPU.profile.NORMAL
-@export var scan_only_in_range:bool = false
-@export var special:String = ""
 var guns_safety:bool = false
-
 
 var burn_color = Color(1,0,0,1)
 var light_bright:float = 1
 var burn_bright:float = 0
-var cloak_strength:float = 0
-var freeze_strength:float = 0
-var acid_strength:float = 0
-var dissolve_strength:float = 0
-var shock_strength:float = 0
-var shield_strength:float = 0
-var shield_damage:float = 0
-var build_strength:float = 0
-var swirl_strength:float = 0
-
 
 var spaghettified:bool = false
 var select_strength:float = 0
-var offset:Vector2 = Vector2(randi() % 1000 + 10,randi() % 1000 + 10)
-
-var player
+var player:Player
 var tcpu:TargetCPU 
-var tFOV
-var hitbox
-var phys
-var stats
-
-var ai_box = null
+var stats:Stats
 var modules = []
 var spawn_id:int = 0
-
-var death:bool = false
-var dead:bool = death:
-	set(value):
-		_do_death(value)
-
-		death = value
-	get:
-		return death
-
 var vanish:bool = false
 var is_type:UNIT_STATE.type = UNIT_STATE.type.THING
-
-@export var build_speed:float = 1
-
-var _selection:bool
 var is_selected:bool = false
-
+var inactive:bool = true 
 var tick_clock:float = 0
 var physics_clock:float = 0
-var tick_speed:float = 1:
+var has_no_modules:bool = false
+var invulnerable = false
+
+@onready var hull:Sprite2D = $Hull
+@onready var mat:Material = $Hull.get_material()
+@onready var has_modules:bool = modules.size() > 0
+@onready var has_tcpu:bool = tcpu != null
+@onready var has_stats:bool = stats != null
+@onready var is_not_struct:bool = is_type != UNIT_STATE.type.STRUCT
+@onready var animator = hull.get_node("AnimationPlayer") if hull.has_node("AnimationPlayer") else null
+
+var tick_speed:float = 1.0:
 	set(value):
-		if value < 0:
-			value = 0
 		
-		tick_speed = value
+		tick_speed = clampf(value, 0.0, 1.0)
+		
+		if animator != null:
+			animator.speed_scale = tick_speed
 	get:
 		return tick_speed
 
-@onready var has_modules:bool = modules.size() > 0
-@onready var has_tcpu:bool = tcpu != null
-@onready var is_not_struct:bool = is_type != UNIT_STATE.type.STRUCT
-@onready var has_hitbox:bool = hitbox != null
-var inactive:bool = true
+var _death:bool = false
+var dead:bool = _death:
+	set(value):
+		_do_death(value)
+
+		_death = value
+	get:
+		return _death
 
 func _ready() -> void:
-	hide()
 	_do_range()
-	if !visible:
-		show()
-
-	#hitbox.tree_exited.connect(func(): has_hitbox = false)
 
 func _process(delta:float) -> void:
-
-	if stats == null && is_selected:
-		stats = SPAWNER._spawn_stats()
-		stats.set_position(position)
-		_set_stats()
-
-	if stats != null:
-		if is_instance_valid(stats):
-			stats.set_position(position)
-		if is_selected == false:
-			stats.queue_free()
-			stats = null
 	
 	if inactive: return
 
-	tick_clock += delta
-	if tick_clock > 0.1:
-		tick_clock -= 0.1
-		_do_tick()
-	if tick_clock > 0.2 / tick_speed:
-		tick_clock = 0.2 / tick_speed
-	
+	_do_tick_clock(delta)
+
 	physics_clock += delta
 	if physics_clock > 0.1:
 		physics_clock -= 0.1
 
 		if is_not_struct: _do_physics()
 
-		if has_hitbox: hitbox.pos = pos + position
-
 	if physics_clock > 0.2:
 		physics_clock = 0.2
 
+func _do_tick_clock(delta:float) -> void:
+
+	if armor <= 0:
+		die()
+
+	tick_clock += delta * tick_speed
+
+	if tick_clock > 0.1:
+		tick_clock -= 0.1
+		_do_tick()
+
+	if tick_clock > 0.2:
+		tick_clock = 0.2
+
 func _add_tcpu() -> void:
-	tcpu = tcpu_node.instantiate()
+	tcpu = TargetCPU.tcpu_node.instantiate()
 	tcpu.up = self
 	tcpu.set_target_profile = target_profile
 
@@ -155,30 +122,11 @@ func _apply_force(f:float, dir:Vector2) -> void:
 	delta_v = inertia * f * dir
 	velocity = velocity + delta_v
 
-func _station_distance() -> float:
-	var d := 10000.0
-	var old_d := 10000.0
-
-	for struct in player.my_structs:
-
-		if struct.special == "STATION": continue
-
-		d = pos.distance_to(struct.pos)
-
-		if d < old_d:
-			old_d = d
-
-	return old_d
-
-func _die() -> void:
-	if stats != null:
-		stats.hide()
-		stats.queue_free()
-		stats = null
-	if vanish == false:
+func die() -> void:
+	if not vanish:
 		for module in modules:
-			if module.has_method("_on_death"):
-				module._on_death()
+			if !module.has_method("_on_death"): continue
+			module._on_death()
 	dead = true
 
 func _do_death(value:bool) -> void:
@@ -207,8 +155,6 @@ func _do_physics() -> void:
 	if rotate < 0:
 		rotate = rotate + TAU
 
-var has_no_modules:bool = false
-
 func _do_modules() -> void:
 
 	if has_no_modules: return
@@ -219,13 +165,13 @@ func _do_modules() -> void:
 		if !is_instance_valid(module):
 			has_no_modules = true
 			return
-
-		module._do_tick()
 		
 		if "shield_radius" in module && module.shield_radius - module.shield_width / 2 > shield_radius:
 			shield_radius = module.shield_radius - module.shield_width / 2
 			area_shield = module.shield
 			max_area_shield = module.max_shield
+		
+		module._do_tick()
 
 func _do_range() -> void:
 	_add_tcpu()
@@ -236,26 +182,11 @@ func _do_range() -> void:
 		if "range_radius" in module && module.range_radius > range_radius:
 			range_radius = module.range_radius
 	
-	tFOV = FOV_node.instantiate()
+	var tFOV = Target_FOV.FOV_node.instantiate()
 	add_child(tFOV)
 
 	tFOV._initialize_FOV_area(range_radius)
 	tFOV._bind_tcpu(tcpu)
-
-func _do_select(s:bool) -> void:
-	is_selected = s
-	if player != SPAWNER.game.me:
-		is_selected = false
-
-func _do_selection(delta:float) -> void:
-	
-	if is_selected:
-		select_strength = 1
-	elif select_strength > 0:
-		select_strength = select_strength - 3 * delta
-		select_strength = clamp(select_strength,0,1)
-
-	mat.set_shader_parameter("select_strength",select_strength)
 
 func _do_tick() -> void:
 
@@ -264,11 +195,6 @@ func _do_tick() -> void:
 
 	if has_modules:
 		_do_modules()
-
-	_set_stats()
-
-	if armor <= 0:
-		_die()
 
 func _get_turret_score() -> int:
 	var score := 0
@@ -279,26 +205,44 @@ func _get_turret_score() -> int:
 
 	return score
 
-func _do_damage() -> void:
-
-	UNIT_STATE.do_unit_damage(self)
-
-func _hit(s) -> void:
-
-	if s.is_type == UNIT_STATE.type.SINGULARITY:
-		UNIT_STATE.do_black_hole_death(self)
-		return
-
-	armor = armor - s.damage
+func do_damage(amount:float) -> void:
+	if invulnerable: return
+	armor = armor - amount
 
 	if armor > max_armor:
 		armor = max_armor
 
-	UNIT_STATE.do_unit_damage_strength(self)
-	_do_damage()
+	UNIT_STATE.do_unit_damage(self)
+	if stats != null: 
+		stats.update_stats()
 	
+func hit(s) -> void:
+
+	if s.is_type == UNIT_STATE.type.SINGULARITY:
+		UNIT_STATE.do_black_hole_death(self)
+		vanish = true
+		return
+	
+	do_damage(s.damage)
+	UNIT_STATE.do_unit_damage_strength(self)
+
+	#apply effects(Acid, freeze, shock, etc)
+
+	if "shot_effects" in s && s.shot_effects.size() > 0: 
+
+		for effect in s.shot_effects:
+
+			var instance:unit_effect = UNIT_STATE.effect[effect].new()
+
+			instance.current_shot = s
+
+			SPAWNER.game.add_child(instance)
+			SPAWNER.game.unit_effects.append(instance)
+
+			instance.apply_effect(self)
+
 	if s.is_type == UNIT_STATE.type.SHOT:
-		s.armor = 0
+		s.armor = -100
 		_apply_force(s.force, s.velocity)
 		SPAWNER._spawn_hit(s.damage_type, s.damage, s.pos, velocity, s.rotate)
 
@@ -309,7 +253,7 @@ func _hit(s) -> void:
 		SPAWNER._spawn_hit(s.damage_type, s.damage, pos, velocity, s.rotate)
 
 	if s.is_type == UNIT_STATE.type.MISSILE:
-		s.armor = 0
+		s.armor = -100
 		_apply_force(s.force, s.velocity)
 
 func _remove_ref(s) -> void:
@@ -325,29 +269,3 @@ func _set_player(p) -> void:
 		var mat := hull.get_material()
 		mat.set_shader_parameter("flag_color",player.flag_color)
 		mat.set_shader_parameter("light_color",player.light_color)
-
-func _set_stats() -> void:
-	var a := 0.0
-	var s := 0.0
-	var sb := 0.0
-
-	if !is_instance_valid(stats): return
-
-	if armor > 0:
-		if max_armor > 0:
-			a = armor/max_armor
-		else:
-			a = 0
-		if max_shields > 0:
-			s = shields/max_shields
-		else:
-			s = 0
-		if max_area_shield > 0:
-			sb = area_shield/max_area_shield
-		else:
-			sb = 0
-		stats._set_stats(a,s,sb,range_radius,shield_radius)
-	else:
-		stats.hide()
-		stats.queue_free()
-		stats = null

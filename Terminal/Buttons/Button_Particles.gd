@@ -10,7 +10,7 @@ func _ready():
 		text = "LOW"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _pressed():

@@ -13,7 +13,7 @@ func _ready():
 	hide()
 	anim.playback_active = false
 
-func _process(delta):
+func _process(delta:float) -> void:
 	if(anim.playback_active == false):
 		hide()
 	else:

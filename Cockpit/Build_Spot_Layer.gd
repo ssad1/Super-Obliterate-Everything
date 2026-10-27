@@ -16,7 +16,7 @@ func _ready():
 	EVENTS.connect("clear_build_layer", Callable(self, "_clear_all"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	var xx = 0
 	var yy = 0
 	var xshift = 0
@@ -34,7 +34,7 @@ func _process(delta):
 
 func _new_build_spot(id,v,prices,r,e,sr):
 	if(is_instance_valid(build_spot) == true):
-		build_spot._die()
+		build_spot.die()
 		build_spot.queue_free()
 		build_spot = null
 	build_spot = Build_Spot.instantiate()
@@ -45,7 +45,7 @@ func _new_build_spot(id,v,prices,r,e,sr):
 
 func _cancel_build():
 	if(is_instance_valid(build_spot) == true):
-		build_spot._die()
+		build_spot.die()
 		build_spot.queue_free()
 		build_spot = null
 	hide()

@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://coxjddpqipkgg"]
+[gd_scene load_steps=7 format=3 uid="uid://coxjddpqipkgg"]
 
 [ext_resource type="Texture2D" uid="uid://vcul7cayynvp" path="res://Effects/E_MuzzleJ.png" id="1_bcbg3"]
-[ext_resource type="Script" path="res://Effects/E_Muzzle_Laser.gd" id="2_kjxcc"]
+[ext_resource type="Script" uid="uid://uettf17oj1cq" path="res://Effects/E_Muzzle_Laser.gd" id="2_kjxcc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7uogj"]
+light_mode = 1
 
 [sub_resource type="Animation" id="2"]
 resource_name = "Burn"
@@ -36,18 +39,20 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a41k1"]
 _data = {
-"Burn": SubResource("2"),
-"RESET": SubResource("Animation_hsiyn")
+&"Burn": SubResource("2"),
+&"RESET": SubResource("Animation_hsiyn")
 }
 
 [node name="Node2D" type="Sprite2D"]
 script = ExtResource("2_kjxcc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.020557094, 7.1805066e-06, 0.13627857, 1)
+material = SubResource("CanvasItemMaterial_7uogj")
 texture = ExtResource("1_bcbg3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_a41k1")
+&"": SubResource("AnimationLibrary_a41k1")
 }
 speed_scale = 1.5

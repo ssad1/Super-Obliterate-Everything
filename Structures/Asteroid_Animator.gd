@@ -13,5 +13,5 @@ func _ready():
 		speed_scale = -1 * (randf() * .9 + .1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass

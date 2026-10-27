@@ -12,7 +12,7 @@ func _ready():
 	EVENTS.connect("build_alert", Callable(self,"_build_alert"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	if(fade_in == true):
 		fade_alpha = fade_alpha + 5 * delta
 		if(fade_alpha >= 1):

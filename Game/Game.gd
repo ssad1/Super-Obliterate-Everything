@@ -2,16 +2,19 @@ class_name Game
 extends Node2D
 
 var planet_system
+
 var radar:Array = []
 var players:Array = []
 var ships:Array[Ship_General] = []
 var structs:Array[Struct_General] = []
 var lasers:Array[Laser_General] = []
-var missiles:Array[Ship_Missile] = []
-var shots:Array = []
+var missiles:Array[Thing] = []
+var shots:Array[Thing] = []
 var explosions:Array = []
 var rocks:Array = []
 var event_list:Array = []
+var unit_effects:Array[unit_effect] = []
+
 var mapsize:Vector2 = Vector2(32*128,32*128)
 var wint:float = 0
 var wint_on:bool = false
@@ -60,7 +63,6 @@ func _process(delta:float) -> void:
 		wint = 0
 		wint_on = false
 
-
 func _cam_offset() -> Vector2:
 	var pos := position
 	return Vector2(GLOBAL.resx / 2 - (pos.x + .5 * mapsize.x), GLOBAL.resy / 2 - (pos.y + .5 * mapsize.y))
@@ -91,89 +93,6 @@ func _camera_edges() -> void:
 	if position.y + mapsize.y < GLOBAL.resy:
 		position.y = -1 * mapsize.y + GLOBAL.resy
 
-func _collide() -> void:
-	for shot in shots:
-
-		for target in shot.tcpu.targets:
-
-			if !is_instance_valid(target): continue
-
-			var sizeSX:float = shot.hitbox.size.x
-			var sizeTX:float = target.hitbox.size.x
-
-			var sizeSY:float = shot.hitbox.size.y
-			var sizeTY:float = target.hitbox.size.y
-
-			var shot_pos:Vector2 = shot.hitbox.global_position
-			var target_pos:Vector2 = target.hitbox.global_position
-
-			if (
-			(shot.hitbox != null && target.hitbox != null) && 
-			(shot_pos.x + sizeSX > target_pos.x - sizeTX) && 
-			(shot_pos.x - sizeSX < target_pos.x + sizeTX) && 
-			(shot_pos.y + sizeSY > target_pos.y - sizeTY) && 
-			(shot_pos.y - sizeSY < target_pos.y + sizeTY)):
-				target._hit(shot)
-
-	for missile in missiles:
-		for target in missile.tcpu.targets:
-
-			if !is_instance_valid(target): continue
-
-			var sizeSX:float = missile.hitbox.size.x
-			var sizeTX:float = target.hitbox.size.x
-
-			var sizeSY:float = missile.hitbox.size.y
-			var sizeTY:float = target.hitbox.size.y
-
-			var missile_pos:Vector2 = missile.hitbox.global_position
-			var target_pos:Vector2 = target.hitbox.global_position
-
-			if(
-			(missile.hitbox != null && target.hitbox != null) &&
-			(missile_pos.x + sizeSX > target_pos.x - sizeTX) && 
-			(missile_pos.x - sizeSX < target_pos.x + sizeTX) &&
-			(missile_pos.y + sizeSY > target_pos.y - sizeTY) && 
-			(missile_pos.y - sizeSY < target_pos.y + sizeTY)):
-				target._hit(missile)
-
-func _collide_explosions() -> void:
-	for explosion in explosions:
-		explosion.tcpu._clean_targets()
-
-		for target in explosion.tcpu.targets:
-
-			if target.hitbox == null: continue
-
-			var d2:float = target.hitbox.size.x
-			if target.hitbox.size.y > d2:
-				d2 = target.hitbox.size.y
-
-			if explosion.pos.distance_to(target.pos) < explosion.boom_radius + d2:
-				target._hit(explosion)
-
-func _collide_shields() -> void:
-	for struct in structs:
-		for module in struct.modules:
-
-			if module.is_type == UNIT_STATE.type.SHIELD && module.shield > 0:
-				_collide_shields_b(struct.player.id, module)
-
-func _collide_shields_b(f,s) -> void:
-	for shot in shots:
-		if shot.is_type != UNIT_STATE.type.LASER && DIPLOMACY.grid[shot.player.id][f] == 0:
-			_collide_shields_c(shot,s)
-			
-	for missile in missiles:
-		if DIPLOMACY.grid[missile.player.id][f] == 0:
-			_collide_shields_c(missile,s)
-
-func _collide_shields_c(sa,sb) -> void:
-	var d = sa.pos.distance_to(sb.pos)
-	if d < sb.shield_radius + 0.5 * sb.shield_width && d > sb.shield_radius - 0.5 * sb.shield_width:
-		sa.armor = 0
-		SPAWNER._spawn_hit("SHIELD", sa.damage, sa.pos, Vector2(0,0), sa.rotate + PI)
-		sb._hit_shield(sa.damage,sa.pos)
 
 func _clear_game() -> void:
 	print("Clear Game")
@@ -215,7 +134,6 @@ func _do_event_list() -> void:
 func _do_move(p,type,s,posx,posy) -> void:
 	tx_moves[p] = [p,type,s,posx,posy]
 
-func _do_rx_moves() -> void:
 	if GLOBAL.gamemode == 2:
 		rx_moves = tx_moves
 
@@ -231,21 +149,18 @@ func _do_rx_moves() -> void:
 
 func _do_tick() -> void:
 	var start_clock = Time.get_ticks_usec()
-	var end_clock
+	#var end_clock
 	mission_clock = mission_clock + 1
 	_do_event_list()
 	_do_radar()
-	_do_rx_moves()
-	_collide()
-	_collide_explosions()
-	_collide_shields()
+	
 	SFX._do_tick()
 
 	for player in players:
 		player._do_tick()
 	_do_victory()
 	GLOBAL.heatbright = GLOBAL.heatbright * .9 - 1
-	end_clock = Time.get_ticks_usec()
+	#end_clock = Time.get_ticks_usec()
 	
 func _do_radar() -> void:
 	var pos:Vector2
@@ -282,11 +197,12 @@ func _do_radar() -> void:
 		data = ship.build_mission
 
 		var data2 = data[2]
+		var playerData0 = players[data[0]]
 
-		if "factory" in players[data[0]].item_bag_objs[data2]:
-			build_obj = players[data[0]].item_bag_factory_objs[data2]
+		if "factory" in playerData0.item_bag_objs[data2]:
+			build_obj = playerData0.item_bag_factory_objs[data2]
 		else:
-			build_obj = players[data[0]].item_bag_objs[data2]
+			build_obj = playerData0.item_bag_objs[data2]
 		pos.x = data[3]
 		pos.y = data[4]
 		for xx in build_obj.build_size.x:
@@ -366,7 +282,7 @@ func _set_players() -> void:
 @onready var layer_bright_effects:Node = $Layer_Effects_Bright
 @onready var layer_stats:Node = $Layer_Stats
 
-func _super_add_child(obj) -> void:
+func super_add_child(obj) -> void:
 	
 	add_child(obj)
 	remove_child(obj)

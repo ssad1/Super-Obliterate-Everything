@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bdovqa3a0x3gi"]
 
-[ext_resource type="Script" path="res://Background/StarField.gd" id="1"]
+[ext_resource type="Script" uid="uid://dp1nf4eecismj" path="res://Background/StarField.gd" id="1"]
 
 [node name="StarField" type="Node2D"]
 light_mask = 0

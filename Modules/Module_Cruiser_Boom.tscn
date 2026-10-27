@@ -14,6 +14,7 @@ death_activate = true
 [node name="Spawn_Explosion" parent="." instance=ExtResource("3")]
 
 [node name="Explode_Basic" parent="Spawn_Explosion" instance=ExtResource("1")]
+boom_scale = 1.25
 
 [node name="Gun_General" parent="." instance=ExtResource("4")]
 visible = false

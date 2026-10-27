@@ -18,7 +18,7 @@ func _ready():
 	timer.connect("timeout", Callable(self,"_timeout"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	var theta = 0
 	var r = 0
 	if backalpha < .75:
@@ -32,8 +32,8 @@ func _process(delta):
 		bigfireworkt = bigfireworkt + delta
 		if fireworkt > 0.1:
 			
-			var rand_x = $Back.scale.x * randf()
-			var rand_y = $Back.scale.y * randf()
+			var rand_x = $Back.size.x * randf()
+			var rand_y = $Back.size.y * randf()
 			SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_FIREWORK_A], null, Vector2(rand_x, rand_y), Vector2(0,0), randf() * 2 * PI, 11,0)
 			SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_FIREWORK_B], null, Vector2(rand_x, rand_y), Vector2(0,0), randf() * 2 * PI, 11,0)
 

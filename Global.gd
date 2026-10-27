@@ -40,7 +40,7 @@ var shakes = []
 
 var graphics_quality = 3
 var graphics_shake = 1
-var graphics_maximized = true
+var graphics_maximized = false
 
 var sell_rate = 0.2
 

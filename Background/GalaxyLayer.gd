@@ -8,14 +8,14 @@ var galaxies = []
 var fade = 255
 var fadeset = 255
 
-func _ready():
+func _ready() -> void:
 	var s
 	EVENTS.connect("flipload", Callable(self, "_flipload"))
 	EVENTS.connect("fadeset", Callable(self, "_fadeset"))
 	set_position(Vector2(0,0))
 	_gen_galaxies()
 
-func _process(delta):
+func _process(delta:float) -> void:
 	if(fade < fadeset):
 		fade = fade + 200 * delta
 	if(fade > fadeset):
@@ -29,7 +29,7 @@ func _process(delta):
 	modulate = Color8(255,255,255,int(fade))
 	pass
 
-func _gen_galaxies():
+func _gen_galaxies() -> void:
 	var total = CALC._randint() % 35 + 15
 	var g
 	CALC.rseed = LEVELS.level_seed
@@ -48,7 +48,7 @@ func _gen_galaxies():
 		galaxies.append(g)
 		add_child(g)
 
-func _clear_galaxies():
+func _clear_galaxies() -> void:
 	var i
 	i = galaxies.size() - 1
 	while i > -1:
@@ -56,7 +56,7 @@ func _clear_galaxies():
 		galaxies.remove_at(i)
 		i = i - 1
 
-func _flipload():
+func _flipload() -> void:
 	if(GLOBAL.nextscreen == 0):
 		_clear_galaxies()
 		_gen_galaxies()
@@ -67,5 +67,5 @@ func _flipload():
 		_clear_galaxies()
 		_gen_galaxies()
 
-func _fadeset(dim):
+func _fadeset(dim:float) -> void:
 	fadeset = dim

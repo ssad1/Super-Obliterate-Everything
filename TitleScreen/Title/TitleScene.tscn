@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://dti881w5cvnvb"]
 
 [ext_resource type="Texture2D" uid="uid://cm0qnwdnnf8x1" path="res://Terminal/Map/StarGlow.png" id="1"]
-[ext_resource type="Script" path="res://TitleScreen/Title/TitleSpotlight.gd" id="2"]
-[ext_resource type="Script" path="res://TitleScreen/Title/TitleSpotlight2.gd" id="3"]
+[ext_resource type="Script" uid="uid://c0oqo7grlcgvv" path="res://TitleScreen/Title/TitleSpotlight.gd" id="2"]
+[ext_resource type="Script" uid="uid://haig51vid7oe" path="res://TitleScreen/Title/TitleSpotlight2.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://dn7o1t7dwdqvh" path="res://TitleScreen/Title/TitleD.png" id="4"]
-[ext_resource type="Script" path="res://Shaders/Text_Dissolve_In.gd" id="6"]
-[ext_resource type="Shader" path="res://Shaders/Text_Dissolve.gdshader" id="7"]
+[ext_resource type="Script" uid="uid://ckvxxixqjv3vj" path="res://Shaders/Text_Dissolve_In.gd" id="6"]
+[ext_resource type="Shader" uid="uid://soer2j8ti04u" path="res://Shaders/Text_Dissolve.gdshader" id="7"]
 [ext_resource type="Texture2D" uid="uid://d37bhmmxxp3mt" path="res://TitleScreen/Title/TitleN.png" id="7_rvd7t"]
-[ext_resource type="Script" path="res://TitleScreen/Title/TitleFade.gd" id="8"]
+[ext_resource type="Script" uid="uid://b34n32in8tldk" path="res://TitleScreen/Title/TitleFade.gd" id="8"]
 [ext_resource type="Texture2D" uid="uid://cepqvmtm6aies" path="res://TitleScreen/Backdrop3.png" id="9"]
 
 [sub_resource type="ShaderMaterial" id="1"]
@@ -24,7 +24,12 @@ normal_texture = ExtResource("7_rvd7t")
 position = Vector2(800, 450)
 scale = Vector2(0.834, 0.834)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("9")
 
 [node name="TitleSpotlight" type="PointLight2D" parent="."]
@@ -49,10 +54,21 @@ texture = ExtResource("1")
 texture_scale = 2.5
 script = ExtResource("3")
 
-[node name="TitleD" type="Sprite2D" parent="."]
+[node name="TitleD" type="TextureRect" parent="."]
 light_mask = 1024
 z_index = 1
 material = SubResource("1")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -650.0
+offset_top = -150.0
+offset_right = 650.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = SubResource("CanvasTexture_t2sd7")
 script = ExtResource("6")
 

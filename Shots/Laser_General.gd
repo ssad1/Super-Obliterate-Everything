@@ -5,14 +5,29 @@ extends Node2D
 @export var force = 1.0
 @export var damage_type = "LASER"
 @export var visual_target = false
+@export var lifespan = 5
+@export var shot_scale:float = 1
+
 var clock = 0
 var damage = 0.0
-@export var lifespan = 5
-@export var shot_scale := float(1)
 var mat
-@onready var beam = $Sprite2D
 var beam_wide = 1.0
 var beam_long = 1.0
+
+var is_type:UNIT_STATE.type = UNIT_STATE.type.LASER
+var armor = 1
+var player
+var pos := Vector2(0,0)
+var spawn_id = 0
+var rotate = 0
+var pa
+var pb
+var pa_pos := Vector2(0,0)
+var pb_pos := Vector2(0,0)
+var pa_id = 0
+var pb_id = 0
+var tick_clock:float = 0
+var inactive:bool = true
 
 var death:bool = false
 var dead:bool = death:
@@ -28,28 +43,10 @@ var dead:bool = death:
 	get:
 		return death
 
-var is_type:UNIT_STATE.type = UNIT_STATE.type.LASER
-var armor = 1
-var player
-var pos := Vector2(0,0)
-var spawn_id = 0
-var rotate = 0
-var pa
-var pb
-var pa_pos := Vector2(0,0)
-var pb_pos := Vector2(0,0)
-var pa_id = 0
-var pb_id = 0
-
-var tick_clock:float = 0
-var inactive:bool = true
+@onready var beam = $Sprite2D
 
 func _ready() -> void:
 	_calc_damage()
-	
-	#mat = get_material()
-	#if(mat != null):
-	#	mat.set_shader_parameter("phase",randf() * 2 * PI)
 
 func _ignite(new_pa,new_pb) -> void:
 	pa_id = new_pa.top.spawn_id
@@ -65,7 +62,7 @@ func _draw_laser() -> void:
 	var theta = 0
 	
 	if pa != null:
-		if  !pa.get_ref():
+		if !pa.get_ref():
 			pa = null
 		else:
 			pa_pos = pa.get_ref().shot_pos;
@@ -108,7 +105,7 @@ func _process(delta:float) -> void:
 func _calc_damage() -> void:
 	damage = round(base_damage * 1 * pow(1 + shot_scale,2) + 1)
 
-func _die() -> void:
+func die() -> void:
 	dead = true
 
 func _do_tick() -> void:
@@ -119,10 +116,7 @@ func _do_tick() -> void:
 	if clock >= lifespan:
 		armor = 0
 	if armor <= 0:
-		_die()
-
-func _do_selection(delta:float) -> void:
-	pass
+		die()
 
 func _set_player(p) -> void:
 	if p != null:

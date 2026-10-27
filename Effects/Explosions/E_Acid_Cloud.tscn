@@ -1,0 +1,286 @@
+[gd_scene load_steps=25 format=3 uid="uid://dke7a88t66pyg"]
+
+[ext_resource type="Script" uid="uid://g81p30f547g0" path="res://Effects/Effect_Clear.gd" id="1_el7jy"]
+[ext_resource type="Script" uid="uid://dywrqi0gycq48" path="res://Effects/AnimationMultiRandom.gd" id="3_s7wgd"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f454q"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/glow.png-4e43deb76995e2248be2d42125d48b71.ctex"
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f454q"]
+resource_local_to_scene = true
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 8
+particles_anim_loop = false
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4smat"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/LargeSmoke.PNG-92635a5dc9b30fc271456517cbe216a2.ctex"
+
+[sub_resource type="Curve" id="Curve_vrvqk"]
+_data = [Vector2(0.09090909, 0), 0.0, 7.6276116, 0, 0, Vector2(0.2348485, 0.8876405), 0.64887625, 0.64887625, 0, 0, Vector2(0.81060606, 0.9101124), -0.25322017, -0.25322017, 0, 0, Vector2(0.9621212, 0.022471905), -7.08615, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_cy013"]
+curve = SubResource("Curve_vrvqk")
+
+[sub_resource type="Curve" id="Curve_s7wgd"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -0.25842702), 0.0, 0.44943824, 0, 1, Vector2(1, 0.19101119), 0.44943824, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_68msk"]
+curve = SubResource("Curve_s7wgd")
+
+[sub_resource type="Curve" id="Curve_pv3ru"]
+_data = [Vector2(0, 0.57303375), 0.0, 1.0660112, 0, 0, Vector2(0.45454544, 0.764045), 0.0, 0.0, 0, 0, Vector2(1, 0.5842697), -0.6814456, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_14tjj"]
+curve = SubResource("Curve_pv3ru")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vrvqk"]
+resource_local_to_scene = true
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+angle_min = -119.99999
+angle_max = 120.000015
+angle_curve = SubResource("CurveTexture_68msk")
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_14tjj")
+alpha_curve = SubResource("CurveTexture_cy013")
+anim_offset_max = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2r2dd"]
+resource_local_to_scene = true
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 8
+particles_anim_loop = false
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_68msk"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/LargeSmoke.PNG-92635a5dc9b30fc271456517cbe216a2.ctex"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4smat"]
+resource_local_to_scene = true
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+angle_min = -119.99999
+angle_max = 120.000015
+angle_curve = SubResource("CurveTexture_68msk")
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_14tjj")
+alpha_curve = SubResource("CurveTexture_cy013")
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
+anim_offset_max = 1.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2r2dd"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/bubble_5_256.png-39e37bedf09c9a09af37e5db845ffc06.ctex"
+
+[sub_resource type="Gradient" id="Gradient_nhrhw"]
+colors = PackedColorArray(0.22352941, 0.8980392, 0, 1, 0.75686276, 0.12156863, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r84mi"]
+gradient = SubResource("Gradient_nhrhw")
+
+[sub_resource type="Curve" id="Curve_cwh0m"]
+_data = [Vector2(0, 0), 0.0, 7.415733, 0, 0, Vector2(0.47727275, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.033707857), -6.117981, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_anndi"]
+curve = SubResource("Curve_cwh0m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s7wgd"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 55.0
+spread = 180.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.02
+scale_curve = SubResource("CurveTexture_anndi")
+color_ramp = SubResource("GradientTexture1D_r84mi")
+
+[sub_resource type="Animation" id="Animation_s7wgd"]
+resource_name = "AcidCloud"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CloudAura:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2333333, 10, 12),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.8980392, 0, 0), Color(0, 0.8980392, 0, 0.26666668), Color(0, 0.8980392, 0, 0.26666668), Color(0, 0.8980392, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AcidSmokeBelow:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AcidBubbles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AcidSmokeAbove:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AcidSmokeAbove:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 10, 11.966666),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.15686275, 0.15686275, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AcidSmokeBelow:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.99999994, 10, 11.966666),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.15686275, 0.15686275, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AcidBubbles:modulate:a")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1, 10, 11.966666),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_68msk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AcidSmokeAbove:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.15686275]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AcidBubbles:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_68msk"]
+_data = {
+&"AcidCloud": SubResource("Animation_s7wgd"),
+&"RESET": SubResource("Animation_68msk")
+}
+
+[node name="EAcidCloud" type="Node2D"]
+script = ExtResource("1_el7jy")
+
+[node name="CloudAura" type="Sprite2D" parent="."]
+modulate = Color(0, 0.8980392, 0, 0.26666665)
+z_index = -1
+scale = Vector2(0.3, 0.3)
+texture = SubResource("CompressedTexture2D_f454q")
+
+[node name="AcidSmokeAbove" type="GPUParticles2D" parent="."]
+modulate = Color(0.16078432, 0.36078432, 0, 0.15686275)
+z_index = 1
+material = SubResource("CanvasItemMaterial_f454q")
+amount = 20
+texture = SubResource("CompressedTexture2D_4smat")
+lifetime = 2.0
+speed_scale = 1.25
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_vrvqk")
+
+[node name="AcidSmokeBelow" type="GPUParticles2D" parent="."]
+modulate = Color(0.16078432, 0.36078432, 0, 0.15686275)
+z_index = -1
+material = SubResource("CanvasItemMaterial_2r2dd")
+amount = 20
+texture = SubResource("CompressedTexture2D_68msk")
+lifetime = 2.0
+speed_scale = 1.25
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_4smat")
+
+[node name="AcidBubbles" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+amount = 32
+texture = SubResource("CompressedTexture2D_2r2dd")
+speed_scale = 2.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_s7wgd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_68msk")
+}
+script = ExtResource("3_s7wgd")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

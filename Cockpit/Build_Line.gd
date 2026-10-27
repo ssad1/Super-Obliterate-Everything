@@ -3,10 +3,7 @@ extends Line2D
 var builder
 var build_spot = Vector2(0,0)
 
-func _ready():
-	pass # Replace with function body.
-
-func _process(delta):
+func _process(delta:float) -> void:
 	var destroy = false
 	clear_points()
 	if(weakref(builder).get_ref() != null):
@@ -27,6 +24,6 @@ func _process(delta):
 		builder = null
 		queue_free()
 		
-func _ignite(b,bs):
+func _ignite(b,bs) -> void:
 	builder = b
 	build_spot = bs

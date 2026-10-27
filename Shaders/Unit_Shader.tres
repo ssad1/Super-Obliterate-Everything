@@ -1,28 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ctaucx5mrok7p"]
-
-[ext_resource type="Shader" uid="uid://dupk13v3byaed" path="res://Shaders/Unit_Shader.gdshader" id="1_v3pbr"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ctaucx5mrok7p"]
 
 [resource]
 resource_local_to_scene = true
-shader = ExtResource("1_v3pbr")
-shader_parameter/flag_color = Color(1, 1, 1, 1)
-shader_parameter/light_color = Color(1, 1, 1, 1)
-shader_parameter/burn_color = Color(1, 1, 1, 1)
-shader_parameter/light_bright = 1.0
-shader_parameter/burn_bright = 1.0
-shader_parameter/frames = Vector2(8, 8)
-shader_parameter/cloak_strength = 0.0
-shader_parameter/freeze_strength = 0.0
-shader_parameter/acid_strength = 0.0
-shader_parameter/damage_strength = 0.0
-shader_parameter/burnt_strength = 0.0
-shader_parameter/dissolve_strength = 0.0
-shader_parameter/fire_strength = 0.0
-shader_parameter/shock_strength = 0.0
-shader_parameter/shield_strength = 0.0
-shader_parameter/shield_charging = 0.0
-shader_parameter/shield_damage_strength = 0.0
-shader_parameter/build_strength = 0.0
-shader_parameter/swirl_strength = 0.0
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/select_strength = 0.0

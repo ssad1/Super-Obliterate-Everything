@@ -11,10 +11,6 @@ func _ready() -> void:
 	up = get_parent()
 	up.modules.append(self)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func _fire() -> void:
 	var obj
 	var sc := Vector2(1,1)

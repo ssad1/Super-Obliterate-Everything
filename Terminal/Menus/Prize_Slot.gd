@@ -7,12 +7,10 @@ var fade = 1
 var booming = false
 var boom_clock = 0
 var booms = 3
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+ 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	var obj
 	$Label.position.x = 280 - $Label.size.x
 	$Credit.position.x = $Label.position.x - 16

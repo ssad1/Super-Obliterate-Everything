@@ -1,7 +1,5 @@
 extends Node2D
 
-@onready var tcpu_node := preload("res://Modules/TargetCPU.tscn")
-
 var s
 @export var damage:float = 10
 @export var damage_type = "EXPLOSION"
@@ -61,7 +59,7 @@ func _process(delta:float) -> void:
 		tick_clock = 0.2
 
 func _add_tcpu() -> void:
-	tcpu = tcpu_node.instantiate()
+	tcpu = TargetCPU.tcpu_node.instantiate()
 	tcpu.up = self
 	tcpu.set_target_profile = tcpu.profile.EXPLOSION
 
@@ -106,5 +104,5 @@ func _remove_ref(s) -> void:
 			modules[i]._remove_ref(s)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass

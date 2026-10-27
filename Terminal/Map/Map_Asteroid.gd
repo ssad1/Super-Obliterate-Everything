@@ -28,7 +28,7 @@ func _ignite():
 	#light_shadow.set_scale(Vector2(.6 * radius / 32,.6 * radius / 32))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	var c
 	phase = get_parent().phase
 	c = int((bright + 50 * sin(phase / 50 + astrophaseshift)) * ringcolor)

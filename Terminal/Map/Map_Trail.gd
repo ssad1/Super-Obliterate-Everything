@@ -9,7 +9,7 @@ var dir = 1
 func _ready():
 	pass # Replace with function body.
 
-func _process(delta):
+func _process(delta:float) -> void:
 	phase = get_parent().phase
 	_do_orbit()
 

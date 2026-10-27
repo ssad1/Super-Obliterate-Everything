@@ -26,7 +26,8 @@ var big_turrets = [
 	SPAWNER.spawn_objs.PLASMACASTER,
 	SPAWNER.spawn_objs.QUAD_MISSILE,
 	SPAWNER.spawn_objs.HYPER_REPAIR_TURRET,
-	SPAWNER.spawn_objs.AUTOCANNON
+	SPAWNER.spawn_objs.AUTOCANNON,
+	SPAWNER.spawn_objs.VOIDLANCE_TURRET
 ]
 var fighters = [
 	SPAWNER.spawn_objs.PIRANHA,
@@ -57,7 +58,9 @@ var frigates = [
 ]
 var destroyers = [
 	SPAWNER.spawn_objs.MYRMIDON,
-	SPAWNER.spawn_objs.MASTODON
+	SPAWNER.spawn_objs.MASTODON,
+	SPAWNER.spawn_objs.PANDEMIC,
+	SPAWNER.spawn_objs.HADES
 ]
 var cruisers = [
 	SPAWNER.spawn_objs.TRIDENT,
@@ -68,16 +71,15 @@ var cruisers = [
 	SPAWNER.spawn_objs.HAMMERHEAD,
 	SPAWNER.spawn_objs.CATACLYSM,
 	SPAWNER.spawn_objs.LEGION,
-	SPAWNER.spawn_objs.JUPITER
+	SPAWNER.spawn_objs.JUPITER,
+	SPAWNER.spawn_objs.TYRANT
 ]
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+ 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _gen_draft(sd):

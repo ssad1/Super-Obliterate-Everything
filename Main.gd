@@ -56,8 +56,8 @@ func _ready():
 	EVENTS.emit_signal("envset",1,0,0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+#func _process(delta:float) -> void:
+#	pass
 
 func _flipload():
 

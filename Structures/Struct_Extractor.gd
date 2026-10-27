@@ -10,7 +10,7 @@ func _do_tick():
 			anim.speed_scale = clamp(anim.speed_scale,1,10)
 		super._do_tick()
 
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _add_rock():

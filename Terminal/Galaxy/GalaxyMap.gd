@@ -11,7 +11,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	if(zoom < 1):
 		zoom = zoom + 5 * delta
 		if(zoom > 1):

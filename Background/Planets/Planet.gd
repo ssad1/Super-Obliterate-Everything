@@ -7,11 +7,7 @@ extends Node2D
 var parallax = 1
 var start_position
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-func _ignite(s):
+func _ignite(s:int) -> void:
 	var scal
 	parallax = randf() * 0.045 + 0.025
 	if(s == 0): #Planet
@@ -25,5 +21,5 @@ func _ignite(s):
 	position = start_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	position = start_position - parallax * SPAWNER.game._cam_offset()

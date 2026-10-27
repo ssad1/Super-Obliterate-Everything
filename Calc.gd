@@ -6,7 +6,7 @@ var half_PI:float = PI/2
 func _ready() -> void:
 	pass # Replace with function body.
 
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _radian_distance(a:float, b:float) -> float:

@@ -14,11 +14,11 @@ var start_position = Vector2(0,0)
 var parallax = 1
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	EVENTS.connect("starmode", Callable(self,"_starmode"))
 	_ignite()
 
-func _ignite():
+func _ignite() -> void:
 	var colorshift = CALC._randint() % 5
 	if CALC._randint() % 3 > 0:
 		colorshift = 4
@@ -59,7 +59,7 @@ func _ignite():
 			starblue = 30
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	var pos:Vector2
 	var center = Vector2(.5 * GLOBAL.resx, .5 * GLOBAL.resy)
 	clock = clock + delta
@@ -97,6 +97,6 @@ func _process(delta):
 			set_position(pos)
 	modulate = Color8(starred,stargreen,starblue,int(fade * 255 * (.6 + .4 * sin(clock + phaseshift))))
 
-func _starmode(mode):
+func _starmode(mode:int) -> void:
 	smode = mode
 	_ignite()

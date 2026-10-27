@@ -8,7 +8,7 @@ func _ready():
 	EVENTS.connect("setup_prize_slots", Callable(self,"_setup"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _setup():

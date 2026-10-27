@@ -41,21 +41,14 @@ func _process(delta:float) -> void:
 	set_position(blend_pos)
 
 	if inactive: return
-
-	tick_clock += delta
-	if tick_clock > 0.1:
-		tick_clock -= 0.1
-		_do_tick()
-	if tick_clock > 0.2:
-		tick_clock = 0.2
+	
+	_do_tick_clock(delta)
 	
 	physics_clock += delta
 	if physics_clock > 0.1:
 		physics_clock -= 0.1
 
 		_do_physics()
-
-		if has_hitbox: hitbox.pos = pos + position
 
 	if physics_clock > 0.2:
 		physics_clock = 0.2
@@ -65,11 +58,6 @@ func _process(delta:float) -> void:
 	for i in units_being_atracted.size():
 
 		var unit = units_being_atracted[i]
-
-		if unit.spaghettified:
-			unit.velocity = velocity
-			continue
-
 		var dir:Vector2 = (unit.global_position - global_position).normalized() 
 		var dist:float = unit.global_position.distance_to(global_position) 
 
@@ -78,9 +66,15 @@ func _process(delta:float) -> void:
 		var speed:float = clamp(terminal_velocity.length(), 0.0, unit.max_velocity)
 		terminal_velocity = terminal_velocity.normalized() * speed
 
+		if unit.spaghettified:
+			unit.velocity = Vector2.ZERO
+			unit.global_position = global_position
+			unit.z_index = z_index + 1
+			continue
+
 		unit.velocity -= terminal_velocity
 
-func _hit(s) -> void:
+func hit(s) -> void:
 	pass
 
 func _on_unit_approached(area:Area2D) -> void:

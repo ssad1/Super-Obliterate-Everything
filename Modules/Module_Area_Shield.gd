@@ -1,10 +1,9 @@
 extends ColorRect
 
 @onready var shield_line = $Shield_Line
-@onready var parent = get_parent()
 @onready var glow = $ShieldGlow.get_material()
 
-var up
+@onready var up = get_parent()
 var pos:Vector2 = Vector2(0,0)
 var is_type:UNIT_STATE.type = UNIT_STATE.type.SHIELD
 var shield_power:float = 0
@@ -20,28 +19,26 @@ var charge_t:int = 0
 var max_charge:float = 20
 
 func _ready() -> void:
-	up = get_parent()
 	up.modules.append(self)
 
-	#hide()
-
 	_gen_circle(shield_radius)
-	_do_shader()
 	show()
 
 func _process(delta:float) -> void:
 	if shield_power > 0:
 
 		shield_power = shield_power - 3 * delta
-		_do_shader()
 
 	if shield_power < 0:
 
 		shield_power = 0
-		_do_shader()
+	
+	glow.set_shader_parameter("hit_angle", shield_theta)
+	glow.set_shader_parameter("hit_fade", shield_power)
+	glow.set_shader_parameter("shield_radius", shield_radius)
 
 func _do_tick() -> void:
-	pos = parent.pos + position + 0.5 * size
+	pos = up.pos + position + 0.5 * size
 	if charge_t == 0 && shield < max_shield:
 		shield = shield + shield_charge
 		shield_mode = 2
@@ -53,6 +50,8 @@ func _do_tick() -> void:
 		shield = 0
 	if charge_t > 0:
 		charge_t = charge_t - 1
+	
+	if up.has_stats: up.stats.update_stats()
 
 func _gen_circle(r:float) -> void:
 	var theta := 0.0
@@ -68,7 +67,7 @@ func _gen_circle(r:float) -> void:
 		shield_line.add_point(p)
 		theta = theta + TAU / samples
 
-func _hit_shield(d:float, hitp:Vector2) -> void:
+func Hit_shield(d:float, hitp:Vector2) -> void:
 	shield = shield - d
 	if shield <= 0:
 		shield_mode = 0
@@ -76,9 +75,3 @@ func _hit_shield(d:float, hitp:Vector2) -> void:
 	charge_t = max_charge
 	shield_power = 1.5 * shield / max_shield + .5
 	shield_theta = atan2(hitp.y - pos.y, hitp.x - pos.x)
-
-func _do_shader() -> void:
-	glow.set_shader_parameter("hit_angle", shield_theta)
-	glow.set_shader_parameter("hit_fade", shield_power)
-	glow.set_shader_parameter("shield_radius", shield_radius)
-	#print("shield: " + str(shield_power))

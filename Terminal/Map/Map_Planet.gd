@@ -35,7 +35,7 @@ func _ignite():
 	#light_shadow.set_scale(Vector2(.6 * radius / 32,.6 * radius / 32))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	phase = get_parent().phase
 	_do_orbit()
 	if(selected == true):

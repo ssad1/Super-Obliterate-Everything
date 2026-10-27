@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://detothhh5v411"]
+
+[ext_resource type="Script" uid="uid://dvwvfnropum3n" path="res://Game/Unit Life/target_fov.gd" id="1_fg0qm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dgp2g"]
+resource_local_to_scene = true
+
+[node name="TargetFov" type="Area2D"]
+monitorable = false
+script = ExtResource("1_fg0qm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dgp2g")
+debug_color = Color(0.99607843, 0, 0.4627451, 0.039215688)

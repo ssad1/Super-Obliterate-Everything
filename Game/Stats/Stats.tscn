@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bgxdn2dna1xqw"]
 
-[ext_resource type="Script" path="res://Game/Stats/Stats.gd" id="1"]
+[ext_resource type="Script" uid="uid://bqecsnyhvetnl" path="res://Game/Stats/Stats.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dnf7d7ihhwef3" path="res://Game/Stats/BarBack.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://bwuv42ey440y8" path="res://Game/Stats/ArmorBar.png" id="3"]
 

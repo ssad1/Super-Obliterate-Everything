@@ -46,6 +46,11 @@ var newlist:Array = []
 @onready var DieTinyBoom3 := load("res://Sounds/Death/DieTinyBoom3.tscn")
 @onready var DieTinyBoom4 := load("res://Sounds/Death/DieTinyBoom4.tscn")
 
+@onready var UnitDisintegrate1 := load("res://Sounds/Death/UnitDisintegrate1.tscn")
+@onready var UnitDisintegrate2 := load("res://Sounds/Death/UnitDisintegrate2.tscn")
+@onready var UnitDisintegrate3 := load("res://Sounds/Death/UnitDisintegrate3.tscn")
+@onready var UnitDisintegrate4 := load("res://Sounds/Death/UnitDisintegrate4.tscn")
+
 @onready var WeaponPlasma := load("res://Sounds/Weapons/WeaponPlasma.tscn")
 @onready var WeaponArtillery1 := load("res://Sounds/Weapons/WeaponArtillery1.tscn")
 @onready var WeaponArtillery2 := load("res://Sounds/Weapons/WeaponArtillery2.tscn")
@@ -69,6 +74,9 @@ var newlist:Array = []
 @onready var WeaponBlackHole1 := load("res://Sounds/Weapons/WeaponBlackHole1.tscn")
 @onready var WeaponBlackHole2 := load("res://Sounds/Weapons/WeaponBlackHole2.tscn")
 @onready var WeaponBlackHole3 := load("res://Sounds/Weapons/WeaponBlackHole3.tscn")
+
+@onready var AcidCloudBubbling := load("res://Sounds/Misc/AcidCloudBubbling.tscn")
+@onready var FreezeCloudLeaking := load("res://Sounds/Misc/FreezeCloudLeaking.tscn")
 
 @onready var GetMetal := load("res://Sounds/Interface/GetMetal.tscn")
 @onready var ButtonBuild := load("res://Sounds/Interface/ButtonBuild.tscn")
@@ -130,7 +138,10 @@ enum sound {
 	BUTTON_MENU,
 	BUTTON_START,
 
-	WEAPON_BLACK_HOLE
+	WEAPON_BLACK_HOLE,
+	DISINTEGRATE,
+	ACID_CLOUD_BUBBLING,
+	FREEZE_CLOUD_LEAKING
 }
 
 func _play(s) -> void:
@@ -234,6 +245,18 @@ func _play(s) -> void:
 				3:
 					sfx = DieTinyBoom4.instantiate()
 			sfx.volume_db = sfx.volume_db - 7
+		sound.DISINTEGRATE:
+			dice = randi() % 4
+			match dice:
+				0:
+					sfx = UnitDisintegrate1.instantiate()
+				1:
+					sfx = UnitDisintegrate2.instantiate()
+				2:
+					sfx = UnitDisintegrate3.instantiate()
+				3:
+					sfx = UnitDisintegrate4.instantiate()
+			sfx.volume_db = sfx.volume_db - 10
 		sound.WEAPON_PLASMA:
 			sfx = WeaponPlasma.instantiate()
 			sfx.volume_db = sfx.volume_db - 5
@@ -385,8 +408,13 @@ func _play(s) -> void:
 					sfx = WeaponBlackHole2.instantiate()
 				2:
 					sfx = WeaponBlackHole3.instantiate()
+		sound.ACID_CLOUD_BUBBLING:
+			sfx = AcidCloudBubbling.instantiate()
+			sfx.volume_db = sfx.volume_db - 5
+		sound.FREEZE_CLOUD_LEAKING:
+			sfx = FreezeCloudLeaking.instantiate()
+			sfx.volume_db = sfx.volume_db - 6
 	
-
 	sfx.volume_db = sfx.volume_db - 20 * (1 - GLOBAL.sound_volume / 100)
 	add_child(sfx)
 	sfx.set_position(Vector2(960,540))

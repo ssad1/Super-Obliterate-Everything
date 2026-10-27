@@ -64,6 +64,8 @@ extends Node
 @onready var E_Pang_Sparks4 := load("res://Effects/Explosions/E_Pang_Sparks4.tscn")
 @onready var E_Fire := load("res://Effects/E_Fire.tscn")
 @onready var E_SmokeTrail := load("res://Effects/E_SmokeTrail.tscn")
+@onready var E_AcidCloud := load("res://Effects/Explosions/E_Acid_Cloud.tscn")
+@onready var E_FreezeCloud := load("res://Effects/Explosions/E_Freeze_Cloud.tscn")
 
 @onready var Struct_Ice_Asteroid_1 := load("res://Structures/Asteroids/Struct_Ice_Asteroid_1.tscn")
 @onready var Struct_Ice_Asteroid_2 := load("res://Structures/Asteroids/Struct_Ice_Asteroid_2.tscn")
@@ -176,6 +178,7 @@ extends Node
 @onready var Ship_Myrmidon := load("res://Ships/Ship_Myrmidon.tscn")
 @onready var Ship_Mastodon := load("res://Ships/Ship_Mastodon.tscn")
 @onready var Ship_Hades := load("res://Ships/Ship_Hades.tscn")
+@onready var Ship_Pandemic := load("res://Ships/Ship_Pandemic.tscn")
 
 @onready var Ship_Trident := load("res://Ships/Ship_Trident.tscn")
 @onready var Ship_Goliath := load("res://Ships/Ship_Goliath.tscn")
@@ -186,6 +189,7 @@ extends Node
 @onready var Ship_Cataclysm := load("res://Ships/Ship_Cataclysm.tscn")
 @onready var Ship_Legion := load("res://Ships/Ship_Legion.tscn")
 @onready var Ship_Jupiter := load("res://Ships/Ship_Jupiter.tscn")
+@onready var Ship_Tyrant := load("res://Ships/Ship_Tyrant.tscn")
 
 @onready var Shot_Blaster = load("res://Shots/Shot_Blaster.tscn")
 @onready var Shot_Double_Blaster = load("res://Shots/Shot_Double_Blaster.tscn")
@@ -318,7 +322,11 @@ enum spawn_objs {
 	SLOOP,
 	HADES,
 	TREMOR,
-	VOIDLANCE_TURRET
+	VOIDLANCE_TURRET,
+	PANDEMIC,
+	EFFECT_ACID_CLOUD,
+	TYRANT,
+	EFFECT_FREEZE_CLOUD
 }
 
 var next_spawn_id:int = 1
@@ -693,6 +701,10 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 		spawn_objs.EFFECT_SMOKE_TRAIL:
 			obj = E_SmokeTrail.instantiate()
 			#obj.scale = Vector2(.3,.3)
+		spawn_objs.EFFECT_ACID_CLOUD:
+			obj = E_AcidCloud.instantiate()
+		spawn_objs.EFFECT_FREEZE_CLOUD:
+			obj = E_FreezeCloud.instantiate()
 
 		#New units:
 
@@ -720,11 +732,15 @@ func _spawn(s, p, position:Vector2, velocity:Vector2, rotation:float, up, init) 
 			obj = Ship_Tremor.instantiate()
 		spawn_objs.VOIDLANCE_TURRET:
 			obj = Struct_VoidLance_Turret.instantiate()
+		spawn_objs.PANDEMIC:
+			obj = Ship_Pandemic.instantiate()
+		spawn_objs.TYRANT:
+			obj = Ship_Tyrant.instantiate()
 
 	obj.s = s
 
 	if up == 0:
-		game._super_add_child(obj)
+		game.super_add_child(obj)
 		obj.spawn_id = next_spawn_id
 		next_spawn_id = next_spawn_id + 1
 		obj.pos = position
@@ -764,7 +780,7 @@ func _spawn_dupe(s, p, position:Vector2, velocity:Vector2, rotation:float, up, i
 	obj.inactive = false
 
 	if up == 0:
-		game._super_add_child(obj)
+		game.super_add_child(obj)
 		obj.spawn_id = next_spawn_id
 		next_spawn_id = next_spawn_id + 1
 
@@ -790,7 +806,7 @@ func _spawn_dupe(s, p, position:Vector2, velocity:Vector2, rotation:float, up, i
 
 func _spawn_laser(s, p, pa, pb) -> Node2D:
 	var obj = s.duplicate()
-	game._super_add_child(obj)
+	game.super_add_child(obj)
 	obj.spawn_id = next_spawn_id
 	next_spawn_id = next_spawn_id + 1
 	obj._ignite(pa,pb)
@@ -838,5 +854,5 @@ func _spawn_player(faction,variant) -> void:
 
 func _spawn_stats() -> Node2D:
 	var obj = Stats.instantiate()
-	game._super_add_child(obj)
+	game.super_add_child(obj)
 	return obj

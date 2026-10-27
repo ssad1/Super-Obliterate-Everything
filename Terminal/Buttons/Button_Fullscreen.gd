@@ -9,17 +9,15 @@ func _ready():
 		text = "OFF"
 	GLOBAL.fullscreens.append(self)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func _pressed():
 	SFX._play_new([SFX.sound.BUTTON_ITEM])
+
 	if(GLOBAL.graphics_maximized == true):
 		GLOBAL._set_window()
 		text = "OFF"
 	elif(GLOBAL.graphics_maximized == false):
 		GLOBAL._set_maximized()
 		text = "ON"
+
 	GLOBAL._save_settings()
 	EVENTS.fullscreen.emit(text)

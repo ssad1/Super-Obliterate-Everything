@@ -7,7 +7,7 @@ func _ready():
 	EVENTS.connect("show_draft_buy", Callable(self,"_show_draft_buy"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _pressed():

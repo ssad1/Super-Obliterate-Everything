@@ -1,6 +1,5 @@
+class_name Explode_Basic
 extends Node2D
-
-@onready var tcpu_node := preload("res://Modules/TargetCPU.tscn")
 
 var s
 @export var damage:float = 10
@@ -12,9 +11,9 @@ var s
 @export var smoke_effect:int = SPAWNER.spawn_objs.EFFECT_SMOKE
 @export var boom_reverse:int = 0
 @export var boom_scale:float = 1
+@export var lifespan:int = 12
 var clock:int = 0
 var armor:float = 0
-var lifespan:int = 12
 var is_type:UNIT_STATE.type = UNIT_STATE.type.EXPLODE
 
 var death:bool = false
@@ -59,7 +58,7 @@ func _process(delta:float) -> void:
 		tick_clock = 0.2
 
 func _add_tcpu() -> void:
-	tcpu = tcpu_node.instantiate()
+	tcpu = TargetCPU.tcpu_node.instantiate()
 	tcpu.up = self
 	tcpu.set_target_profile = tcpu.profile.EXPLOSION
 

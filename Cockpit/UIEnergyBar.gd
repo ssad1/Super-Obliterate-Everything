@@ -13,7 +13,7 @@ func _ready():
 		EVENTS.connect("ui_metal", Callable(self, "_ui_metal"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+#func _process(delta:float) -> void:
 #	pass
 
 func _ui_energy(n):

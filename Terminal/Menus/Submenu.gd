@@ -18,7 +18,7 @@ func _ready():
 
 	EVENTS.connect("menu_button_press", Callable(self, "_menu_button_pressed"))
 
-func _process(delta):
+func _process(delta:float) -> void:
 	pass
 
 func _menu_button_pressed(n):

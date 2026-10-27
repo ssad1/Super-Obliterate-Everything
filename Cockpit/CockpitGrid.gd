@@ -18,7 +18,7 @@ func _ready():
 		item_buttons[i].hotkey.text = "["+key+"]"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float) -> void:
 	if(fade_in == true):
 		fade_alpha = fade_alpha + 5 * delta
 		if(fade_alpha >= 1):
