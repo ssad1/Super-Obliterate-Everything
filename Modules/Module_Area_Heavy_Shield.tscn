@@ -299,7 +299,9 @@ gradient = SubResource("2")
 
 [node name="ShieldGlow" parent="." instance=ExtResource("2")]
 material = SubResource("4")
-position = Vector2(0, 0)
+layout_mode = 0
+offset_left = -256.0
+offset_top = -256.0
 texture = ExtResource("3")
 script = null
 
