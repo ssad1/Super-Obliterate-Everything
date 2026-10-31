@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://elferpjtn4s7" path="res://Terminal/Terminal_Theme_Big.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://otl3jyv0h23v" path="res://Terminal/Menus/Menu_DraftItems.tscn" id="2"]
-[ext_resource type="Script" path="res://Terminal/Menus/Menu_Container.gd" id="3"]
+[ext_resource type="Script" uid="uid://c8pdd4736q3oy" path="res://Terminal/Menus/Menu_Container.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://cq61nvavqgljf" path="res://Terminal/Menus/Menu_Draft_Buy.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://cmkighrp5c3ci" path="res://Terminal/Menus/Menu_Draft_Purchased.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://Terminal/Menus/Menu_Draft_Error.tscn" id="6"]
@@ -34,8 +34,10 @@ grow_vertical = 2
 
 [node name="Menu_Draft_Purchased" parent="." instance=ExtResource("5")]
 visible = false
+layout_mode = 0
 
 [node name="Menu_DraftItems" parent="." instance=ExtResource("2")]
+layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0

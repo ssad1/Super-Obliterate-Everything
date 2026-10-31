@@ -28,7 +28,7 @@ func _zone_hover_in(m,s):
 	label.text = " " + s + " "
 	back.size = label.size
 	dimensions = label.size
-	pos = m.position + m.get_parent().position
+	pos = m.global_position
 	p = Vector2(pos.x + 20 + 16,pos.y - dimensions.y - 20 + 16)
 	#if(p.y < 150):
 	#	p.y = 150

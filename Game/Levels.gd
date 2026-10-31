@@ -20,6 +20,7 @@ var level_star
 var level_resources
 var level_planet
 var level_asteroids
+var level_prizes = []
 
 var base_radius = .32
 
@@ -267,7 +268,7 @@ func _design_mission(s, id, v):
 	var dice = 0
 	var size = "SMALL"
 	var resources = ""
-	#[mission_type, player_array, map, size, temperature, reward, difficulty, hazard, environment, star, resources, planet, asteroids]
+	#[mission_type, player_array, map, size, temperature, reward, difficulty, hazard, environment, star, resources, planet, asteroids, prizes]
 	map = "STANDARD"
 	CALC.rseed = s
 	dice = _zone_levels(id)
@@ -360,6 +361,17 @@ func _design_mission(s, id, v):
 	mission_data.append(0)
 	mission_data.append(0)
 	
+	#coins are plotted inside Map_Mission_Button.gd
+	#fetch the faction prizes
+
+	var prizes = []
+
+	for i in players.size():
+		if i > 1:
+			prizes.append_array(FACTIONS._faction_prizes(players[i], 2 / (players.size() - 1), s))
+
+	mission_data.append(prizes)
+
 	return mission_data
 
 func _zone_factions(z_id):

@@ -296,7 +296,11 @@ gradient = SubResource("2")
 
 [node name="ShieldGlow" parent="." instance=ExtResource("2")]
 material = SubResource("4")
-position = Vector2(0, 0)
+layout_mode = 0
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
 script = null
 
 [node name="ShieldHitbox" parent="." instance=ExtResource("3_w3gmw")]

@@ -50,6 +50,7 @@ func _pressed():
 	LEVELS.level_resources = mission_data[7]
 	LEVELS.level_planet = mission_data[8]
 	LEVELS.level_asteroids = mission_data[9]
+	LEVELS.level_prizes = mission_data[10]
 	GLOBAL.nextscreen = 2
 	EVENTS.emit_signal("flipin")
 	SPAWNER._spawn([SPAWNER.spawn_objs.EFFECT_CLICK_BOOM],null,Vector2(position.x + 16,position.y + 16),Vector2(0,0),0,10,0)
@@ -88,6 +89,18 @@ func _connect(a):
 func _difficulty(d):
 	if mission_data[5] == 0:
 		mission_data[5] = d
+
+		#do coin prizes
+
+		var bonus = 0
+
+		if v == 1:
+			bonus = 20 * d
+
+		CALC.rseed = mission_seed
+		bonus = bonus + round(CALC._rand() * 5 * d)
+		mission_data[10].insert(0, [1, round(5 + 10 * d + bonus)])
+
 	for i in connections.size():
 		if connections[i].mission_data[5] == 0:
 			connections[i]._difficulty(d + .1)

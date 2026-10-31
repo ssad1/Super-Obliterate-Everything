@@ -101,6 +101,7 @@ func _clear_game() -> void:
 	var everything_array = structs + missiles + shots + ships + lasers + explosions + players
 
 	for i in everything_array:
+		if not is_instance_valid(i): continue
 		i.queue_free()
 
 	structs.clear()
@@ -179,6 +180,7 @@ func _do_radar() -> void:
 	rocks.clear()
 
 	for struct in structs:
+		if not is_instance_valid(struct): continue
 		pos = struct.position
 		pos.x = round(pos.x - 16 * struct.build_size.x) / 32
 		pos.y = round(pos.y - 16 * struct.build_size.y) / 32
@@ -192,6 +194,7 @@ func _do_radar() -> void:
 
 	for ship in ships:
 
+		if not is_instance_valid(ship): continue
 		if ship.build_mission == null: continue
 
 		data = ship.build_mission
@@ -245,6 +248,7 @@ func _do_victory() -> void:
 		if victory_flag != 0:
 			EVENTS.emit_signal("cancel_build")
 			EVENTS.emit_signal("show_results",victory_flag)
+			print("Rodou aqui")
 			if victory_flag == 2:
 				EVENTS.emit_signal("set_results",1,mission_id)
 				if victory_condition == "BOSS":
@@ -374,6 +378,7 @@ func _start_game() -> void:
 
 	ACCOUNT.mission_prizes.clear()
 
+	'''
 	if LEVELS.level_mission == "BOSS":
 		bonus = 20 * mission_difficulty
 
@@ -382,8 +387,10 @@ func _start_game() -> void:
 
 	for i in players.size():
 		if i > 1:
-			FACTIONS._faction_prizes(players[i].faction, 2 / (players.size() - 1))
+			var prizes = FACTIONS._faction_prizes(players[i].faction, 2 / (players.size() - 1))
+			ACCOUNT.mission_prizes.append_array(prizes)
 
+	'''
+	ACCOUNT.mission_prizes.append_array(LEVELS.level_prizes)
 	mission_clock = 0
 	tick_clock = 0
-	

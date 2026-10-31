@@ -33,14 +33,21 @@ func _faction_colors(f):
 	c = [flag,light]
 	return c
 
-func _faction_prizes(s, scale):
+func _faction_prizes(s, scale, seed = null):
 	var item_bag = []
 	var odds = []
 	item_bag = _faction_items(s,0)
 	odds = [0.0, 0.05, 0.05, 0.125, 0.075, 0.025, 0.15, 0.1, 0.05, 0.025, 0.05]
+
+	if seed != null:
+		CALC.rseed = seed
+
+	var prizes = []
 	for i in range(1,item_bag.size(),1):
 		if(CALC._rand() < scale * odds[i]):
-			ACCOUNT.mission_prizes.append([0, item_bag[i]])
+			prizes.append([0, item_bag[i]])
+	
+	return prizes
 
 func _faction_items(s,v):
 	var item_bag = []

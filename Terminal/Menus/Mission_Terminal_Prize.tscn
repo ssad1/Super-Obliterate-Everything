@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://btuhib8kfg1bs"]
+
+[ext_resource type="Texture2D" uid="uid://cbkmsvnoj2pt3" path="res://Terminal/Misc/ItemSquareNormal.png" id="1_1qw5o"]
+[ext_resource type="Script" uid="uid://c3m1etawfth1t" path="res://Terminal/Menus/mission_terminal_prize.gd" id="2_mxtai"]
+[ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="4_ij51i"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mxtai"]
+
+[node name="Prize" type="TextureRect"]
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("1_1qw5o")
+script = ExtResource("2_mxtai")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
+position = Vector2(32, 32)
+texture = SubResource("CompressedTexture2D_mxtai")
+
+[node name="LabelAmount" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+light_mask = 0
+layout_direction = 3
+layout_mode = 0
+offset_left = 3.0
+offset_top = 45.0
+offset_right = 18.0
+offset_bottom = 65.0
+theme = ExtResource("4_ij51i")
+text = "0"
+horizontal_alignment = 2

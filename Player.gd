@@ -607,6 +607,7 @@ func _find_stuff() -> void:
 
 	for i in structs.size():
 
+		#if not is_instance_valid(i): continue
 		var struct = structs[i]
 
 		if struct.player != self: continue
@@ -661,8 +662,7 @@ func _find_closest_station(pa:Vector2) -> int:
 
 	for i in my_stations.size():
 
-		if !is_instance_valid(my_stations[i]):
-			continue
+		if !is_instance_valid(my_stations[i]): continue
 
 		pb = my_stations[i].pos
 
