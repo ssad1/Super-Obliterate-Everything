@@ -45,6 +45,7 @@ radius = 13.0
 script = ExtResource("2")
 name_text = "BARRICADE"
 class_text = "ARMOR"
+description = "Soaks damage"
 metal_cost = 5
 supply_cost = 1
 credit_cost = 200

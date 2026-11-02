@@ -68,6 +68,7 @@ aistandoff = 140
 factory = 17
 name_text = "SAPPHIRE"
 class_text = "CORVETTE"
+description = "Shoots homing boomerangs"
 energy_cost = 125
 metal_cost = 30
 supply_cost = 2

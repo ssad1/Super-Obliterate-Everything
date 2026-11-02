@@ -40,6 +40,7 @@ shader_parameter/select_strength = 0.0
 script = ExtResource("1_ncbw6")
 name_text = "AUTOCASTER"
 class_text = "TURRET"
+description = "Shoots plasma volleys"
 energy_cost = 100
 metal_cost = 25
 supply_cost = 1

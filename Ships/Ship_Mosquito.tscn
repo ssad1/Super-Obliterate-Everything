@@ -56,6 +56,7 @@ thrust = 0.2
 factory = 16
 name_text = "MOSQUITO"
 class_text = "FIGHTER"
+description = "Attacks structures"
 energy_cost = 75
 supply_cost = 1
 credit_cost = 150

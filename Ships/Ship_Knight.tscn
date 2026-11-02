@@ -58,6 +58,7 @@ aistandoff = 200
 factory = 17
 name_text = "KNIGHT"
 class_text = "CORVETTE"
+description = "Fast ship with missiles"
 energy_cost = 75
 metal_cost = 35
 supply_cost = 2

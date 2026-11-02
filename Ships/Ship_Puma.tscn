@@ -77,6 +77,7 @@ thrust = 0.4
 factory = 17
 name_text = "PUMA"
 class_text = "CORVETTE"
+description = "Basic corvette"
 energy_cost = 75
 metal_cost = 20
 supply_cost = 2

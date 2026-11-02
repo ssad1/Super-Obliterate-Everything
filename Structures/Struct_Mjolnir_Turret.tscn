@@ -41,6 +41,7 @@ script = ExtResource("2")
 build_size = Vector2(2, 2)
 name_text = "MJOLNIR"
 class_text = "HEAVY TURRET"
+description = "Destroys bases"
 energy_cost = 500
 metal_cost = 300
 supply_cost = 2

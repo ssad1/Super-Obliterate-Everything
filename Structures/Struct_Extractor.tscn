@@ -72,6 +72,7 @@ script = ExtResource("2")
 build_size = Vector2(2, 2)
 name_text = "EXTRACTOR"
 class_text = "ECONOMY"
+description = "Mines metal"
 energy_cost = 250
 supply_cost = 5
 credit_cost = 50

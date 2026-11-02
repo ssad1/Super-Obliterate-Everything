@@ -69,6 +69,7 @@ thrust = 0.2
 factory = 18
 name_text = "SLOOP"
 class_text = "FRIGATE"
+description = "Small carrier with boomerangs"
 energy_cost = 200
 metal_cost = 100
 supply_cost = 3

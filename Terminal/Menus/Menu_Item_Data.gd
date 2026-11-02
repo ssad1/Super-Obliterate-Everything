@@ -1,4 +1,4 @@
-extends ColorRect
+extends PanelContainer
 
 var energy_cost = 0
 var metal_cost = 0
@@ -6,7 +6,7 @@ var supply_cost = 0
 var clock = 0
 var fade_out = true
 var fade_alpha = 1
-@onready var VBox = $VBox
+@onready var VBox = $MarginContainer/VBox
 
 func _ready():
 	mouse_filter = MOUSE_FILTER_IGNORE
@@ -29,23 +29,86 @@ func _on_show_menu_item_stats(p,o):
 		#energy_cost = e
 		#metal_cost = m
 		#supply_cost = s
-		$VBox/UIName.text = o.name_text
-		$VBox/CostMenu/UIEnergy.text = str(o.energy_cost)
-		$VBox/CostMenu/UIMetal.text = str(o.metal_cost)
-		$VBox/CostMenu/UISupply.text = str(o.supply_cost)
-		if(o.class_text != ""):
-			$VBox/UIClass.text = str(o.class_text)
-			$VBox/UIClass.show()
-		else:
-			$VBox/UIClass.hide()
-		$VBox/UIArmor.text = "ARMOR: " + str(int(o.max_armor))
-		if(o.max_shields > 0):
-			$VBox/UIShield.text = "SHIELDS: " + str(int(o.max_shields))
-			$VBox/UIShield.show()
-		else:
-			$VBox/UIShield.hide()
-		$VBox/UICredits.text = "SELL: " + str(int(ceil(GLOBAL.sell_rate * o.credit_cost)))
+
+		#fetch simple item data
+
+		var dataContainer = VBox.get_node("UnitInfo/Data")
+		var infoContainer = VBox.get_node("UnitInfo/Info")
+
+		var unitClass = VBox.get_node("UIClass")
+		var costMenu = VBox.get_node("CostMenu")
+		var description = VBox.get_node("Description")
+		var uiShield = dataContainer.get_node("UIShield")
+
+		VBox.get_node("UIName").text = o.name_text
+		dataContainer.get_node("UIArmor").text = str(int(o.max_armor))
 		
+		costMenu.get_node("UIEnergy").text = str(o.energy_cost)
+		costMenu.get_node("UIMetal").text = str(o.metal_cost)
+		costMenu.get_node("UISupply").text = str(o.supply_cost)
+
+		if o.class_text != "":
+			unitClass.text = o.class_text
+			unitClass.show()
+		else:
+			unitClass.hide()
+
+		if o.description != "":
+			description.text = o.description
+			description.show()
+		else:
+			description.hide()
+
+		if(o.max_shields > 0):
+			uiShield.text = str(int(o.max_shields))
+			uiShield.show()
+			infoContainer.get_node("UIShield").show()
+		else:
+			uiShield.hide()
+			infoContainer.get_node("UIShield").hide()
+		
+		dataContainer.get_node("UISell").text = str(int(ceil(GLOBAL.sell_rate * o.credit_cost)))
+
+		#fetch the damage from the guns
+
+		var attack = dataContainer.get_node("UIGuns")
+		attack.text = ""
+
+		var guns = []
+		_get_guns(o, guns)
+
+		var gun_data = []
+
+		for gun in guns:
+
+			var ammo = gun.ammo
+
+			if ammo.name == "Shot_Debris": continue
+			if not "damage" in ammo: continue
+			
+			if "gun_arc_rounds" in gun:
+				if gun.gun_arc_rounds > 1:
+					gun_data.append(str(int(ammo.damage)) + "x" + str(gun.gun_arc_rounds))
+					continue
+		
+			gun_data.append(str(int(ammo.damage)))
+		
+		#format the gun text
+
+		if gun_data.size() == 0:
+			attack.hide()
+			infoContainer.get_node("UIGuns").hide()
+		else:
+			attack.show()
+			infoContainer.get_node("UIGuns").show()
+			for i in gun_data.size():
+				var data = gun_data[i]
+				attack.text += data
+				if i < gun_data.size() - 1:
+					attack.text += ", "
+
+		#make the box lock near mouse position
+
 		VBox.set_size(Vector2(1,1))
 		size = VBox.size
 		global_position = p
@@ -65,6 +128,16 @@ func _on_show_menu_item_stats(p,o):
 		modulate = Color(1,1,1,fade_alpha)
 		show()
 		_do_mouse_filter()
+
+func _get_guns(obj, gun_array:Array) -> void:
+	if not "modules" in obj: return
+	if obj.modules.size() == 0: return
+	for module in obj.modules:
+		if module.get_script() == Gun_General || module.get_script() == Gun_Laser:
+			gun_array.append(module)
+		else:
+			_get_guns(module, gun_array)
+	
 
 func _on_hide_menu_item_stats():
 	fade_out = true

@@ -41,6 +41,7 @@ script = ExtResource("1_wbdg7")
 build_size = Vector2(3, 3)
 name_text = "VOID LANCE"
 class_text = "HUGE TURRET"
+description = "Shoots two singularities"
 energy_cost = 600
 metal_cost = 600
 supply_cost = 3

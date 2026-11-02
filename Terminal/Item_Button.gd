@@ -322,11 +322,13 @@ func _remove_obj_from_grid(obj:Thing) -> void:
 	obj.tick_speed = 0
 	obj.tcpu.queue_free()
 
+	#keep a refence of basic modules to keep track of info in-game
 	if "modules" in obj:
 		if "shield_module" in obj:
 			obj.shield_radius = obj.shield_module.shield_radius
 		for module in obj.modules:
-			module.queue_free()
+			module.set_process(false)
+			obj.remove_child(module)
 
 	obj.hull.queue_free()
 

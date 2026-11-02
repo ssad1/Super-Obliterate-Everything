@@ -70,6 +70,7 @@ radius = 12.0
 script = ExtResource("2")
 name_text = "REACTOR"
 class_text = "ECONOMY"
+description = "Generates energy"
 energy_cost = 100
 supply_cost = 1
 credit_cost = 50

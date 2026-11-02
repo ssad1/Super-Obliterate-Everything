@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://nmbqa1dtprsx"]
+[gd_scene load_steps=13 format=3 uid="uid://nmbqa1dtprsx"]
 
 [ext_resource type="PackedScene" uid="uid://c8kp6h711q0kf" path="res://Terminal/Map/Mission Block/FactionList.tscn" id="1"]
 [ext_resource type="Script" uid="uid://bbvjieomjri3g" path="res://Terminal/Map/Mission Block/Mission_Block.gd" id="2"]
@@ -17,7 +17,12 @@ base_font = ExtResource("4_vn3af")
 spacing_space = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_vn3af"]
-font_color = Color(0.61440355, 0.7334618, 1, 1)
+shadow_color = Color(1, 1, 1, 0.15686275)
+shadow_offset = Vector2(-1.5, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ftqmy"]
+shadow_color = Color(1, 1, 1, 0.15686275)
+shadow_offset = Vector2(-1.5, 2)
 
 [node name="Mission_Block" type="Node2D"]
 z_index = 60
@@ -42,13 +47,13 @@ layout_mode = 2
 
 [node name="Mission_Type" type="Label" parent="PanelContainer/MarginContainer/Box"]
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.61440355, 0.7334618, 1, 1)
 theme_override_font_sizes/font_size = 16
 text = "MISSION DATA"
+horizontal_alignment = 1
 
 [node name="Mission_Factions" parent="PanelContainer/MarginContainer/Box" instance=ExtResource("1")]
 layout_mode = 2
+alignment = 1
 
 [node name="MissionInfo" type="HBoxContainer" parent="PanelContainer/MarginContainer/Box"]
 layout_mode = 2
@@ -119,37 +124,44 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 0
 text = "MAP DATA"
+label_settings = SubResource("LabelSettings_ftqmy")
 
 [node name="Mission_Size" type="Label" parent="PanelContainer/MarginContainer/Box/MissionInfo/Data"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 0
 text = "MISSION SIZE"
+label_settings = SubResource("LabelSettings_ftqmy")
 
 [node name="Mission_Resources" type="Label" parent="PanelContainer/MarginContainer/Box/MissionInfo/Data"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 0
 text = "STOCKPILE"
+label_settings = SubResource("LabelSettings_ftqmy")
 
 [node name="Mission_Temperature" type="Label" parent="PanelContainer/MarginContainer/Box/MissionInfo/Data"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 0
 text = "INFERNO"
+label_settings = SubResource("LabelSettings_ftqmy")
 
 [node name="Mission_Difficulty" type="Label" parent="PanelContainer/MarginContainer/Box/MissionInfo/Data"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 0
 text = "DIFFICULTY"
+label_settings = SubResource("LabelSettings_ftqmy")
 
 [node name="Mission_Asteroids" type="Label" parent="PanelContainer/MarginContainer/Box/MissionInfo/Data"]
 visible = false
 layout_mode = 2
 text = "ASTEROIDS"
+label_settings = SubResource("LabelSettings_ftqmy")
 
 [node name="Mission_Planet" type="Label" parent="PanelContainer/MarginContainer/Box/MissionInfo/Data"]
 visible = false
 layout_mode = 2
 text = "PLANET"
+label_settings = SubResource("LabelSettings_ftqmy")
 
 [node name="RewardGrid" type="GridContainer" parent="PanelContainer/MarginContainer/Box"]
 layout_mode = 2

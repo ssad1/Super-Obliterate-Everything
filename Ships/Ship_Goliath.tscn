@@ -58,6 +58,7 @@ thrust = 0.15
 factory = 20
 name_text = "GOLIATH"
 class_text = "CRUISER"
+description = "Heavy ship with two powerful beams"
 energy_cost = 600
 metal_cost = 500
 supply_cost = 5

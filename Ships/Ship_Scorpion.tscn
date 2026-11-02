@@ -58,6 +58,7 @@ aistandoff = 300
 factory = 18
 name_text = "SCORPION"
 class_text = "FRIGATE"
+description = "Bombards with ranged bombs"
 energy_cost = 150
 metal_cost = 300
 supply_cost = 3

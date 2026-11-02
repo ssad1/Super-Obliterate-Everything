@@ -57,6 +57,7 @@ aistandoff = 75
 factory = 16
 name_text = "SABER"
 class_text = "FIGHTER"
+description = "Close range fighter"
 energy_cost = 60
 supply_cost = 1
 credit_cost = 75

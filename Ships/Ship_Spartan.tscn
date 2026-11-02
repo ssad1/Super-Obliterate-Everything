@@ -54,6 +54,7 @@ aistandoff = 150
 factory = 18
 name_text = "SPARTAN"
 class_text = "FRIGATE"
+description = "Heavy sniper laser"
 energy_cost = 300
 metal_cost = 150
 supply_cost = 3

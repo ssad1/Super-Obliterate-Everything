@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cf5cx8yq0pkxp"]
+[gd_scene load_steps=13 format=3 uid="uid://cf5cx8yq0pkxp"]
 
 [ext_resource type="Theme" uid="uid://db0q0rv6j8gcq" path="res://Terminal/Terminal_Theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://c831kobi0cwh" path="res://Terminal/Menus/Menu_Item_Data.gd" id="2"]
@@ -9,129 +9,205 @@
 [ext_resource type="Theme" uid="uid://cn87onodi101q" path="res://Terminal/Terminal_Theme_Tiny.tres" id="7"]
 [ext_resource type="Theme" uid="uid://elferpjtn4s7" path="res://Terminal/Terminal_Theme_Big.tres" id="8"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnm1y"]
+bg_color = Color(0, 0, 0, 0.941176)
+
 [sub_resource type="LabelSettings" id="LabelSettings_gnm1y"]
 shadow_color = Color(1, 1, 1, 0.15686275)
-shadow_offset = Vector2(-3, 3)
+shadow_offset = Vector2(-1.5, 3)
 
-[node name="Menu_Item_Data" type="ColorRect"]
+[sub_resource type="LabelSettings" id="LabelSettings_vcqo5"]
+font_size = 15
+shadow_color = Color(1, 1, 1, 0.15686275)
+shadow_offset = Vector2(-1.5, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5rghu"]
+font_size = 12
+shadow_color = Color(1, 1, 1, 0.15686275)
+shadow_offset = Vector2(-1, 2)
+
+[node name="Menu_Item_Data" type="PanelContainer"]
 light_mask = 0
-custom_minimum_size = Vector2(200, 200)
-color = Color(0, 0, 0, 0.941176)
+offset_right = 171.0
+offset_bottom = 162.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gnm1y")
 script = ExtResource("2")
 
-[node name="VBox" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 12.0
-offset_right = 181.0
-offset_bottom = 164.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="UIName" type="Label" parent="VBox"]
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="UIName" type="Label" parent="MarginContainer/VBox"]
 light_mask = 0
 layout_mode = 2
 theme = ExtResource("8")
+text = "UNIT"
 label_settings = SubResource("LabelSettings_gnm1y")
 horizontal_alignment = 1
 
-[node name="CostMenu" type="HBoxContainer" parent="VBox"]
+[node name="CostMenu" type="HBoxContainer" parent="MarginContainer/VBox"]
 layout_mode = 2
+alignment = 1
 
-[node name="UIEnergyIcon" type="TextureRect" parent="VBox/CostMenu"]
+[node name="UIEnergyIcon" type="TextureRect" parent="MarginContainer/VBox/CostMenu"]
 light_mask = 0
 layout_mode = 2
 texture = ExtResource("3")
 
-[node name="UIEnergy" type="Label" parent="VBox/CostMenu"]
+[node name="UIEnergy" type="Label" parent="MarginContainer/VBox/CostMenu"]
 light_mask = 0
 layout_mode = 2
 theme = ExtResource("1")
 text = "0"
 
-[node name="UIMetalIcon" type="TextureRect" parent="VBox/CostMenu"]
+[node name="UIMetalIcon" type="TextureRect" parent="MarginContainer/VBox/CostMenu"]
 light_mask = 0
 layout_mode = 2
 texture = ExtResource("4")
 
-[node name="UIMetal" type="Label" parent="VBox/CostMenu"]
+[node name="UIMetal" type="Label" parent="MarginContainer/VBox/CostMenu"]
 light_mask = 0
 layout_mode = 2
 theme = ExtResource("1")
 text = "0"
 
-[node name="UISupplyIcon" type="TextureRect" parent="VBox/CostMenu"]
+[node name="UISupplyIcon" type="TextureRect" parent="MarginContainer/VBox/CostMenu"]
 light_mask = 0
 layout_mode = 2
 texture = ExtResource("5")
 
-[node name="UISupply" type="Label" parent="VBox/CostMenu"]
+[node name="UISupply" type="Label" parent="MarginContainer/VBox/CostMenu"]
 light_mask = 0
 layout_mode = 2
 theme = ExtResource("1")
 text = "0"
 
-[node name="UIClass" type="Label" parent="VBox"]
+[node name="UIClass" type="Label" parent="MarginContainer/VBox"]
 light_mask = 0
 layout_mode = 2
 theme = ExtResource("6")
 text = "CLASS"
+label_settings = SubResource("LabelSettings_vcqo5")
 horizontal_alignment = 1
 
-[node name="UIArmor" type="Label" parent="VBox"]
+[node name="Description" type="RichTextLabel" parent="MarginContainer/VBox"]
+layout_mode = 2
+theme = ExtResource("7")
+theme_override_colors/default_color = Color(1, 1, 0.5019608, 1)
+theme_override_font_sizes/normal_font_size = 14
+text = "Description"
+fit_content = true
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="UnitInfo" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="Info" type="VBoxContainer" parent="MarginContainer/VBox/UnitInfo"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="UIArmor" type="Label" parent="MarginContainer/VBox/UnitInfo/Info"]
 light_mask = 0
 layout_mode = 2
 theme = ExtResource("7")
 text = "ARMOR:"
-horizontal_alignment = 1
+label_settings = SubResource("LabelSettings_5rghu")
 
-[node name="UIShield" type="Label" parent="VBox"]
+[node name="UIShield" type="Label" parent="MarginContainer/VBox/UnitInfo/Info"]
 light_mask = 0
 layout_mode = 2
 theme = ExtResource("7")
 text = "SHIELD:"
-horizontal_alignment = 1
+label_settings = SubResource("LabelSettings_5rghu")
 
-[node name="UIMod1" type="Label" parent="VBox"]
-visible = false
+[node name="UIGuns" type="Label" parent="MarginContainer/VBox/UnitInfo/Info"]
 light_mask = 0
 layout_mode = 2
 theme = ExtResource("7")
-text = "MOD"
-horizontal_alignment = 1
+text = "ATTACK:"
+label_settings = SubResource("LabelSettings_5rghu")
 
-[node name="UIMod2" type="Label" parent="VBox"]
-visible = false
-light_mask = 0
-layout_mode = 2
-theme = ExtResource("7")
-text = "MOD"
-horizontal_alignment = 1
-
-[node name="UIMod3" type="Label" parent="VBox"]
-visible = false
-light_mask = 0
-layout_mode = 2
-theme = ExtResource("7")
-text = "MOD"
-horizontal_alignment = 1
-
-[node name="UIMod4" type="Label" parent="VBox"]
-visible = false
-light_mask = 0
-layout_mode = 2
-theme = ExtResource("7")
-text = "MOD"
-horizontal_alignment = 1
-
-[node name="UIMod5" type="Label" parent="VBox"]
-visible = false
-light_mask = 0
-layout_mode = 2
-theme = ExtResource("7")
-text = "MOD"
-horizontal_alignment = 1
-
-[node name="UICredits" type="Label" parent="VBox"]
+[node name="UICredits" type="Label" parent="MarginContainer/VBox/UnitInfo/Info"]
 layout_mode = 2
 theme = ExtResource("6")
-text = "VALUE"
-horizontal_alignment = 1
+text = "SELL:"
+label_settings = SubResource("LabelSettings_5rghu")
+
+[node name="Data" type="VBoxContainer" parent="MarginContainer/VBox/UnitInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UIArmor" type="Label" parent="MarginContainer/VBox/UnitInfo/Data"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "0"
+label_settings = SubResource("LabelSettings_5rghu")
+
+[node name="UIShield" type="Label" parent="MarginContainer/VBox/UnitInfo/Data"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "0"
+label_settings = SubResource("LabelSettings_5rghu")
+
+[node name="UIGuns" type="Label" parent="MarginContainer/VBox/UnitInfo/Data"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "0, 0, 0"
+label_settings = SubResource("LabelSettings_5rghu")
+
+[node name="UISell" type="Label" parent="MarginContainer/VBox/UnitInfo/Data"]
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "0"
+label_settings = SubResource("LabelSettings_5rghu")
+
+[node name="UIMod1" type="Label" parent="MarginContainer/VBox"]
+visible = false
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "MOD"
+label_settings = SubResource("LabelSettings_5rghu")
+
+[node name="UIMod2" type="Label" parent="MarginContainer/VBox"]
+visible = false
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "MOD"
+label_settings = SubResource("LabelSettings_5rghu")
+
+[node name="UIMod3" type="Label" parent="MarginContainer/VBox"]
+visible = false
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "MOD"
+label_settings = SubResource("LabelSettings_5rghu")
+
+[node name="UIMod4" type="Label" parent="MarginContainer/VBox"]
+visible = false
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "MOD"
+label_settings = SubResource("LabelSettings_5rghu")
+
+[node name="UIMod5" type="Label" parent="MarginContainer/VBox"]
+visible = false
+light_mask = 0
+layout_mode = 2
+theme = ExtResource("7")
+text = "MOD"
+label_settings = SubResource("LabelSettings_5rghu")

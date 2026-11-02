@@ -70,6 +70,7 @@ aistandoff = 150
 factory = 18
 name_text = "GRENDAL"
 class_text = "FRIGATE"
+description = "Mounted phalanx and arc guns"
 energy_cost = 200
 metal_cost = 100
 supply_cost = 3

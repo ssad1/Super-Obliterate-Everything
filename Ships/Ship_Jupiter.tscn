@@ -81,6 +81,7 @@ thrust = 0.2
 factory = 20
 name_text = "JUPITER"
 class_text = "CRUISER"
+description = "Heavy carrier with plasma weapons"
 energy_cost = 600
 metal_cost = 500
 supply_cost = 5

@@ -58,6 +58,7 @@ aistandoff = 300
 factory = 20
 name_text = "CATACLYSM"
 class_text = "CRUISER"
+description = "Gigantic ship with loads of missiles"
 energy_cost = 400
 metal_cost = 400
 supply_cost = 5

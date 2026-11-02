@@ -57,6 +57,7 @@ thrust = 0.2
 factory = 18
 name_text = "ATHENA"
 class_text = "FRIGATE"
+description = "Shoots bomb arrays at bases"
 energy_cost = 250
 metal_cost = 100
 supply_cost = 3

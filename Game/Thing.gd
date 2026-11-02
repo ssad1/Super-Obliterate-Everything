@@ -3,6 +3,7 @@ extends Node2D
 
 @export var name_text:String = "" 
 @export var class_text:String = ""
+@export var description:String = ""
 @export var energy_cost:int = 0
 @export var metal_cost:int = 0
 @export var supply_cost:int = 0

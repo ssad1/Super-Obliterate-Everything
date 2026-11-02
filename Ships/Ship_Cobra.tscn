@@ -69,6 +69,7 @@ aistandoff = 300
 factory = 18
 name_text = "COBRA"
 class_text = "FRIGATE"
+description = "Artillery sniper"
 energy_cost = 300
 metal_cost = 150
 supply_cost = 3

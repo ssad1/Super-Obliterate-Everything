@@ -102,6 +102,7 @@ thrust = 0.2
 factory = 20
 name_text = "TYRANT"
 class_text = "CRUISER"
+description = "Mine-layer with freezing capabilities"
 energy_cost = 450
 metal_cost = 550
 supply_cost = 5

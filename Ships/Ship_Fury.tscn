@@ -80,6 +80,7 @@ aistandoff = 32
 factory = 16
 name_text = "FURY"
 class_text = "FIGHTER"
+description = "Flying bomb"
 energy_cost = 80
 supply_cost = 1
 credit_cost = 100

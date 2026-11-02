@@ -83,6 +83,7 @@ script = ExtResource("2")
 build_size = Vector2(2, 2)
 name_text = "HEAVY SHIELD"
 class_text = "AUXILIARY"
+description = "Protects a bigger area"
 energy_cost = 200
 metal_cost = 100
 supply_cost = 2

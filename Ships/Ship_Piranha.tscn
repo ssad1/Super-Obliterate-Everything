@@ -68,6 +68,7 @@ thrust = 0.6
 factory = 16
 name_text = "PIRANHA"
 class_text = "FIGHTER"
+description = "Basic fighter"
 energy_cost = 45
 supply_cost = 1
 credit_cost = 50

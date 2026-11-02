@@ -71,6 +71,7 @@ aistandoff = 110
 factory = 20
 name_text = "LEGION"
 class_text = "CRUISER"
+description = "Fleet carrier with heavy blaster"
 energy_cost = 500
 metal_cost = 400
 supply_cost = 5

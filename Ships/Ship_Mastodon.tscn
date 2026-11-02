@@ -60,6 +60,7 @@ aistandoff = 300
 factory = 19
 name_text = "MASTODON"
 class_text = "DESTROYER"
+description = "Carrier with missiles and phalanx"
 energy_cost = 250
 metal_cost = 200
 supply_cost = 4

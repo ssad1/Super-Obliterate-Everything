@@ -80,6 +80,7 @@ aistandoff = 300
 factory = 20
 name_text = "HAMMERHEAD"
 class_text = "CRUISER"
+description = "Gigantic ship for long bombarding"
 energy_cost = 400
 metal_cost = 400
 supply_cost = 5

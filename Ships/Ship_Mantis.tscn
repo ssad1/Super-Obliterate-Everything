@@ -76,6 +76,7 @@ thrust = 0.5
 factory = 16
 name_text = "MANTIS"
 class_text = "FIGHTER"
+description = "Heavy fighter"
 energy_cost = 65
 supply_cost = 1
 credit_cost = 75

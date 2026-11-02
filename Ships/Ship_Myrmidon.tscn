@@ -71,6 +71,7 @@ aistandoff = 150
 factory = 19
 name_text = "MYRMIDON"
 class_text = "DESTROYER"
+description = "Heavy ship with plasma weapon"
 energy_cost = 300
 metal_cost = 250
 supply_cost = 4

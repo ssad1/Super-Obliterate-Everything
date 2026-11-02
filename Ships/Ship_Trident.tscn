@@ -87,6 +87,7 @@ thrust = 0.2
 factory = 20
 name_text = "TRIDENT"
 class_text = "CRUISER"
+description = "Battleship filled with blasters"
 energy_cost = 400
 metal_cost = 300
 supply_cost = 5

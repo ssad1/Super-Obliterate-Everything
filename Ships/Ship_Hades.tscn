@@ -57,6 +57,7 @@ thrust = 0.15
 factory = 19
 name_text = "HADES"
 class_text = "DESTROYER"
+description = "Black hole weapon, crushes everything"
 energy_cost = 300
 metal_cost = 300
 supply_cost = 4

@@ -40,6 +40,7 @@ shader_parameter/select_strength = 0.0
 script = ExtResource("1_mbe88")
 name_text = "MICROLASER"
 class_text = "TURRET"
+description = "Close-range laser"
 energy_cost = 30
 supply_cost = 1
 credit_cost = 75

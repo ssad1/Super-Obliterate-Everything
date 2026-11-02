@@ -57,6 +57,7 @@ aistandoff = 300
 factory = 16
 name_text = "HAWK"
 class_text = "FIGHTER"
+description = "Launchs bombs"
 energy_cost = 90
 supply_cost = 1
 credit_cost = 150
@@ -85,7 +86,7 @@ vframes = 8
 shape = SubResource("CircleShape2D_tan4f")
 
 [node name="Gun_General" parent="." instance=ExtResource("8")]
-position = Vector2(0, -16)
+position = Vector2(0, -8)
 fire_sound = 23
 gun_kick = 1.0
 gun_heat = 30

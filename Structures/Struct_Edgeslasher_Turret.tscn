@@ -40,6 +40,7 @@ shader_parameter/select_strength = 0.0
 script = ExtResource("1_k1dwb")
 name_text = "EDGESLASHER"
 class_text = "TURRET"
+description = "Shoots homming boomerangs"
 energy_cost = 80
 supply_cost = 1
 credit_cost = 300

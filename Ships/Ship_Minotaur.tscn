@@ -58,6 +58,7 @@ aistandoff = 300
 factory = 18
 name_text = "MINOTAUR"
 class_text = "FRIGATE"
+description = "Missile frigate"
 energy_cost = 75
 metal_cost = 200
 supply_cost = 3

@@ -78,6 +78,7 @@ thrust = 0.2
 factory = 18
 name_text = "ODYSSEY"
 class_text = "FRIGATE"
+description = "Front-facing carrier"
 energy_cost = 250
 metal_cost = 125
 supply_cost = 3

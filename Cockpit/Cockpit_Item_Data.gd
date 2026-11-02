@@ -6,6 +6,7 @@ var supply_cost = 0
 var clock = 0
 var fade_out = true
 var fade_alpha = 1
+@onready var VBox = $Blackground/MarginContainer/VBox
 
 func _ready():
 	EVENTS.connect("show_item_stats", Callable(self, "_on_show_item_stats"))
@@ -35,10 +36,10 @@ func _on_show_item_stats(p,n,e,m,s):
 	energy_cost = e
 	metal_cost = m
 	supply_cost = s
-	$VBox/UIName.text = n
-	$VBox/CostMenu/UIEnergy.text = str(energy_cost)
-	$VBox/CostMenu/UIMetal.text = str(metal_cost)
-	$VBox/CostMenu/UISupply.text = str(supply_cost)
+	VBox.get_node("UIName").text = n
+	VBox.get_node("CostMenu/UIEnergy").text = str(energy_cost)
+	VBox.get_node("CostMenu/UIMetal").text = str(metal_cost)
+	VBox.get_node("CostMenu/UISupply").text = str(supply_cost)
 	_cost_colors()
 	fade_out = false
 	fade_alpha = 1
@@ -55,21 +56,21 @@ func _cost_colors():
 	var white = Color(1,1,1,1)
 	if(SPAWNER.game.me != null):
 		if(SPAWNER.game.me.energy < energy_cost):
-			$VBox/CostMenu/UIEnergy.modulate = red
+			VBox.get_node("CostMenu/UIEnergy").modulate = red
 			costly = true
 		else:
-			$VBox/CostMenu/UIEnergy.modulate = white
+			VBox.get_node("CostMenu/UIEnergy").modulate = white
 		if(SPAWNER.game.me.metal < metal_cost):
-			$VBox/CostMenu/UIMetal.modulate = red
+			VBox.get_node("CostMenu/UIMetal").modulate = red
 			costly = true
 		else:
-			$VBox/CostMenu/UIMetal.modulate = white
+			VBox.get_node("CostMenu/UIMetal").modulate = white
 		if(SPAWNER.game.me.supply < supply_cost):
-			$VBox/CostMenu/UISupply.modulate = red
+			VBox.get_node("CostMenu/UISupply").modulate = red
 			costly = true
 		else:
-			$VBox/CostMenu/UISupply.modulate = white
+			VBox.get_node("CostMenu/UISupply").modulate = white
 	if(costly == true):
-		$VBox/UIName.modulate = red
+		VBox.get_node("UIName").modulate = red
 	else:
-		$VBox/UIName.modulate = flash_white
+		VBox.get_node("UIName").modulate = flash_white

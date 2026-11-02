@@ -71,6 +71,7 @@ thrust = 0.4
 factory = 17
 name_text = "TREMOR"
 class_text = "CORVETTE"
+description = "Lays mines"
 energy_cost = 150
 metal_cost = 50
 supply_cost = 2
